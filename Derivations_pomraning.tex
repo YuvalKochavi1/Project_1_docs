@@ -1,0 +1,355 @@
+\documentclass[15pt]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath}				% For Math
+\usepackage{fancyhdr}				% For fancy header/footer
+\usepackage{graphicx}				% For including figure/image
+\usepackage{cancel}					% To use the slash to cancel out stuff in work
+\usepackage{bm}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{Tal Ramot}
+\fancyhead[CO,C]{HEDP \& Transport Research}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Chapter 1 - Definitions in Radiative Transfer}
+\subsection{The radiation Field}
+\begin{itemize}
+    \item The definition of the PDF for photons in phase space uses the fact that $E=h\nu$ in order to parameterize the phase space by $(\bm{r},\nu,\bm{\Omega})$, i.e. six DOF.
+    \begin{align}
+        f(t)=f(\bm{r},\nu,\bm{\Omega}, t)\\
+        dn=fd\bm{r}d\nu d\bm{\Omega}
+    \end{align}
+    *$d\bm{r}$ is actually a volume differential.
+    \item The specific intensity and radiant energy are:
+    \begin{align}
+        I(\bm{r},\nu,\bm{\Omega}, t)=ch\nu f(\bm{r},\nu,\bm{\Omega}, t)\\
+        dE=I(\bm{r},\nu,\bm{\Omega}, t)\cos(\theta)d\nu d\bm\Omega d\sigma dt
+    \end{align}
+    *Notice that $Id\bm\Omega d\nu dt$ is the number of photons in the cone seen in the following figure, and multiplying it by $\cos\theta d\sigma$ gives $dE$.
+\end{itemize}
+\subsection{The energy flux, radiative flux and pressure tensor}
+\begin{itemize}
+    \item The energy density of photons comes from simply integrating the energy of all photons in intervals $d\nu,d\Omega$ (in phase space):
+    \begin{align}
+         u(\bm r,t) = \int_0^\infty d\nu\int_{4\pi} d\bm\Omega h\nu f=\frac{1}{c}\int_0^\infty d\nu \int_{4\pi}d\bm\Omega I
+    \end{align}
+    
+    \underline{Example:} Given the specific intensity of Planck function (black body), we can calculate $u(\bm r,t)$ and show that $u=aT^4$.
+    \item If a surface element is oriented perpendicular to the x axis, then the amount of $dE$ passing through it per unit time and surface is (analogous to the calculation of I and dE from beforehand, but now $d\Omega_x=d\sigma\cos\theta$):
+\begin{align}
+        F_x (\bm r,t)= \int_0^\infty d\nu\int_{4\pi}d\bm\Omega ch\nu\Omega_xf=\int_0^\infty d\nu \int_{4\pi} d\bm\Omega \Omega_x I
+\end{align}
+and in general we define:
+\begin{align}
+    \bm F=\int_0^\infty d\nu \int_{4\pi} \bm d\Omega \bm \Omega I
+\end{align}
+If $I$ is isotropic then $F=0$ (in thermodynamic equillibrium there shouldn't be net energy flow).
+\item The rate of momentum flow across a surface is the momentum tensor. For example, $p_{xy}(\bm r,t)$ is the rate of y momentum flow per unit area \& time across a surface perp. to x axis. A photon caries $y$ momentum in the amount $\frac{h\nu\Omega_y}{c}$ so:
+\begin{align}
+    p_{xy}=\int_0^\infty d\nu \int_{4\pi} d\bm\Omega (c\Omega_x)\left(\frac{h\nu\Omega_y}{c}\right) f=\frac{1}{c}\int_0^\infty d\nu \int_{4\pi} d\bm\Omega \Omega_x\Omega_y I
+\end{align}
+and in general:
+\begin{align}
+    \bm p(\bm r,t)==\frac{1}{c}\int_0^\infty d\nu \int_{4\pi} d\bm\Omega \bm\Omega \bm\Omega I
+\end{align}
+\underline{Note:} The pressure is symmetric $p_{kj}=p_{jk}$ and since $\Omega_x^2+\Omega_y^2+\Omega_z^2=1$ we have:
+\begin{align}
+    p_{xx}+p_{yy}+p_{zz} = \frac{1}{c}\int_0^\infty d\nu \int_{4\pi} d\bm\Omega I=u
+\end{align}
+This leads to the definition of the average pressure:
+\begin{align}
+    \bar{p}=\frac{1}{3}(p_{xx}+p_{yy}+p_{zz})=\frac{1}{3}u
+\end{align}
+\underline{Examples:} For an isotropic specific intensity one finds that
+\begin{align}
+    p_{xx}=p_{yy}=p_{zz}=\bar{p}=\frac{1}{3}u
+\end{align}
+with all off diagonal terms of the tensor zero.
+On the other extreme from isotropy, if at $(\bm r,t)$ all photons are moving on the $x$ direction (the specific intensity is the Dirac Delta function in the x direction) then $p_{xx}=u$ with all other 8 components zero.
+\end{itemize}
+\subsection{Interaction of the Radiation Field with Matter}
+\begin{itemize}
+    \item The probability density (of $(\bm r,\nu)$) of a photon to be absorbed travelling a distance $ds$ is $\sigma_a(\bm r,\nu,t)ds$. 
+\item \underline{Note:} The independency of $\bm\Omega$ is caused by the lack of prefered direction in the medium (the material).
+\item The probability density (of $\bm r$) of a photon to be scattered from $\nu'$ to $\nu$ (centered at $d\nu$) and from $\Omega'$ to $\Omega$ centered at $d\Omega$, travelling distance $ds$ is:
+\begin{align}
+    probability = \sigma_s(\nu'\to\nu,\Omega'\cdot\Omega)d\nu d\bm\Omega ds
+\end{align}
+\underline{Note:} The notation $\Omega'\cdot\Omega$ implies the lack of preferred direction.
+\item Integrating over $d\nu,d\bm\Omega$ gives the probability density (of $\bm r,t,\nu'$) for a general event of scattering to happen:
+\begin{align}
+    \sigma_s(\nu')=\int_0^\infty d\nu \int_{4\pi} d\bm\Omega \sigma_s(\nu'\to \nu,\Omega'\cdot\Omega)=2\pi\int_0^\infty d\nu \int_{-1}^{1}d\mu_{0}\sigma_s(\nu'\to\nu,\mu_0)
+\end{align} 
+where here $\Omega'$ is just an arbitrary angle chosen to be along the z direction (and defining $\mu_0=\Omega'\cdot\Omega$, or we can think of the third term as the original intention, which is the integration of the $\mu_0=\cos\theta$ term that corresponds to the scattering angle (regardless of the two angles themselves).
+\item One can define
+\begin{align}
+    K(\nu'\to\nu,\Omega\cdot\Omega')=\frac{\sigma_s(\nu'\to\nu,\Omega'\cdot\Omega)}{\sigma_s(\nu')}
+\end{align}
+as the probability of scattering to $(\nu,\Omega)$ given that a scattering event has happened at $(\nu',\Omega')$ .
+\item The scattering is called \textit{coherent} if there is no change in $\nu$ (i.e. energy) on scattering events, and is called \textit{isotropic} if the kernel is independent of the scattering angle (i.e. once a scattering event has occurred, the scattered angle is equally distributed).
+\item $\tilde{\omega}=\frac{\sigma_s}{\sigma_s+\sigma_a}$ denotes the probability of scattering once known that an event has occurred.
+\item  The number of collided photons a beam in an interval of distance $ds$ satisfies:
+\begin{align}
+    dN=-N\sigma ds \\
+    \frac{dN}{ds}=-N\sigma \\
+    N=N_0e^{-as}
+\end{align}
+Therefore, we can think of probability to event occurrence after travelling a distance $s$, inside a further interval of length $ds$ and it is 
+\begin{align}
+    \bar s=\lambda=\frac{\int_0^s ds\left(N_0\sigma e^{-as}\right)}{\int_0^\infty ds\left(N_0\sigma e^{-as}\right)}
+\end{align}
+\item \underline{Important Note:} We notice that the probability of a single photon to be scattered or absorbed after traveling distance $s$ is Geo($\sigma$) and the mean distance it passes is $\lambda=\frac{1}{\sigma}$.
+\item \underline{Emission:} $\text{photons emitted per unit volume} = q(\bm r,\nu,t)d\nu d\bm\Omega$ and it's independent of $\Omega$ (material has no preferred direction to which it spontaneously emits photons).
+
+\end{itemize}
+\section{Chapter 2 - The Equation of Transfer}
+\subsection{Eulerian Derivation}
+\begin{itemize}
+    \item change in photons in a cube in phase space = $\Delta V \frac{\partial}{\partial t}
+    f(\bm r,\nu,\bm\Omega)$ where $\Delta V=\Delta x \Delta y \Delta z \Delta \mu\Delta\varphi\Delta \nu$
+These are the 5 processes which lead to change in $f$:
+\begin{enumerate}
+    \item Stream - Streaming of photons in or out of the cube.
+    \item Absorption - material spontaneously absorbs photons.
+    \item Outscattering - scattering from $\nu,\Omega$ to all other freq. and directions.
+    \item Inscattering - scattering into $\nu,\Omega$
+    \item Emission - material spontaneously creates photons.
+
+\end{enumerate}
+\item \underline{Stream} The rate of photons leaving the cube through the surfaces perp. to the x axis is:
+\begin{align}
+    (streaming)_x=c\Omega_xf(\bm r,\nu,\Omega,t)|^{x+\Delta x}_x\Delta y\Delta z\Delta \nu\Delta \mu\Delta \varphi \\
+    (streaming_x)=\Delta V \frac{\partial}{\partial x}\left[\dot x f(\bm r,\nu,\bm\Omega,t)\right]
+\end{align}
+when the second equation comes from defining $\dot x=c\Omega_x$ and then multiplying and dividing by $\Delta x\to dx\to0$.
+The total streaming then becomes:
+\begin{align}
+    streaming = \left[\frac{\partial}{\partial x}(\dot xf)+\frac{\partial}{\partial y}(\dot yf)+...\right] \Delta V
+\end{align}
+\underline{Note:} Terms like $\dot \nu,\dot \varphi$ denote the rate of change of the $\nu,\varphi$ values of the photon as it streams along its path.
+\item\underline{Other Contributions:} Appear clearly in the book. Notice that: \begin{enumerate}
+    \item Scattering and absorption is calculated through = probability for a single photon to be scattered/absorbed \underline{per unit time} (hence use of $c$ instead of $ds$) $\times$ number of photons in the cube $f\Delta V$
+    \item In scattering, the in and out both depend on two other integration parameters $\nu',\Omega'$. In outscattering the $f$ can be taken out of the integral and we remain with the total differential scattering coefficient $\sigma_s(\bm r,\nu'\to\nu,\Omega'\cdot\Omega,t)$ which corresponds to the total photons reaching $(\nu,\Omega)$ per unit time.
+    \item substituting $I$ and/or $S=h\nu q(\bm r,\nu,t)$ (Energy emitted per unit time and volume) lead to different forms of the equation.
+    \item In case of photons $\dot \varphi=0, \dot \nu=0$ (angle and frequency of a photon don't change between collisions. Therefore, one can manage a simpler version of the equation. 
+
+\end{enumerate}
+
+\end{itemize}
+\subsection{A Lagrangian Derivation}
+\begin{itemize}
+    \item Another derivation that replaces the streaming term by directly time-differentiating the term $\frac{d}{dt}\left[f\Delta V\right]$ - i.e. interpreting the box as changing in time (while encompassing the photons of interest). 
+    \item The other terms of absorption, scattering and emission (which happen exactly the same regardless of the POV for the box) remain the same.
+
+ \end{itemize}
+ \subsection{Boundary Conditions}
+ \begin{itemize}
+     \item space BC (along a surface $r_s\in S$):\begin{align}
+         I(r_s,\nu,\Omega,t)=\Gamma(r_s,\nu,\Omega,t),
+     \end{align}
+One should note that if $n\cdot\Omega<0$ it means that the photons in that direction enter the surface ($n$ is the normal vector). If this vanishes then it's called "vaccum" or "free surface".
+     \item time BC:\begin{align}
+         I(r,\nu,\Omega,0)=\Lambda(r,\nu,\Omega)
+     \end{align}
+ \end{itemize}
+\subsection{The equation of transfer in various coordinate systems}
+\begin{itemize}
+    \item In all cases, one should notice that $\bm\Omega\cdot\nabla\bm I=\frac{\partial I}{\partial s}$ is a directional derivative which is taken while $t,\nu$ are taken constant (\textcolor{red}{understand}). In all cases we start by finding the parameters in which $I$ depends and then find $\frac{\partial I}{\partial s}$.
+    \item \underline{Plane / \ Cartesian symmetry} - $I(z,\mu)$ (I doesn't depend on $x,y$ and also $\varphi$ by assumption - \textcolor{red}{understand}). Inscattering term spanned by Legendre polynomials.
+    \item \textcolor{purple}{More to go over.}
+\end{itemize}
+
+\newpage
+\section{Diffusion Equations}
+The calssical Boltzmann equation for photons is:
+
+% insert project_3\images_derivations\eq2_17.png
+
+
+which is known as the simplest (2.17) or (2.28) eq. in the book of Pomraning.
+
+
+Then, eq. (2.167) adds induced processes (which is simply quantum statistical density of bozons), in terms of the definition equations$P'=P[1 + \frac{c^2}{2h\nu^3}]$:
+
+
+
+Eq. (2.170) Then includes defines the emission term $S$ and the modified absorption cross section $\sigma_a'$ as:
+\begin{gather}
+    S = \sigma_a'B\label{S} \\
+    \sigma_a = \sigma_a' (1 + c^2 \frac{B}{2h\nu^3})
+\end{gather}
+Eq. (25) means that the emission property occurs due to absorption of radiative energy from another source, and the definition of $\sigma_a'$ in Eq. (26) is meant to make this term resemble the scattering \& absorption terms that include this term from induced proceeses (this terms wasn't included in the emission, as emissions is not necessarily from radiative transfer).
+
+% eq 2_170.png
+
+\textcolor{red}{Include explanations about the various terms in these equations and their physical meaning.}
+
+More explanations about eq. (2.167) are included in pg. 46 (56 in PDF) in Pomraning.
+In eq. (2.171) it is argued that using the detailed balance equation (or under the assumption of the special case $\sigma_s = 0$ for simplicity), one gets:
+\begin{gather}
+    \sigma_a'(\nu) = B(\nu) - I(\nu,\bm\Omega) \\
+    \Downarrow \\ B(\nu) = I(\nu,\bm\Omega)
+\end{gather}
+This shows that in thermodynamical equillibrium $B(\nu)$ is $I(\nu)$, which the planckian as shown in statistical mechanics. \textbf{NOTICE} that here $[B]=\frac{\text{energy}}{\text{area}\cdot\text{time}\cdot\text{freq}}=\frac{erg}{cm^2}$ and it means that $B=4\pi I$ ($[I]=\frac{erg}{cm^2\cdot\text{rad}^2}$). 
+Under the \textit{LTE assumption} it is argued that the rate of emission from different radiation fields doesn't differ a lot from the Planck-function, so the equation $B(\nu) = I(\nu,\bm\Omega)=\frac{2h\nu^3}{c^2}(e^{h\nu/kT}-1)^{-1}$ is a good approximation in the general case as well. 
+pg. (48)-(50) in Pomraning discuss the validity of the equation of transfer, mainly discussing the various phenomena that are relevant to the equation but are not included.
+
+\subsection{Diffusion Equations}
+\underline{Assumptions}:
+\begin{enumerate}
+    \item The basic assumption for all diffusion approximations are the approximation of a first order expansion for the angular part of $I(\nu,\bm \Omega)$ which is given by eq. (3.1):
+
+
+    After integrating over $\bm\Omega$ with/without prior multiplication by $\Omega$, one gets Eq. (3.4) \& (3.5):
+    % insert image eq3_4.png, center it and put at the correct point.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{figuers/eq_3_4_and_3_5.png}
+        \caption{Eq. (3.4) in Pomraning - first order expansion of the specific intensity.}
+        \label{Hello}
+    \end{figure}
+
+
+    Eq. (3.4) appears in Pomraning \textit{4 times} - (3.4), (3.20), (3.62) and (3.79) when the diffrences are the inclusion of the consideration of $|\bm I_1|\ll I_0$ and neglecting the last $\bm I_1(\nu)\bm I_1(\nu')$, and also the definition of $D$.
+    \item The further assumption is that $\frac{1}{c}\frac{\partial \bm I_1 }{\partial t}$ is negligible compared to the other terms in eq. (3.4) [Quasi-static approximation], and that the scattering Kernel is digaonal (making a coherent and isotroping scattering).
+    % eq. 3.16 and a couple derivations.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figuers/eq_3_16.png}
+    \end{figure}
+
+    This allows us to get the famous \textit{Fick's Law} \textcolor{red}{(prove)}:
+    \begin{align}
+        \bm I_1(\nu) = -D(\nu)\nabla I_0(\nu)
+    \end{align}
+    where $D(\nu)=\frac{1}{3}\sigma_{tr}=\frac{1}{3(\sigma_a'+\sigma_s-A_1)}$ and $A_1 = \int_0^\infty d\nu' \int_{4\pi} d\bm\Omega' \sigma_s(\nu\to\nu',\Omega\cdot\Omega')\Omega\cdot\Omega'=2\pi \int_0^\infty d\nu' \int_{-1}^{1}d\mu_0\mu_0 \sigma_s (\nu\to\nu',\mu_0)$.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figuers/eq_3_17.png}
+    \end{figure}
+
+
+    \textcolor{blue}{Notice that this derivation arises from eq. (3.5), and the following derivations include approximations of eq. (3.4) based on the Fick's Law and additional assumptions}
+
+    \textcolor{red}{Elaborate on the derivation of eq. (3.17)}.
+\end{enumerate}
+
+\subsection{Assymptotic Diffusion Theory}
+This eq. assumes coherent and isotropic scattering as well as no emission - explained by a regime of long optical distances (far from source) and long times (equillibrium achieved).
+% eq. 3_40, 3_28 (slab geometry) and 3_20 (After defining D)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figuers/eq_3_40.png}
+    \caption{Assymptotic diffusion theory}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_28.png}
+    \caption{slab geometry (special case)}
+\end{figure}
+Notice that here $\sigma_s=\sigma_s(\nu)$ under the assumption:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_27.png}
+\end{figure}
+More explanation in pg. 55 (PDF 65) in the book.
+NOTE: The P-1 approximation in Heizler et al. (2010) is the equation that is received from not neglecting the time-derivative term.
+
+
+\subsection{New Diffusion Theory}
+This theory assumes coherent and isotropic scattering, and also allows for position-variant cross sections. \textbf{As opposed to the Assymptotic theory, it doesn't assume $B=0$}.
+The derivation is in Pomraning pg. 63-66 (73-76 in PDF).
+% eq. 3_81 and 3_82 (slab geometry)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_81.png}
+    \caption{New diffusion theory}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_82.png}
+    \caption{New diffusion theory - slab geometry}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/1D Diffusion Linear.png}
+\end{figure}
+where in eq. (2) we used $\frac{\partial u}{\partial T} = c_V(T)\frac{\partial T}{\partial t}$
+
+
+
+\subsection{Equillibrium Diffusion Theory}
+\underline{Assumption:} Same as the Eddington/Diffusion.
+The derivation just calculates $I_0$ and $\bm{I}_1$, and then substitutes back into the Eddington Eq. (1) to get Eq. (3.238) for the specific intensity - \textcolor{blue}{and it is possible because $I_0(\bm r,\nu, t)$ is given explicitly, so by substitution in Fick's Law \& Eq. of Eddington - one can get $I(\bm r,\nu,\bm \Omega,t)$ explicitly.}
+%insert eq._3_255_to_3_238.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_255_to_3_238.png}
+    \caption{Equilibrium diffusion theory}
+\end{figure}
+
+
+The diffusion law appears from examining the radiation flux $F$ in Eq. (3.240):
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_240.png}
+    \caption{Radiation flux equation}
+\end{figure}
+after a simple algebric manipulation:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_242.png}
+    \caption{Algebraic manipulation of flux}
+\end{figure}and by defining the \textit{Rossland mean free path} one achieves Eq. (3.245) Eq. (3.244).
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_245.png}
+    \caption{Rosseland mean free path}
+\end{figure}
+
+\underline{NOTE:} The Rossland mean free path can be thought of as "an harmonic average" of the mean free paths $1/\sigma(\nu)$ integrated on $\nu$ in a non-trivial manner. 
+In fact, the contribution of a photon (in freq. $\nu$) to the diffusive flux goes like $F_\nu \sim \lambda_\nu \frac{\partial B}{\partial \partial T}$ which leads to the appearance of $\lambda_R$ in eq. (3.245) in a way that $D\sim \frac{1}{\lambda_R}\sim\Delta x^2$ (where x is the random variable for the location of a photon in a random walk) - so it means that the physical meaning of $\lambda_R$ is that it's \textbf{proportional to the diffusion const. of the energy density, i.e. the ensemble transports energy at the same rate as if each step were $\lambda_R$}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuers/eq_3_244.png}
+    \caption{Equilibrium diffusion equation}
+\end{figure}
+
+\subsection{Radiation \& Matter Interactions}
+One can take eq. (3.4) \& (3.5), then find Fick's Law from eq. (3.5), substitute in (3.4), then apply the New Diffusion Theory assumptions (diagonal scattering kernel) and instead of equating the elements inside the integral (as the New Diffusion Theory derivation does) - just equating the $I_0$ terms (prop. to energy density) in order to get the following diffusion system of PDEs for matter-radiation interaction.
+\begin{equation*}
+\Downarrow
+\end{equation*} 
+\newline
+\newline   
+\begin{equation*}
+    \frac{1}{c}\cdot\frac{\partial u}{\partial t} - \nabla \cdot (D \nabla I_0) = S -\sigma u
+\end{equation*}
+where S is the emission term.
+In case of a coupling between radiation and matter, and assuming that the matter emits photons like a black body, as well as writing the 2nd law of thermodynamics for the material (neglecting Hydrodynamic influence), one gets the following system of equations from Su-Olson.
+
+\subsubsection{Applying of "Black" physical case}
+The last system of PDEs is called "gray" because of the allegedly "equal" position that the radiation energy $E$ and the matter energy $aT^4$ (which in materials that obey $c_V \sim T^3$ we denote as $U$) receives.
+
+However, in cases closer to equilibrium, in which the matter and radiation energies get close enough to each other (i.e. $E\sim U$) one gets a single PDE for the temperature (which is the same for the matter and the radiation).
+
+\subsubsection{Non Linear Diffusion Theory}
+The flux $F=1234256$
+
+\end{document}

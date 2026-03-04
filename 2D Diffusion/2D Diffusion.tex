@@ -1,0 +1,243 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\title{2D Diffusion - Linear Case}
+\author{The Weapon Group}
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Basic Setup - Dimensionless Variables and Discretization}
+The 2 new equations:
+\begin{equation}
+\frac{\partial E(\rho, x,\tau)}{\partial \tau} - \frac{\partial^2E(\rho, x,\tau)}{\partial \rho^2} - \frac{1}{\rho}\frac{\partial E(\rho, x,\tau)}{\partial \rho} - \frac{\partial^2E( \rho, x,\tau)}{\partial x^2} = U(\rho, x,\tau) - E(\rho, x,\tau),
+\end{equation}
+
+\begin{equation}
+\frac{\partial U(\rho, x,\tau)}{\partial \tau} = E(\rho, x,\tau) - U(\rho, x,\tau),
+\end{equation}
+Now lets discretize the equations:
+
+\begin{equation}
+\begin{split}
+\frac{E^{n+1}_{i,j}-E^{n}_{i,j}}{\Delta \tau} & - \frac{E^{n+1}_{i,j+1}-2E^{n+1}_{i,j}+E^{n+1}_{i,j-1}}{\Delta \rho^2} 
+- \frac{1}{\rho_j}\frac{E^{n+1}_{i,j+1}-E^{n+1}_{i,j-1}}{2\Delta \rho} \\
+& - \frac{E^{n+1}_{i+1,j}-2E^{n+1}_{i,j}+E^{n+1}_{i-1,j}}{\Delta x^2} = U^{n+1}_{i,j} - E^{n+1}_{i,j},
+\end{split}
+\end{equation}
+
+\begin{equation}
+\frac{U^{n+1}_{i,j}-U^{n}_{i,j}}{\Delta \tau} = E^{n+1}_{i,j} - U^{n+1}_{i,j},
+\end{equation}
+
+Rearranging the equations to solve for the next time step values:
+\begin{equation}
+\begin{split}
+E^{n+1}_{i,j} = E^{n}_{i,j} + \Delta \tau \Biggl( & \frac{E^{n+1}_{i,j+1}-2E^{n+1}_{i,j}+E^{n+1}_{i,j-1}}{\Delta \rho^2} 
++ \frac{1}{\rho_j}\frac{E^{n+1}_{i,j+1}-E^{n+1}_{i,j-1}}{2\Delta \rho} \\
+& + \frac{E^{n+1}_{i+1,j}-2E^{n+1}_{i,j}+E^{n+1}_{i-1,j}}{\Delta x^2} + U^{n+1}_{i,j} - E^{n+1}_{i,j} \Biggr),
+\end{split}
+\end{equation}
+
+\begin{equation}
+U^{n+1}_{i,j} = \frac{U^{n}_{i,j} + \Delta \tau E^{n+1}_{i,j}}{1 + \Delta \tau},
+\end{equation}
+
+Define $\alpha$, $\lambda_x$, and $\lambda_\rho$ as:
+\begin{equation}
+\alpha = \frac{\Delta \tau}{1+\Delta \tau}, \quad \lambda_x = \frac{\Delta \tau}{\Delta x^2}, 
+\quad \lambda_{\rho} = \frac{\Delta \tau}{\Delta \rho^2}, \quad \gamma_j = \frac{\Delta \tau}{2j\Delta \rho^2} = \frac{\lambda_{\rho}}{2j},
+\end{equation}
+We can rewrite the equations as (substituting $U^{n+1}_{j,i}$ into the first equation):
+\begin{equation}
+\begin{split}
+E^{n+1}_{i,j}-E^{n}_{i,j} & = \lambda_{\rho}(E^{n+1}_{i,j+1}-2E^{n+1}_{i,j}+E^{n+1}_{i,j-1}) 
+ + \frac{\lambda_{\rho}}{2j}(E^{n+1}_{i,j+1}-E^{n+1}_{i,j-1}) \\
+& + \lambda_x({E^{n+1}_{i+1,j}-2E^{n+1}_{i,j}+E^{n+1}_{i-1,j}}) + \alpha U^{n}_{i,j} -\alpha E^{n+1}_{i,j},
+\end{split}
+\end{equation}
+Now we will have to rearrange to have the $E^{n+1}$ terms on the left side:
+\begin{equation}
+\begin{split}
+(1 + 2\lambda_{\rho} + 2\lambda_x + \alpha)E^{n+1}_{i,j} & - (\lambda_{\rho} + \frac{\lambda_{\rho}}{2j})E^{n+1}_{i,j+1} - (\lambda_{\rho} - \frac{\lambda_{\rho}}{2j})E^{n+1}_{i,j-1} \\
+& - \lambda_x E^{n+1}_{i+1,j} - \lambda_x E^{n+1}_{i-1,j} = \alpha U^{n}_{i,j} + E^{n}_{i,j},
+\end{split}
+\end{equation}
+Now we will to look for a way to solve this system of equations.
+
+\subsection*{Matrix Formulation}
+We would like to express this in matrix form $A\cdot E^{n+1} = B$, where $A$ is 
+the coefficients of the $E^{n+1}$ terms, and $B$ is the right side of the equation.
+But first we need to linearize the 2D indices $(i,j)$, where j is the $\rho$ index and i is the $x$ index, into a 1D index $k$:
+\begin{equation}
+k = i\cdot N_\rho + j,
+\end{equation}
+Where $N_x$ is the number of grid points in the x direction, that will to $E_{i+1,j} = E_{(i+1)\cdot N_\rho + j} = E_{k+N_\rho}$.
+On the other hand, $E_{i,j+1} = E_{i\cdot N_\rho + j + 1} = E_{k+1}$. Now we can express the equation in terms of $k$:
+\begin{equation}
+\begin{split}
+(1 + 2\lambda_{\rho} + 2\lambda_x + \alpha)E^{n+1}_{k} & - (\lambda_{\rho} + \frac{\lambda_{\rho}}{2j})E^{n+1}_{k+1} - (\lambda_{\rho} - \frac{\lambda_{\rho}}{2j})E^{n+1}_{k-1} \\
+& - \lambda_x E^{n+1}_{k+N_\rho} - \lambda_x E^{n+1}_{k-N_\rho} = \alpha U^{n}_{k} + E^{n}_{k},
+\end{split}
+\end{equation}
+This system is far from be efficient to solve directly, so we will look for other methods, it has a runtime of $O(N^6)$.
+
+\subsection*{Silvester Equations Approach}
+We can express the system as a Sylvester equation of the form:
+\begin{equation}
+A X^{n+1} + X^{n+1} B = Y^{n},
+\end{equation}
+Where $A$ and $B$ are matrices representing the discretization in the $\rho$ and $x$ directions respectively, and $C$ is the right-hand side matrix.
+To construct matrices $A$ and $B$, we can use the coefficients from the discretized equations. The matrix $A$ will represent the axial diffusion terms, while matrix $B$ will represent the radial diffusion terms.
+The right-hand side matrix $Y^{n}$ will be constructed from the known values of $E^{n}$ and $U^{n}$ at the current time step.
+This approach allows us to leverage efficient numerical algorithms for solving Sylvester equations, which can significantly reduce
+the computational complexity compared to direct methods, such as the method we've seen in the last subsection.
+
+\subsection*{Details on Silvester Equations in Our Problem}
+We will define the matrix:
+\begin{equation}
+    X^{n+1}\in {R}^{N_x\times N_{\rho}}\;\;\;\;[X^{n+1}]=E_{i,j}^n
+\end{equation}
+Where we think about a small cross of variables inside $X^n$ that looks like the following:
+\begin{equation}
+    \begin{bmatrix}
+        * & E_{i-1,j} & * \\
+        E_{i,j-1} & E_{i,j} & E_{i,j+1} \\
+        * & E_{i+1,j} & *
+    \end{bmatrix}
+\end{equation}
+Following the discussion of the implicit solution in the simpler 1D diffusion problem, as described in the last subsection - one can notice that the 5-\_\_\_\_ equation can be written in matrix form as
+\begin{equation}
+    AX^{n+1}+X^{n+1}B=Y^n
+\end{equation}
+    \begin{equation}
+\begin{split}
+(1 + 2\lambda_{\rho} + 2\lambda_x + \alpha)E^{n+1}_{i,j} & - (\lambda_{\rho} + \frac{\lambda_{\rho}}{2j})E^{n+1}_{i,j+1} - (\lambda_{\rho} - \frac{\lambda_{\rho}}{2j})E^{n+1}_{i,j-1} \\
+& - \lambda_x E^{n+1}_{i+1,j} - \lambda_x E^{n+1}_{i-1,j} = \alpha U^{n}_{i,j} + E^{n}_{i,j},
+\end{split}
+\end{equation}
+\begin{equation}
+    a_{ij}E_{i-1,j}+b_{ij}E_{i,j}+c_{ij}E_{i+1,j}+d_{ij}E_{i,j+1}+e_{ij}E_{i,j+1}+f_{ij}E_{i,j}^*
+\end{equation}
+(*) Note that $E_{i,j}^*=2\lambda_\rho$  is the part of the center of the cross element and will appear in the $B$ matrix.
+where the matrix $A,B,Y^n$ are defined as
+\begin{gather}
+A = 
+\begin{bmatrix}
+1 & 1 & 0 & \cdots & 0 & 0\\
+a_1 & b_1 & c_1 & \cdots & 0 & 0 \\  
+0 & a_2 & b_2 & c_2 &\cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & a_{N_\rho-2} & b_{N_\rho-2} & c_{N_\rho-2}  \\
+0 & 0 & 0 & 0 & \cdots & 1
+\end{bmatrix}_{N_x\times N_x} = \\
+\begin{bmatrix}
+1 & 1 & 0 & \cdots & 0 & 0\\
+-\lambda_x & 1+2\lambda_x+\alpha & -\lambda_x & \cdots & 0 & 0 \\  
+0 & -\lambda_x &  1+2\lambda_x+\alpha & -\lambda_x &\cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & -\lambda_x &  1+2\lambda_x+\alpha & -\lambda_x  \\
+0 & 0 & 0 & 0 & \cdots & 1
+\end{bmatrix}_{N_x\times N_x}
+\end{gather}
+and
+\begin{gather}
+B = 
+\begin{bmatrix}
+1 & d_1 & 0 & \cdots  & 0 & 0\\
+1 & e_1  & d_2 & \cdots & 0 &0 \\  
+0 & f_1 &  e_2 &\vdots & 0 \\
+\vdots & \vdots & f_2 & \ddots & d_{N_x-2} & 0 \\
+0 & 0 & \vdots & \cdots &  e_{N_x-2} & \vdots  \\
+0 & 0 & 0 & \cdots &  f_{N_x-2} & 1
+\end{bmatrix}_{N_{\rho}\times N_{\rho}}
+\end{gather}
+\begin{gather}
+\begin{bmatrix}
+1 & -\lambda_\rho(1-\frac{1}{2j}) & 0 & \cdots  & 0 & 0\\
+1 & 2\lambda_\rho  & -\lambda_\rho(1-\frac{1}{2j}) & \cdots & 0 &0 \\  
+0 & -\lambda_\rho(1+\frac{1}{2j}) &  2\lambda_\rho & \cdots &\vdots & 0 \\
+\vdots & \vdots & -\lambda_\rho(1+\frac{1}{2j}) & \ddots & -\lambda_\rho(1-\frac{1}{2j}) & 0 \\
+0 & 0 & \vdots & \cdots &  2\lambda_\rho & \vdots  \\
+0 & 0 & 0 & \cdots & -\lambda_\rho(1+\frac{1}{2j}) & 1
+\end{bmatrix}_{N_{\rho}\times N_{\rho}}
+\end{gather}
+The boundary conditions for this problem is
+\ \begin{gather}
+    E(x=0,\rho,t)=a(T_0^z)^4 \\
+    E(x,\rho=0,t)=E(x,\rho=\Delta \rho,t) \\
+\end{gather}
+and the initial conditions are
+\begin{equation}
+    E(x,\rho,t=0)=U(x,\rho,t=0)=a(T_*)^4
+\end{equation}
+
+\section{The Dimension full Problem}
+The dimensional problem is given by the following equations:
+\begin{equation}
+\frac{\partial E(r,z,t)}{\partial t} - \frac{c}{3\sigma}(\frac{\partial ^2 E}{\partial r^2} + 
+\frac{1}{r}\frac{\partial E}{\partial r} + \frac{\partial ^2 E}{\partial z^2}) = c\sigma(U - E)
+\end{equation}
+\begin{equation}
+\frac{1}{\varepsilon}\frac{\partial U(r,z,t)}{\partial t} = c\sigma(E - U)
+\end{equation}
+
+Now we will Derive the Numerical Scheme for the dimensional problem, similar to the dimensionless one.
+\subsection*{Numerical Scheme for the Dimensional Problem}
+First we discretize the equations:
+\begin{equation}
+\begin{split}
+\frac{E^{n+1}_{i,j}-E^{n}_{i,j}}{\Delta t} & - \frac{c}{3\sigma} \Biggl( \frac{E^{n+1}_{i,j+1}-2E^{n+1}_{i,j}+E^{n+1}_{i,j-1}}{\Delta r^2}
+    + \frac{1}{r_j}\frac{E^{n+1}_{i,j+1}-E^{n+1}_{i,j-1}}{2\Delta r} \\
+& + \frac{E^{n+1}_{i+1,j}-2E^{n+1}_{i,j}+E^{n+1}_{i-1,j}}{\Delta z^2} \Biggr) = c\sigma(U^{n+1}_{i,j} - E^{n+1}_{i,j}),
+\end{split}
+\end{equation}
+\begin{equation}
+\frac{1}{\varepsilon}\frac{U^{n+1}_{i,j}-U^{n}_{i,j}}{\Delta t} = c\sigma(E^{n+1}_{i,j} - U^{n+1}_{i,j}),
+\end{equation}
+Rearranging the equations to solve for the next time step values:
+\begin{equation}
+\begin{split}
+E^{n+1}_{i,j} = E^{n}_{i,j} + \Delta t \Biggl( & \frac{c}{3\sigma} \Biggl( \frac{E^{n+1}_{i,j+1}-2E^{n+1}_{i,j}+E^{n+1}_{i,j-1}}{\Delta r^2}
+    + \frac{1}{r_j}\frac{E^{n+1}_{i,j+1}-E^{n+1}_{i,j-1}}{2\Delta r} \\
+& + \frac{E^{n+1}_{i+1,j}-2E^{n+1}_{i,j}+E^{n+1}_{i-1,j}}{\Delta z^2} \Biggr) + c\sigma(U^{n+1}_{i,j} - E^{n+1}_{i,j}) \Biggr),
+\end{split}
+\end{equation}
+\begin{equation}
+U^{n+1}_{i,j} = \frac{U^{n}_{i,j} + c\sigma \varepsilon \Delta t E^{n+1}_{i,j}}{1 + c\sigma \varepsilon \Delta t},
+\end{equation}
+Define the following parameters:
+\begin{equation}
+f = \frac{1}{1+c\sigma \varepsilon \Delta t}, \lambda_r = \frac{c\Delta t}{3\sigma \Delta r^2}, \lambda_z = \frac{c\Delta t}{3\sigma \Delta z^2}, 
+\gamma_j = \frac{c\Delta t}{3\sigma 2r_j \Delta r},
+\end{equation}
+Notice that $r_j = j\Delta r$, one can substitute it back to the equations.
+\begin{equation}
+    \gamma_j = \frac{\lambda_r}{2j}
+\end{equation}
+We can rewrite the equations as (substituting $U^{n+1}_{j,i}$ into the first equation):
+\begin{equation}
+\begin{split}
+E^{n+1}_{i,j}-E^{n}_{i,j} & = \lambda_{r}(E^{n+1}_{i,j+1}-2E^{n+1}_{i,j}+E^{n+1}_{i,j-1}) 
+ + \frac{\lambda_r}{2j}(E^{n+1}_{i,j+1}-E^{n+1}_{i,j-1}) \\
+& + \lambda_z({E^{n+1}_{i+1,j}-2E^{n+1}_{i,j}+E^{n+1}_{i-1,j}}) + c\sigma (1-f) U^{n}_{i,j} - c \sigma (1-f) E^{n+1}_{i,j},
+\end{split}
+\end{equation}
+Rearranging to have the $E^{n+1}$ terms on the left side:
+\begin{equation}    
+\begin{split}
+(1 + 2\lambda_{r} + 2\lambda_z + c\sigma (1-f))E^{n+1}_{i,j} & - (\lambda_{r} + \frac{\lambda_{r}}{2j})E^{n+1}_{i,j+1} 
+- (\lambda_{r} - \frac{\lambda_{r}}{2j})E^{n+1}_{i,j-1} \\
+& - \lambda_z E^{n+1}_{i+1,j} - \lambda_z E^{n+1}_{i-1,j} = c\sigma (1-f) U^{n}_{i,j} + E^{n}_{i,j},
+\end{split}
+\end{equation}
+This system can be solved using the Sylvester equation approach as described in the dimensionless case.
+
+
+
+\end{document}

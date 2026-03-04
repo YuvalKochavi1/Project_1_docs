@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\title{Modeling of Supersonic Radiative Marshak Waves Using Simple Models and Advanced Simulations}
+\author{Yuval Kochavi}
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Effective mean free path}
+if the Rossland mean free path is larger than the halraum diameter, we need to correct it to avoid unphysical results. In other words,
+\begin{itemize}
+    \item Optically think (diffusion regime): $\lambda_{\mathrm{R}} \ll R$, no correction needed.
+    \item Optically thin (transport regime): $\lambda_{\mathrm{R}} \gg R$, need to correct $\lambda_{\mathrm{R}}$ to be $\sim R$.
+\end{itemize}
+So, we can define an effective mean free path as below:
+\begin{equation}
+\lambda_{\mathrm{eff}} = \left( \frac{1}{\lambda_{\mathrm{R}}} + \frac{1}{R} \right)^{-1}.
+\end{equation}
+But, this definition has a problem: when $\lambda_{\mathrm{R}} \ll R$, $\lambda_{\mathrm{eff}} \approx \lambda_{\mathrm{R}}$ (which is good), and when $\lambda_{\mathrm{R}} \gg R$, $\lambda_{\mathrm{eff}} \approx R$ (which is also good). However, in the intermediate regime, $\lambda_{\mathrm{eff}}$ can be significantly smaller than both $\lambda_{\mathrm{R}}$ and $R$, which is unphysical. To fix this, we can use the following definition:
+\begin{equation}
+\lambda_{\mathrm{eff}} = \left( \frac{1}{\lambda_{\mathrm{R}}^n} + \frac{1}{R^n} \right)^{-\frac{1}{n}} \to \min\left( \lambda_{\mathrm{R}}, R \right).
+\end{equation}
+This way, $\lambda_{\mathrm{eff}}$ smoothly transitions between $\lambda_{\mathrm{R}}$ and $R$ without becoming unphysically small in the intermediate regime. The choice of $n$ controls the sharpness of the transition; a larger $n$ results in a sharper transition.
+
+\subsection*{Effective mean-free-path correction in the numerical model}
+
+To prevent unphysical behavior when the Rosseland mean free path becomes comparable to or larger than the hohlraum radius, an effective mean-free-path correction is implemented in the numerical model.  
+The Rosseland mean free path is evaluated as
+\begin{equation}
+\lambda_{\mathrm{R}}(T_s,\rho)
+=
+g\,T_s^{\alpha}\,\rho^{-(\lambda+1)},
+\end{equation}
+and the geometric transport scale is taken as the hohlraum diameter,
+\begin{equation}
+\lambda_{\mathrm{geom}} = 2R.
+\end{equation}
+
+A smooth minimum between these two scales is then defined using a generalized power mean,
+\begin{equation}
+\lambda_{\mathrm{eff}}
+=
+\left(
+\lambda_{\mathrm{geom}}^{-p}
++
+\lambda_{\mathrm{R}}^{-p}
+\right)^{-1/p},
+\end{equation}
+where the numerical parameter $p$ controls the sharpness of the transition.  
+This construction ensures that
+\[
+\lambda_{\mathrm{eff}} \to
+\begin{cases}
+\lambda_{\mathrm{R}}, & \lambda_{\mathrm{R}} \ll 2R,\\
+2R, & \lambda_{\mathrm{R}} \gg 2R,
+\end{cases}
+\]
+without introducing an artificial minimum at intermediate optical depth.
+
+The opacity prefactor is renormalized consistently with the effective mean free path,
+\begin{equation}
+g_{\mathrm{eff}}(t)
+=
+g\,\frac{\lambda_{\mathrm{eff}}(t)}{\lambda_{\mathrm{R}}(t)},
+\end{equation}
+so that the diffusion coefficient scales as $D \propto \lambda_{\mathrm{eff}}$ in both the diffusion and geometry-limited regimes.
+
+When enabled (\texttt{lam\_eff=True}), this correction is applied dynamically at each time step using the instantaneous surface temperature $T_s(t)$ (or $T_s(t-\Delta t)$ in the Marshak marcher).  
+In the ablation case with density evolution, the correction is coupled directly to the density-dependent transport scaling by integrating the combined factor
+\[
+\left(\tfrac{g_{\mathrm{eff}}}{g}\right)\rho^{\,\mu-\lambda-2}
+\]
+inside the time integral used to construct the similarity coefficient, ensuring that geometry-limited transport and density evolution are treated consistently rather than as separable corrections.
+
+Finally, the dimensionless similarity parameter controlling the Marshak-wave front evolution is evaluated as
+\begin{equation}
+Z_1 = Z_1\!\left(C_{\mathrm{eff}}, \rho\right),
+\end{equation}
+so that the wave-front dynamics, opacity, geometry, and density are consistently coupled through $\lambda_{\mathrm{eff}}$.
+
+\bigskip
+\noindent
+\textbf{Physical meaning:}  
+This construction enforces a physically consistent transition between diffusion-dominated transport and free-streaming transport, while preserving correct scaling of opacity, diffusion coefficient, and Marshak-wave similarity structure in cylindrical hohlraum geometry.
+
+\section{Results}
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c c c c c c c c}
+\hline
+$Diameter$ & L & $\frac{L}{\lambda_R}$ & $\frac{\lambda_R}{D}$ & $\rho$ & $\lambda_R\;[\mathrm{cm}]$ & $n$ & Material & Expt. \\
+\hline
+0.06 & 0.04 & 0.11 & 5.93 & 0.05   & 0.356 & $\to\infty$ & C$_6$H$_{12}$ & Xu \\
+0.06 & 0.04 & 0.41 & 1.633 & 0.05   & 0.098 & $>2$        & C$_6$H$_{12}$Cu$_{0.394}$ & Xu \\
+0.16 & 0.15 & 8.33 & 0.1125 & 0.04   & 0.018 & $\ge 2$     & Ta$_2$O$_5$ & Back \\
+0.16 & 0.15 & 0.83 & 1.125 & 0.05   & 0.18 & 1.5     & SiO$_2$ & Back \\
+0.30 & 0.15 & 1.36 & 0.6875 & 0.01   & 0.11 & $\ge 2$     & SiO$_2$ low energy & Back \\
+0.20 & 0.28 & 1.32 & 0.5695 & 0.1249 & 0.212 & 1           & SiO$_2$ & Moore \\
+0.20 & 0.28 & 0.28 & 4.94 & 0.1139 & 0.988 & 2--2.5      & C$_8$H$_7$Cl & Moore \\
+0.08 & 0.12 & 0.31 & 4.875 & 0.0065  & 0.39  & 1           & C$_{15}$H$_{20}$O$_6$ & Keiter \\
+0.08 & 0.12 & 2.11 & 0.7125 & 0.0625 & 0.057 & 2           & C$_{15}$H$_{20}$O$_6$Au$_{0.172}$ & Keiter \\
+0.02 & 0.03 & 0.64 & 2.35 & 0.16   & 0.047 & ? ($n>3$)   & C$_8$H$_8$ & Ji-Yan \\
+0.10 & 0.12 & 0.29 & 4.1 & 0.029  & 0.41  & 1           & French gold & French3 \\
+0.20 & 0.2 & 0.23 & 4.33 & 0.0189  & 0.866  & 1           & French copper & French3 \\
+\hline
+\end{tabular}
+\caption{Parameters extracted from whiteboard note}
+\label{tab:whiteboard_params}
+\end{table}
+
+\end{document}

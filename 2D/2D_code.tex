@@ -1,0 +1,706 @@
+% Uses: Numerical_Problems (23).pdf and Numerical_Problems (21).pdf
+% Goal: “fit Eq.(23) to Eq.(21)” = take the 1D self-similar harmonic-face diffusion (23)
+% and generalize it consistently to the 2D cylindrical discretization (21),
+% while keeping the dimensional/units-based definitions from (21).
+
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, bm}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!60!black},
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{red!50!black},
+  showstringspaces=false,
+  frame=single,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{From 1D Self-Similar Diffusion to 2D Cylindrical Self-Similar Diffusion}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Starting point: 2D cylindrical diffusion (dimensional form)}
+We begin from the \emph{dimensional} 2D (cylindrical) matter--radiation diffusion system (your file ``2D Diffusion - Linear Case''):
+\begin{align}
+\frac{\partial E(r,z,t)}{\partial t}
+-\frac{c}{3\sigma}\left(
+\frac{\partial^2 E}{\partial r^2}
++\frac{1}{r}\frac{\partial E}{\partial r}
++\frac{\partial^2 E}{\partial z^2}
+\right)
+&= c\sigma\,(U-E), \label{eq:2D_dim_E}\\
+\frac{1}{\varepsilon}\frac{\partial U(r,z,t)}{\partial t}
+&= c\sigma\,(E-U). \label{eq:2D_dim_U}
+\end{align}
+This corresponds to Eqs.~(26)--(27) in the 2D PDF.
+
+\section{Insert the 1D self-similar physics (opacity + EOS) into 2D}
+From the 1D self-similar file, we assume the standard power-law relations:
+\begin{align}
+\frac{1}{\kappa_R} &= g\,T^{\alpha}\,\rho^{-\lambda}, \label{eq:selfsim_kappa}\\
+e &= f\,T^{\gamma}\,\rho^{-\mu}, \qquad U_m=\rho e = f\,T^{\gamma}\,\rho^{-\mu+1}. \label{eq:selfsim_e}
+\end{align}
+Also $U_R(T)=aT^4$ and we define
+\begin{equation}
+\beta(T)\equiv \frac{\partial U_R}{\partial U_m}. \label{eq:beta_def}
+\end{equation}
+As in the 1D derivation, the diffusion coefficient is
+\begin{equation}
+D(T)\equiv \frac{c}{3\sigma(T)}
+=\frac{c}{3}\,g\,T^{\alpha}\,\rho^{-\lambda-1}. \label{eq:D_of_T}
+\end{equation}
+And (same algebra as in the 1D file) one gets
+\begin{equation}
+\beta(T)=\frac{4a\rho^{\mu-1}}{f\gamma}\,T^{4-\gamma}. \label{eq:beta_of_T}
+\end{equation}
+
+\paragraph{What changes from (linear) 2D to (self-similar) 2D?}
+In the 2D linear PDF, $\sigma$ is treated as constant in the dimensional scheme, producing constant $\lambda_r,\lambda_z$.
+Here we keep the \emph{same cylindrical operator and discretization}, but we replace the constant diffusion coefficient
+$\frac{c}{3\sigma}$ by $D(T)$ and replace the ``$\varepsilon$''-style coupling by the self-similar $\beta(T)$ update (exactly like the 1D self-similar implicit coupling step).
+
+\section{Time-lagged coefficients (use the ``units'' logic)}
+Following your 1D self-similar implementation philosophy: at time level $n$, $U_R^n$ is known, hence $T^n$ is known,
+so $D^n$ and $\beta^n$ are known coefficients for the implicit step.
+
+From the 1D file:
+\begin{equation}
+T^n_{i,j}=\left(\frac{U_{R,i,j}^n}{a}\right)^{1/4}, \qquad
+D^n_{i,j}= \frac{c}{3}\,g\,(T^n_{i,j})^\alpha\,\rho^{-\lambda-1}, \qquad
+\beta^n_{i,j}= \frac{4a\rho^{\mu-1}}{f\gamma}\,(T^n_{i,j})^{4-\gamma}. \label{eq:lagged_coeffs}
+\end{equation}
+This is the direct 2D analogue of Eqs.~(19)--(21) in the 1D self-similar PDF.
+
+\section{Discretization on a $(z,r)$ grid (same stencil as your 2D PDF)}
+Let $z_i=i\Delta z$ and $r_j=j\Delta r$ with $j\ge 0$.
+Use fully implicit time stepping for $E$:
+\begin{equation}
+\frac{E^{n+1}_{i,j}-E^n_{i,j}}{\Delta t} - \nabla\cdot\big(D^n\nabla E^{n+1}\big)
+= \chi c\sigma^n_{i,j}\big(U^{n+1}_{i,j}-E^{n+1}_{i,j}\big), \label{eq::transportEq}
+\end{equation}
+
+where the cylindrical divergence gives the same structure as in the 2D PDF:
+\[
+\nabla\cdot(D\nabla E)=
+\frac{1}{r}\frac{\partial}{\partial r}\left(r D\frac{\partial E}{\partial r}\right)
++\frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right).
+\]
+We now discretize it using face fluxes (finite-volume style), matching the \emph{spirit} of the 2D discretization (radial Laplacian + $(1/r)\partial_r$) while allowing variable $D$.
+
+\subsection{Key step: ``fit Eq.(23) into Eq.(21)'' via harmonic face diffusion}
+In 1D you used the decimal average at cell faces in the 1D self-similar PDF):
+\begin{equation}
+D^n_{i+\frac12}=\frac{D^n_i + D^n_{i+1}}{2}. \label{eq:harm_1D}
+\end{equation}
+To extend this consistently to 2D, we define decimal averages on \emph{both} coordinate faces:
+\begin{align}
+D^{n}_{i+\frac12,j} &\equiv \frac{D^n_{i,j}+\,D^n_{i+1,j}}{2}, \label{eq:harm_z}\\
+D^{n}_{i,j+\frac12} &\equiv \frac{D^n_{i,j}+\,D^n_{i,j+1}}{2}. \label{eq:harm_r}
+\end{align}
+This is \emph{exactly} the 2D generalization of Eq.~\eqref{eq:harm_1D}, and it is what you want when $D$ varies strongly with $T$.
+
+\subsection{Define the dimensionful ``$\lambda$'' factors (units part from the 2D PDF)}
+Your 2D dimensional scheme defines (Eqs.~(32)--(33) there):
+\[
+\lambda_r=\frac{c\Delta t}{3\sigma\,\Delta r^2},\quad
+\lambda_z=\frac{c\Delta t}{3\sigma\,\Delta z^2},\quad
+\gamma_j=\frac{c\Delta t}{3\sigma2r_j\Delta r}=\frac{\lambda_r}{2j}.
+\]
+In the self-similar case, $\sigma$ varies, so the natural replacement is to use the \emph{face} diffusion coefficients:
+\begin{equation}
+\lambda^{n}_{z,i+\frac12,j} \equiv \frac{\Delta t}{\Delta z^2}\,D^n_{i+\frac12,j},
+\label{eq:lambdas_faces}
+\end{equation}
+The cylindrical $(1/r)\partial_r$ contribution can be handled in the following way:
+\begin{equation}
+\left[\frac{1}{r}\frac{\partial}{\partial r}\left(r D\frac{\partial E}{\partial r}\right)\right]_{ij}\approx \frac{1}{r_j \Delta r}\left( r_{j+\frac{1}{2}}D_{i,j+\frac{1}{2}}^n \frac{E_{i,j+1}-E_{i,j}}{\Delta r} - r_{j-\frac{1}{2}}D_{i,j-\frac{1}{2}}^n \frac{E_{i,j}-E_{i,j-1}}{\Delta r} \right)
+\end{equation}
+
+\begin{equation}
+\lambda^{n}_{r,i\pm \frac12,j} \equiv \frac{\Delta t}{\Delta r^2}\,\frac{r_{j\pm 1/2}}{r_j}\,D^n_{i,j\pm\frac12}. \label{eq:lambda_r}
+\end{equation}
+
+Notice that the definition of $r_{j+1/2}$ is consistent with the grid (e.g. $r_{j+1/2}=(j+1/2)\Delta r$). 
+
+\subsection{Implicit coupling update (self-similar replacement of $\varepsilon$-form)}
+From the 1D self-similar file, the matter equation is written in terms of $U_R$ and $\beta$:
+\[
+\frac{1}{\beta^n_{i,j}}\frac{U_{R,i,j}^{n+1}-U_{R,i,j}^{n}}{\Delta t}
+= \chi c\sigma^n_{i,j}\left(E^{n+1}_{i,j}-U_{R,i,j}^{n+1}\right).
+\]
+Solve it locally (same algebra as your 1D Eqs.~(29)--(30)):
+\begin{align}
+A^n_{i,j} &\equiv \beta^n_{i,j}\,\Delta t \chi c\sigma^n_{i,j},\\
+U_{R,i,j}^{n+1} &= \frac{A^n_{i,j}E^{n+1}_{i,j}+U^n_{R,i,j}}{1+A^n_{i,j}}. \label{eq:UR_update}
+\end{align}
+This is the exact self-similar analogue of the $f=\frac{1}{1+c\sigma\varepsilon\Delta t}$ trick in the 2D PDF (but with $\beta^n$ replacing $\varepsilon$).
+
+\section{Final 2D implicit stencil for $E^{n+1}_{i,j}$}
+Insert \eqref{eq:UR_update} into the $E$ equation coupling term (RHS of \eqref{eq::transportEq}):
+\[
+\chi c\sigma^n_{i,j}(U^{n+1}_{R,i,j}-E^{n+1}_{i,j})
+= \frac{\chi c\sigma^n_{i,j}}{1+A^n_{i,j}}U^n_{R,i,j}
+-\frac{\chi c\sigma^n_{i,j}}{1+A^n_{i,j}}E^{n+1}_{i,j}.
+\]
+Therefore the diagonal gains an extra
+\[
++\frac{\chi c\sigma^n_{i,j}}{1+A^n_{i,j}}
+\]
+exactly like the 1D tridiagonal derivation.
+
+Using face fluxes with face $D$, the fully implicit 5-point form becomes:
+\begin{align}
+&\Bigg[
+\frac{1}{\Delta t}
++ \frac{\lambda^{n}_{z,i+\frac12,j}+\lambda^{n}_{z,i-\frac12,j}}{\Delta t}
++ \frac{\lambda^{n}_{r,i,j+\frac12}+\lambda^{n}_{r,i,j-\frac12}}{\Delta t}
++ \frac{\chi c\sigma^n_{i,j}}{1+A^n_{i,j}}
+\Bigg]E^{n+1}_{i,j}
+\nonumber\\
+&\quad
+-\frac{\lambda^{n}_{z,i+\frac12,j}}{\Delta t}E^{n+1}_{i+1,j}
+-\frac{\lambda^{n}_{z,i-\frac12,j}}{\Delta t}E^{n+1}_{i-1,j}
+-\frac{\lambda^{n}_{r,i,j+\frac12}}{\Delta t}E^{n+1}_{i,j+1}
+-\frac{\lambda^{n}_{r,i,j-\frac12}}{\Delta t}E^{n+1}_{i,j-1}
+\nonumber\\
+&=
+\frac{1}{\Delta t}E^{n}_{i,j}
++\frac{\chi c\sigma^n_{i,j}}{1+A^n_{i,j}}\,U^n_{R,i,j}
+\qquad (\text{interior cells}). \label{eq:2D_selfsim_stencil}
+\end{align}
+This is the direct 2D generalization of the 1D self-similar tridiagonal equation, with the \emph{same} decimal-face idea now applied in both $r$ and $z$.
+
+\section{Radial diffusion operator and boundary conditions}
+
+We consider the cylindrical diffusion operator appearing in the radiation equation,
+\begin{equation}
+\mathcal{L}_r[E]
+=
+\frac{1}{r}\frac{\partial}{\partial r}
+\left(
+r\,D(r,z,t)\,\frac{\partial E}{\partial r}
+\right),
+\end{equation}
+defined on a uniform radial grid
+\[
+r_j = j\,\Delta r,
+\qquad j = 0,\dots,N_r-1.
+\]
+
+To ensure conservation and stability for variable diffusion coefficient $D(T)$,
+we discretize $\mathcal{L}_r$ in conservative (finite-volume) form using face fluxes.
+
+%-------------------------------------------------
+\subsection{Interior radial discretization}
+
+For interior cells $1 \le j \le N_r-2$, the radial operator is approximated by
+\begin{equation}
+\mathcal{L}_r[E]_{i,j}
+\approx
+\frac{1}{r_j\,\Delta r}
+\left[
+r_{j+\frac12} D^n_{i,j+\frac12}
+\frac{E^{n+1}_{i,j+1}-E^{n+1}_{i,j}}{\Delta r}
+-
+r_{j-\frac12} D^n_{i,j-\frac12}
+\frac{E^{n+1}_{i,j}-E^{n+1}_{i,j-1}}{\Delta r}
+\right],
+\end{equation}
+where
+\[
+r_{j\pm\frac12} = \left(j \pm \tfrac12\right)\Delta r,
+\]
+and $D^n_{i,j\pm\frac12}$ is the face diffusion coefficient (harmonic, arithmetic,
+or geometric average).
+
+Defining the effective cylindrical diffusion weights
+\begin{equation}
+\lambda^n_{r,i,j+\frac12}
+=
+\Delta t\,
+\frac{r_{j+\frac12}}{r_j}
+\frac{D^n_{i,j+\frac12}}{\Delta r^2},
+\qquad
+\lambda^n_{r,i,j-\frac12}
+=
+\Delta t\,
+\frac{r_{j-\frac12}}{r_j}
+\frac{D^n_{i,j-\frac12}}{\Delta r^2},
+\end{equation}
+the implicit radial contribution to the linear system takes the tridiagonal form
+\begin{equation}
+-\lambda^n_{r,i,j-\frac12} E^{n+1}_{i,j-1}
++
+\left(
+\lambda^n_{r,i,j-\frac12}
++
+\lambda^n_{r,i,j+\frac12}
+\right) E^{n+1}_{i,j}
+-
+\lambda^n_{r,i,j+\frac12} E^{n+1}_{i,j+1}.
+\end{equation}
+
+%-------------------------------------------------
+\subsection{Axis boundary at $r=0$}
+
+Physical regularity at the cylindrical axis requires
+\begin{equation}
+\left.\frac{\partial E}{\partial r}\right|_{r=0} = 0.
+\end{equation}
+
+This symmetry condition is enforced by imposing
+\begin{equation}
+E_{i,0}^{n+1} = E_{i,1}^{n+1},
+\end{equation}
+which removes the singularity of the $1/r$ term and ensures zero radial flux
+through the axis.
+
+In matrix form, the axis row is written as
+\[
+E_{i,0}^{n+1} - E_{i,1}^{n+1} = 0,
+\]
+yielding a stable and conservative discretization.
+
+%-------------------------------------------------
+\subsection{Outer radial boundary at $r=R$}
+
+At the outer boundary $r=R$, different physical models correspond to different
+boundary conditions.
+
+%-------------------------------------------------
+\subsubsection{Neumann boundary (no radial flux)}
+
+For a reflecting or insulating boundary, we impose
+\begin{equation}
+\left.\frac{\partial E}{\partial r}\right|_{r=R} = 0,
+\end{equation}
+which implies zero radial flux through the outer surface.
+
+In conservative form, the outer face flux vanishes,
+\[
+r_{j+\frac12} D_{j+\frac12}
+\frac{E_{j+1}-E_j}{\Delta r} = 0,
+\]
+so only the inner face contributes.
+
+The resulting discrete equation at $j=N_r-1$ is
+\begin{equation}
+\lambda^n_{r,i,j-\frac12} E^{n+1}_{i,j}
+-
+\lambda^n_{r,i,j-\frac12} E^{n+1}_{i,j-1},
+\end{equation}
+which corresponds to the matrix row
+\[
+E^{n+1}_{i,j} - E^{n+1}_{i,j-1} = 0
+\quad\text{(up to scaling)}.
+\]
+
+%-------------------------------------------------
+\subsubsection{Dirichlet boundary (fixed bath)}
+
+For a fixed radiation bath at $r=R$, we impose
+\begin{equation}
+E^{n+1}(R) = E_R.
+\end{equation}
+
+The missing outer neighbor is eliminated by substituting $E_{j+1}=E_R$ into the
+radial flux, yielding
+\begin{equation}
+\left(
+\lambda^n_{r,i,j-\frac12}
++
+\lambda^n_{r,i,j+\frac12}
+\right) E^{n+1}_{i,j}
+-
+\lambda^n_{r,i,j-\frac12} E^{n+1}_{i,j-1}
+=
+\lambda^n_{r,i,j+\frac12} E_R.
+\end{equation}
+
+This introduces an additional diagonal contribution and a source term on the
+right-hand side, while preserving the tridiagonal structure.
+
+\section{Summary of the ``fit''}
+\begin{itemize}
+\item Take the 2D cylindrical discretization and units definitions from the 2D PDF (dimensional $\Delta t,\Delta r,\Delta z$ and the cylindrical term).
+\item Replace constant $c/(3\sigma)$ by the self-similar $D(T)$ from the 1D PDF.
+\item Compute $T^n, D^n, \beta^n$ from $U_R^n$ (time-lagged coefficients), exactly like 1D.
+\item \emph{Most importantly:} use the 1D arithmetic-face diffusion Eq.~\eqref{eq:harm_1D} as a template and define arithmetic-face $D$ in both directions \eqref{eq:harm_z}--\eqref{eq:harm_r}; this is the precise meaning of ``fit Eq.(23) to Eq.(21)''.
+\item Apply the axis boundary condition \eqref{eq:axis_bc} (your 2D Eq.~(23)).
+\end{itemize}
+
+\section{Adding a gold coat}
+\subsection{Radial discretization on a nonuniform grid}
+
+In cylindrical geometry, the radiative diffusion operator in the radial direction
+takes the form
+\begin{equation}
+\mathcal{L}_r[E]
+=
+\frac{1}{r}\frac{\partial}{\partial r}
+\left(
+r\, D(r,T)\, \frac{\partial E}{\partial r}
+\right),
+\end{equation}
+where $E=aT^4$ is the radiation energy density and $D=c/(3\sigma)$ is the diffusion
+coefficient.
+
+\paragraph{Motivation for a nonuniform grid.}
+In the foam region ($0 \le r < R_{\mathrm{foam}}$), the characteristic length scales
+are relatively large and a uniform radial spacing $\Delta r$ is sufficient.
+In contrast, the gold layer ($R_{\mathrm{foam}} \le r \le R$) is thin and highly opaque,
+leading to steep temperature gradients near the foam--gold interface.
+To resolve these gradients efficiently, a geometrically stretched grid is used
+in the gold region, such that the radial cell width increases with $r$.
+
+As a result, the radial spacing $\Delta r$ is not constant across the domain and
+the diffusion operator must be discretized in a form that remains valid on
+nonuniform grids.
+
+\paragraph{Conservative finite--volume formulation.}
+We discretize the operator using a finite--volume approach, defining fluxes at
+cell faces:
+\begin{equation}
+F_{j+\frac12}
+=
+-\, r_{j+\frac12}\, D_{j+\frac12}
+\frac{E_{j+1}-E_j}{\Delta r_{j+\frac12}},
+\end{equation}
+where
+\[
+\Delta r_{j+\frac12} = r_{j+1}-r_j,
+\qquad
+r_{j+\frac12} = \frac{r_j+r_{j+1}}{2}.
+\]
+
+The divergence of the flux in cell $j$ is then approximated by
+\begin{equation}
+\mathcal{L}_r[E]_j
+\approx
+\frac{F_{j+\frac12}-F_{j-\frac12}}{r_j\,\Delta r_j},
+\qquad
+\Delta r_j = r_{j+\frac12}-r_{j-\frac12}.
+\end{equation}
+
+This formulation guarantees:
+\begin{itemize}
+\item exact conservation of radial energy flux,
+\item consistency across the foam--gold interface,
+\item automatic reduction to the standard second--order scheme when the grid
+      is uniform.
+\end{itemize}
+
+\paragraph{Axis and outer boundary treatment.}
+At the cylindrical axis ($r=0$), symmetry implies $\partial E/\partial r = 0$.
+This is enforced by setting the inward flux $F_{-1/2}=0$ and retaining only the
+outward contribution.
+
+At the outer boundary ($r=R$), either a Neumann condition ($\partial E/\partial r=0$)
+or a Dirichlet condition ($E=E_{\mathrm{bath}}$) is imposed by appropriately modifying
+the outward flux term. but it shouldn't matter a lot here where the gold region is applied.
+
+\paragraph{Implications.}
+Although the foam region uses a uniform grid, the same nonuniform discretization
+is applied throughout the domain. This avoids artificial discontinuities in the
+numerical operator at $r=R_{\mathrm{foam}}$ and ensures physically consistent
+transport across the foam--gold interface.
+
+
+\section*{Goal of the changes}
+The main runtime cost in the 2D implicit diffusion solver is per-timestep work in two places:
+\begin{enumerate}
+  \item \textbf{Assembling the sparse matrix} for the implicit step, and
+  \item \textbf{Solving the linear system}.
+\end{enumerate}
+
+The refactor focuses on reducing Python-level overhead in matrix assembly (the biggest avoidable cost) while preserving the numerical scheme and boundary-condition structure.
+
+\section*{What stayed the same (numerics)}
+The scheme is still backward Euler in time for the radiation energy density $E$ on a $(z,r)$ grid, with temperature-dependent diffusion:
+\begin{align}
+  \frac{E^{n+1}-E^n}{\Delta t} - \nabla\cdot\bigl(D(T^n)\nabla E^{n+1}\bigr) + \text{(coupling)}\,E^{n+1} &= \text{rhs}(E^n, U_R^n),
+\end{align}
+where $D(T)=\frac{c}{3\,\sigma(T)}$ and the coupling is handled with the same lagged-$T$ linearization you were using.
+
+Boundary conditions are still:
+\begin{itemize}
+  \item $z=0$: either Dirichlet ``drive'' (default) or Marshak-style equation (optional),
+  \item $z=L_z$: Dirichlet bath,
+  \item $r=0$: symmetry (Neumann),
+  \item $r=R$: selectable Dirichlet bath or Neumann $\partial E/\partial r=0$.
+\end{itemize}
+
+\section*{Big change \#1: CSR sparsity-pattern caching}
+\subsection*{The issue in the original approach}
+The original implementation constructed the sparse matrix by inserting coefficients inside nested loops (commonly with a format like LIL). Even though the matrix is sparse, inserting entries row-by-row in Python every timestep is slow because:
+\begin{itemize}
+  \item the \emph{pattern} (which entries are nonzero) is identical every timestep, but
+  \item the code was re-building that structure repeatedly.
+\end{itemize}
+
+\subsection*{The new idea}
+Split ``build the matrix'' into two parts:
+\begin{enumerate}
+  \item Build and cache the \textbf{CSR pattern} once (row pointers and column indices).
+  \item Each timestep, allocate a \textbf{data} array and fill only the coefficients.
+\end{enumerate}
+
+CSR format stores a sparse matrix as three arrays:
+\begin{itemize}
+  \item \texttt{indptr}: row-start pointers,
+  \item \texttt{indices}: column indices for each stored nonzero,
+  \item \texttt{data}: numeric values aligned with \texttt{indices}.
+\end{itemize}
+
+\subsection*{How \texttt{\_ensure\_csr\_template} works}
+The helper \texttt{\_ensure\_csr\_template(marshak\_boundary)}:
+\begin{itemize}
+  \item Decides which $z$-rows are unknowns:
+  \begin{itemize}
+    \item If Marshak is used at $z=0$, then $i=0$ is included in the unknown vector.
+    \item If Dirichlet drive is used at $z=0$, then $i=0$ is excluded (it is imposed after the solve).
+  \end{itemize}
+  \item Defines a flattening map from 2D indices $(i,j)$ to a 1D unknown index:
+  \[
+    \mathrm{idx}(i,j) = (i-i_0)\,N_r + j.
+  \]
+  \item First pass: for every row, constructs the sorted list of columns corresponding to the 5-point stencil (or a reduced stencil on the Marshak boundary row).
+  \item Second pass: precomputes lookup arrays \texttt{pos\_self}, \texttt{pos\_im}, \texttt{pos\_ip}, \texttt{pos\_jm}, \texttt{pos\_jp}.
+\end{itemize}
+
+Those \texttt{pos\_*} arrays are the key performance trick: they tell you the exact position in \texttt{data} where each neighbor coefficient must be written. Then the timestep assembly can do fast assignments like
+\begin{lstlisting}[language=Python]
+data[pos_ip[rows]] = -D_iph/dz2
+data[pos_self[rows]] = diag
+\end{lstlisting}
+without any sparse insertions.
+
+\section*{Big change \#2: precompute radial geometry weights}
+The $r$-direction diffusion in cylindrical coordinates has geometric factors like $\frac{1}{r}\partial_r(r\partial_r E)$. On a possibly nonuniform $r$ grid, the finite-volume style coefficients depend on the grid geometry.
+
+The refactor pulls all \emph{geometry-only} multipliers into a one-time precompute:
+\begin{itemize}
+  \item axis coefficient (for $j=0$ symmetry handling),
+  \item interior ``minus-half'' and ``plus-half'' weights,
+  \item outer boundary weights.
+\end{itemize}
+
+Then each timestep only multiplies by the local face diffusion $D$ to form the final coefficients. This reduces repeated floating-point work and also makes the assembly code clearer.
+
+\section*{Big change \#3: optional iterative linear solve (with guardrails)}
+The default solver remains a direct sparse solve (\texttt{spsolve}) to match the reference behavior.
+
+An optional iterative path (\texttt{bicgstab}) is provided for speed on larger grids:
+\begin{itemize}
+  \item Warm-start with the previous timestep solution $x_0 \approx E^n$.
+  \item Use a cheap Jacobi preconditioner (inverse diagonal).
+  \item Handle SciPy API differences (\texttt{rtol/atol} vs \texttt{tol}).
+  \item If the iterative method fails to converge (or returns non-finite values), fall back to \texttt{spsolve}.
+  \item Optionally check the achieved relative residual and fall back if it is too large.
+\end{itemize}
+
+These guardrails are important because iterative solvers can be fast but may produce inaccurate solutions when the system is ill-conditioned or when tolerances are not strict enough.
+
+\section*{What you should expect to improve}
+\begin{itemize}
+  \item \textbf{Assembly time per timestep} should drop significantly because the CSR pattern and neighbor positions are cached.
+  \item \textbf{Total runtime} improves most when the grid is moderately large and many timesteps are taken.
+  \item \textbf{Memory} remains sparse (zeros are not stored), but the main win is reduced repeated work.
+\end{itemize}
+
+\section*{How to use the new knobs (practical)}
+\begin{itemize}
+  \item For correctness-first runs: keep \texttt{linear\_solver="direct"}.
+  \item For speed experiments: set \texttt{linear\_solver="bicgstab"} and tune \texttt{linear\_tol} and \texttt{linear\_maxiter}.
+  \item If results look off with the iterative solver, tighten tolerances or rely on the residual-check fallback.
+  \item For a flatter-in-$r$ front (less lateral heat loss): consider \texttt{bc\_r\_outer="neumann0"} rather than a Dirichlet bath at $r=R$.
+\end{itemize}
+
+\section*{Summary}
+The refactor does \emph{not} change the physics model or the discretization. It mainly changes \emph{how} the linear system is assembled:
+\begin{itemize}
+  \item build CSR sparsity structure once,
+  \item fill only values each timestep using precomputed positions,
+  \item optionally use an iterative solve with safe fallback.
+\end{itemize}
+
+
+\section{Energy Calculations}
+
+\subsection{Axisymmetric Energy Integral}
+
+For an axisymmetric cylindrical geometry with material internal energy density $U_m(r,z,t)$, the total energy in a region at time $t$ is computed as:
+
+\begin{equation}
+E_{\text{total}}(t) = \int_0^{L_z} \int_0^{R} U_m(z,r,t) \cdot 2\pi r \, dr \, dz \quad [\text{erg}]
+\end{equation}
+
+where $2\pi r$ is the circumferential weight factor for cylindrical coordinates.
+
+\subsubsection{Numerical Integration}
+
+Using composite trapezoidal rule (from \texttt{numpy.trapezoid}):
+
+\begin{enumerate}
+\item Integrate in $r$ direction (for each $z$):
+\begin{equation}
+E_z(z,t) = \int_0^{R} U_m(z,r,t) \cdot 2\pi r \, dr \approx \sum_{j=1}^{N_r} U_m(z,r_j,t) \cdot w_j^{(r)}
+\end{equation}
+where $w_j^{(r)} = 2\pi r_j$ and the trapezoidal rule accounts for node spacing.
+
+\item Integrate in $z$ direction:
+\begin{equation}
+E_{\text{total}}(t) = \int_0^{L_z} E_z(z,t) \, dz \approx \sum_{i=1}^{N_z} E_z(z_i,t) \cdot w_i^{(z)}
+\end{equation}
+where $w_i^{(z)}$ are trapezoidal weights in $z$.
+\end{enumerate}
+
+\subsubsection{Foam and Gold Regions}
+
+The computational domain is subdivided into two material regions:
+
+\begin{itemize}
+\item \textbf{Foam:} $0 \le r < R_{\text{foam}}$
+\item \textbf{Gold:} $R_{\text{foam}} \le r \le R_{\text{foam}} + \delta R_{\text{gold}}$
+\end{itemize}
+
+\noindent The foam and gold energies are computed by applying a radial mask $\text{mask}_r$ in the integration:
+
+\begin{equation}
+E_{\text{foam}}(t) = \int_0^{L_z} \int_0^{R_{\text{foam}}} U_m(z,r,t) \cdot 2\pi r \, dr \, dz
+\end{equation}
+
+\begin{equation}
+E_{\text{gold}}(t) = \int_0^{L_z} \int_{R_{\text{foam}}}^{R_{\text{foam}} + \delta R_{\text{gold}}} U_m(z,r,t) \cdot 2\pi r \, dr \, dz
+\end{equation}
+
+\noindent \textbf{Unit Conversion:} The code returns energy in erg; convert to hectojoules (hJ) by:
+\begin{equation}
+E[\text{hJ}] = E[\text{erg}] \times 10^{-9}
+\end{equation}
+
+---
+
+\section{Front Position at a Single Radial Index}
+
+\subsection{Problem Statement}
+
+Given the material temperature profile $T_m(z,r_j,t)$ along the $z$-axis at a fixed radial location $r = r_j$, compute the location of the thermal front $z_F(r_j,t)$ where the heat pulse transitions from heated to ambient material.
+
+\subsection{Maximum Gradient Method}
+
+The front is located at the position of maximum temperature gradient:
+
+\begin{equation}
+z_F(r_j,t) = z_i^* \quad \text{where} \quad i^* = \arg\max_i \left| \frac{dT_m}{dz}\bigg|_{z=z_i} \right|
+\end{equation}
+
+\noindent \textbf{Numerical Implementation:}
+\begin{equation}
+i^* = \arg\max_{i=0}^{N_z-2} \left| T_m(z_{i+1},r_j,t) - T_m(z_i,r_j,t) \right|
+\end{equation}
+
+\noindent This is robust and does not require a critical temperature threshold.
+
+\subsection{Threshold Method}
+
+Alternatively, the front is defined as the first location where temperature falls below a threshold:
+
+\begin{equation}
+z_F(r_j,t) = \min\{z_i : T_m(z_i,r_j,t) \le \alpha \cdot T_{\text{cold}}\}
+\end{equation}
+
+\noindent where:
+\begin{itemize}
+\item $T_{\text{cold}}$ = ambient temperature (default: 300 K for CGS or $300 / K_{\text{per HeV}}$ for hev|ns)
+\item $\alpha$ = threshold factor (default: $\alpha = 5$)
+\end{itemize}
+
+\noindent If no cell satisfies the condition, $z_F$ is set to the rightmost $z$-node.
+
+---
+
+\section{Surface Front (2D Front Position)}
+
+\subsection{Problem Statement}
+
+Compute the full 2D front surface $z_F(r,t)$---the front location as a function of both radial and time coordinates.
+
+\begin{equation}
+z_F(r_j, t_n) \quad \text{for all} \quad j = 0, 1, \ldots, N_r-1 \text{ and } n = 0, 1, \ldots, N_t-1
+\end{equation}
+
+\noindent This gives an $(N_t \times N_r)$ array describing how the front surface evolves.
+
+\subsection{Maximum Gradient Method (2D)}
+
+For each radial location $r_j$ and time step $t_n$, independently apply the 1D max-gradient method:
+
+\begin{equation}
+z_F(r_j,t_n) = z_i^*,  \quad \text{where} \quad i^* = \arg\max_i \left| T_m(z_{i+1},r_j,t_n) - T_m(z_i,r_j,t_n) \right|
+\end{equation}
+
+\noindent \textbf{Vectorized Implementation:}
+\begin{align}
+\mathbf{dT} &= |\Delta T_m|_{\text{along } z} \quad \Rightarrow \quad \text{shape } (N_t, N_z-1, N_r) \\
+\mathbf{i}^* &= \arg\max(\mathbf{dT}, \text{ axis}=1) \quad \Rightarrow \quad \text{shape } (N_t, N_r) \\
+z_F &= z[\mathbf{i}^*] \quad \Rightarrow \quad \text{shape } (N_t, N_r)
+\end{align}
+
+\subsection{Threshold Method (2D)}
+
+For each $(r_j, t_n)$ pair:
+
+\begin{equation}
+z_F(r_j,t_n) = \min\{z_i : T_m(z_i,r_j,t_n) \le \alpha \cdot T_{\text{cold}}\}
+\end{equation}
+
+\noindent \textbf{Vectorized Implementation:}
+\begin{align}
+\mathbf{M} &= T_m \le \alpha T_{\text{cold}} \quad \Rightarrow \quad \text{shape } (N_t, N_z, N_r) \\
+\mathbf{i}^* &= \arg\max(\mathbf{M}, \text{ axis}=1) \quad \Rightarrow \quad \text{shape } (N_t, N_r) \quad [\text{first True index}] \\
+z_F &= z[\mathbf{i}^*] \quad \Rightarrow \quad \text{shape } (N_t, N_r)
+\end{align}
+
+\noindent If all temperatures exceed the threshold in a column, $z_F$ defaults to $z_{N_z-1}$ (the rightmost location).
+
+\subsubsection*{Code Structure Reference}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Method} & \textbf{Purpose} \\
+\hline
+\texttt{compute\_energy\_foam(stored\_Um)} & Total foam energy $E_{\text{foam}}(t)$ \\
+\texttt{compute\_energy\_gold(stored\_Um)} & Total gold energy $E_{\text{gold}}(t)$ \\
+\texttt{compute\_front\_at\_r(stored\_Tm, r\_index)} & Front at single radius (1D array) \\
+\texttt{compute\_front\_surface(stored\_Tm)} & Front surface $z_F(r,t)$ (2D array) \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsubsection*{Example Usage}
+
+\begin{verbatim}
+# Create and run simulation
+sim = create_simulation(material="SiO2")
+stored_t, stored_Um, stored_Tm, stored_TR = run_simulation(sim)
+
+# Compute quantities
+energy_foam = sim.compute_energy_foam(stored_Um) * 1e-9  # erg -> hJ
+front_r0 = sim.compute_front_at_r(stored_Tm, r_index=0)
+front_surface = sim.compute_front_surface(stored_Tm)  # shape (Nt, Nr)
+\end{verbatim}
+
+\end{document}

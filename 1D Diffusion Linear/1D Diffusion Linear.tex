@@ -1,0 +1,359 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+
+\title{Basic Diffusion Problem}
+\author{Yuval.Kochavi }
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{The physics}
+The non-equilibrium Marshak wave problem consists of a semi-infinite, purely absorbing, and homogeneous medium occupying $0 \leq z < \infty$. The medium is at zero temperature with no radiation field present at time $t < 0$. Commencing at $t = 0$, a time independent radiative flux impinges upon the surface at $z = 0$. Neglecting hydrodynamic motion and heat conduction, the one group radiative transfer equation in the diffusion approximation and the material energy balance equation are
+
+\begin{equation}
+\frac{\partial E(z,t)}{\partial t} - \frac{\partial}{\partial z}\left[\frac{c}{3\sigma(T)}\frac{\partial E(z,t)}{\partial z}\right] = c\sigma(T)[aT^4(z,t) - E(z,t)],
+\end{equation}
+
+\begin{equation}
+c_v(T)\frac{\partial T(z,t)}{\partial t} = c\sigma(T)[E(z,t) - aT^4(z,t)],
+\end{equation}
+
+where $E(z,t)$ is the radiation energy density, $T_m(z,t)$ is the material temperature, $\sigma(T)$ is the absorption cross section (opacity), $c$ is the speed of light, $a$ is the radiation constant, and $c_v(T_m)$ is the heat capacity of the material. 
+
+We use some Easy discounts: 
+
+\begin{itemize}
+\item $\sigma(T)$ is constant and does not depends on T.
+\item $c_v(T_m) = \alpha T_m^3$, and define $U = aT_m^4$, and $\varepsilon = \frac{4a}{\alpha}$.
+\end{itemize}
+
+Now, The equations will look a bit different: 
+
+\begin{equation}
+\frac{1}{c}\frac{\partial E(z,t)}{\partial t} - \frac{1}{3\sigma}\frac{\partial^2E(z,t)}{\partial z^2} = \sigma[U - E(z,t)],
+\end{equation}
+
+\begin{equation}
+\frac{1}{c\varepsilon}\frac{\partial U(z,t)}{\partial t} = \sigma[E(z,t) - U],
+\end{equation}
+
+For numerical needs, we will assume $E(z,0) = T(z,0) = 300$ , instead of $E(z,0) = T(z,0) = 0$, but in fact, since the bath is very hot, it will be zero for us. One more assumption is that, in the end of the material, there is a vacuum, meaning $E(\infty,t)=0$.
+
+
+\subsection*{Deriving the Marshak boundary condition}
+In order to describe the the affect of the coupled bath on the material, one need to use the marshak boundary condition, 
+we'll have to perform a small derivation using the book $Pomraning$. 
+The difficulty is performing a linear approximation fit into boundery condition, 
+the solution is using a weight function $w(\Omega) = \boldsymbol{n}\cdot \boldsymbol{\Omega}$, 
+that is the marshak condition. We will integrate over all incoming directions: 
+
+\begin{equation}
+\int_{\mathbf{n}\cdot\Omega < 0} d\Omega w(\Omega) \left[\frac{1}{4\pi} I_0(\mathbf{r}_s, v, t) + \frac{3}{4\pi} \Omega \cdot \mathbf{I}_1(\mathbf{r}_s, v, t) - I(\mathbf{r}_s, v, \Omega, t)\right] = 0,
+%\tag{3.10}
+\end{equation}
+
+and it yields
+
+\begin{equation}
+\frac{1}{4}I_0(\mathbf{r}_s, v, t) - \frac{1}{2}\mathbf{n} \cdot \mathbf{I}_1(\mathbf{r}_s, v, t) = \int_{\mathbf{n}\cdot\Omega < 0} d\Omega \left|\mathbf{n}\cdot\mathbf{\Omega}\right| I(\mathbf{r}_s, v, \Omega, t).
+\end{equation}
+
+Now, for a plane boundary at z=0, the hemisphere $\mu<0$ corresponds to rays entering the medium, therefore, $w(\mu , \varphi) = \mu$, and $I(\mathbf{r}_s, v, \Omega, t) = I_{inc}(\mu)$: 
+
+\begin{equation}
+\int_{-1}^{0}d\mu\mu \left[\frac{1}{4\pi} E + \frac{3}{4\pi} \mu \cdot F - I_{inc}(\mu)\right] = 0,
+\end{equation}
+
+Now, Defining $F_{inc} = \int_{-1}^{0}d\mu\mu I_{inc}$, we can derive: 
+
+\begin{equation}
+ \frac{E}{2} +\frac{F}{c}= \frac{4\pi}{c}F_{inc}
+\end{equation}
+This is the Marshak boundary condition for P1 approximation. Now, using the diffusion law
+\begin{equation}
+    \bm{I}_1=-D\frac{\partial I_0}{\partial z}\;\;\;\;(D=\frac{1}{3\sigma})
+\end{equation}
+\begin{equation}
+    F=-\frac{c}{3\sigma}\frac{\partial I_0}{\partial z}
+\end{equation}
+After substituting in eq. (8) and multiplying by \textcolor{red}{...}
+\begin{equation}
+E(0,t) -\frac{2}{3\sigma(T(0,t))} \frac{\partial E(0,t)}{\partial z} = \frac{4\pi}{c}F_{inc}, 
+\end{equation}
+\begin{equation}
+cE(0,t) + 2F(0,t) = 4\pi F_{inc}
+\end{equation}
+
+\subsection*{Dimensionless equations}
+Now lets try to make those equations dimensionless. We can define:
+
+\begin{equation}
+x = \sqrt3 \sigma z \;; \;\;\;\;\tau = \varepsilon c\sigma t
+\end{equation}
+
+We now have 2 new dimensionless equations:
+\begin{equation}
+\frac{\partial E(x,\tau)}{\partial \tau} - \frac{\partial^2E(x,\tau)}{\partial x^2} = U(x,\tau) - E(z,\tau),
+\end{equation}
+
+\begin{equation}
+\frac{\partial U(x,\tau)}{\partial \tau} = E(x,\tau) - U(x,\tau),
+\end{equation}
+
+Substituting in eq(10) $F_{inc} = \sigma_{sb}T_{bath}^4$, and Fick's law, we get:
+\begin{equation}
+E(0,\tau)-  \frac{2}{\sqrt3} \frac{\partial E(0,\tau)}{\partial x} = aT_{bath}^4,
+\end{equation}
+The thing comes next is to compare the article results to my simulation. It is important to state that the first problem we have solved is that where the $E(0,\tau) = aT_{bath}^4$, which means we force the material to have the temperature of the bath at the beginning. But, this is of course physically impossible, since the material is coupled to the bath and it takes time for the energy at the beginning of the material to behave as $E(0,\tau) = aT_{bath}^4$.
+
+\subsection*{Stefan-Boltzmann constant}
+\underline{Definition:} The definition rises from the amount of power that a point particle receives from a black-body radiator.
+The first definition in this matter comes from wikipedia and is the energy per volume and per frequency of a photon:
+\begin{equation}
+    u_\nu =  \frac{8\pi h \nu^3}{c^2}\frac{1}{e^{\beta h \nu}-1}
+\end{equation}
+The units of $u_\nu$ are
+\begin{equation}
+    [u_\nu] = \frac{rad\cdot J\cdot Hz^2\cdot s^2}{m^2}=\frac{}{}
+\end{equation}
+\begin{align}
+    P=\int_0^\infty d\nu\int_{north\;hemisphere}d\Omega \;B(\nu,\Omega)\cos\theta \\ =\int_0^\infty d\nu \int_0^{\frac{\pi}{2}}d\theta \int_0^{2\pi}d\phi \;B(\nu,\Omega)\cos\theta\sin\theta =\sigma T^4
+\end{align}
+where $B(\nu,\Omega)=I(\nu,\Omega)=\frac{2h\nu^3}{c^2}\frac{1}{e^{\beta h\nu}-1}$.
+The units of $B=I$ are
+\begin{equation}
+    [B]=\frac{J\cdot Hz^2\cdot s^2}{m^2}=\frac{J}{m^2}
+\end{equation}
+recalling the definition from Pomraning
+\begin{equation}
+    E=Id\nu d\Omega dS dt
+\end{equation}
+\begin{align}
+    U=\frac{1}{c}\int_0^\infty d\nu \int_{4\pi} d\Omega B(\nu,\Omega) \\
+    =\int_0^\infty d\nu \int_0^{\pi}d\theta\sin\theta \int_0^{2\pi}d\phi \;B(\nu,\Omega) =a T^4
+\end{align}
+where the constant a satisfies
+\begin{equation}
+    \frac{a}{\sigma}=\frac{\int_0^{\pi}d\theta\sin\theta}{c\int_0^\frac{\pi}{2}d\theta\sin\theta\cos\theta}=\frac{2}{c\cdot0.5}=\frac{4}{c}
+\end{equation}
+\section{Numerical solution}
+To solve those equations numerically, we will use the finite difference method. 
+We will discretize both time and space, and use an implicit scheme to ensure stability. 
+The spatial domain will be divided into N grid points, and the time domain will 
+be advanced in small time steps.
+
+Right now, my shemem is explicit in time (RK4 uses $E^n$, $U^n$ to calculate $E^{n+1}$, $U^{n+1}$), and central difference in space.
+to make it implicit, we need to use $E^{n+1}$, $U^{n+1}$ to calculate $E^{n+1}$, $U^{n+1}$, 
+which will lead to a system of equations to solve at each time step.
+
+\begin{equation}
+\frac{\partial E(x,\tau)}{\partial \tau} = \frac{\partial^2E(x,\tau)}{\partial x^2} + U - E(x,\tau),
+\end{equation}
+\begin{equation}
+\frac{\partial U(x,\tau)}{\partial \tau} = E(x,\tau) - U(x,\tau),
+\end{equation}
+
+Dirclet boundary condition at x=0 and x=L:
+\begin{equation}
+E(0,\tau) = aT_{bath}^4; \;\;\;\;E(L,\tau) = 0
+\end{equation}
+
+\subsection*{Backward Euler discretization}
+\begin{equation}
+\frac{E_i^{n+1} - E_i^n}{\Delta \tau} = \frac{E_{i+1}^{n+1} - 2E_i^{n+1} + E_{i-1}^{n+1}}{(\Delta x)^2} + U_i^{n+1} - E_i^{n+1},
+\end{equation}
+\begin{equation}
+\frac{U_i^{n+1} - U_i^n}{\Delta \tau} = E_i^{n+1} - U_i^{n+1},
+\end{equation}
+
+The second equation is local - solve for $U_i^{n+1}$:
+\begin{equation}
+    (1+\Delta \tau) U_i^{n+1} - \Delta \tau E_i^{n+1} = U_i^n
+\end{equation}
+\begin{equation}
+    U_i^{n+1} = \frac{\Delta \tau E_i^{n+1} + U_i^n}{1+\Delta \tau}
+\end{equation}
+Now define $\alpha = \frac{\Delta \tau}{1+\Delta \tau}$, $\lambda = \frac{\Delta \tau}{(\Delta x)^2}$ and substitute into the first equation:
+\begin{equation}
+    -\lambda E_{i-1}^{n+1} + (1 + 2\lambda + \alpha) E_i^{n+1} - \lambda E_{i+1}^{n+1} = E_i^n + \alpha U_i^n
+\end{equation}
+
+Notice that this is a tridiagonal system of equations for $E_i^{n+1}$, 
+which can be solved efficiently using the Thomas algorithm. 
+Once $E_i^{n+1}$ is found, we can compute $U_i^{n+1}$ directly from the previous equation. 
+Notice that we need to modify the first and last equations to account for the boundary conditions.
+when $i=1$:
+\begin{equation}
+    -\lambda E_0^{n+1}+(1 + 2\lambda + \alpha) E_1^{n+1} - \lambda E_2^{n+1} = E_1^n + \alpha U_1^n
+\end{equation}
+when $i=N-1$:
+\begin{equation}
+    -\lambda E_{N-2}^{n+1} + (1 + 2\lambda + \alpha) E_{N-1}^{n+1} - \lambda E_N^{n+1} = E_{N-1}^n + \alpha U_{N-1}^n
+\end{equation}
+With $E_0^{n+1} = aT_{bath}^4$ and $E_N^{n+1} = 0$.
+This completes the implicit finite difference scheme for solving the 1D diffusion problem.
+The modifications to the right-hand side vector due to the boundary conditions are:
+\begin{equation}
+rhs[0] += \lambda \cdot E_0^{n+1}; \;\;\;\; rhs[-1] += \lambda \cdot E_N^{n+1}
+\end{equation}
+where $rhs$ is the vector of free elements in the matrix equation (The ones involving $E^n,U^n$ stuff. 
+Further explanations about the numeric implementation of the solution for the system of equations are provided in the section about \textit{the Thomas Algorithm}.
+\subsubsection*{Applying the marshak boundary condition on the simulation}
+\begin{equation}
+E(0,\tau)-  \frac{2}{\sqrt3} \frac{\partial E(0,\tau)}{\partial x} = aT_{bath}^4,
+\end{equation}
+Using a finite difference approximation for the spatial derivative at the boundary:
+\begin{equation}
+\frac{\partial E}{\partial x}|_{x=0} \approx \frac{E_1^{n+1} - E_0^{n+1}}{\Delta x}
+\end{equation}
+Substituting this into the Marshak boundary condition gives:
+\begin{equation}
+E_0^{n+1} - \frac{2}{\sqrt3} \frac{E_1^{n+1} - E_0^{n+1}}{\Delta x} = aT_{bath}^4
+\end{equation}
+Rearranging this, we get a relation between $E_0^{n+1}$ and $E_1^{n+1}$:
+\begin{equation}
+\left(1 + \frac{2}{\sqrt3\Delta x}\right) E_0^{n+1} - \frac{2}{\sqrt3\Delta x} E_1^{n+1} = aT_{bath}^4
+\end{equation}
+Notice that by defining $\beta = -\frac{2}{\sqrt3}$, we can understand that applying 
+$\beta=0$ is equivalent to the Dirichlet boundary condition.
+This modified equation will replace the first equation in our tridiagonal system, where 
+$b_0 = 1 + \frac{2}{\sqrt3\Delta x}$, $c_0 = -\frac{2\sqrt3}{\Delta x}$, 
+and the right-hand side is $aT_{bath}^4$.
+
+\subsection*{The numeric shceme in matrixes form}
+The tridiagonal system, as represented in Eq.(24),Eq.(25), and Eq.(26) can be represented in matrix form as follows:
+\begin{equation}
+\begin{bmatrix}
+b_1 & c_1 & 0 & \cdots & 0 \\  
+a_1 & b_1 & c_1 & \cdots & 0 \\
+0 & a_2 & b_2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & a_{N} & b_{N}
+\end{bmatrix}
+\begin{bmatrix}
+E_1^{n+1} \\
+E_1^{n+1} \\
+E_2^{n+1} \\
+\vdots \\
+E_{N}^{n+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+d_1 \\
+d_2 \\
+d_3 \\
+\vdots \\
+d_{N}
+\end{bmatrix}
+\end{equation}
+Where the coefficients are defined as:
+\begin{gather*}
+a_i = -\lambda \quad \text{for } i = 1,2,\ldots,N-1 \\\
+b_i = 1 + 2\lambda + \alpha \quad \text{for } i = 1,2,\ldots,N-1 \\\
+c_i = -\lambda \quad \text{for } i = 0,1,\ldots,N-2 \\\
+d_0 = a T_{\text{bath}}^4 \\\
+d_i = E_i^n + \alpha U_i^n \quad \text{for } i = 1,2,\ldots,N-1 \\\
+d_{N-1} = E_{N-2}^n + \alpha U_{N-2}^n + \lambda E_{N-1}^{n+1} 
+\end{gather*}
+Remember that $E_{N-1}^{n+1} = 0$ due to the boundary condition at $x=L$. Now, 
+one can solve this tridiagonal system using the Thomas algorithm to 
+find the values of $E_i^{n+1}$ for all grid points at the new time step. 
+Once $E_i^{n+1}$ is computed, $U_i^{n+1}$ can be updated using the relation derived earlier (Eq.(23)).
+
+
+\subsection*{Thomas Algorithm}
+In this section we attempt to explain the usage of the boundary conditions on the matrix linear equation to find $E_i^{n+1}$ for every space-cell $i$.
+The unknowns are $(E_0^{n+1},...,E_{N-1}^{n+1})$ where the boundary conditions are 
+\begin{equation}
+    E_0^{n+1}=aT_*^4 
+\end{equation}
+\begin{equation}
+    E_{N-1}^{n+1}=0
+\end{equation}
+Therefore, the entire matrix equation for the vector of unknowns is:
+\begin{equation}
+\begin{bmatrix}
+1 & 0 & 0 & \cdots & 0 & 0\\
+a_1 & b_1 & c_1 & \cdots & 0 & 0 \\  
+0 & a_2 & b_2 & c_2 &\cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & a_{N-2} & b_{N-2} & c_{N-2}  \\
+0 & 0 & 0 & 0 & \cdots & 1
+\end{bmatrix}
+\begin{bmatrix}
+E_0^{n+1} \\
+E_1^{n+1} \\
+E_2^{n+1} \\
+\vdots \\
+E_{N-2}^{n+1} \\
+E_{N-1}^{n+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+aT_*^4 \\
+d_1 \\
+d_2 \\
+\vdots \\
+d_{N-2} \\
+0
+\end{bmatrix}
+\end{equation}
+From now, we can reduce the $a_1$ and the $c_{N-2}$ from the $0^{th}$ and $(N-2)^{th}$ row and get the matrix equation:
+\begin{equation}
+\begin{bmatrix}
+1 & 0 & 0 & \cdots & 0 & 0\\
+0 & b_1 & c_1 & \cdots & 0 & 0 \\  
+0 & a_2 & b_2 & c_2 &\cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & a_{N-2} & b_{N-2} & 0  \\
+0 & 0 & 0 & 0 & \cdots & 1
+\end{bmatrix}
+\begin{bmatrix}
+E_0^{n+1} \\
+E_1^{n+1} \\
+E_2^{n+1} \\
+\vdots \\
+E_{N-2}^{n+1} \\
+E_{N-1}^{n+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+aT_*^4 \\
+d_1 - aT_*^4\\
+d_2 \\
+\vdots \\
+d_{N-2} \\
+0
+\end{bmatrix}
+\end{equation}
+Notice that we thereby received an invariant matrix equaiton in $N-2$ unknowns, which is:
+\begin{equation}
+\begin{bmatrix}
+b_1 & c_1 & \cdots & 0 & 0 \\  
+a_2 & b_2 & c_2 &\cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & a_{N-2} & b_{N-2}   \\
+\end{bmatrix}
+\begin{bmatrix}
+E_1^{n+1} \\
+E_2^{n+1} \\
+\vdots \\
+E_{N-2}^{n+1} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+d_1 - aT_*^4\\
+d_2 \\
+\vdots \\
+d_{N-2}
+\end{bmatrix}
+\end{equation}
+This is a \textit{tridiagonal system of equations} which can be solved by the \textit{Thomas algorithm} which is basically how one reduces this matrix - first reducing all $a_{i}$ for $i\in \{1,...,N-2\}$ and then recursively applying $b_{N-2}$ from the last equation to the previous equation, then finding $b_{N-3}$ and substituting in the previous equation and so on.
+\textcolor{red}{Remember to add the Matrix representation of the Marshak BC (important for the numeric implementation).}
+bla 
+\end{document}

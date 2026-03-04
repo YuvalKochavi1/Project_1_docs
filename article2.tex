@@ -1,0 +1,303 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\title{Key to understanding supersonic radiative Marshak waves using simple
+models and advanced simulations}
+\author{Yuval Kochavi}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin{itemize}
+    \item Supersonic radiative Marshak waves are important in modeling energy transport in inertial confinement fusion (ICF) and astrophysical systems.
+    \item These waves propagate faster than the material sound speed, allowing diffusion-based approximations.
+    \item Modeling challenges include uncertainties in opacity, equations of state, radiation losses, and multidimensional effects.
+    \item This study introduces:
+    \begin{itemize}
+        \item A semi-analytic model based on diffusion theory which takes the following into account:
+        \begin{itemize}
+            \item 1D radiative diffusion,
+            \item Radiation losses to gold walls,
+            \item Ablated wall material and motion,
+            \item Diagnostic-based effective front correction.
+        \end{itemize}
+        \item Detailed two-dimensional implicit Monte Carlo (IMC) simulations,
+        \item A unified framework applicable across diverse experimental setups.
+    \end{itemize}
+\end{itemize}
+
+\section{Experimental Overview}
+
+\begin{itemize}
+    \item Experiments use laser-driven gold hohlraums to generate X-rays, which drive radiative waves into attached low-density foam tubes.
+    \item Key parameters:
+    \begin{itemize}
+        \item Laser energy: 1–350~kJ
+        \item Radiation temperature($T_D$): 85–310~eV
+        \item Foam densities: 10–160~mg/cm\textsuperscript{3}
+    \end{itemize}
+    \item Two primary diagnostic strategies are used to determine the heat front position:
+    \begin{itemize}
+        \item \textbf{Variable foam length method:} The foam length is changed between shots. The breakout time is recorded for each length, and the heat front velocity is inferred. The breakout is typically identified as the first sign of signal (e.g., darkening) at the rear end of the foam.
+        \item \textbf{Slit imaging method:} A single foam-filled gold cylinder includes either multiple short slits or one long slit along its side. The heat front's position is observed directly over time through the slit(s), allowing single-shot tracking. The main challenge is achieving sufficient time resolution to determine when the front passes each slit location.
+    \end{itemize}
+    \item Despite varying geometries and techniques, all experiments probe radiation-dominated, supersonic heat transport.
+\end{itemize}
+
+\section{Theoretical Background}
+
+\begin{itemize}
+    \item Governing equation: radiation diffusion in LTE,
+    \[
+    \frac{\partial U}{\partial t} = \frac{\partial}{\partial x} \left( \frac{c}{3\rho \kappa_R} \frac{\partial U}{\partial x} \right)
+    \]
+    \item Opacity and heat capacity follow power laws:
+    \[
+    \kappa \propto T^{-\alpha}, \quad C_v \propto T^\beta
+    \]
+    \item Semi-analytic model accounts for:
+    \begin{itemize}
+        \item 1D radiative diffusion,
+        \item Radiation losses to gold walls,
+        \item Ablated wall material and motion,
+        \item Diagnostic-based effective front correction.
+    \end{itemize}
+\end{itemize}
+
+\section{Simple Semi-Analytic Model}
+
+\subsection{1D Diffusion Model (Hammer–Rosen Formulation)}
+The foundational model for the radiative Marshak wave is based on the Hammer–Rosen (HR) solution from 2003.
+\begin{itemize}
+    \item Assumes optically thick foam and local thermodynamic equilibrium (LTE).
+    \item Reduces radiation transport to a nonlinear diffusion equation for $T(x,t)$.
+    \item Opacity and internal energy modeled as power laws:
+    \[
+    \kappa^{-1} = g T^a \rho^{-\lambda}, \quad e = f T^b \rho^{-\mu}
+    \]
+    \item Self-similar solution from Hammer–Rosen yields front position:
+    \begin{equation}
+        x_F^2(t) = \frac{2+\varepsilon}{1-\varepsilon} C H^{-\varepsilon}(t) \int_0^t H(t') dt'
+    \end{equation}
+    with:
+    \begin{equation}
+        H = T_s^{4+\alpha}, \varepsilon = \frac{\beta}{4+\alpha}, C = \frac{16g\sigma}{3f(4+\alpha)\rho^{2-\mu-\lambda}},
+    \end{equation}
+    \item Temperature profile behind the front approximated by a Henyey-like expression (it is pretty good approximation when the material is Low Z and so $\varepsilon$ is small):
+    \begin{equation}
+        T(x,t) = T_S(t) (1-\frac{x}{x_F})^{\frac{1}{4+\alpha-\beta}}
+    \end{equation}
+\end{itemize}
+
+\subsection{Surface vs. Drive Temperature: Boundary Condition Correction}
+
+\begin{itemize}
+    \item The drive temperature $T_D$ (from the hohlraum) is not equal to the foam surface temperature $T_s$.
+    \item Marshak boundary condition relates incoming flux and re-emission:
+    \[
+    \sigma_{\mathrm{SB}}T_D^4(t)
+    = \sigma_{\mathrm{SB}}T_S^4(t)+\frac{F(0,t)}{2},
+    \]
+    where $F(0,t)$ is the radiation flux into the foam at $x=0$, and also the derivative of the energy stored in the foam: 
+    \[
+    F(0,t) = \frac{d}{dt} \int_0^{x_f(t)} \rho e(x,t) dx = \frac{d}{dt} \left[f \rho^{1-\mu} x_F(t) H^{\varepsilon}(t)(1-\varepsilon)\right]
+    \]
+    \item A system of equations (HR front, energy stored in foam, Marshak condition) is solved numerically for $T_s(t), x_F(t)$. Detailed explanation in the $aricle1.tex$ sebsection 5.2.
+    \item This correction reduces $T_s$ and slows $x_f(t)$, improving agreement with experiments.
+\end{itemize}
+
+\subsection{Diagnostic Cutoff Correction}
+
+\begin{itemize}
+    \item Experiments define the front as where flux reaches a fraction $\chi$ of its peak.
+    \item Apply a correction using the modeled temperature profile:
+    \[
+    T(x,t) = T_s(t) \left(1 - \frac{x}{x_f(t)} \right)^{\frac{1}{4+\alpha - \beta}}
+    \]
+    \item Solving $T(x_f') = T_s f^{1/4}$ gives:
+    \[
+    x_f'(t) = x_f(t) \left(1 - f^{(4+\alpha - \beta)/4} \right)
+    \]
+    \item This reduces the effective front position, which we get from the simulation. And using this connection, one get the real front position, which is the one that should be compared to the experiments.
+\end{itemize}
+
+\subsection{2D Effects: Wall Energy Loss and Ablation}
+
+\subsubsection*{Wall Energy Loss}
+
+\begin{itemize}
+    \item In cylindrical experiments, the low-$Z$ foam is enclosed within a high-$Z$ wall (typically gold), which absorbs a portion of the radiation propagating through the foam.
+    
+    \item As the Marshak wave progresses axially through the foam, radiation leaks laterally into the surrounding wall, driving a 1D subsonic Marshak wave into the wall material.
+    
+    \item To model this, each axial slice of the foam is treated as emitting radiation sideways into a semi-infinite wall. The wall absorbs this flux and stores energy based on the time it has been exposed. Each spatial element is exposed to the radiation only after the heat front reaches it at time $t_0(x)$ for a period of $t - t_0(x)$.
+    
+    \item The total energy lost to the wall is calculated by integrating over all axial slices exposed to the heat front. the expression is:
+    \[
+    E_{\text{wall}}(t) = 2\pi R \int_0^{x_F(t)}\int_{t_0(x)}^t \dot E_{material}(t') dt'dx
+    \]
+    
+    \item The model uses analytic expressions from Shussman and Heizler (2015) to evaluate energy deposition into gold walls with LTE radiative diffusion assumptions.
+    
+    \item For experiments with different wall materials:
+    \begin{itemize}
+        \item For \textbf{gold walls}, constants are taken from CRSTA opacity/EOS data.
+        \[
+                E_{gold}(t) = 0.59 T_0^{3.35}(t-t_0(x))^{0.59} [hJ/mm^2]
+        \]
+        \item For \textbf{beryllium walls}, which are more transparent and supersonic-like, alternate constants are used.
+        \[
+        E_{Be}(t) = 1.27 T_0^{4.99}(t-t_0(x))^{0.5} [hJ/mm^2]
+        \]
+        \item For \textbf{bare foam} (no wall), lateral radiation is assumed to freely stream into vacuum (i.e., Marshak vacuum boundary condition).
+    \end{itemize}
+    
+    \item The total energy loss to the wall, $E_{\text{wall}}(t)$, reduces the energy remaining in the foam, thereby decreasing the surface temperature $T_s(t)$ (in about $10 eV$).
+    
+    \item This effect causes a further slowdown of the Marshak wavefront. For example, in the Back et al.\ experiment, wall losses accounted for most of the gap between the 1D prediction and the observed wavefront position.
+\end{itemize}
+
+\subsubsection*{Wall Ablation and Foam Compression}
+
+\begin{itemize}
+    \item As the foam's surface is heated by the radiation wave, the inner surface of the gold wall is also exposed to intense radiation. This drives a subsonic Marshak wave into the gold, heating it and causing the gold to ablate inward into the foam channel.
+
+    \item The wall ablation speed $u_{\text{abl}}(t)$ is calculated using the subsonic Marshak wave solution into a semi-infinite medium, derived by Shussman and Heizler (2015). For gold walls, the ablation speed in vacuum is given by:
+    \begin{equation}
+    u_{\text{abl}}(t) = -510.1 \tilde u(\rho_{gold}) T_0^{0.716} (t-t_0(x))^{0.036} [km/s]
+    \end{equation}
+    The ablation front inside the gold wall is not uniform; it follows a self-similar velocity profile $\tilde{u}(\rho)$ ranging from 1 at the surface to 0 deeper inside the wall.
+        
+    \item Because the gold wall is restrained by the foam, the model selects $\tilde{u}$ at a density corresponding to approximately $\rho \approx 4\rho_{\text{foam}}$, based on 2D simulation calibration.
+    
+    \item In the case of low-$Z$ walls such as beryllium sleeves, where the internal heat wave is nearly supersonic, the model sets $u_{\text{abl}} = 0$, effectively ignoring wall ablation in those cases.
+
+    \item The foam channel radius decreases over time due to wall ablation:
+    \[
+    R(t,x) = R_0 - u_{\text{abl}}(t) (t-t_0(x))
+    \]
+    which effectively reduces the cross-sectional area available for energy delivery.
+
+    \item As a result, the total incoming energy power is reduced:
+    \begin{equation}
+    \begin{aligned}
+        E_{\text{in}} &= \int_0^{t} F(t',0) \cdot \pi R^2(t',x) \, dt' \\
+        &= \int_0^{t} 2\sigma_{\text{SB}} \left(T_D^{4}(t') - T_s^4(t')\right) \cdot \pi R^2(t',x) \, dt' \\
+        &= 2\pi \sigma_{\text{SB}} \int_0^{t} \left(T_D^{4}(t') - T_s^4(t')\right) \cdot \left(R_0^2 - u_{\text{abl}}(t') t'\right) \, dt'
+    \end{aligned}
+    \end{equation}
+
+    This leads to a further reduction in $T_s(t)$, since less energy reaches the foam.
+
+    \item Simultaneously, ablated wall mass enters and mixes with the foam, increasing its effective average density over time. The evolving foam density is approximated as:
+    \begin{equation}
+        \rho_{\text{eff}}(t) = \rho _0 \frac{V_0}{V(t)} = \frac{\rho_0 V_0}{\int_{0}^{x_f(t)} \pi R^2(t,x) dx}
+    \end{equation}    Watch that $C(t)$ changes because it depends on $\rho$: 
+    \begin{equation}
+    C(t) = \frac{16g\sigma}{3f(4+\alpha) t}\int_{0}^{t}\rho_{\text{eff}}^{\mu+\lambda-2}(t')dt'
+    \end{equation}
+
+    \item Since radiative transport is sensitive to density (through opacity and heat capacity), the increasing $\rho_{\text{eff}}$ further slows the wavefront.
+
+    \item The model updates the Hammer–Rosen front position formula by incorporating both the time-dependent drive area and the evolving foam density, brings the semi-analytic prediction into near-exact agreement with measured data.
+
+\end{itemize}
+
+\section{Comparison with Experiments}
+
+\subsection*{Massen et al.\ (1994, GEKKO-XII)}
+
+\begin{itemize}
+    \item Target: Lead-doped plastic foam (C\textsubscript{11}H\textsubscript{16}Pb\textsubscript{0.3852}), density $\rho \approx 80$~mg/cm\textsuperscript{3}.
+    \item Drive: Hohlraum-driven radiation at $T_D \approx 100$, 120, and 150~eV using 0.8--0.9~ns laser pulses.
+    \item Foam lengths: 50--300~µm; no explicit gold wall noted.
+    \item Diagnostics: X-ray streak camera measured breakout time at foam rear.
+    \item Front definition: Breakout timing, no flux cutoff reported.
+    \item Modeling: 1D semi-analytic model with corrected $T_s(t)$ (Marshak boundary) accurately reproduced front trajectories.
+    \item Notes: Classical HR model overestimated velocity by $\sim$20\%; corrected model explains this without tuning.
+\end{itemize}
+
+\subsection*{Back et al.\ (1995, OMEGA Low-Energy)}
+
+\begin{itemize}
+    \item Target: SiO\textsubscript{2} foam, density $\rho \approx 10$~mg/cm\textsuperscript{3}.
+    \item Drive: Radiation temperature $T_D \approx 85$~eV with 10~ns pulse.
+    \item Foam lengths: 0.5--1.5~mm; cylindrical gold wall.
+    \item Diagnostics: Emergent flux vs.\ time measured for breakout.
+    \item Front definition: Likely flux onset, no cutoff specified.
+    \item Modeling: With updated opacity/EOS for low-$T$ and low-$\rho$, 2D semi-analytic and IMC models matched breakout timing.
+    \item Notes: Energy regime emphasizes opacity modeling; flux shape agreement was qualitative.
+\end{itemize}
+
+\subsection*{Back et al.\ (2000, OMEGA High-Energy)}
+
+\begin{itemize}
+    \item Target: SiO\textsubscript{2} and Ta\textsubscript{2}O\textsubscript{5} foams, densities $\rho \approx 50$ and 40~mg/cm\textsuperscript{3}, respectively.
+    \item Drive: $T_D \approx 190$~eV with up to 1~ns laser energy.
+    \item Foam lengths: 0.25--1.25~mm; 1.6~mm-diameter cylindrical gold hohlraum.
+    \item Diagnostics: X-ray flux breakout timing vs.\ length.
+    \item Front definition: Point where flux reached 50\% of maximum.
+    \item Modeling: Required full 2D treatment—wall loss and ablation—to reproduce measured front speed and flux history.
+    \item Be wall case: Beryllium sleeve produced $\sim$10\% slower wave; matched by modified model.
+\end{itemize}
+
+\subsection*{Keiter et al.\ (2007–2013, OMEGA)}
+
+\begin{itemize}
+    \item Target: C\textsubscript{15}H\textsubscript{20}O\textsubscript{6} foams, $\rho \approx 62$--65~mg/cm\textsuperscript{3}, with and without 12\% Au nanoparticle doping.
+    \item Drive: $T_D \approx 200$--210~eV.
+    \item Geometry: 1.2~mm long, 0.8~mm diameter gold-coated tubes with side window.
+    \item Diagnostics: Side-on X-ray emission through gold slit.
+    \item Front definition: Position at 40\% of peak radiative flux.
+    \item Modeling: Required front cutoff correction + 2D energy loss + wall ablation to match data.
+    \item Notes: Doped foams showed slower front due to increased opacity; model reproduced both doped and pure cases.
+\end{itemize}
+
+\subsection*{Ji-Yan et al.\ (2010, SG-II)}
+
+\begin{itemize}
+    \item Target: Polystyrene foam (C\textsubscript{8}H\textsubscript{8}), $\rho \approx 160$~mg/cm\textsuperscript{3}, no confining wall.
+    \item Drive: $T_D \approx 175$~eV.
+    \item Geometry: 0.3~mm long, 0.2~mm diameter.
+    \item Diagnostics: Side-on self-emission through vacuum.
+    \item Front definition: Flux reaching 50\% of peak value.
+    \item Modeling: Used vacuum lateral boundary condition to account for radiative escape.
+    \item Notes: 2D lateral energy loss essential even without walls; model and IMC both agreed with experiment.
+\end{itemize}
+
+\subsection*{Moore et al.\ (2015, NIF ``Pleiades'')}
+
+\begin{itemize}
+    \item Targets: SiO\textsubscript{2} foam ($\rho \approx 100$~mg/cm\textsuperscript{3}) and Cl-doped CH (C\textsubscript{8}H\textsubscript{7}Cl, $\rho \approx 100$~mg/cm\textsuperscript{3}).
+    \item Drive: $T_D \approx 300$~eV with a foam length of 2.8~mm.
+    \item Geometry: 2~mm diameter gold tube with side windows.
+    \item Diagnostics:
+    \begin{itemize}
+        \item Breakout timing via Dante x-ray diodes,
+        \item Front tracking with side-on framing camera.
+    \end{itemize}
+    \item Front definition: Position vs.\ time from camera data.
+    \item Modeling:
+    \begin{itemize}
+        \item HR model overpredicted front speed.
+        \item Full 2D model (Marshak $T_s$, wall loss, ablation, cutoff correction) reproduced trajectories within 5--10\%.
+    \end{itemize}
+    \item Notes: IMC simulations matched both centerline and edge front speeds; NIF scale required all corrections.
+\end{itemize}
+
+\subsection*{Overall Summary}
+
+\begin{itemize}
+    \item All experiments spanning 1994--2015, with densities of 10--160~mg/cm\textsuperscript{3} and $T_D$ from 85--300~eV, were matched by a single unified semi-analytic model.
+    \item 1D models were adequate only in short, low-energy cases.
+    \item 2D effects—especially wall loss, foam channel narrowing, and diagnostic cutoff correction—were essential for matching timing and trajectory in all long or high-flux experiments.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,475 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\title{Modeling of Supersonic Radiative Marshak Waves Using Simple Models and Advanced Simulations}
+\author{Yuval Kochavi}
+\date{December 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Radiation heat waves play an important role in many high-energy-density
+physics phenomena, for example, in inertial confinement fusion (ICF). In recent decades, several experiments on supersonic Marshak waves propagating through low-density foams were performed and reported. The governing equation that describes the behavior of radiative heat waves is the radiative transport equation, also known as the Boltzmann equation (for photons and gray (frequency-independent)):
+\begin{equation}
+\begin{split}
+\frac{1}{c}\frac{\partial I(\hat{\Omega}, \vec{r}, t)}{\partial t} &+ \hat{\Omega} \cdot \vec{\nabla}I(\hat{\Omega}, \vec{r}, t) + \left(\sigma_a\left(T_m(\vec{r}, t)\right) + \sigma_s\left(T_m(\vec{r}, t)\right)\right)I(\hat{\Omega}, \vec{r}, t) \\
+&= \sigma_a\left(T_m(\vec{r}, t)\right)B\left(T_m(\vec{r}, t)\right) + \frac{\sigma_s\left(T_m(\vec{r}, t)\right)}{4\pi}\int_{4\pi}I(\hat{\Omega}, \vec{r}, t)d\hat{\Omega} + S(\hat{\Omega}, \vec{r}, t),
+\end{split}
+\end{equation}
+Along with the equation for the radiation energy, the complementary equation for the material is as follows:
+\begin{equation}
+\frac{C_v}{c} \frac{\partial T_m(\vec{r},t)}{\partial t} = \sigma_a(T_m(\vec{r},t)) \left( \frac{1}{c}\int_{4\pi} I(\hat{\Omega}, \vec{r}, t) d\hat{\Omega} - a T_m^4 \right),
+\end{equation}
+where \(I\) is the specific intensity, \(c\) is the speed of light, \(\mathbf{\Omega}\) is the direction vector, \(\sigma_a\) is the absorption coefficient, \(B\) is the Planck function, \(C_v\) is the specific heat at constant volume, \(T_m\) is the material temperature, \(E\) is the radiation energy density, and \(a\) is the radiation constant.
+
+Exact solutions of the transport equation are difficult, especially in multiple dimensions; common exact approaches ($P_N, S_N$, and Monte Carlo) converge to the true solution only in infinite limit. Because these methods are computationally demanding, there is strong motivation to develop reliable approximations that are simpler to implement. Here we use the discontinuous asymptotic P1 approximation that was described above, in order to analyze a fundamental supersonic Marshak wave experiment. 
+
+\subsection*{The experiment}
+In this experiment, a high-energy laser is used to create a strong radiation heat source using a hohlraum, which then flows through a cylinder made of low-density $SiO_2$ foam. This experiment was chosen because it is relatively optically thin; hence, modeling the radiative transfer is challenging and therefore interesting (the simple diffusion approximation yields large errors). The experiment measures the outgoing flux from the foam cylinder for different foam lengths.
+
+\section{Classic approximations of the Boltzmann equation}
+Integrating the Boltzmann equation over all angles results in the first moment equation:
+\begin{equation}
+\frac{1}{c}\frac{\partial E(\vec{r}, t)}{\partial t} + \frac{1}{c} \vec{\nabla} \cdot \vec{F}(\vec{r}, t) = \sigma_a(T_m(\vec{r}, t)) \left( \int_{4\pi} B(T_m(\vec{r}, t)) d\hat{\Omega} - E(\vec{r}, t) \right) + S_0(\vec{r}, t),
+\end{equation}
+Now, integrating the Boltzmann equation after multiplying by \(\hat{\Omega}\) gives the second moment equation:
+\begin{equation}
+\frac{1}{c}\frac{\partial \vec{F}(\vec{r}, t)}{\partial t} + \frac{c}{3} \vec{\nabla} \cdot {E}(\vec{r}, t) + \sigma_t(T_m(\vec{r}, t)) \vec{F}(\vec{r}, t) = S_1(\vec{r}, t),
+\end{equation}
+Where $\sigma_t = \sigma_a + \sigma_s$ is the total cross-section. Notice that $S_1(\vec{r},t)=0$ since the source is isotropic. The classic diffusion approximation is derived by neglecting the time derivative of the flux in the second moment equation, leading to Fick's law:
+\begin{equation}
+\vec{F}(\vec{r}, t) = -\frac{c}{3\sigma_t(T_m(\vec{r}, t))} \vec{\nabla} E(\vec{r}, t).
+\end{equation}
+
+\section{Back et al. experiment}
+The test-case experiment considered is that of Back et al.\ (2000), performed at the Omega laser facility in Rochester. A third-harmonic Nd:glass laser ($\lambda = 0.35~\mu\mathrm{m}$) delivering $\sim 10~\mathrm{kJ}$ in a $\sim 2.4~\mathrm{ns}$ pulse heated a gold halfraum of characteristic size $\sim 1~\mathrm{mm}$--$1~\mathrm{cm}$. The absorbed laser energy was converted into a soft X-ray drive with a radiation temperature of $T_{\mathrm{rad}} \approx 100$--$300~\mathrm{eV} \approx 10^6 Kelvin$, which irradiated low-density SiO$_2$ foam samples. The foams had a density of $50~\mathrm{mg\,cm^{-3}}$ and lengths of $0.5$, $1.0$, and $1.25~\mathrm{mm}$, and were coated by a $25~\mu\mathrm{m}$-thick gold cylinder of $1.6~\mathrm{mm}$ diameter. The resulting radiative (Marshak) heat wave propagated supersonically through the foam, while hydrodynamic motion remained negligible. An X-ray streak camera measured the emerging flux at the rear of the samples, allowing the breakout time and heat-front propagation to be determined.
+
+\section{Simple Analytic Model for the Heat Front}
+
+This section develops a hierarchy of analytic models designed to capture
+the dominant physics of supersonic radiative Marshak waves in the
+Back et al.\ experiment.
+The goal is not an exact solution of the radiative transfer problem,
+but rather a physically transparent description that explains
+(i) the heat-front propagation,
+(ii) the role of different radiation temperatures,
+and (iii) the impact of two-dimensional energy losses to the gold walls.
+
+The modeling proceeds in stages:
+first a one-dimensional (1D) LTE diffusion-based model is constructed,
+then refined by carefully distinguishing between radiation temperatures,
+and finally extended to include the dominant two-dimensional wall-loss effect
+using an effective ``1.5D'' approach.
+\subsection*{Important results from H$\&$R2003}
+First, let's introduce some important notations: 
+\begin{equation}
+    \zeta = \frac{T^{4+\alpha}}{T_S^{4+\alpha}}, \quad H = T_s^{4+\alpha}, \varepsilon = \frac{\beta}{4+\alpha}, C = \frac{16g\sigma}{3f(4+\alpha)\rho^{2-\mu-\lambda}},
+\end{equation}
+Now let's present some important results from Hammer \& Rosen (2003):
+\begin{equation}
+    x_F^2(t) = \frac{2+\varepsilon}{1-\varepsilon} C H^{-\varepsilon}(t) \int_0^t H(t') dt'
+\end{equation}
+\begin{equation}
+    E = \int_0^{x_F}\rho e dx = f \rho^{1-\mu}(1-\varepsilon) x_F H^{\varepsilon}
+\end{equation}
+\begin{equation}
+    F = \frac{dE}{dt} = f \rho^{1-\mu} (1-\varepsilon) \frac{\partial (x_FH^{\varepsilon})}{ \partial t}
+\end{equation}
+Where \(C, f, \alpha, \beta, \mu\) are material constants. Another important relation is the expression for the profile of the heat material temperature:
+\begin{equation} 
+    \zeta = \frac{T^{4+\alpha}}{T_S^{4+\alpha}} = ((1-y)(1+\frac{\varepsilon}{2}(1-\frac{1}{H}\frac{\partial H}{\partial s})y))^{\frac{1}{1-\varepsilon}} = ((1-y)(1+\frac{\varepsilon}{2}(1-\frac{1}{H}\frac{\partial H}{\partial s})y))^{\frac{4+\alpha}{4+\alpha-\beta}}
+\end{equation}
+Where \(y = \frac{x}{x_F}\) is the normalized spatial variable and $ s = \int \frac{CH^{1-\varepsilon}}{x_F^2} dt$. A result for the temperature of the material is:
+\begin{equation}
+    T(x,t) = T_S(t) \left[\left(1-\frac{x}{x_F}\right)\left(1+\frac{\varepsilon}{2}(1-\frac{1}{H}\frac{\partial H}{\partial s})\frac{x}{x_F}\right)\right]^{\frac{1}{4+\alpha-\beta}}
+\end{equation}
+When $\varepsilon$ is small enough, the temperature profile can be approximated by a linear profile:
+\begin{equation}
+    T(x,t) = T_S(t) (1-\frac{x}{x_F})^{\frac{1}{4+\alpha-\beta}}
+\end{equation}
+This is a particularly useful result for our analysis.
+
+\subsection{Heat-Wave Profile}
+
+Radiative Marshak waves are characterized by a sharp thermal front,
+originating from the strong temperature dependence of both the opacity
+and the material heat capacity.
+Under the assumption of local thermodynamic equilibrium (LTE),
+the radiation energy density satisfies
+\[
+E(x,t) \simeq a T^4(x,t),
+\]
+and the Rosseland mean opacity and internal energy
+are approximated by power laws:
+\[
+\kappa^{-1} = g T^a \rho^{-\lambda}, \quad
+e = f T^b \rho^{-\mu}
+\]
+
+These assumptions admit self-similar solutions for both supersonic
+and subsonic Marshak waves.
+For a constant boundary temperature $T_S$,
+the temperature profile exhibits a nearly flat region
+behind the heat front $x_F(t)$ and a sharp drop near the front.
+
+For a special temporal boundary condition,
+the so-called Henyey solution provides an explicit analytic profile:
+\[
+T_{\mathrm{Hy}}(x,t) = T_S(t)
+\left(1 - \frac{x}{x_F(t)}\right)^{\frac{1}{4+a-b}},
+\]
+which approximates the exact self-similar solution remarkably well.
+The paper adopts this Henyey-like profile as an analytic approximation
+even when the boundary temperature varies in time,
+provided that the correct heat-front position $x_F(t)$ is used. This profile is later employed to estimate energy deposition into the gold walls.
+
+\subsection{1D Model with Multiple Radiation Temperatures}
+
+A key insight of the paper is that several distinct radiation temperatures
+must be distinguished:
+\begin{itemize}
+\item $T_D(t)$ --- the drive (hohlraum) temperature,
+\item $T_S(t) = T(0,t)$ --- the material surface temperature at the foam entrance,
+\item $T_{\mathrm{obs}}(t)$ --- the brightness temperature observed by diagnostics.
+\end{itemize}
+
+Naively setting $T_S = T_D$ leads to a severe overestimation
+of the heat-front velocity.
+Instead, the surface temperature must be determined self-consistently
+using a Marshak boundary condition.
+
+The heat-front position in the 1D LTE diffusion model,
+following Hammer and Rosen, satisfies
+\[
+x_F^2(t)
+= \frac{2+\varepsilon}{1-\varepsilon}\,
+CH^{-\varepsilon}(t)\int_0^t H(t')\,dt',
+\qquad
+\varepsilon = \frac{\beta}{4+\alpha},
+\]
+
+\subsubsection*{Short derivation of the Marshak boundary condition.}
+In 1D slab geometry let $\mu=\cos\theta$ be defined such that the \emph{incoming}
+hemisphere corresponds to $\mu\in[-1,0]$ (as in Eq.~(11)).
+The incoming (drive) flux is
+\[
+F_D(t)\equiv \sigma_{\mathrm{SB}}T_D^4(t)
+= \int_{-1}^{0} I(0,\mu,t)\,\mu\,d\mu ,
+\]
+(up to the conventional $2\pi$ azimuthal factor, which is absorbed in the paper's
+1D definition of $I$ and $F$).
+
+Under the diffusion/P1 assumption, the intensity is approximated by its first two
+moments:
+\[
+I(0,\mu,t)\approx \frac{c}{2}E(0,t)+\frac{3}{2}\mu\,F(0,t),
+\]
+which is the 1D equivalent of $I\simeq \frac{c}{4\pi}E+\frac{3}{4\pi c}\Omega\cdot F$.
+
+Substituting into the definition of $F_D$ yields
+\begin{align*}
+F_D(t)
+&=\int_{-1}^{0}\left(\frac{c}{2}E(0,t)+\frac{3}{2}\mu\,F(0,t)\right)\mu\,d\mu \\
+&=\frac{c}{2}E(0,t)\int_{-1}^{0}\mu\,d\mu+\frac{3}{2}F(0,t)\int_{-1}^{0}\mu^2\,d\mu \\
+&=\frac{c}{2}E(0,t)\left[-\frac{1}{2}\right]+\frac{3}{2}F(0,t)\left[\frac{1}{3}\right]
+= -\frac{c}{4}E(0,t)+\frac{1}{2}F(0,t).
+\end{align*}
+
+Now use LTE at the boundary $E(0,t)\simeq aT_S^4(t)$ with $a=4\sigma_{\mathrm{SB}}/c$,
+so $\frac{c}{4}E(0,t)=\sigma_{\mathrm{SB}}T_S^4(t)$, and therefore
+\[
+\sigma_{\mathrm{SB}}T_D^4(t)
+= \sigma_{\mathrm{SB}}T_S^4(t)+\frac{F(0,t)}{2},
+\]
+where the sign difference between the intermediate step and the final form is
+accounted for by the convention that $F(0,t)$ is taken positive into the material
+in Eq.~(11) (incoming flux), whereas in the diffusion equation it is commonly
+taken positive outward. Converting between these conventions flips the sign of
+the $E$-term and restores the standard Marshak form above. 
+
+\subsubsection*{Remark on ``$\sim 1$ mfp (and $2/3$ mfp) optical depth''.}
+Here \emph{mfp} stands for \emph{mean free path}, the typical distance a photon
+travels before an interaction:
+\[
+\ell_{\mathrm{mfp}}=\frac{1}{\kappa_t},\qquad \kappa_t=\kappa_a+\kappa_s.
+\]
+The corresponding (gray) optical depth is
+\[
+\tau(x)=\int_0^x \kappa_t(x')\,dx' \;\;\Rightarrow\;\;
+\tau=\frac{x}{\ell_{\mathrm{mfp}}}\quad \text{(homogeneous medium)}.
+\]
+Thus ``$\sim 1$ mfp optical depth'' means $\tau\sim 1$.
+The specific value $\tau\simeq 2/3$ appears in classical diffusion/Eddington
+(Milne) boundary theory: the emergent intensity (and therefore the measured
+``brightness temperature'' $T_{\mathrm{obs}}$) is effectively set by the material
+temperature at the depth where $\tau\approx 2/3$, i.e.\ about $2/3$ of a mean free
+path inside the surface. This is why $T_{\mathrm{obs}}$ generally differs from
+the true surface temperature $T_S$.
+
+\subsubsection*{Relation between $T_D$, $T_S$, and $T_{\mathrm{obs}}$}
+
+The relation
+\[
+\sigma_{\mathrm{SB}}T_{D}^4(t)
+= \sigma_{\mathrm{SB}}T_{\mathrm{obs}}^4(t)+F(0,t)
+\]
+follows directly from energy conservation at the boundary.
+The drive temperature $T_D$ characterizes the total incoming radiative
+energy flux from the hohlraum, while $T_{\mathrm{obs}}$ is the brightness
+temperature inferred from the re-emitted radiation.
+The difference between these two quantities is exactly the net energy flux
+$F(0,t)$ that penetrates into the foam and is stored in the material. Together with the Marshak boundary condition, we get
+\[
+T_D^4 = 2T_S^4 - T_{\mathrm{obs}}^4.
+\]
+This relation shows that the drive, surface, and observed temperatures are
+distinct and ordered as $T_D>T_S>T_{\mathrm{obs}}$.
+
+\subsubsection*{Getting $F(0,t)$}
+
+The energy that is stored in the material per unit area is: 
+\[
+E(t) = f \rho^{1-\mu} x_F(t) H^{\varepsilon}(t)(1-\varepsilon)
+\]
+
+Therefore, the outgoing flux, which we need for the Marshak boundary condition, is related to the rate of energy accumulation inside the foam:
+
+\[
+F(0,t) = \frac{d}{dt}
+\left[
+f \rho^{1-\mu} x_F(t) H^{\varepsilon}(t)(1-\varepsilon)
+\right]
+\]
+
+Together, these coupled equations determine $T_S(t)$ and $x_F(t)$.
+Solving them numerically yields a substantial reduction
+in the predicted heat-front speed,
+bringing the 1D model into much closer agreement with
+LTE diffusion simulations. However, even this improved 1D model remains faster than experiment, indicating the importance of additional physical effects, such as energy loss to the gold walls.
+
+\subsection{Two-Dimensional (``1.5D'') Effective Model}
+
+The dominant missing effect is the loss of energy from the foam
+into the surrounding gold walls.
+Although the experiment is geometrically two-dimensional,
+the authors construct an effective ``1.5D'' model
+by combining two independent 1D self-similar solutions:
+\begin{itemize}
+\item a supersonic Marshak wave in the foam (axial direction),
+\item a subsonic Marshak wave in the gold walls (radial direction).
+\end{itemize}
+
+Once the heat front reaches a given axial position $x$ at time $t_0(x)$,
+the adjacent gold wall is exposed to a boundary temperature $T_S(t)$.
+For gold, the subsonic self-similar solution with constant boundary temperature
+implies that the energy absorbed per unit wall area grows as
+\[
+E_{\mathrm{gold}}(t)
+= 0.59\, T_0^{3.35}\, [t - t_0(x)]^{0.59}
+\quad [\mathrm{hJ/mm^2}],
+\]
+where the numerical coefficients follow from Shussman \& Heizler.
+
+The total energy lost to the walls is then obtained by integrating
+over the cylindrical surface and exposure time:
+\[ dE_W = E_{gold}(t-t_0(x))\cdot 2\pi R(dx) \Rightarrow
+E_W(t)
+= 2\pi R
+\int_0^{x_F(t)}
+\int_{t_0(x)}^{t}
+\dot{E}_{\mathrm{gold}}(t')\,dt'\,dx
+\]
+
+This wall-loss term is subtracted from the energy balance used
+to determine $T_S(t)$ ($E(t) = f \rho^{1-\mu} x_F(t) H^{\varepsilon}(t)(1-\varepsilon)$),
+leading to a reduced surface temperature
+and consequently a slower heat-front propagation.
+
+The resulting ``1.5D'' model reproduces the experimental heat-front trajectory
+much more accurately than the purely 1D models.
+Using a Henyey-like temperature profile instead of a flat-top profile
+slightly reduces the estimated wall losses,
+but the overall effect remains comparable.
+
+The remaining discrepancies are attributed to
+non-LTE effects, detailed opacity physics,
+and additional two-dimensional hydrodynamic phenomena
+such as gold ablation and wall motion,
+which are beyond the scope of the analytic model.
+
+\section{Numerical Comparisons}
+First, the big difference between this code ($article1.py$), is that it has a changing $T_{bath}$, and that the code has a choice between foam to gold. The $T_D$ values (meaning the $T_{bath}$ at each time (ns)) were taken as samples from the green curve in Cohen\&Heizler 2018 (Figure 3).
+\subsection{Foam Simulation - simple HR comparison}
+The implementation required several iterations to achieve stable behavior. The foam parameters were taken from the Back et al. experiment, as described in the article. The big problem with this simulation is that the results are very sensitive to the exact values of the parameters, especially the opacity parameters. After many hours wasted, Shay tolf me to try to chage the harmonic averaging the the \texttt{D\_face} calaculation to arithmetic averaging, and this made the simulation much more stable. The harmonic averaging made the front heat wave of the foam be off by 3 orders of magnitude ($10^{-4}m$)! After this change, I ran the simulation and compared it to the simple HR 1D model using $T_s=T_D$.
+\subsection{Foam Simulation - marshak boundary condition HR comparison}
+\label{sec:appendixA_energy_step}
+
+\paragraph{Marshak boundary vs.\ ordinary (Dirichlet) boundary.}
+In the ``ordinary'' boundary treatment we prescribe the left boundary radiation energy density directly from the imposed drive temperature,
+\[
+E(0,t)=a\,T_D^4(t),
+\]
+so the diffusion solve is a standard Dirichlet problem: the boundary value is known and only the interior unknowns are solved.
+
+\subsubsection*{Applying the marshak boundary condition on the simulation}
+The marshak boundary condition is given by:
+\[
+aT_D^4(t)
+= aT_S^4(t)+\frac{F(0,t)}{2} = E(0,t)+\frac{F(0,t)}{2} = E(0,t) - \frac{2}{c} \frac{c}{3\sigma} \frac{\partial E(0,t)}{\partial z}
+\]
+Notice that the $\frac{2}{c}$ comes from the fact that $a = \frac{4\sigma}{c}$.
+\begin{equation}
+E(0,t)- \frac{2}{c} \frac{c}{3\sigma}\frac{\partial E(0,t)}{\partial z} = aT_{bath}^4,
+\end{equation}
+Using a finite difference approximation for the spatial derivative at the boundary:
+\begin{equation}
+\frac{\partial E}{\partial z}|_{z=0} \approx \frac{E_1^{n+1} - E_0^{n+1}}{\Delta z}
+\end{equation}
+Substituting this into the Marshak boundary condition gives:
+\begin{equation}
+E_0^{n+1} - \frac{2}{c} D_{\frac{1}{2}}^n\frac{E_1^{n+1} - E_0^{n+1}}{\Delta z} = aT_{bath}^4
+\end{equation}
+Rearranging this, we get a relation between $E_0^{n+1}$ and $E_1^{n+1}$:
+\begin{equation}
+\left(1 + \frac{2}{c\Delta z} D_{\frac{1}{2}}^n\right) E_0^{n+1} - \frac{2}{c\Delta z} D_{\frac{1}{2}}^n E_1^{n+1} = aT_{bath}^4
+\end{equation}
+
+\subsubsection*{Cohen--Heizler Appendix~A time-marching scheme.}
+In the Cohen--Heizler Appendix~A scheme, one uses the previous-step surface temperature \(T_s(t-\Delta t)\) to compute the net boundary flux via Eq.~(12),
+\[
+F(0,t)=2\sigma_{\mathrm{SB}}\!\left[T_D^4(t)-T_s^4(t-\Delta t)\right],
+\]
+integrates this flux to obtain the accumulated deposited energy \(E(t)=\int_0^t F(0,t')\,dt'\), and then solves an implicit nonlinear relation (Eq.~(A.3)) for
+\(H(t)=T_s^{4+\alpha}(t)\). Only after \(T_s(t)\) is updated does one compute the wave front \(x_F(t)\) from Eq.~(9).
+
+The paper derives a convenient time-marching relation for the \emph{total energy} contained in the heated foam region, expressed in terms of the boundary (surface) state. Define
+\begin{equation}
+H(t) \;\equiv\; T_s^{\,4+\alpha}(t),
+\qquad
+\varepsilon \;\equiv\; \frac{\beta}{4+\alpha},
+\end{equation}
+so that $H$ is the natural nonlinear variable that appears in the similarity solution.
+
+% -------------------------
+% Energy identity (A.1)
+% -------------------------
+Starting from Eqs.~(14) and (9), the total energy obeys (paper Eq.~(A.1))
+\begin{equation}
+E^2(t)
+=
+f^2\,\rho^{2(1-\mu)}\,(2+\varepsilon)(1-\varepsilon)\,C\,
+H^{\varepsilon}(t)\,
+\int_{0}^{t} H(t')\,dt'.
+\label{eq:A1_energy_identity}
+\end{equation}
+To advance in time with a finite step $\Delta t$, the integral is split as
+\begin{equation}
+\int_{0}^{t} H(t')dt'
+=
+\int_{0}^{t-\Delta t} H(t')dt'
++
+\int_{t-\Delta t}^{t} H(t')dt'.
+\end{equation}
+The paper then defines the constants (Eqs.~(A.2a)--(A.2b))
+\begin{align}
+Z_1 &\equiv f^2\,\rho^{2(1-\mu)}\,(2+\varepsilon)(1-\varepsilon)\,C, \label{eq:Z1_def}\\
+Z_2(t) &\equiv Z_1 \int_{0}^{t-\Delta t} H(t')\,dt'. \label{eq:Z2_def}
+\end{align}
+With these, Eq.\eqref{eq:A1_energy_identity} becomes the compact update relation (paper Eq.~(A.3))
+\begin{equation}
+E^2(t)
+=
+\left(
+Z_2(t) + Z_1\int_{t-\Delta t}^{t} H(t')\,dt'
+\right)\,H^{\varepsilon}(t).
+\label{eq:A3_compact}
+\end{equation}
+
+% -------------------------
+% Practical marching algorithm (bullets)
+% -------------------------
+\paragraph{Algorithmic interpretation (the paper's bullet list).}
+At each new time $t_n$ (with $\Delta t = t_n-t_{n-1}$), the scheme performs:
+
+\begin{enumerate}
+    \item \textbf{Use the previous surface temperature to get the boundary flux.}
+    Using Eq.~(12) in the paper with $T_s(t_{n-1})$,
+    \begin{equation}
+    \sigma_{\rm SB}\,T_D^4(t_n)
+    =
+    \sigma_{\rm SB}\,T_s^4(t_{n-1}) + \frac{1}{2}F(0,t_n),
+    \end{equation}
+    hence
+    \begin{equation}
+    F(0,t_n) = 2\,\sigma_{\rm SB}\left[T_D^4(t_n)-T_s^4(t_{n-1})\right].
+    \label{eq:flux_update}
+    \end{equation}
+    This is exactly the logic used in the implementation: the drive temperature $T_D$ is known from input data, and the previous-step $T_s$ closes the flux.
+
+    \item \textbf{Update the accumulated energy from the flux.}
+    Interpret the boundary flux as the power into the material and integrate it in time,
+    \begin{equation}
+    E(t_n) = E(t_{n-1}) + \int_{t_{n-1}}^{t_n} F(0,t)\,dt
+    \;\;\approx\;\;
+    E_{n-1} + \frac{F_n+F_{n-1}}{2}\,\Delta t,
+    \label{eq:E_trap}
+    \end{equation}
+    (trapezoidal rule), and then form $E^2(t_n)$ for Eq.~\eqref{eq:A3_compact}.
+
+    \item \textbf{Solve implicitly for the new nonlinear boundary variable $H(t_n)$.}
+    Equation~\eqref{eq:A3_compact} is implicit because $H(t_n)$ appears both as $H^\varepsilon(t_n)$ and inside the short-time integral $\int_{t_{n-1}}^{t_n}H(t')dt'$.
+    Using a trapezoid approximation over the last interval,
+    \begin{equation}
+    \int_{t_{n-1}}^{t_n} H(t')dt' \;\approx\; \frac{H_{n-1}+H_n}{2}\,\Delta t,
+    \label{eq:I_last_trap}
+    \end{equation}
+    and defining the previously accumulated integral
+    \begin{equation}
+    I_{n-1}\equiv \int_0^{t_{n-1}} H(t')dt',
+    \qquad
+    Z_2(t_n)=Z_1 I_{n-1},
+    \end{equation}
+    Eq.~\eqref{eq:A3_compact} becomes a one-dimensional nonlinear equation for $H_n$:
+    \begin{equation}
+    Z_1\Bigl(I_{n-1}+\tfrac{1}{2}(H_{n-1}+H_n)\Delta t\Bigr)\,H_n^{\varepsilon}
+    \;-\;
+    E^2(t_n)
+    \;=\;0.
+    \label{eq:implicit_H_equation}
+    \end{equation}
+    Numerically, this is solved for the positive root $H_n>0$ (e.g.\ by bracketing and bisection), after which the surface temperature is recovered by
+    \begin{equation}
+    T_s(t_n) = H_n^{1/(4+\alpha)}.
+    \end{equation}
+
+    \item \textbf{Update the front position using Eq.~(9).}
+    With the updated $H_n$ and the updated cumulative integral
+    \begin{equation}
+    I_n = I_{n-1} + \frac{H_{n-1}+H_n}{2}\,\Delta t,
+    \end{equation}
+    the Marshak-wave front is computed from Eq.~(9) (paper notation):
+    \begin{equation}
+    x_F^2(t_n)
+    =
+    \frac{2+\varepsilon}{1-\varepsilon}\,C\,H_n^{-\varepsilon}\,I_n.
+    \label{eq:xF_from_H}
+    \end{equation}
+\end{enumerate}
+
+\paragraph{Connection to the implementation.}
+The code mirrors the paper exactly:
+(i) compute $F(0,t_n)$ from Eq.~\eqref{eq:flux_update} using $T_s(t_{n-1})$,
+(ii) integrate to get $E(t_n)$ via Eq.~\eqref{eq:E_trap},
+(iii) solve Eq.~\eqref{eq:implicit_H_equation} for $H_n$ (thus $T_s(t_n)$),
+and finally (iv) evaluate the front via Eq.~\eqref{eq:xF_from_H}.
+This ``Marshak-boundary'' mode differs from the simpler option $T_s(t)=T_D(t)$ by enforcing the boundary energy balance through the implicit Appendix~A closure.
+
+The goal here was to compare this algortithem (which is actually the analytic model from the paper) to the full simulation code ($article1.py$) which solves the diffusion eq using marshak boundary conidition. Notice that in order to get good comparisons between the analytic and simulation, I had to solve the simulation under LTE assumption, which means high $\chi$ values (low non-LTE effects).
+
+\end{document}
