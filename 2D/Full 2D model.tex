@@ -365,7 +365,7 @@ kappa_roots(eps, R, n_roots, x_max=None, dx=1e-2)
 
 \subsection{Time-Marching with Bessel Data Storage}
 
-\textbf{Module:} \texttt{analytics\_models.py}
+\textbf{Module:} \texttt{model\_main.py}
 
 \textbf{Key function:}
 \begin{verbatim}
@@ -393,7 +393,139 @@ At each time step $t_i$ where $i > 1$ and \texttt{wall\_loss=True}:
     \end{verbatim}
 \end{enumerate}
 
-\textbf{Note:} $J_0$ profiles are computed at each axial position $z$ to enable interpolation at the front position.
+\textbf{Implementation note (current code):}
+\begin{itemize}
+    \item For runs with \texttt{wall\_loss=False}, \texttt{bessel\_data} can be empty.
+    \item The plotting routine uses a fallback in this case:
+    \begin{itemize}
+        \item set $t_{\text{closest}} = t_{\text{target}}$,
+        \item build a radially flat $z_F(r,t)$ profile from 1D $z_F(t)$,
+        \item continue plotting without nearest-time lookup in an empty dictionary.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Wall-Profile Construction in Heatmaps}
+
+\textbf{Module:} \texttt{shape\_2D\_analytical\_model.py}
+
+The helper \texttt{\_compute\_wall\_heyney\_horizontal\_profile} now distinguishes two explicit modes:
+\begin{enumerate}
+    \item \textbf{Ablation mode}: profile starts at local ablation interface $R_{\text{ablation}}(z)$ and ends at local stop radius $r_{\text{stop}}(z)$.
+    \item \textbf{Non-ablation mode}: profile starts at fixed foam boundary $R_{\mathrm{cm}}$ and ends at $R_{\mathrm{cm}} + \Delta r_{\text{pen}}(z)$ (or equivalent absolute radius profile).
+\end{enumerate}
+
+In both modes, the Henyey coordinate is evaluated pointwise along wall cells:
+\begin{equation}
+\eta(r,z) = \frac{r-r_{\text{start}}(z)}{r_{\text{stop}}(z)-r_{\text{start}}(z)}
+\end{equation}
+
+Also, unreached/cold gold cells are set to $T=0$ in the plotting mesh (not NaN), preventing white masked regions in the heatmap.
+
+\subsection{Foam-Gold Region Differentiation and Temperature Assignment}
+
+\textbf{Module:} \texttt{shape\_2D\_analytical\_model.py}
+
+In the heatmap implementation, the cylindrical cross-section is split into two material regions:
+\begin{itemize}
+    \item \textbf{Foam region}: $r \leq R_{\mathrm{cm}}$
+    \item \textbf{Gold region}: $r > R_{\mathrm{cm}}$
+\end{itemize}
+
+The foam temperature is first computed on the foam radial mesh via the self-similar law:
+\begin{equation}
+T_{\mathrm{foam}}(r,z,t) =
+\begin{cases}
+T_s(t)\left(1-\dfrac{z}{z_F(r,t)}\right)^{\gamma}, & z<z_F(r,t), \\
+0, & z\ge z_F(r,t).
+\end{cases}
+\end{equation}
+
+Implementation detail: the 2D plotting grid is built early in the plotting routine from
+the current radial and axial meshes, i.e. $(R_{\mathrm{mesh}}, Z_{\mathrm{mesh}})=\mathrm{meshgrid}(r_{\mathrm{mesh}}, z_{\mathrm{mesh}})$,
+and then the same grid is reused for temperature filling, contour extraction, and final rendering.
+
+Then the plotting mesh is initialized as zeros and filled in two stages:
+\begin{enumerate}
+    \item Interpolate $T_{\mathrm{foam}}$ onto all cells with $r \leq R_{\mathrm{cm}}$.
+    \item Overwrite gold-side cells with the wall Henyey-like profile where valid.
+\end{enumerate}
+
+The wall profile is written only on the radial interval between a start radius and stop radius:
+\begin{equation}
+r_{\mathrm{start}}(z)=
+\begin{cases}
+R_{\mathrm{ablation}}(z), & \text{ablation mode}, \\
+R_{\mathrm{cm}}, & \text{non-ablation mode},
+\end{cases}
+\qquad
+r_{\mathrm{stop}}(z)=R_{\mathrm{cm}}+\Delta r_{\mathrm{pen}}(z)
+\end{equation}
+
+Here, $\Delta r_{\mathrm{pen}}(z)$ (often referenced in code as \texttt{r\_pen}) is implemented from the
+snapshot field \texttt{wall\_penetration\_radius\_profile}. The implementation supports two input conventions:
+\begin{itemize}
+    \item \textbf{Absolute-radius convention}: profile already stores $r_{\mathrm{stop}}(z)$.
+    \item \textbf{Depth convention}: profile stores penetration depth into gold, then code converts it to
+    $r_{\mathrm{stop}}(z)=R_{\mathrm{cm}}+\Delta r_{\mathrm{pen}}(z)$.
+\end{itemize}
+
+For robustness, the profile is sanitized before use: if shape mismatch is detected, a fallback profile with
+$r_{\mathrm{stop}}(z)=R_{\mathrm{cm}}$ is used; otherwise each value is clipped to the plotting radial domain so
+the wall profile remains bounded and physically consistent.
+
+with normalized coordinate
+\begin{equation}
+\eta(r,z)=\frac{r-r_{\mathrm{start}}(z)}{r_{\mathrm{stop}}(z)-r_{\mathrm{start}}(z)}
+\end{equation}
+
+and wall temperature
+\begin{equation}
+T_{\mathrm{gold}}(r,z,t)=T_{\mathrm{local}}(z,t)\left(1-\eta(r,z)\right)^{\gamma_{\mathrm{wall}}},\quad 0\le\eta\le1.
+\end{equation}
+
+Implementation-wise, this is controlled by masks/profile arrays stored in each time snapshot (e.g., \texttt{ablation\_foam\_mask}, \texttt{ablation\_wall\_mask}, \texttt{wall\_penetration\_radius\_profile}), and the final plotted field is assembled as:
+\begin{equation}
+T_{\mathrm{plot}} = T_{\mathrm{foam}}\;\text{in foam domain},\qquad
+T_{\mathrm{plot}} = T_{\mathrm{gold}}\;\text{where wall profile is valid},
+\end{equation}
+with all remaining cells left at $0$.
+
+\subsection{Shock Front in the Wall Layer}
+
+As an another nice addition to the 2D model, we can compute the shock front position in the wall layer using the same time-dependent surface temperature history that drives the wall-loss model. 
+
+The shock starts from the already-penetrated wall region and advances outward of the holraum as energy accumulates. 
+
+For each axial location $z$, the code computes:
+\begin{equation}
+r_{\text{shock}}(z,t) = r_{\text{wall}}(z,t) + r_{\text{shock}}(z,t)
+\end{equation}
+where:
+\begin{itemize}
+    \item $r_{\text{wall}}(z,t)$ is the wall penetration front profile,
+    \item $r_{\text{shock}}(z,t)$ is the local shock penetration depth,
+    \item both quantities are stored as one-dimensional arrays over the axial (z) grid.
+\end{itemize}s
+
+\subsubsection*{Profile Construction}
+
+The shock profile is computed using the same time-dependent surface temperature history that drives the wall-loss model. For each $z_i$ behind the heated region:
+\begin{enumerate}
+    \item Compute the pressure by using the formula $P(z_i) = 2.71 T_0(z) ^ {2.63}$, where $T_0(z)$ is the gold-foam interface temperature at the time when the shock starts to heat that location.
+    \item Compute the local exposure time $t_{\text{exposed}}(z_i) = t - t_{\text{heat}}(z_i)$.
+    \item Evaluate the shock penetration depth from the local thermodynamic state using $m_s = 5.38\cdot10^{-3} P_0 ^ {0.5} \cdot t_{\text{exposed}}$ and $r_{\text{shock}}(z_i) = m_s / \rho_{\text{gold}}$.
+    \item Convert that depth into an absolute radius profile by adding it to the wall front.
+\end{enumerate}
+
+\subsubsection*{Implementation Notes}
+
+The current code stores the shock as 1D profiles such as:
+\begin{itemize}
+    \item \texttt{shock\_penetration\_depth\_cm\_profile}
+    \item \texttt{shock\_penetration\_radius\_profile}
+\end{itemize}
+
+This keeps the shock handling consistent with the wall-front logic and avoids introducing an extra radial modulation factor.
 
 \subsection{Radial Front Reconstruction}
 
@@ -494,13 +626,21 @@ For each requested time $t$:
         \item Returns $\kappa_n = x_n / R$
     \end{itemize}
     
-    \item \textbf{analytics\_models.py}
+    \item \textbf{model\_main.py}
     \begin{itemize}
         \item Time-marching with Marshak BC: \texttt{\_marshak\_appendixA\_march}
         \item Energy partition: \texttt{compute\_wall\_energy\_loss}
         \item Albedo calculation: \texttt{compute\_albedo\_step}
         \item Front position: self-similar scaling laws
         \item Bessel data storage at each time step
+    \end{itemize}
+
+    \item \textbf{shape\_2D\_analytical\_model.py}
+    \begin{itemize}
+        \item 2D front and temperature plotting routines
+        \item Empty-\texttt{bessel\_data} fallback for non-wall-loss runs
+        \item Ablation/non-ablation wall profile branching
+        \item Gold region initialized with $T=0$ for robust rendering
     \end{itemize}
     
     \item \textbf{comparison.py}
@@ -519,13 +659,21 @@ For each requested time $t$:
 parameters.py (material constants)
     |
     v
-analytics_models.py (time marching)
+model_main.py (time marching)
     |---> compute T_s(t), z_F(t), E_wall(t), albedo(t)
     |---> solve for kappa_0(t) using eigen_bessel_solver.py
-    |---> store J_0(kappa_0 r) profiles in bessel_data dict
+    |---> store J_0(kappa_0 r) profiles in bessel_data dict (wall_loss=True)
     |
     v
-comparison.py (visualization)
+shape_2D_analytical_model.py (2D reconstruction)
+    |---> if bessel_data is empty: use flat-radial z_F fallback
+    |---> wall profile:
+    |       ablation    : R_ablation(z) -> r_stop(z)
+    |       no ablation : R_cm -> R_cm + penetration(z)
+    |---> initialize cold gold cells with T=0
+    |
+    v
+comparison.py (orchestration)
     |---> read z_F(t), T_s(t), and bessel_data
     |---> compute z_F(r,t) = z_F(t) * J_0(kappa_0 r)
     |---> compute T(r,z,t) = T_s(t) * (1 - z/z_F(r,t))^gamma

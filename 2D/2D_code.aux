@@ -16,10 +16,10 @@
 \newlabel{eq:lagged_coeffs}{{8}{2}{Time-lagged coefficients (use the ``units'' logic)}{equation.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discretization on a $(z,r)$ grid (same stencil as your 2D PDF)}{2}{section.4}\protected@file@percent }
 \newlabel{eq::transportEq}{{9}{2}{Discretization on a $(z,r)$ grid (same stencil as your 2D PDF)}{equation.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Key step: ``fit Eq.(23) into Eq.(21)'' via harmonic face diffusion}{2}{subsection.4.1}\protected@file@percent }
-\newlabel{eq:harm_1D}{{10}{2}{Key step: ``fit Eq.(23) into Eq.(21)'' via harmonic face diffusion}{equation.10}{}}
-\newlabel{eq:harm_z}{{11}{2}{Key step: ``fit Eq.(23) into Eq.(21)'' via harmonic face diffusion}{equation.11}{}}
-\newlabel{eq:harm_r}{{12}{2}{Key step: ``fit Eq.(23) into Eq.(21)'' via harmonic face diffusion}{equation.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Key step: ``fit Eq.(23) into Eq.(21)'' via Decimal face diffusion}{2}{subsection.4.1}\protected@file@percent }
+\newlabel{eq:harm_1D}{{10}{2}{Key step: ``fit Eq.(23) into Eq.(21)'' via Decimal face diffusion}{equation.10}{}}
+\newlabel{eq:harm_z}{{11}{2}{Key step: ``fit Eq.(23) into Eq.(21)'' via Decimal face diffusion}{equation.11}{}}
+\newlabel{eq:harm_r}{{12}{2}{Key step: ``fit Eq.(23) into Eq.(21)'' via Decimal face diffusion}{equation.12}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Define the dimensionful ``$\lambda $'' factors (units part from the 2D PDF)}{2}{subsection.4.2}\protected@file@percent }
 \newlabel{eq:lambdas_faces}{{13}{2}{Define the dimensionful ``$\lambda $'' factors (units part from the 2D PDF)}{equation.13}{}}
 \newlabel{eq:lambda_r}{{15}{3}{Define the dimensionful ``$\lambda $'' factors (units part from the 2D PDF)}{equation.15}{}}
@@ -39,17 +39,19 @@
 \@writefile{toc}{\contentsline {paragraph}{Motivation for a nonuniform grid.}{6}{section*.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Conservative finite--volume formulation.}{6}{section*.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Axis and outer boundary treatment.}{6}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Implications.}{6}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Energy Calculations}{9}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Axisymmetric Energy Integral}{9}{subsection.9.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.1.1}Numerical Integration}{9}{subsubsection.9.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.1.2}Foam and Gold Regions}{10}{subsubsection.9.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Front Position at a Single Radial Index}{10}{section.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Problem Statement}{10}{subsection.10.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Maximum Gradient Method}{10}{subsection.10.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Threshold Method}{11}{subsection.10.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Surface Front (2D Front Position)}{11}{section.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Problem Statement}{11}{subsection.11.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Maximum Gradient Method (2D)}{11}{subsection.11.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Threshold Method (2D)}{11}{subsection.11.3}\protected@file@percent }
-\gdef \@abspage@last{12}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Marshak boundary at $r=R_{\mathrm  {tot}}$}{7}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Marshak boundary at $z=0$}{7}{subsection.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implications.}{8}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Energy Calculations}{11}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Axisymmetric Energy Integral}{11}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.1.1}Numerical Integration}{11}{subsubsection.9.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.1.2}Foam and Gold Regions}{11}{subsubsection.9.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Front Position at a Single Radial Index}{12}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Problem Statement}{12}{subsection.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Maximum Gradient Method}{12}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Threshold Method}{12}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Surface Front (2D Front Position)}{12}{section.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Problem Statement}{12}{subsection.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Maximum Gradient Method (2D)}{13}{subsection.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Threshold Method (2D)}{13}{subsection.11.3}\protected@file@percent }
+\gdef \@abspage@last{13}

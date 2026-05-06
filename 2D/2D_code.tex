@@ -62,6 +62,7 @@ And (same algebra as in the 1D file) one gets
 \begin{equation}
 \beta(T)=\frac{4a\rho^{\mu-1}}{f\gamma}\,T^{4-\gamma}. \label{eq:beta_of_T}
 \end{equation}
+Notice that $\beta$ is actually the heats capacities ratio. 
 
 \paragraph{What changes from (linear) 2D to (self-similar) 2D?}
 In the 2D linear PDF, $\sigma$ is treated as constant in the dimensional scheme, producing constant $\lambda_r,\lambda_z$.
@@ -96,7 +97,7 @@ where the cylindrical divergence gives the same structure as in the 2D PDF:
 \]
 We now discretize it using face fluxes (finite-volume style), matching the \emph{spirit} of the 2D discretization (radial Laplacian + $(1/r)\partial_r$) while allowing variable $D$.
 
-\subsection{Key step: ``fit Eq.(23) into Eq.(21)'' via harmonic face diffusion}
+\subsection{Key step: ``fit Eq.(23) into Eq.(21)'' via Decimal face diffusion}
 In 1D you used the decimal average at cell faces in the 1D self-similar PDF):
 \begin{equation}
 D^n_{i+\frac12}=\frac{D^n_i + D^n_{i+1}}{2}. \label{eq:harm_1D}
@@ -404,9 +405,111 @@ At the cylindrical axis ($r=0$), symmetry implies $\partial E/\partial r = 0$.
 This is enforced by setting the inward flux $F_{-1/2}=0$ and retaining only the
 outward contribution.
 
-At the outer boundary ($r=R$), either a Neumann condition ($\partial E/\partial r=0$)
-or a Dirichlet condition ($E=E_{\mathrm{bath}}$) is imposed by appropriately modifying
-the outward flux term. but it shouldn't matter a lot here where the gold region is applied.
+For the gold-coated geometry, the computational domain ends at the true outer radius
+\[
+R_{\mathrm{tot}} = R_{\mathrm{foam}} + r_{\mathrm{gold}},
+\]
+so the boundary condition is applied on the last radial node of the stretched gold mesh.
+In the discrete system, this is implemented by modifying the outer-face flux associated
+with the final radial control volume.
+
+At $r=R_{\mathrm{tot}}$, the present implementation keeps the Neumann condition
+($\partial E/\partial r=0$). In the finite-volume stencil this means the outer-face
+flux is set to zero at the final radial control volume, while the interior stencil is
+left unchanged.
+
+\subsection{Marshak boundary at $r=R_{\mathrm{tot}}$}
+
+If the outer coated surface is treated as a radiating boundary instead of a perfectly
+reflecting one, the same flux-balance idea used at $z=0$ gives a Marshak-type radial
+boundary condition. At the outer wall, the incoming surface radiation is balanced by
+the outgoing diffusive flux through the last radial face:
+\begin{equation}
+\sigma_{\mathrm{SB}} T_{\mathrm{wall}}^4(t)
+=
+\sigma_{\mathrm{SB}} T_S^4(z,t)
++
+\frac{F_r(R_{\mathrm{tot}},z,t)}{2},
+\end{equation}
+where $F_r=-D\,\partial E/\partial r$ is the radial flux at the outer surface.
+
+Using $E=aT^4$ with $a=4\sigma_{\mathrm{SB}}/c$, this can be written as
+\begin{equation}
+aT_{\mathrm{wall}}^4(t)
+=
+E(z,R_{\mathrm{tot}},t)
+-
+\frac{2D(z,R_{\mathrm{tot}},t)}{c}
+\left.\frac{\partial E}{\partial r}\right|_{r=R_{\mathrm{tot}}}.
+\end{equation}
+
+Approximating the radial derivative on the last grid interval gives
+\begin{equation}
+\left.\frac{\partial E}{\partial r}\right|_{r=R_{\mathrm{tot}}}
+\approx
+\frac{E^{n+1}_{i,N_r-1}-E^{n+1}_{i,N_r-2}}{\Delta r},
+\end{equation}
+so the discrete Marshak row at the outer boundary may be written as
+\begin{equation}
+\left(
+1 + \frac{2D^n_{i,N_r-\frac12}}{c\,\Delta r}
+\right)E^{n+1}_{i,N_r-1}
+-
+\frac{2D^n_{i,N_r-\frac12}}{c\,\Delta r}E^{n+1}_{i,N_r-2}
+=
+aT_{\mathrm{wall}}^4(t^{n+1}).
+\end{equation}
+
+This is the direct radial analogue of the Marshak drive condition at $z=0$.
+In the current solver it is not enabled, because the outer edge is still handled
+with the Neumann condition above, but the derivation shows how the same stencil
+would be modified if a radiating wall were desired.
+
+\subsection{Marshak boundary at $z=0$}
+
+The axial drive at $z=0$ can also be written as a Marshak-type boundary condition.
+In the diffusion approximation, the incoming radiation from the drive is balanced
+against the outgoing diffusive flux at the material surface:
+\begin{equation}
+\sigma_{\mathrm{SB}} T_D^4(t)
+=
+\sigma_{\mathrm{SB}} T_S^4(r,t)
++
+\frac{F_z(0,r,t)}{2},
+\end{equation}
+where $T_D(t)$ is the imposed drive temperature, $T_S(r,t)$ is the surface temperature,
+and $F_z=-D\,\partial E/\partial z$ is the axial radiative flux.
+
+Using $E=aT^4$ with $a=4\sigma_{\mathrm{SB}}/c$, this becomes
+\begin{equation}
+aT_D^4(t)
+=
+E(0,r,t)
+-
+\frac{2D(0,r,t)}{c}
+\left.\frac{\partial E}{\partial z}\right|_{z=0}.
+\end{equation}
+
+On the grid, the boundary derivative is approximated with the first axial face,
+\begin{equation}
+\left.\frac{\partial E}{\partial z}\right|_{z=0}
+\approx
+\frac{E^{n+1}_{1,j}-E^{n+1}_{0,j}}{\Delta z},
+\end{equation}
+so the discrete Marshak row at $z=0$ can be written as
+\begin{equation}
+\left(
+1 + \frac{2D^n_{\frac12,j}}{c\,\Delta z}
+\right)E^{n+1}_{0,j}
+-
+\frac{2D^n_{\frac12,j}}{c\,\Delta z}E^{n+1}_{1,j}
+=
+aT_D^4(t^{n+1}).
+\end{equation}
+
+This is the boundary row used when the Marshak option is enabled in the implicit
+solver. It replaces the prescribed Dirichlet value at $z=0$, while the rest of the
+stencil remains unchanged.
 
 \paragraph{Implications.}
 Although the foam region uses a uniform grid, the same nonuniform discretization

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  12 FEB 2026 18:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  3 MAY 2026 10:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"./Full 2D model.tex"
-(Full 2D model.tex
+**"c:/Users/TLP-001/Documents/GitHub/Project_1_docs/2D/Full 2D model.tex"
+(c:/Users/TLP-001/Documents/GitHub/Project_1_docs/2D/Full 2D model.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
 (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -344,26 +344,41 @@ Overfull \hbox (2.11116pt too wide) in paragraph at lines 22--23
 \tf@toc=\write4
 \openout4 = `"Full 2D model.toc"'.
 
- [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] (Full 2D model.aux)
+ [2] [3] [4] [5] [6] [7] [8] [9]
+Overfull \hbox (1.37827pt too wide) in paragraph at lines 424--424
+[]\OT1/cmr/bx/n/14.4 Foam-Gold Re-gion Dif-fer-en-ti-a-tion and Tem-per-a-ture As-sign-
+ []
+
+[10]
+Overfull \hbox (44.87273pt too wide) in paragraph at lines 486--487
+\OT1/cmr/m/n/12 snap-shot (e.g., \OT1/cmtt/m/n/12 ablation[]foam[]mask\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 ablation[]wall[]mask\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 wall[]penetration[]radius[]profile\OT1/cmr/m/n/12 ),
+ []
+
+[11] [12] [13]
+Overfull \hbox (16.33234pt too wide) in paragraph at lines 684--684
+[]    \OT1/cmtt/m/n/12 |---> store J_0(kappa_0 r) profiles in bessel_data dict (wall_loss=True)[] 
+ []
+
+[14] [15] [16] [17] [18] [19] (Full 2D model.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `"Full 2D model".out' has not changed.
-(rerunfilecheck)             Checksum: 5296D65AB45B324EDA01A8F54792797D;9072.
+(rerunfilecheck)             Checksum: 7845DD14A155989A0C69A443D06EC103;9910.
  ) 
 Here is how much of TeX's memory you used:
- 10723 strings out of 467871
- 164162 string characters out of 5417408
+ 10753 strings out of 467871
+ 164617 string characters out of 5417408
  586420 words of memory out of 5000000
- 39316 multiletter control sequences out of 15000+600000
+ 39321 multiletter control sequences out of 15000+600000
  638846 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,798b,680s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,848b,675s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\TLP-001\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on "c:/Users\TLP-001\semesterC\project1\2D\Full 2D model.pdf" (16 pages, 310268 bytes).
+Output written on "Full 2D model.pdf" (19 pages, 326710 bytes).
 PDF statistics:
- 540 PDF objects out of 1000 (max. 8388607)
- 168 named destinations out of 1000 (max. 500000)
- 393 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 591 PDF objects out of 1000 (max. 8388607)
+ 192 named destinations out of 1000 (max. 500000)
+ 417 words of extra memory for PDF output out of 10000 (max. 10000000)
 

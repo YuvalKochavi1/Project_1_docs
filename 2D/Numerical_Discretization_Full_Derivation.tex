@@ -1,0 +1,796 @@
+\documentclass[12pt,oneside]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{fancybox}
+
+\title{Full Algebraic Derivation of 2D Radiation Diffusion Implicit Stencil}
+\author{}
+\date{}
+
+\newcommand{\labeleq}[1]{\tag{#1}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% Section 1: Continuous Equations
+% ============================================================
+\section{Continuous Equations in Cylindrical Coordinates}
+
+We start with the coupled radiation and material energy equations in axisymmetric cylindrical coordinates $(r, z, t)$.
+
+\subsection{Radiation Energy Equation}
+
+The radiation energy density $E(r,z,t)$ evolves according to:
+\begin{equation}
+\frac{\partial E}{\partial t}
+=
+\frac{c}{3\sigma}\left(\frac{\partial^2 E}{\partial r^2} + \frac{1}{r}\frac{\partial E}{\partial r} + \frac{\partial^2 E}{\partial z^2}\right)
+-
+\chi c\sigma(E - U),
+\label{eq:E_continuous}
+\end{equation}
+where
+\begin{itemize}
+\item $c$ is the speed of light,
+\item $\sigma(T)$ is the temperature-dependent opacity (Rosseland mean), which varies in space via temperature,
+\item $U(r,z,t)$ is the material energy density (to be coupled below),
+\item the term $\frac{1}{r}\frac{\partial E}{\partial r}$ arises from cylindrical geometry.
+\end{itemize}
+
+\textbf{Important:} The form in Eq.~\eqref{eq:E_continuous} is written for notational simplicity. Since $\sigma(T(r,z))$ is \emph{space-dependent}, the operator $\frac{c}{3\sigma}\nabla^2$ is not linear in the usual sense. In discretization, we must use the \emph{conservative form} with diffusion coefficient $D(r,z) = \frac{c}{3\sigma(T(r,z))}$ varying at each location, giving:
+\begin{equation}
+\frac{\partial E}{\partial t}
+=
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD\frac{\partial E}{\partial r}\right) + \frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right)
+-
+\chi c\sigma(E - U).
+\label{eq:E_continuous_conservative}
+\end{equation}
+This is the form we use throughout the derivation below.
+
+\subsection{Material Energy Equation}
+
+The material energy density $U(r,z,t)$ evolves according to:
+\begin{equation}
+\frac{1}{\beta}\,\frac{\partial U}{\partial t}
+=
+\chi c\sigma(E - U),
+\label{eq:U_continuous}
+\end{equation}
+where $\beta = \frac{\partial U_R}{\partial U_m}$ is the ratio of radiation to material heat capacity (dimensionless coupling strength).
+
+\subsection{Decomposition of the Diffusion Operator}
+
+Define the space-dependent diffusion coefficient:
+\begin{equation}
+D(r,z,t)
+\equiv
+\frac{c}{3\sigma(T(r,z,t))}.
+\end{equation}
+
+The diffusion operator in conservative form (Eq.~\eqref{eq:E_continuous_conservative}) is:
+\begin{equation}
+\mathcal{L}[E]
+\equiv
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD\frac{\partial E}{\partial r}\right) + \frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right)
+=
+\mathcal{L}_r[E] + \mathcal{L}_z[E],
+\end{equation}
+where the radial part is:
+\begin{equation}
+\mathcal{L}_r[E]
+\equiv
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD\frac{\partial E}{\partial r}\right)
+\end{equation}
+and the axial part is:
+\begin{equation}
+\mathcal{L}_z[E]
+\equiv
+\frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right).
+\end{equation}
+
+In the numerical implementation, we discretize using a finite-volume approach where $D(r,z)$ is evaluated at cell faces and treated as piecewise constant over each control volume. The diffusion coefficients $D^n_{i,j\pm1/2}$ are then lagged in time (evaluated at $t^n$ from $U^n$).
+
+The coupled equations in conservative form are:
+\begin{align}
+\frac{\partial E}{\partial t}
+&=
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD\frac{\partial E}{\partial r}\right) + \frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right)
+-
+\chi c\sigma(E - U),
+\label{eq:E_decomposed}\\
+\frac{1}{\beta}\,\frac{\partial U}{\partial t}
+&=
+\chi c\sigma(E - U).
+\label{eq:U_decomposed}
+\end{align}
+
+% ============================================================
+% Section 2: Time Discretization
+% ============================================================
+\section{Time Discretization via Backward Euler}
+
+We discretize time using the backward (implicit) Euler scheme on a sequence of times
+\[
+t^n = t^{n-1} + \Delta t,
+\]
+where $\Delta t = \Delta t_n$ may vary with $n$.
+
+\subsection{Implicit Euler for Radiation Energy}
+
+Apply backward Euler to Eq.~\eqref{eq:E_decomposed}:
+\begin{equation}
+\frac{E^{n+1} - E^n}{\Delta t}
+=
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD^n\frac{\partial E^{n+1}}{\partial r}\right) + \frac{\partial}{\partial z}\left(D^n\frac{\partial E^{n+1}}{\partial z}\right)
+-
+\chi c\sigma^n(E^{n+1} - U^{n+1}),
+\end{equation}
+where we use time-lagged space-dependent coefficients $D^n(r,z)$ and $\sigma^n(r,z)$ (computed from $U^n$) at the old time, while spatial derivatives of $E$ are evaluated at the new time (implicit in space, explicit in the coefficients).
+
+Rearrange:
+\begin{equation}
+\frac{E^{n+1}}{\Delta t}
+-
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD^n\frac{\partial E^{n+1}}{\partial r}\right) 
+-
+\frac{\partial}{\partial z}\left(D^n\frac{\partial E^{n+1}}{\partial z}\right)
++
+\chi c\sigma^n E^{n+1}
+-
+\chi c\sigma^n U^{n+1}
+=
+\frac{E^n}{\Delta t}.
+\end{equation}
+
+\subsection{Implicit Euler for Material Energy}
+
+\textbf{Note on LTE coupling:} The coupling factor $\chi$ (dimensionless) modulates the interaction strength between radiation and material in Local Thermodynamic Equilibrium (LTE). The factor appears in $A^n = \beta^n \Delta t \cdot \chi \cdot c\sigma^n$, with typical values $\chi = 1$ for full coupling or $\chi < 1$ for reduced coupling.
+
+Apply backward Euler to Eq.~\eqref{eq:U_decomposed}, using time-lagged coefficients $\beta^n$ and $\sigma^n$ (computed from $U^n$):
+\begin{equation}
+\frac{1}{\beta^n}\,\frac{U^{n+1} - U^n}{\Delta t}
+=
+\chi c\sigma^n(E^{n+1} - U^{n+1}).
+\end{equation}
+
+Rearrange:
+\begin{equation}
+\frac{1}{\beta^n}\,U^{n+1}
++
+\Delta t \cdot \chi \cdot c\sigma^n U^{n+1}
+=
+\frac{1}{\beta^n}\,U^n
++
+\Delta t \cdot \chi \cdot c\sigma^n E^{n+1}.
+\end{equation}
+
+Factor:
+\begin{equation}
+\left(\frac{1}{\beta^n} + \Delta t \cdot \chi \cdot c\sigma^n\right) U^{n+1}
+=
+\frac{1}{\beta^n}\,U^n
++
+\Delta t \cdot \chi \cdot c\sigma^n E^{n+1}.
+\end{equation}
+
+Define:
+\begin{equation}
+A^n
+\equiv
+\beta^n \Delta t \cdot \chi \cdot c\sigma^n.
+\end{equation}
+Then:
+\begin{equation}
+\left(1 + A^n\right) U^{n+1}
+=
+U^n
++
+A^n E^{n+1}.
+\end{equation}
+
+Solve for $U^{n+1}$ in terms of $E^{n+1}$:
+\begin{equation}
+U^{n+1}
+=
+\frac{U^n + A^n E^{n+1}}{1 + A^n}
+\label{eq:U_update}
+\end{equation}
+
+\subsection{Substituting the Material Update into the Radiation Equation}
+
+Substitute Eq.~\eqref{eq:U_update} into the radiation equation:
+\begin{equation}
+\frac{E^{n+1}}{\Delta t}
+-
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD^n\frac{\partial E^{n+1}}{\partial r}\right) 
+-
+\frac{\partial}{\partial z}\left(D^n\frac{\partial E^{n+1}}{\partial z}\right)
++
+\chi c\sigma^n E^{n+1}
+-
+\chi c\sigma^n \frac{U^n + A^n E^{n+1}}{1 + A^n}
+=
+\frac{E^n}{\Delta t}.
+\end{equation}
+
+Expand the coupling term:
+\begin{equation}
+\chi c\sigma^n \frac{U^n + A^n E^{n+1}}{1 + A^n}
+=
+\frac{\chi c\sigma^n U^n}{1 + A^n}
++
+\frac{\chi c\sigma^n A^n E^{n+1}}{1 + A^n}.
+\end{equation}
+
+Substitute back:
+\begin{equation}
+\frac{E^{n+1}}{\Delta t}
+-
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD^n\frac{\partial E^{n+1}}{\partial r}\right) 
+-
+\frac{\partial}{\partial z}\left(D^n\frac{\partial E^{n+1}}{\partial z}\right)
++
+\chi c\sigma^n E^{n+1}
+-
+\frac{\chi c\sigma^n A^n E^{n+1}}{1 + A^n}
+=
+\frac{E^n}{\Delta t}
++
+\frac{\chi c\sigma^n U^n}{1 + A^n}.
+\end{equation}
+
+Combine the $E^{n+1}$ coefficients on the left:
+\begin{equation}
+\frac{1}{\Delta t} + \chi c\sigma^n - \frac{\chi c\sigma^n A^n}{1 + A^n}.
+\end{equation}
+
+Simplify the coupling diagonal:
+\begin{align}
+\chi c\sigma^n - \frac{\chi c\sigma^n A^n}{1 + A^n}
+&=
+\chi c\sigma^n\left(1 - \frac{A^n}{1 + A^n}\right)\\
+&=
+\chi c\sigma^n\left(\frac{1 + A^n - A^n}{1 + A^n}\right)\\
+&=
+\frac{\chi c\sigma^n}{1 + A^n}.
+\end{align}
+
+So the equation becomes:
+\begin{equation}
+\left(\frac{1}{\Delta t} + \frac{\chi c\sigma^n}{1 + A^n}\right) E^{n+1}
+-
+-
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD^n\frac{\partial E^{n+1}}{\partial r}\right) 
+-
+\frac{\partial}{\partial z}\left(D^n\frac{\partial E^{n+1}}{\partial z}\right)
+=
+\frac{E^n}{\Delta t}
++
+\frac{\chi c\sigma^n}{1 + A^n} U^n.
+\label{eq:E_implicit_final}
+\end{equation}
+
+Define the effective coupling coefficient:
+\begin{equation}
+C^n
+\equiv
+\frac{\chi c\sigma^n}{1 + A^n}.
+\end{equation}
+
+Then Eq.~\eqref{eq:E_implicit_final} reads:
+\begin{equation}
+\left(\frac{1}{\Delta t} + C^n\right) E^{n+1}
+-
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD^n\frac{\partial E^{n+1}}{\partial r}\right) 
+-
+\frac{\partial}{\partial z}\left(D^n\frac{\partial E^{n+1}}{\partial z}\right)
+=
+\frac{E^n}{\Delta t}
++
+C^n U^n.
+\label{eq:E_final_coupled}
+\end{equation}
+
+% ============================================================
+% Section 3: Spatial Discretization - Grid
+% ============================================================
+\section{Spatial Discretization}
+
+\subsection{Grid Definition}
+
+We discretize the domain into a 2D grid of cell-centers:
+\begin{align}
+z_i &= (i-1)\,\Delta z, \quad i = 0, 1, \ldots, N_z - 1, \quad \Delta z = \frac{L_z}{N_z - 1},\\
+r_j &= \text{general radial nodes}, \quad j = 0, 1, \ldots, N_r - 1.
+\end{align}
+
+In general, $r_j$ may be non-uniform (e.g., uniform in the foam region and geometrically stretched in the gold layer). For simplicity in the derivation, we first assume uniform $\Delta r$, then note the modifications for non-uniform grids.
+
+Stored fields are cell-centered:
+\begin{equation}
+E^{n}_{i,j} \approx E(r_j, z_i, t^n), \quad U^{n}_{i,j} \approx U(r_j, z_i, t^n).
+\end{equation}
+
+\subsection{Face Values and Averaging}
+
+Spatial derivatives are computed at cell faces. The faces are located at:
+\begin{align}
+r_{j-\frac12} &= \frac{r_{j-1} + r_j}{2}, \quad \Delta r_j = r_j - r_{j-1},\\
+z_{i-\frac12} &= \frac{z_{i-1} + z_i}{2}, \quad \Delta z = z_i - z_{i-1}.
+\end{align}
+
+For space-dependent coefficients like $D(T(r,z))$, we evaluate $T$ at cell centers to get $D_{i,j}$, then average $D$ to each face. Common averaging methods are:
+\begin{align}
+\text{Arithmetic: } \quad D_{i,j+\frac12} &\approx \frac{D_{i,j} + D_{i,j+1}}{2},\\
+\text{Harmonic: } \quad D_{i,j+\frac12} &\approx \frac{2 D_{i,j} D_{i,j+1}}{D_{i,j} + D_{i,j+1}},\\
+\text{Geometric: } \quad D_{i,j+\frac12} &\approx \sqrt{D_{i,j} D_{i,j+1}}.
+\end{align}
+The harmonic mean is often preferred for diffusion coefficients to ensure monotonicity, but the code supports all three. Similarly for z-faces. These face-averaged coefficients $D^n_{i,j\pm1/2}$ are then frozen at the old time $t^n$ during the implicit solve.
+
+% ============================================================
+% Section 4: Radial Diffusion Operator
+% ============================================================
+\section{Radial Diffusion Operator}
+
+\subsection{Conservative Form}
+
+The radial part of the diffusion operator with space-dependent $D(r,z)$ is:
+\begin{equation}
+\mathcal{L}_r[E]
+=
+\frac{1}{r}\frac{d}{dr}\left(rD\frac{\partial E}{\partial r}\right).
+\end{equation}
+
+This is the correct conservative form when $D$ varies with position. We discretize by defining radial fluxes at cell faces:
+\begin{equation}
+F^{r}_{i,j+\frac12}
+\equiv
+r_{j+\frac12}\,D^n_{i,j+\frac12}\,\frac{E^{n+1}_{i,j+1} - E^{n+1}_{i,j}}{\Delta r_{j+\frac12}},
+\quad
+\Delta r_{j+\frac12} = r_{j+1} - r_j.
+\end{equation}
+
+The divergence over a control volume at $(i,j)$ is then:
+\begin{equation}
+\left[\frac{1}{r}\frac{d}{dr}\left(rD\frac{\partial E}{\partial r}\right)\right]_{i,j}
+\approx
+\frac{1}{r_j \,\Delta r_j}\left(F^{r}_{i,j+\frac12} - F^{r}_{i,j-\frac12}\right),
+\end{equation}
+where $\Delta r_j$ is the width of the control volume around node $j$ (typically the average of $\Delta r_{j-\frac12}$ and $\Delta r_{j+\frac12}$).
+
+\subsection{Discrete Form for Interior Nodes}
+
+For interior nodes $1 \le j \le N_r - 2$, expanding the space-dependent operator:
+\begin{equation}
+\left[\frac{1}{r}\frac{d}{dr}\left(rD\frac{\partial E}{\partial r}\right)\right]_{i,j}
+\approx
+\frac{1}{r_j \,\Delta r_j}
+\left[
+r_{j+\frac12}\,D^n_{i,j+\frac12}\,\frac{E^{n+1}_{i,j+1} - E^{n+1}_{i,j}}{\Delta r_{j+\frac12}}
+-
+r_{j-\frac12}\,D^n_{i,j-\frac12}\,\frac{E^{n+1}_{i,j} - E^{n+1}_{i,j-1}}{\Delta r_{j-\frac12}}
+\right].
+\end{equation}
+
+Here, $D^n_{i,j+\frac12}$ is the face-averaged diffusion coefficient at time $t^n$. Rearrange as a linear combination:
+\begin{equation}
+\approx
+\frac{r_{j+\frac12}\,D^n_{i,j+\frac12}}{r_j\,\Delta r_j\,\Delta r_{j+\frac12}} E^{n+1}_{i,j+1}
+-
+\frac{r_{j+\frac12}\,D^n_{i,j+\frac12}}{r_j\,\Delta r_j\,\Delta r_{j+\frac12}} E^{n+1}_{i,j}
+-
+\frac{r_{j-\frac12}\,D^n_{i,j-\frac12}}{r_j\,\Delta r_j\,\Delta r_{j-\frac12}} E^{n+1}_{i,j}
++
+\frac{r_{j-\frac12}\,D^n_{i,j-\frac12}}{r_j\,\Delta r_j\,\Delta r_{j-\frac12}} E^{n+1}_{i,j-1}.
+\end{equation}
+
+Define the effective cylindrical weights (with space-dependent coefficients):
+\begin{align}
+\lambda^{r,n}_{i,j+\frac12}
+&\equiv
+\frac{\Delta t \cdot r_{j+\frac12}\,D^n_{i,j+\frac12}}{r_j\,\Delta r_j\,\Delta r_{j+\frac12}},\\
+\lambda^{r,n}_{i,j-\frac12}
+&\equiv
+\frac{\Delta t \cdot r_{j-\frac12}\,D^n_{i,j-\frac12}}{r_j\,\Delta r_j\,\Delta r_{j-\frac12}}.
+\end{align}
+
+Then the discrete radial contribution to the implicit step is:
+\begin{equation}
+\Delta t \left[\frac{1}{r}\frac{d}{dr}\left(rD^n\frac{\partial E}{\partial r}\right)\right]_{i,j}^{n+1}
+\approx
+\lambda^{r,n}_{i,j+\frac12} E^{n+1}_{i,j+1}
+-
+\left(\lambda^{r,n}_{i,j+\frac12} + \lambda^{r,n}_{i,j-\frac12}\right) E^{n+1}_{i,j}
++
+\lambda^{r,n}_{i,j-\frac12} E^{n+1}_{i,j-1}.
+\label{eq:radial_stencil}
+\end{equation}
+
+% ============================================================
+% Section 5: Axial Diffusion Operator
+% ============================================================
+\section{Axial Diffusion Operator}
+
+\subsection{Continuous Form}
+
+The axial part with space-dependent $D(r,z)$:
+\begin{equation}
+\mathcal{L}_z[E]
+=
+\frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right).
+\end{equation}
+
+\subsection{Discrete Form for Interior Nodes}
+
+For interior axial nodes $i = 1, \ldots, N_z - 2$, the space-dependent operator is approximated as:
+\begin{equation}
+\left[\frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right)\right]_{i,j}
+\approx
+\frac{1}{(\Delta z)^2}\left[D^n_{i+1,j}\,E^{n+1}_{i+1,j} - (D^n_{i+1,j} + D^n_{i,j})\,E^{n+1}_{i,j} + D^n_{i,j}\,E^{n+1}_{i-1,j}\right].
+\end{equation}
+
+However, for simplicity and to maintain stability, a common approximation averages the diffusion coefficient to the cell center:
+\begin{equation}
+D^n_{i,j} \approx \frac{D^n_{i+1,j} + D^n_{i,j} + D^n_{i-1,j}}{3},
+\end{equation}
+which then gives the simpler form:
+\begin{equation}
+\left[\frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right)\right]_{i,j}
+\approx
+D^n_{i,j}\,\frac{E^{n+1}_{i+1,j} - 2E^{n+1}_{i,j} + E^{n+1}_{i-1,j}}{(\Delta z)^2}.
+\end{equation}
+
+With implicit time stepping:
+\begin{equation}
+\Delta t \left[\frac{\partial}{\partial z}\left(D^n\frac{\partial E}{\partial z}\right)\right]_{i,j}^{n+1}
+\approx
+\frac{\Delta t \cdot D^n_{i,j}}{(\Delta z)^2}
+\left[E^{n+1}_{i+1,j} - 2E^{n+1}_{i,j} + E^{n+1}_{i-1,j}\right].
+\end{equation}
+
+Define the axial weight:
+\begin{equation}
+\lambda^{z,n}_{i,j}
+\equiv
+\frac{\Delta t \cdot D^n_{i,j}}{(\Delta z)^2}.
+\end{equation}
+
+Then:
+\begin{equation}
+\Delta t \left[D\frac{\partial^2 E}{\partial z^2}\right]_{i,j}^{n+1}
+\approx
+\lambda^{z,n}_{i,j} E^{n+1}_{i+1,j}
+-
+2\lambda^{z,n}_{i,j} E^{n+1}_{i,j}
++
+\lambda^{z,n}_{i,j} E^{n+1}_{i-1,j}.
+\label{eq:axial_stencil}
+\end{equation}
+
+% ============================================================
+% Section 6: Complete Interior Stencil
+% ============================================================
+\section{Complete Interior 5-Point Stencil}
+
+\subsection{Combining All Terms}
+
+Start from Eq.~\eqref{eq:E_final_coupled} and apply time discretization:
+\begin{equation}
+\left(\frac{1}{\Delta t} + C^n\right) E^{n+1}_{i,j}
+-
+\left[\Delta t \mathcal{L}_r + \Delta t \mathcal{L}_z\right] E^{n+1}_{i,j}
+=
+\frac{E^n_{i,j}}{\Delta t}
++
+C^n U^n_{i,j}.
+\end{equation}
+
+Substitute the discrete forms from Eqs.~\eqref{eq:radial_stencil} and \eqref{eq:axial_stencil}:
+\begin{equation}
+\left(\frac{1}{\Delta t} + C^n\right) E^{n+1}_{i,j}
+-\left[
+\lambda^{r,n}_{i,j+\frac12} E^{n+1}_{i,j+1}
+-
+(\lambda^{r,n}_{i,j+\frac12} + \lambda^{r,n}_{i,j-\frac12}) E^{n+1}_{i,j}
++
+\lambda^{r,n}_{i,j-\frac12} E^{n+1}_{i,j-1}
+\right]
+\end{equation}
+\begin{equation}
+-\left[
+\lambda^{z,n}_{i,j} E^{n+1}_{i+1,j}
+-
+2\lambda^{z,n}_{i,j} E^{n+1}_{i,j}
++
+\lambda^{z,n}_{i,j} E^{n+1}_{i-1,j}
+\right]
+=
+\frac{E^n_{i,j}}{\Delta t}
++
+C^n U^n_{i,j}.
+\end{equation}
+
+Collect all terms on the left:
+\begin{align}
+&\left(\frac{1}{\Delta t} + C^n + \lambda^{r,n}_{i,j+\frac12} + \lambda^{r,n}_{i,j-\frac12} + 2\lambda^{z,n}_{i,j}\right) E^{n+1}_{i,j}\\
+&\quad - \lambda^{r,n}_{i,j+\frac12} E^{n+1}_{i,j+1}
+- \lambda^{r,n}_{i,j-\frac12} E^{n+1}_{i,j-1}
+- \lambda^{z,n}_{i,j} E^{n+1}_{i+1,j}
+- \lambda^{z,n}_{i,j} E^{n+1}_{i-1,j}\\
+&=
+\frac{E^n_{i,j}}{\Delta t}
++
+C^n U^n_{i,j}.
+\end{align}
+
+Rearrange into standard form:
+\begin{equation}
+\boxed{
+\begin{alignedat}{2}
+&\text{diagonal coeff: }&&
+\frac{1}{\Delta t} + C^n + \lambda^{r,n}_{i,j+\frac12} + \lambda^{r,n}_{i,j-\frac12} + 2\lambda^{z,n}_{i,j},\\
+&\text{r-neighbors: }&&
+-\lambda^{r,n}_{i,j\pm\frac12},\\
+&\text{z-neighbors: }&&
+-\lambda^{z,n}_{i,j},\\
+&\text{RHS: }&&
+\frac{E^n_{i,j}}{\Delta t}
++
+C^n U^n_{i,j}.
+\end{alignedat}
+}
+\label{eq:5point_interior}
+\end{equation}
+
+This is the full interior 5-point stencil (or 4-point in 1D) used in the implicit solver.
+
+% ============================================================
+% Section 7: Boundary Conditions
+% ============================================================
+\section{Boundary Conditions}
+
+\subsection{Axial Boundary Conditions}
+
+\subsubsection{Dirichlet Boundary at $z = 0$ (Drive)}
+
+At the irradiated surface, we impose:
+\begin{equation}
+E^{n+1}_{0,j} = E_{\mathrm{drive}}(t^{n+1}, j),
+\end{equation}
+where $E_{\mathrm{drive}}(t)$ is computed from the imposed drive temperature $T_D(t)$ via $E_{\mathrm{drive}} = a T_D^4$ with $a = 4\sigma_{\mathrm{SB}}/c$.
+
+This node is eliminated from the linear system; instead, its value is imposed after the solve.
+
+\subsubsection{Marshak Boundary at $z = 0$}
+
+Alternatively, the Marshak boundary condition relates the boundary value to the outward flux:
+\begin{equation}
+a T_D^4(t) = E(0,j,t) - \frac{2D(0,j,t)}{c}\,\left.\frac{\partial E}{\partial z}\right|_{z=0}.
+\end{equation}
+
+Using backward differencing:
+\begin{equation}
+\left.\frac{\partial E}{\partial z}\right|_{z=0}
+\approx
+\frac{E_{1,j}^{n+1} - E_{0,j}^{n+1}}{\Delta z}.
+\end{equation}
+
+Substituting:
+\begin{equation}
+a T_D^4(t^{n+1})
+=
+E_{0,j}^{n+1} - \frac{2D^n_{0,j}}{c}\,\frac{E_{1,j}^{n+1} - E_{0,j}^{n+1}}{\Delta z}.
+\end{equation}
+
+Multiply by $\Delta z$ and rearrange:
+\begin{equation}
+a T_D^4(t^{n+1}) \Delta z
+=
+E_{0,j}^{n+1} \Delta z - \frac{2D^n_{0,j}}{c}\,(E_{1,j}^{n+1} - E_{0,j}^{n+1}).
+\end{equation}
+
+\begin{equation}
+a T_D^4(t^{n+1}) \Delta z
+=
+E_{0,j}^{n+1}\left(\Delta z + \frac{2D^n_{0,j}}{c}\right) - \frac{2D^n_{0,j}}{c}\,E_{1,j}^{n+1}.
+\end{equation}
+
+Define $\alpha_j = \frac{2D^n_{0,j}}{c\,\Delta z}$. Then:
+\begin{equation}
+a T_D^4(t^{n+1}) = (1 + \alpha_j)\,E_{0,j}^{n+1} - \alpha_j\,E_{1,j}^{n+1}.
+\label{eq:marshak_row_z0}
+\end{equation}
+
+This is the discrete Marshak row at $z=0$, replacing the interior 5-point stencil for that location.
+
+\subsubsection{Dirichlet Boundary at $z = L_z$ (Bath)}
+
+At the far end:
+\begin{equation}
+E^{n+1}_{N_z-1,j} = E_{\mathrm{bath}} = a(300\text{ K})^4.
+\end{equation}
+
+\subsection{Radial Boundary Conditions}
+
+\subsubsection{Axis Symmetry at $r = 0$}
+
+By cylindrical symmetry:
+\begin{equation}
+\left.\frac{\partial E}{\partial r}\right|_{r=0} = 0.
+\end{equation}
+
+This is enforced by setting $E_{i,0} = E_{i,1}$, which removes the $1/r$ singularity.
+
+\subsubsection{Dirichlet Boundary at $r = R_{\mathrm{tot}}$ (Fixed Bath)}
+
+Impose:
+\begin{equation}
+E^{n+1}_{i,N_r-1} = E_{\mathrm{bath}}.
+\end{equation}
+
+\subsubsection{Neumann Boundary at $r = R_{\mathrm{tot}}$ (No Flux)}
+
+Impose:
+\begin{equation}
+\left.\frac{\partial E}{\partial r}\right|_{r=R_{\mathrm{tot}}} = 0,
+\end{equation}
+which eliminates the outer-face flux contribution in the stencil.
+
+\subsubsection{Marshak Boundary at $r = R_{\mathrm{tot}}$ (Radiating Wall)}
+
+The Marshak condition at the outer surface is:
+\begin{equation}
+a T_{\mathrm{wall}}^4(t) = E(N_r-1,i,t) - \frac{2D(N_r-1,i,t)}{c}\,\left.\frac{\partial E}{\partial r}\right|_{r=R_{\mathrm{tot}}}.
+\end{equation}
+
+Using backward differencing:
+\begin{equation}
+\left.\frac{\partial E}{\partial r}\right|_{r=R_{\mathrm{tot}}}
+\approx
+\frac{E_{i,N_r-1}^{n+1} - E_{i,N_r-2}^{n+1}}{\Delta r_{\mathrm{outer}}}.
+\end{equation}
+
+Substituting and rearranging similarly to Eq.~\eqref{eq:marshak_row_z0}:
+\begin{equation}
+\boxed{
+a T_{\mathrm{wall}}^4(t^{n+1})
+=
+(1 + \alpha_i)\,E_{i,N_r-1}^{n+1} - \alpha_i\,E_{i,N_r-2}^{n+1},
+}
+\label{eq:marshak_row_r_outer}
+\end{equation}
+where $\alpha_i = \frac{2D^n_{i,N_r-1}}{c\,\Delta r_{\mathrm{outer}}}$.
+
+This row is included in the linear system to replace the interior 5-point stencil at the outer radial boundary.
+
+% ============================================================
+% Section 8: Linear System Assembly
+% ============================================================
+\section{Linear System Assembly}
+
+\subsection{Unknown Vector Organization}
+
+The implicit solve solves for $E^{n+1}$ on an interior subset of the grid. Typically:
+\begin{itemize}
+\item If Marshak boundary at $z=0$: unknowns are $E^{n+1}_{i,j}$ for $i=0,\ldots,N_z-2$ and $j=0,\ldots,N_r-1$.
+\item If Dirichlet at $z=0$: unknowns are $E^{n+1}_{i,j}$ for $i=1,\ldots,N_z-2$ and $j=0,\ldots,N_r-1$.
+\item Boundary nodes at $z=L_z$ and possibly $r=R$ are either imposed after the solve or handled specially.
+\end{itemize}
+
+The total number of unknowns is:
+\begin{equation}
+n_{\text{unknown}} = n_z \times n_r,
+\end{equation}
+where $n_z$ and $n_r$ are the counts of unknown rows in each direction.
+
+\subsection{Row-Wise Assembly}
+
+For each unknown $(i,j)$, the corresponding matrix row contains:
+\begin{itemize}
+\item Diagonal entry: coefficient of $E^{n+1}_{i,j}$,
+\item Off-diagonal entries: coefficients of neighboring $E^{n+1}_{i\pm1,j}$ and $E^{n+1}_{i,j\pm1}$,
+\item RHS: constant vector entries.
+\end{itemize}
+
+The sparsity pattern is structured: each row has at most 5 nonzeros (2D grid), or fewer at boundaries.
+
+\subsection{CSR Storage}
+
+To store the matrix efficiently in Compressed Sparse Row (CSR) format:
+\begin{align}
+&\text{indptr}: \text{ row start pointers (length } n_{\text{unknown}} + 1),\\
+&\text{indices}: \text{ column indices of stored values,}\\
+&\text{data}: \text{ numeric coefficients.}
+\end{align}
+
+For each row, we store only the nonzero entries in sorted column order, reducing memory from $O(n_{\text{unknown}}^2)$ dense to $O(n_{\text{unknown}})$ sparse.
+
+% ============================================================
+% Section 9: Material Update
+% ============================================================
+\section{Material Energy Update}
+
+After solving for $E^{n+1}$, update $U^{n+1}$ using Eq.~\eqref{eq:U_update}:
+\begin{equation}
+U^{n+1}_{i,j}
+=
+\frac{U^n_{i,j} + A^n_{i,j} E^{n+1}_{i,j}}{1 + A^n_{i,j}},
+\end{equation}
+where $A^n_{i,j} = \beta^n_{i,j} \Delta t \cdot \chi \cdot c\sigma^n_{i,j}$.
+
+This is a local (cell-by-cell) update, not requiring a linear solve.
+
+% ============================================================
+% Section 10: Self-Similar Model Integration
+% ============================================================
+\section{Self-Similar Model Integration}
+
+In the self-similar model, the coupling parameter $\beta(T)$ (hence $\beta^n$ at the old time) and the heat capacity are related to material parameters via:
+\begin{equation}
+\beta(T) = \text{Cv}_R(T) / \text{Cv}_m(T),
+\end{equation}
+which is the ratio of radiation to material heat capacity (dimensionless). This is temperature-dependent and must be evaluated at each location from the old material energy $U^n$ to get $\beta^n_{i,j}$.
+
+The opacity and heat capacity are functions of temperature:
+\begin{align}
+\sigma(T) &= \frac{1}{g T^\alpha \rho^{-\lambda - 1}},\\
+\text{Cv}_m(T) &= f \beta_{\exp} T^{\beta_{\exp} - 1} \rho^{-\mu + 1},\\
+\text{Cv}_R(T) &= 4 a T^3.
+\end{align}
+
+At each timestep, $T^n = (U^n / a)^{1/4}$ is computed from the old material energy, and all temperature-dependent quantities ($D^n, \sigma^n, C^n$) are evaluated there.
+
+% ============================================================
+% Appendix: Summary
+% ============================================================
+\appendix
+
+\section{Quick Reference: Final Stencil Summary}
+
+\subsection{Interior 5-Point Stencil}
+
+For interior nodes $(i,j)$ with $1 \le i \le N_z-2$ and $1 \le j \le N_r-2$ (or adjusted ranges for Marshak):
+
+\subsubsection{Matrix Coefficients}
+
+\begin{align}
+a_{\text{self}} &= \frac{1}{\Delta t} + C^n + \lambda^{r,n}_{i,j+\frac12} + \lambda^{r,n}_{i,j-\frac12} + 2\lambda^{z,n}_{i,j},\\
+a_{i+1,j} &= -\lambda^{z,n}_{i,j},\\
+a_{i-1,j} &= -\lambda^{z,n}_{i,j},\\
+a_{i,j+1} &= -\lambda^{r,n}_{i,j+\frac12},\\
+a_{i,j-1} &= -\lambda^{r,n}_{i,j-\frac12}.
+\end{align}
+
+\subsubsection{RHS}
+
+\begin{equation}
+b_{i,j} = \frac{E^n_{i,j}}{\Delta t} + C^n_{i,j} U^n_{i,j},
+\end{equation}
+where $C^n_{i,j} = \frac{c\sigma^n_{i,j}}{1 + A^n_{i,j}}$ and $A^n_{i,j} = \beta^n_{i,j} \Delta t \cdot \chi \cdot c\sigma^n_{i,j}$.
+
+\subsection{Marshak Rows at $z=0$}
+
+\begin{align}
+a_{\text{self}} &= 1 + \alpha_j, \quad \alpha_j = \frac{2D^n_{0,j}}{c\,\Delta z},\\
+a_{1,j} &= -\alpha_j,\\
+b_{0,j} &= a T_D^4(t^{n+1}).
+\end{align}
+
+\subsection{Marshak Rows at $r=R_{\mathrm{tot}}$}
+
+\begin{align}
+a_{\text{self}} &= 1 + \alpha_i, \quad \alpha_i = \frac{2D^n_{i,N_r-1}}{c\,\Delta r_{\mathrm{outer}}},\\
+a_{i,N_r-2} &= -\alpha_i,\\
+b_{i,N_r-1} &= a T_{\mathrm{wall}}^4(t^{n+1}).
+\end{align}
+
+\end{document}

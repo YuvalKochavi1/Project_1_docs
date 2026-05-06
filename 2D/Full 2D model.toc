@@ -25,25 +25,28 @@
 \contentsline {section}{\numberline {8}Computational Implementation}{9}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Eigenvalue Calculation}{9}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Time-Marching with Bessel Data Storage}{9}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Radial Front Reconstruction}{10}{subsection.8.3}%
-\contentsline {section}{\numberline {9}Results and Visualization}{10}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Output Files}{10}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Typical Behavior}{11}{subsection.9.2}%
-\contentsline {section}{\numberline {10}Code Structure}{11}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Module Organization}{11}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Data Flow}{12}{subsection.10.2}%
-\contentsline {section}{\numberline {11}Extensions and Future Work}{12}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Higher-Order Modes}{12}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}Time-Dependent Albedo}{12}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}Ablation Effects}{13}{subsection.11.3}%
-\contentsline {subsection}{\numberline {11.4}Effective Lambda Correction}{13}{subsection.11.4}%
-\contentsline {section}{\numberline {12}Validation and Benchmarking}{13}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Comparison with Experiments}{13}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Code-to-Code Comparison}{13}{subsection.12.2}%
-\contentsline {subsection}{\numberline {12.3}Convergence Tests}{14}{subsection.12.3}%
-\contentsline {section}{\numberline {13}Conclusion}{14}{section.13}%
-\contentsline {section}{\numberline {A}Derivation of Eigenvalue Equation}{14}{appendix.A}%
-\contentsline {section}{\numberline {B}Numerical Solution of Transcendental Equation}{15}{appendix.B}%
-\contentsline {section}{\numberline {C}Bessel Function Properties}{16}{appendix.C}%
-\contentsline {subsection}{\numberline {C.1}Key Identities}{16}{subsection.C.1}%
-\contentsline {subsection}{\numberline {C.2}Asymptotic Behavior}{16}{subsection.C.2}%
+\contentsline {subsection}{\numberline {8.3}Wall-Profile Construction in Heatmaps}{10}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Foam-Gold Region Differentiation and Temperature Assignment}{10}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Shock Front in the Wall Layer}{11}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Radial Front Reconstruction}{12}{subsection.8.6}%
+\contentsline {section}{\numberline {9}Results and Visualization}{13}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Output Files}{13}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Typical Behavior}{13}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Code Structure}{14}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Module Organization}{14}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Data Flow}{14}{subsection.10.2}%
+\contentsline {section}{\numberline {11}Extensions and Future Work}{15}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Higher-Order Modes}{15}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Time-Dependent Albedo}{15}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Ablation Effects}{15}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Effective Lambda Correction}{16}{subsection.11.4}%
+\contentsline {section}{\numberline {12}Validation and Benchmarking}{16}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Comparison with Experiments}{16}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Code-to-Code Comparison}{16}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Convergence Tests}{16}{subsection.12.3}%
+\contentsline {section}{\numberline {13}Conclusion}{17}{section.13}%
+\contentsline {section}{\numberline {A}Derivation of Eigenvalue Equation}{17}{appendix.A}%
+\contentsline {section}{\numberline {B}Numerical Solution of Transcendental Equation}{18}{appendix.B}%
+\contentsline {section}{\numberline {C}Bessel Function Properties}{18}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}Key Identities}{18}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}Asymptotic Behavior}{19}{subsection.C.2}%

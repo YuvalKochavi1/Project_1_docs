@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  12 FEB 2026 18:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  18 MAR 2026 17:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**./hurricane_cylender.tex
-(hurricane_cylender.tex
+**c:/Users/TLP-001/Documents/GitHub/Project_1_docs/2D/hurricane_cylender.tex
+(c:/Users/TLP-001/Documents/GitHub/Project_1_docs/2D/hurricane_cylender.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
 (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -133,8 +133,7 @@ LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count295
-)
-No file hurricane_cylender.aux.
+) (hurricane_cylender.aux)
 \openout1 = `hurricane_cylender.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -151,7 +150,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
-(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count296
 \scratchdimen=\dimen160
@@ -177,11 +176,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-LaTeX Warning: Reference `eq::laplace' on page 1 undefined on input line 58.
-
-[1
+) [1
 
 {C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 <bessel_functions.png, id=14, 545.78906pt x 410.2828pt>
@@ -189,121 +184,32 @@ File: bessel_functions.png Graphic file (type png)
 <use bessel_functions.png>
 Package pdftex.def Info: bessel_functions.png  used on input line 113.
 (pdftex.def)             Requested size: 172.5pt x 129.67172pt.
- [2 <./bessel_functions.png>]
-
-LaTeX Warning: Reference `eq::bessel_diff' on page 3 undefined on input line 135.
-
-
-LaTeX Warning: Reference `eq::bessel_prop' on page 3 undefined on input line 135.
-
-
-LaTeX Warning: Reference `eq::eigenvalue' on page 3 undefined on input line 163.
-
-[3]
-
-LaTeX Warning: Reference `eq::general_solution' on page 4 undefined on input line 211.
-
-
-LaTeX Warning: Reference `eq::general_solution' on page 4 undefined on input line 222.
-
-
+ [2 <./bessel_functions.png>] [3]
 Overfull \hbox (19.55498pt too wide) detected at line 268
 []
  []
 
-[4]
-
-LaTeX Warning: Reference `eq::U_series_full' on page 5 undefined on input line 287.
-
-
-LaTeX Warning: Reference `eq::front_leadingBC_full' on page 5 undefined on input line 287.
-
-
-LaTeX Warning: Reference `eq:Bn_in_terms_An' on page 5 undefined on input line 310.
-
-[5]
-
-LaTeX Warning: Reference `eq:AB_to_sinh_step' on page 6 undefined on input line 324.
-
-
-LaTeX Warning: Reference `eq:AB_sinh_form_full' on page 6 undefined on input line 337.
-
-
-LaTeX Warning: Reference `eq::U_series_full' on page 6 undefined on input line 337.
-
-
-LaTeX Warning: Reference `eq::U_sinh_series' on page 6 undefined on input line 354.
-
-
-LaTeX Warning: Reference `eq::U_final_form_full' on page 6 undefined on input line 367.
-
-[6]
-
-LaTeX Warning: Reference `eq::U_hyperbolic' on page 7 undefined on input line 401.
-
-
-LaTeX Warning: Reference `eq::front_speed' on page 7 undefined on input line 423.
-
-
-LaTeX Warning: Reference `eq::dUdz_front' on page 7 undefined on input line 446.
-
-[7]
-
-LaTeX Warning: Reference `eq::c0_ode_raw' on page 8 undefined on input line 474.
-
-
-LaTeX Warning: Reference `eq::c0_ode' on page 8 undefined on input line 484.
-
-
-LaTeX Warning: Reference `eq::c0_solution' on page 8 undefined on input line 550.
-
-[8]
-
-LaTeX Warning: Reference `eq::AnBn_source' on page 9 undefined on input line 561.
-
-
-LaTeX Warning: Reference `eq::dUdz_front' on page 9 undefined on input line 562.
-
-
-LaTeX Warning: Reference `eq::galerkin' on page 9 undefined on input line 571.
-
-
-LaTeX Warning: Reference `eq::c0_ode_time_drive_raw' on page 9 undefined on input line 586.
-
-
-LaTeX Warning: Reference `eq::c0_ode_time_drive' on page 9 undefined on input line 595.
-
-
+[4] [5] [6] [7] [8]
 Overfull \hbox (30.27194pt too wide) detected at line 622
 [][]
  []
-
-
-LaTeX Warning: Reference `eq::c0_general_drive' on page 9 undefined on input line 641.
 
 [9] [10] [11] (hurricane_cylender.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 2776 strings out of 467871
- 41349 string characters out of 5417408
- 449858 words of memory out of 5000000
- 31629 multiletter control sequences out of 15000+600000
+ 2780 strings out of 467871
+ 41558 string characters out of 5417408
+ 450875 words of memory out of 5000000
+ 31630 multiletter control sequences out of 15000+600000
  641176 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,12n,65p,257b,240s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,12n,65p,307b,240s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\TLP-001\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on c:/Users\TLP-001\semesterC\project1\2D\hurricane_cylender.pdf (11 pages, 362505 bytes).
+Output written on hurricane_cylender.pdf (11 pages, 362255 bytes).
 PDF statistics:
  136 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
