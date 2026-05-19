@@ -397,15 +397,15 @@ Define the effective cylindrical weights (with space-dependent coefficients):
 \begin{align}
 \lambda^{r,n}_{i,j+\frac12}
 &\equiv
-\frac{\Delta t \cdot r_{j+\frac12}\,D^n_{i,j+\frac12}}{r_j\,\Delta r_j\,\Delta r_{j+\frac12}},\\
+\frac{r_{j+\frac12}\,D^n_{i,j+\frac12}}{r_j\,\Delta r_j\,\Delta r_{j+\frac12}},\\
 \lambda^{r,n}_{i,j-\frac12}
 &\equiv
-\frac{\Delta t \cdot r_{j-\frac12}\,D^n_{i,j-\frac12}}{r_j\,\Delta r_j\,\Delta r_{j-\frac12}}.
+\frac{r_{j-\frac12}\,D^n_{i,j-\frac12}}{r_j\,\Delta r_j\,\Delta r_{j-\frac12}}.
 \end{align}
 
 Then the discrete radial contribution to the implicit step is:
 \begin{equation}
-\Delta t \left[\frac{1}{r}\frac{d}{dr}\left(rD^n\frac{\partial E}{\partial r}\right)\right]_{i,j}^{n+1}
+\left[\frac{1}{r}\frac{d}{dr}\left(rD^n\frac{\partial E}{\partial r}\right)\right]_{i,j}^{n+1}
 \approx
 \lambda^{r,n}_{i,j+\frac12} E^{n+1}_{i,j+1}
 -
@@ -451,9 +451,9 @@ D^n_{i,j}\,\frac{E^{n+1}_{i+1,j} - 2E^{n+1}_{i,j} + E^{n+1}_{i-1,j}}{(\Delta z)^
 
 With implicit time stepping:
 \begin{equation}
-\Delta t \left[\frac{\partial}{\partial z}\left(D^n\frac{\partial E}{\partial z}\right)\right]_{i,j}^{n+1}
+\left[\frac{\partial}{\partial z}\left(D^n\frac{\partial E}{\partial z}\right)\right]_{i,j}^{n+1}
 \approx
-\frac{\Delta t \cdot D^n_{i,j}}{(\Delta z)^2}
+\frac{D^n_{i,j}}{(\Delta z)^2}
 \left[E^{n+1}_{i+1,j} - 2E^{n+1}_{i,j} + E^{n+1}_{i-1,j}\right].
 \end{equation}
 
@@ -461,12 +461,12 @@ Define the axial weight:
 \begin{equation}
 \lambda^{z,n}_{i,j}
 \equiv
-\frac{\Delta t \cdot D^n_{i,j}}{(\Delta z)^2}.
+\frac{D^n_{i,j}}{(\Delta z)^2}.
 \end{equation}
 
 Then:
 \begin{equation}
-\Delta t \left[D\frac{\partial^2 E}{\partial z^2}\right]_{i,j}^{n+1}
+\left[D\frac{\partial^2 E}{\partial z^2}\right]_{i,j}^{n+1}
 \approx
 \lambda^{z,n}_{i,j} E^{n+1}_{i+1,j}
 -
@@ -487,7 +487,7 @@ Start from Eq.~\eqref{eq:E_final_coupled} and apply time discretization:
 \begin{equation}
 \left(\frac{1}{\Delta t} + C^n\right) E^{n+1}_{i,j}
 -
-\left[\Delta t \mathcal{L}_r + \Delta t \mathcal{L}_z\right] E^{n+1}_{i,j}
+\left[\mathcal{L}_r + \mathcal{L}_z\right] E^{n+1}_{i,j}
 =
 \frac{E^n_{i,j}}{\Delta t}
 +
