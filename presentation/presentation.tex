@@ -1,0 +1,184 @@
+% Simple Beamer presentation for Project_1
+% Compile with: `pdflatex presentation.tex` or `xelatex presentation.tex`
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usetheme{Madrid}
+
+% Dark (black) theme settings
+\definecolor{bgcolor}{RGB}{255,255,255}
+\definecolor{fgcolor}{RGB}{0,0,0}
+\definecolor{accent}{RGB}{255,165,0}
+\setbeamercolor{background canvas}{bg=bgcolor}
+\setbeamercolor{normal text}{fg=fgcolor,bg=bgcolor}
+\setbeamercolor{frametitle}{fg=fgcolor,bg=bgcolor}
+\setbeamercolor{title}{fg=fgcolor}
+\setbeamercolor{author}{fg=fgcolor}
+\setbeamercolor{institute}{fg=fgcolor}
+\setbeamercolor{section in toc}{fg=fgcolor}
+\setbeamercolor{itemize item}{fg=accent}
+\setbeamercolor{enumerate item}{fg=accent}
+
+% Bold and uppercase frame titles to match uploaded presentation
+\setbeamerfont{frametitle}{series=\bfseries}
+
+\title{\textbf{Modeling 2D Marshak Waves}}
+\author{Yuval Kochavi \\ Dr. Shai Heizler}
+\institute{The Hebrew University of Jerusalem}
+\date{17.6.2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{MOTIVATION}
+  \begin{itemize}
+    \item Cylindrical radiation diffusion problems arise in many physical scenarios.
+    \item The 1D solution only provides centerline front position $z_F(t)$.
+    \item Real experiments display complicated 2D geometry requiring rigorous modeling. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{THE MECHANISM}
+  \begin{itemize}
+    \item Radiation propagates axially (along $z$) and radially (along $r$).
+    \item Wall absorption causes overall energy loss.
+    \item Radial temperature gradients dynamically develop.
+    \item The radiation-driven heat front curves in $(r,z)$ space. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{PREVIOUS WORKS}
+  \begin{itemize}
+    \item R. E. Marshak  1958 - First description and super-sonic solutions. 
+    \item J. H. Hammer; M. D. Rosen  2006 - New 1D solutions based on a perturbation theory.
+    \item O. A. Hurricane; J. H. Hammer  2006 - Matematical characterization of marshak waves curvature.
+    \item A. P. Cohen; G. Malamud, S. I. Heizler  2020 - Modeling the 1D heat front Based on many experiments.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{OUR WORK - OVERVIEW}
+  \begin{itemize}
+    \item The idea: Solve the 1D propagation and radial perturbation structure separately and patch them.
+    \item We deploy separation of variables on the 2D energy equation.
+    \item The fundamental Bessel mode is introduced mathematically.
+    \item The radial structure of the heat front elegantly surfaces as an analytical Bessel profile.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{ASSUMPTIONS}
+  \begin{itemize}
+    \item \textbf{Geometry:} Domain spans $0 \leq r \leq R$ (radius) and $0 \leq z \leq L$ (length).
+    \item \textbf{Boundary Condition at Source:} Marshak boundary condition relates incoming and outgoing radiation safely at $z=0$. 
+    \item \textbf{Wall Interaction:} Parameterized via Albedo (reflectivity factor $\alpha_{\text{wall}}$).
+    \item \textbf{Product Solution:} We adopt a separated solution profile: $T(r,z,t) = T_0(z,t) \cdot \Phi(r)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{STATEMENT OF THE PROBLEM}
+  The radiation diffusion equation in foam material:
+  \begin{equation}
+    \frac{\partial U}{\partial t} = \nabla \cdot (D \nabla U)
+  \end{equation}
+  where $U = a T^4$ is the radiation energy density, and $D = \frac{c\lambda}{3}$ is the radiation diffusion coefficient.
+
+  \vspace{10pt}
+  In cylindrical coordinates $(r, z)$:
+  \begin{equation}
+    \frac{\partial U}{\partial t} = \frac{1}{r}\frac{\partial}{\partial r}\left(r D \frac{\partial U}{\partial r}\right) + \frac{\partial}{\partial z}\left(D \frac{\partial U}{\partial z}\right)
+  \end{equation}
+\end{frame}
+
+\begin{frame}{THE 1D CENTERLINE SOLUTION}
+  For the self-similar heat front at the exact centerline ($r=0$):
+  \begin{equation}
+    x_F^2(t) = \frac{2+\epsilon}{1-\epsilon} \cdot C(\rho) \cdot H(t)^{-\epsilon} \cdot \int_0^t H(t') \, dt'
+  \end{equation}
+  An implicit time-marching numerical approach acts on:
+  \begin{equation}
+    E(t_i) = E(t_{i-1}) + \frac{1}{2}\left[F_{\text{net}}(t_i) + F_{\text{net}}(t_{i-1})\right] \Delta t
+  \end{equation}
+  incorporating wall energy loss $F_{\text{net}}(t_i) = F(0, t_i) - \frac{\dot{E}_{\text{wall}}(t_i)}{A}$.
+\end{frame}
+
+\begin{frame}{WALL ENERGY LOSS \& ALBEDO}
+  Energy transfer to the cylindrical wall at $r=R$:
+  \begin{equation}
+    \frac{dE_{\text{wall}}}{dt} = 2\pi R L \sigma_{SB} \left(T_s^4 - \frac{\dot{E}_{\text{wall}}}{4\pi R L \sigma_{SB}}\right)
+  \end{equation}
+  The albedo $\alpha_{\text{wall}}$ tracks the non-linear relationship between reflected and incident flux:
+  \begin{equation}
+    \alpha_{\text{wall}} = \frac{F_{\text{in}}}{F_{\text{out}}} = \frac{\sigma_{SB}T_s^4 + \frac{\dot{E}_{\text{wall}}}{2}}{\sigma_{SB}T_s^4 - \frac{\dot{E}_{\text{wall}}}{2}}
+  \end{equation}
+\end{frame}
+
+\begin{frame}{THE 2D RADIAL EIGENVALUE PROBLEM}
+  Under assumed product formulation, the radial variant behaves linearly:
+  \begin{equation}
+    \frac{1}{r}\frac{d}{dr}\left(r\frac{d\Phi}{dr}\right) + \kappa^2 \Phi = 0
+  \end{equation}
+  A Robin boundary condition dictates behavior at the wall $r=R$, securing a continuous profile without divergence. Thus $\Phi(r) = J_0(\kappa r)$. 
+  \vspace{10pt}
+
+  The boundary enforces a transcendental equation for eigenvalues $\kappa$:
+  \begin{equation}
+    \kappa R \cdot J_1(\kappa R) = \epsilon_{\text{loss}} \cdot J_0(\kappa R)
+  \end{equation}
+\end{frame}
+
+\begin{frame}{RESULTS: CURVED FRONT POSITION}
+  \textbf{Two-Dimensional Temperature Distribution}:
+  The front curves precisely via the first eigenvalue $\kappa_0$:
+  \begin{equation}
+    z_F(r,t) = z_F(t) \cdot J_0(\kappa_0 r)
+  \end{equation}
+  
+  \textbf{Key observations:}
+  \begin{itemize}
+      \item The front exhibits max penetration directly on axis ($r=0$).
+      \item \textbf{Perfect Reflector ($\alpha_{\text{wall}} \to 1$):} Reduces $\kappa_0 \to 0$ generating a decoupled flat 1D plane. 
+      \item \textbf{Total Absorber ($\alpha_{\text{wall}} \to 0$):} Compresses the function giving sharp decay off-axis.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{RESULTS: REPRESENTATIVE SIMULATION}
+  \begin{figure}
+    \centering
+    \IfFileExists{Figures_new/ExampleFigure.png}{%
+      \includegraphics[width=0.75\textwidth]{Figures_new/ExampleFigure.png}
+    }{%
+      \setlength{\fboxsep}{8pt}%
+      \fbox{\parbox{0.75\textwidth}{\centering Missing figure: \texttt{Figures\_new/ExampleFigure.png}\\[6pt]Place the generated image in the Figures\_new/ folder or update the path.}}
+    }
+    \caption{Self-Similar Solution of the 2D Heat Wave plotted against time.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{COMPARISON TO NUMERICAL SIMULATIONS (1)}
+  \begin{itemize}
+    \item The analytically derived $J_0$ mapping maintains remarkably solid alignment with rigorous 2D simulations.
+    \item Insert actual simulation plots here proving $T(r,z,t)$ validation.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{COMPARISON TO NUMERICAL SIMULATIONS (2)}
+  \begin{itemize}
+    \item Highlight variations of albedo. 
+    \item Discuss errors mapping extreme $\epsilon$ shifts.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{SUMMARY}
+  \begin{itemize}
+    \item We offer an explicit analytical derivation coupling the 1D self-similar wave front equations onto 2D bounded spaces.
+    \item Separation of variables generates a natural $J_0(\kappa_0 r)$ curvature.
+    \item The model elegantly wraps radiation losses through empirical albedo adjustments across the wall.
+    \item Accurate, cheap, and easily adapted for varying pulse profile shapes.
+  \end{itemize}
+\end{frame}
+
+\end{document}
