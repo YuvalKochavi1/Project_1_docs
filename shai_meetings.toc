@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Meeting --- May 24, 2026}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Agenda / Objectives}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Discussion \& Key Progress}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Decisions \& Conclusions}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Meeting --- May 25, 2026}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Agenda / Objectives}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Discussion \& Key Progress}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Decisions \& Conclusions}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Meeting --- May 26, 2026}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Agenda / Objectives}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Discussion \& Key Progress}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Decisions \& Conclusions}{6}{subsection.3.3}%

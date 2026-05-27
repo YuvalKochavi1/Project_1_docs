@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{Calculation and Normalization of Local Radiation Flux in Supersonic Radiative Marshak Waves}
+\author{Yuval Kochavi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In the study of supersonic radiative heat waves (Marshak waves) propagating in cylindrical foam cylinders, tracking the evolution of the heat front position $z_F(t)$ and the surface temperature $T_s(t)$ provides global metrics of energy transport. However, experimental diagnostics often rely on localized detectors placed at specific spatial depths to record the arrival and progression of the thermal wave. 
+
+To model these diagnostics, we have implemented a dedicated calculation framework that tracks the local temperature $T(z, t)$ and the corresponding radiation flux $\Phi(z, t)$ at three fixed spatial locations:
+\begin{itemize}
+    \item \textbf{Dataset 1:} $z = 0.5\text{ mm}$
+    \item \textbf{Dataset 2:} $z = 1.0\text{ mm}$
+    \item \textbf{Dataset 3:} $z = 1.5\text{ mm}$
+\end{itemize}
+This framework tracks the flux continuously from $t = 0$, detects the exact front arrival time $t_{\text{start}}(z)$, and normalizes the resulting curves to enable a direct, relative comparison of the signal shapes and rise times across different detector depths.
+
+\section{Theoretical Framework}
+
+\subsection{Self-Similar Henyey Temperature Profile}
+The heat front solver yields the wave-front position $z_F(t)$ and the surface drive temperature $T_s(t)$ in HeV. Behind the wave front ($z < z_F(t)$), the spatial temperature profile is governed by the self-similar Henyey-like profile:
+\begin{equation}
+T(z, t) = T_s(t) \cdot \left( 1 - \frac{z}{z_F(t)} \right)^{\frac{1}{4+\alpha-\beta}},
+\end{equation}
+where $\alpha$ is the material opacity exponent and $\beta$ is the equation of state (EOS) exponent. Ahead of the heat front ($z \ge z_F(t)$), the material remains unheated, and the temperature is identically zero:
+\begin{equation}
+T(z, t) = 0 \quad \text{for } z \ge z_F(t).
+\end{equation}
+This profile models the spatial decay of the thermal wave behind the steep, supersonic heat front.
+
+\subsection{Radiation Flux and the Stefan-Boltzmann Law}
+The thermal radiation flux $\Phi(z, t)$ emitted by the material at a given spatial depth is calculated using the Stefan-Boltzmann law. In the simulation unit system, the temperature is expressed in HeV, and the radiation constant $a_{\text{hev}}$ and speed of light $c$ are used. The flux is given by:
+\begin{equation}
+\Phi(z, t) = \sigma_{\text{SB}} \cdot [T(z, t)]^4,
+\end{equation}
+where the Stefan-Boltzmann constant in HeV units is defined as:
+\begin{equation}
+\sigma_{\text{SB}} = \frac{a_{\text{hev}} \cdot c}{4}.
+\end{equation}
+Alternatively, when converting HeV temperatures to Kelvin using the conversion factor $K_{\text{per\_HeV}}$ ($\approx 1.1605 \times 10^6 \text{ K/HeV}$), the flux in standard SI units ($\text{W/m}^2$) can be calculated using the physical constant $\sigma_{\text{SB}} \approx 5.6704 \times 10^{-8}\text{ W/m}^2\text{K}^4$:
+\begin{equation}
+\Phi_{\text{SI}}(z, t) = \sigma_{\text{SB}} \cdot \left[ T(z, t) \cdot K_{\text{per\_HeV}} \right]^4.
+\end{equation}
+
+\subsection{Arrival Time and Curve Normalization}
+For a given detector position $z$, the heat front arrival time $t_{\text{start}}(z)$ is the first time step at which the wave front reaches or surpasses the detector:
+\begin{equation}
+t_{\text{start}}(z) = \min \{ t \mid z_F(t) \ge z \}.
+\end{equation}
+Prior to this arrival time ($t < t_{\text{start}}$), the local temperature and radiation flux are identically zero. 
+
+To enable a comparison of the relative magnitudes and shapes of the flux curves across different depths, all raw radiation fluxes are normalized by the same global peak factor (which corresponds to the maximum peak flux among all detector positions, typically at $z = 0.5\text{ mm}$):
+\begin{equation}
+\overline{\Phi}(z, t) = \frac{\Phi(z, t)}{\max_{z', t'} \Phi(z', t')}.
+\end{equation}
+This normalization preserves the relative magnitude differences between different positions while scaling the highest signal to a peak value of $1$.
+
+\subsection{Radial Extension into the Wall and Ablation}
+To capture the physical behavior of gold ablation and shock wave propagation in the temperature cross-section, the radial temperature analysis is extended past the foam boundary ($r = R_{\text{foam}}$) and directly into the gold wall. 
+
+Behind the foam boundary ($r \le R_{\text{foam}}$), the temperature is modeled by the standard self-similar profile:
+\begin{equation}
+T_{\text{foam}}(r, z, t) = T_s(t) \cdot \left( 1 - \frac{z}{z_F(r, t)} \right)^{\frac{1}{4+\alpha-\beta}}.
+\end{equation}
+In the wall region ($r > R_{\text{foam}}$), the lateral heat penetration is described by a horizontal Henyey-like profile with wall-specific opacity and equation-of-state exponents ($\alpha_{\text{wall}}$ and $\beta_{\text{wall}}$):
+\begin{equation}
+T_{\text{wall}}(r, z, t) = T_{\text{int}}(z, t) \cdot \left( 1 - \frac{r - R_{\text{foam}}}{\Delta r_p(z, t)} \right)^{\frac{1}{4+\alpha_{\text{wall}}-\beta_{\text{wall}}}},
+\end{equation}
+where $T_{\text{int}}(z, t)$ is the temperature at the foam-wall interface, and $\Delta r_p(z, t)$ is the shock or thermal wave penetration depth into the wall at depth $z$. This accounts for the physical boundary layer and ablation of the high-$Z$ wall material.
+
+\section{Implementation in the Codebase}
+
+The computation is implemented in a separate, modular Python script \texttt{radiation\_flux.py} to preserve clean separation from the core ODE solvers.
+
+\subsection{1D Flux Functions}
+\begin{itemize}
+    \item \texttt{henyey\_temperature\_array()}: Computes the vectorized spatial temperature profile over time using the Henyey-like self-similar exponent $\frac{1}{4+\alpha-\beta}$.
+    \item \texttt{detect\_arrival\_time()}: Finds the index and exact time $t_{\text{start}}$ when the wave front reaches the detector.
+    \item \texttt{compute\_flux\_at\_position()}: Performs the end-to-end calculations at a single spatial point, returning a dictionary with raw/normalized flux and temperature arrays.
+    \item \texttt{compute\_radiation\_flux\_datasets()}: High-level driver that manages calculations for all detector locations ($z = 0.5, 1.0, 1.5\text{ mm}$ by default) and packages them together.
+    \item \texttt{compute\_and\_plot\_radiation\_flux()}: Integrates directly with the wave-front dispatch system to run the simulation, execute the flux model, export the datasets to a CSV, and plot a 3-panel figure.
+\end{itemize}
+
+\subsection{2D Flux Curvature Functions}
+\begin{itemize}
+    \item \texttt{compute\_temperature\_cross\_section\_at\_z()}: Computes the radial temperature profile $T(r)$ at a fixed axial depth $z_{\text{det}}$ using the curved front $z_F(r)$ and the Henyey exponent.
+    \item \texttt{compute\_flux\_curvature\_at\_position()}: Wraps the temperature cross-section and applies $\Phi(r) = \sigma_{\text{SB}} \cdot T(r)^4$.
+    \item \texttt{compute\_flux\_curvature\_datasets()}: High-level driver that, for each requested time snapshot and each detector position, extracts the curved front from the Bessel data, computes the radial cross-section, and normalises all profiles by a single global peak factor.
+    \item \texttt{plot\_flux\_curvature()}: Multi-panel figure (rows = detector depths, columns = time snapshots) showing the normalised radial flux profile $\Phi(r)/\Phi_{\max}$ vs.\ radial position $r$. Also exports per-snapshot CSV files.
+    \item \texttt{compute\_and\_plot\_flux\_curvature()}: End-to-end convenience function that runs the Marshak solver, computes the 2D flux curvature, prints a summary table, plots, and exports.
+    \item \texttt{plot\_flux\_curvature\_post\_breakout()}: Plots the radial flux curvature at a fixed delay (e.g., $0.5\text{ ns}$) after the breakout time for multiple detector depths ($z = 0.25, 0.5, 0.75, 1.0\text{ mm}$ for $\text{Ta}_2\text{O}_5$) on a single graph, using global normalization to showcase physical attenuation. Features full symmetric coordinates, foam-wall interface markers, and comparison to experimental datasets.
+\end{itemize}
+
+\subsection{Standalone Execution}
+The script includes an interactive standalone block that allows the user to run it directly:
+\begin{verbatim}
+python radiation_flux.py
+\end{verbatim}
+This automatically detects the active material in \texttt{parameters.py}, runs the appropriate time sweep, and generates:
+\begin{enumerate}
+    \item \textbf{Console Output:} A clean summary table of arrival times, peak fluxes, and peak temperatures (1D), followed by a flux curvature summary table (2D).
+    \item \textbf{CSV Files:} 1D flux results written to \texttt{Data\_new/\{Experiment\}/\{Material\}/1.5 model/radiation\_flux/}, and 2D radial flux curvature profiles written to \texttt{Data\_new/\{Experiment\}/\{Material\}/1.5 model/flux\_curvature/}.
+    \item \textbf{Visual Plots:} A 3-panel PNG for the 1D flux (raw, normalised, temperature), and a multi-panel PNG for the 2D radial flux curvature, both saved under \texttt{Figures\_new/\{Experiment\}/\{Material\}/1.5 model/}.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{2D Flux Curvature: Radial Flux Profile at Detector Positions}
+
+\subsection{Motivation}
+The 1D framework described in Sections~1--3 treats each detector as a single spatial point and tracks the flux $\Phi(z, t)$ as a function of time only. In the cylindrical geometry of the experiment, however, the heat front is \emph{curved}: due to lateral energy losses to the confining wall, the front at the cylinder edge ($r = R$) lags behind the front at the axis ($r = 0$). Experimental diagnostics (e.g., in Back's experiments) measure a spatially-resolved radiation signal across the cylinder cross-section at each detector depth. The resulting radial profile of the flux, $\Phi(r, z_{\text{det}}, t)$, encodes the front curvature in a way that can be directly compared to experiment.
+
+To perform this comparison, we need to go beyond the 1D model and incorporate the radial structure of the curved front.
+
+\subsection{Curved Front from the Bessel Eigenmode}
+In the 2D cylindrical model, the heat front position varies radially according to the fundamental Bessel eigenmode:
+\begin{equation}
+z_F(r, t) = z_F(0, t) \cdot J_0(\kappa_0 \, r),
+\end{equation}
+where $\kappa_0$ is the fundamental eigenvalue determined by the wall albedo $a$ and the Rosseland mean free path $\lambda_R$:
+\begin{equation}
+\epsilon = \frac{3}{4} (1 - a) \frac{R}{\lambda_R},
+\end{equation}
+and $\kappa_0$ is the first root of the transcendental equation coupling $J_0$ and $J_1$ through $\epsilon$. The key observation is that the front at the wall ($r = R$) is retarded relative to the axis, producing the curved front shape.
+
+\subsection{Temperature Cross-Section at Detector Depth}
+At a fixed detector depth $z_{\text{det}}$ and a given time $t$, the temperature varies across the cylinder radius because the front position $z_F(r, t)$ differs at each radial location. Applying the Henyey self-similar profile radially:
+\begin{equation}
+\label{eq:T_radial}
+T(r, z_{\text{det}}, t) = 
+\begin{cases}
+T_s(t) \cdot \left( 1 - \dfrac{z_{\text{det}}}{z_F(r, t)} \right)^{\frac{1}{4+\alpha-\beta}}, & \text{if } z_{\text{det}} < z_F(r, t), \\[6pt]
+0, & \text{if } z_{\text{det}} \ge z_F(r, t).
+\end{cases}
+\end{equation}
+At radial positions where the front has not yet reached the detector depth (i.e., near the wall, where the front lags), the temperature is zero. At the axis, the front is furthest ahead, so the temperature is highest. This produces a radial temperature profile that reflects the front curvature.
+
+\subsection{Radial Flux Profile (Flux Curvature)}
+The radial radiation flux profile at the detector depth is then:
+\begin{equation}
+\Phi(r, z_{\text{det}}, t) = \sigma_{\text{SB}} \cdot \left[ T(r, z_{\text{det}}, t) \right]^4.
+\end{equation}
+Because the flux scales as $T^4$, the radial contrast is amplified compared to the temperature profile: the flux drops off more steeply toward the wall where the front is still approaching or has not yet arrived.
+
+This radial flux profile $\Phi(r)$ at each detector position and time snapshot is what we call the \emph{flux curvature}. It directly corresponds to the spatially-resolved radiation signal measured in experiments.
+
+\subsection{Normalisation}
+All radial flux profiles across all time snapshots and all detector positions are normalised by a single global peak factor:
+\begin{equation}
+\overline{\Phi}(r, z_{\text{det}}, t) = \frac{\Phi(r, z_{\text{det}}, t)}{\max_{r', z', t'} \, \Phi(r', z', t')}.
+\end{equation}
+This preserves the relative magnitudes across different depths and times, allowing meaningful comparison of how the curvature evolves.
+
+\subsection{Curvature Post-Breakout Comparison for $\text{Ta}_2\text{O}_5$}
+For high-density, thin-walled targets such as tantalum pentoxide ($\text{Ta}_2\text{O}_5$), tracking profiles at fixed global times fails to capture the spatial curvature at equivalent developmental stages across different depths. To overcome this, a specialized analysis is implemented that plots the radial flux profile at a fixed time delay $\Delta t_{\text{delay}} = 0.5\text{ ns}$ after the wave's breakout (arrival) time $t_{\text{br}}(z)$ at each respective detector depth $z$:
+\begin{equation}
+t_{\text{plot}}(z) = t_{\text{br}}(z) + \Delta t_{\text{delay}},
+\end{equation}
+where the arrival time $t_{\text{br}}(z)$ is dynamically determined via:
+\begin{equation}
+t_{\text{br}}(z) = \min \{ t \mid z_F(0, t) \ge z \}.
+\end{equation}
+
+By applying global normalization relative to the peak flux of the shallowest detector (e.g., $z = 0.25\text{ mm}$):
+\begin{equation}
+\overline{\Phi}_{\text{post-br}}(r, z, t_{\text{plot}}) = \frac{\Phi(r, z, t_{\text{plot}})}{\max_{r', z'} \Phi(r', z', t_{\text{plot}}(z'))},
+\end{equation}
+the profiles are stacked vertically on a single canvas, showing the progressive radial width and amplitude attenuation as the heat wave travels deeper. 
+
+Furthermore, to facilitate validation against experimental measurements, the system overlays normalized experimental datasets extracted from literature (such as the extracted $1.csv$, $2.csv$, and $3.csv$ profiles) symmetrically mapped around the axis of symmetry $r = 0$:
+\begin{equation}
+\overline{\Phi}_{\text{exp}}(r) = \frac{\Phi_{\text{exp}}(r)}{\Phi_{\text{exp}}(r \approx 0)},
+\end{equation}
+ensuring an exact shape-to-shape and magnitude comparison between the 2D Marshak ablation model and physical diagnostic outputs.
+
+\end{document}
