@@ -1,0 +1,162 @@
+COMPLETE SELF-SIMILAR 
+SOLUTION OF THE SUBSONIC 
+MARSHAK WAVE
+Tomer Shussman (Tel Aviv University, Soreq Nuclear Research Centre) 
+Shay I. Heizler (Bar-Ilan University, Nuclear Research Centre Negev)
+1
+---
+NIF website
+ICF: 
+Hohlraum temperature 
+prediction & measurement 
+Laser - Walls coupling analysis 
+Pulse shaping 
+[Lindl 1995], [Kauffman 1995], 
+Rosen 2005] 
+EOS Experiments at a varying 
+pressure profile [Thomas 2006]
+MOTIVATION
+Lindl 1995
+2
+---
+THE MECHANISM
+We consider a semi-infinite wall, 
+heated to high temperature at 
+the boundary. 
+The wall heats via photon 
+transport. 
+In the optically thick limit, a 
+sharp temperature front arises. 
+If the heat front is slower than 
+the speed of sound, a shock 
+region propagates ahead of the 
+ablation region.
+3
+---
+PREVIOUS WORKS
+[R. E. Marshak  
+1958] - First description and super-sonic solutions. 
+[R. Pakula & R. Sigel 1985] - Self-Similar solutions of the ablation 
+region. 
+[J.H Hammer & M.D. Rosen 2003] - New solutions based on a 
+perturbation theory 
+[J. Garnier et. al. 2006] - Solved the heat and the shock, for a 
+specific boundary condition. 
+None of the works above provided a full solution for both regions.
+4
+---
+OUR WORK - OVERVIEW
+The idea: Solve each region separately and find a way 
+to patch the solutions. 
+For each region, we neglect one of the dimensional 
+parameters, to make the problem self-similar. 
+The heat front will serve as the boundary condition 
+for the shock.
+5
+---
+ASSUMPTIONS
+Boundary Condition: 
+Opacity: 
+Heat Capacity: 
+Equation of State: 
+Initial Density:
+6
+T(t)=T0tτ1/κR=gTαρ−λe=fTβρ−µP=rρe≡(γ−1)ρeρ0
+---
+STATEMENT OF THE 
+PROBLEM
+The hydro-radiation equations: 
+The energy equation becomes:
+7
+∂V∂t=∂u∂m∂u∂t=−∂P∂m∂e∂t+P∂V∂t=∂∂m(c3κR∂(aT4)∂m)1r∂PV∂t+P∂V∂t=B∂∂m(Vλ∂∂m(PV1−µ)4+αβ)B=16σ3(4+α)g(rf)−4+αβ
+---
+THE ABLATION REGION
+The problem is characterised by four dimensional 
+parameters: 
+For most the ablation region, the density is much 
+lower than     . 
+We assume the density diverges at the front.
+8
+B,T0,ρ0(V0),tρ0
+---
+THE ABLATION REGION
+X=!XBwX1T0wX2twX3
+9
+---
+THE SELF SIMILAR 
+EQUATION
+We obtain a dimensionless system of ordinary 
+differential equations. 
+The boundary conditions are: 
+For each value of       a unique solution exists. 
+The true value is determined from the condition 
+10
+!V(ξF)=0,∂!V∂ξ|ξF=0!P(0)=0,∂!P∂ξξ→0⎯→⎯⎯∞!u(ξF)=0ξF!T(0)=1
+---
+RESULTS
+For 
+constant
+ T: 
+Similar relations can be obtained 
+for different boundary conditions: 
+Constant Net-Flux 
+Constant Pressure 
+P will be used as the shock 
+boundary condition.
+mF=10.17⋅10−4T01.91t0.52[gcm2]E=0.59T03.35t0.59[hJmm2]PF=2.71T02.63t−0.45Mbar
+11
+---
+THE SHOCK REGION
+This time, we use the boundary condition: 
+With strong shock boundary conditions at the front: 
+We neglect B (no flux at the shock region). 
+We note that the EOS could (and should) be different:
+12
+P(t)=P0tτS
+D−uVs=DV0PS=DuSV0PsusV0=D(eS+us22)r≠r'
+---
+THE SELF SIMILAR 
+EQUATION
+For the boundary condition  
+And the corresponding shock condition P0=2.71MbarτS=−0.45
+T0=100eV,τ=0
+---
+FULL SOLUTION
+14
+---
+COMPARISON TO 
+NUMERICAL SIMULATIONS
+15
+---
+COMPARISON TO 
+NUMERICAL SIMULATIONS
+16
+---
+COMPARISON TO 
+NUMERICAL SIMULATIONS
+17
+---
+PIECEWISE EOS 
+CALCULATION
+18
+---
+PIECEWISE EOS 
+CALCULATION
+
+---
+PIECEWISE EOS 
+CALCULATION
+20
+---
+SUMMARY
+We provide a full solution to the subsonic heat wave for the 
+general boundary power law condition. 
+We solve the ablation region and shock region separately, 
+and patch them using the right boundary conditions. 
+The solutions allow for better planning of laser-plasma 
+interaction experiments, and better understanding of 
+ablation-driven shock waves. 
+Details in Phys. Plasmas 
+22
+, 082109 (2015)
+21
