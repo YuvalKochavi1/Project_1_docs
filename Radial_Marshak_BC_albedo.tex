@@ -1,0 +1,410 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyhead[LO,L]{Tal Ramot}
+\fancyhead[CO,C]{Radial Marshak BC at the Foam--Wall Interface}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Ts}{T_s}
+\newcommand{\Taxis}{T_{\mathrm{axis}}}
+\newcommand{\Tint}{T_{\mathrm{int}}}
+\newcommand{\Rcm}{R}
+\newcommand{\xF}{x_F}
+\newcommand{\sSB}{\sigma_{\mathrm{SB}}}
+\newcommand{\lR}{\lambda_R}
+\newcommand{\lext}{\ell_{\mathrm{ext}}}
+\newcommand{\alphaW}{\alpha_w}
+\newcommand{\Ew}{\dot{E}_w}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\section{Motivation}
+
+In the current 2D cylindrical model, the radiation temperature field inside the
+foam is decomposed into an axial Marshak wave solution and a radial eigenfunction.
+The radial profile satisfies a diffusion eigenvalue problem with an effective
+boundary condition at the foam--wall interface $r = \Rcm$.
+
+The existing approach computes the wall albedo $\alphaW$ from the wall energy
+loss parameterization and feeds it into the eigenvalue equation as a parameter.
+However, $\alphaW$ itself depends on the interface temperature $\Tint$, which
+in turn depends on the radial profile and hence on $\alphaW$---creating a
+circular dependency.
+
+Here we propose a \textbf{self-consistent} formulation: apply a proper Marshak
+boundary condition at the radial interface $r = \Rcm$ using the known
+temperature profile from $r = 0$ to $r = \Rcm$. This yields a Robin boundary
+condition that simultaneously determines the radial eigenvalue $\kappa_0$,
+the interface temperature $\Tint$, and the albedo $\alphaW$.
+
+
+\section{Setup: Radial Temperature Profile}
+
+\subsection{Radiation diffusion in cylindrical geometry}
+
+Consider a cylindrical foam of radius $\Rcm$, with a radiation temperature
+field $T(r, z, t)$. At a fixed axial position $z$ and time $t$, the radiation
+energy density in the diffusion approximation satisfies:
+\begin{equation}
+    \frac{1}{r}\pder{}{r}\left(r\, D(r)\,\pder{U}{r}\right) = S(r)
+    \label{eq:radial_diffusion}
+\end{equation}
+where $U = a T^4$ is the radiation energy density and $D = c/(3\kappa_R)$ is
+the diffusion coefficient with $\kappa_R = 1/\lR$ the Rosseland mean opacity.
+
+\subsection{Separation of variables}
+
+We separate the radial dependence by writing:
+\begin{equation}
+    U(r, z, t) = U_0(z, t) \cdot \Phi(r)
+    \label{eq:U_separation}
+\end{equation}
+where $U_0(z,t)$ is the on-axis ($r=0$) radiation energy density. The radial
+eigenfunction $\Phi(r)$ satisfies:
+\begin{equation}
+    \frac{1}{r}\frac{d}{dr}\left(r\,\frac{d\Phi}{dr}\right) + \kappa_0^2\,\Phi = 0
+    \label{eq:bessel_ode}
+\end{equation}
+with $\Phi(0) = 1$ (normalization) and $\Phi'(0) = 0$ (symmetry). The general
+solution regular at $r = 0$ is:
+\begin{equation}
+    \boxed{\Phi(r) = J_0(\kappa_0\, r)}
+    \label{eq:bessel_solution}
+\end{equation}
+where $J_0$ is the Bessel function of the first kind and $\kappa_0$ is the
+radial eigenvalue, to be determined by the boundary condition at $r = \Rcm$.
+
+
+\section{The Radial Marshak Boundary Condition}
+
+\subsection{Half-range fluxes at the interface}
+
+At the foam--wall interface $r = \Rcm$, we decompose the radiation field
+into outgoing (foam $\to$ wall) and incoming (wall $\to$ foam) half-range
+fluxes. In the $P_1$ (diffusion) approximation:
+\begin{align}
+    J^+(R) &= \frac{c}{4}\,U(R) + \frac{1}{2}\,F_{\mathrm{net}}(R)
+    \qquad \text{(outgoing: foam $\to$ wall)}
+    \label{eq:J_plus} \\[6pt]
+    J^-(R) &= \frac{c}{4}\,U(R) - \frac{1}{2}\,F_{\mathrm{net}}(R)
+    \qquad \text{(incoming: wall $\to$ foam)}
+    \label{eq:J_minus}
+\end{align}
+where the net diffusive flux (positive outward) at the surface is:
+\begin{equation}
+    F_{\mathrm{net}}(R) = -D\,\pder{U}{r}\bigg|_{r=R}
+    = -\frac{c}{3\kappa_R}\,\pder{U}{r}\bigg|_{r=R}
+    \label{eq:F_net}
+\end{equation}
+
+Since $T$ decreases radially ($\partial U / \partial r < 0$), we have
+$F_{\mathrm{net}}(R) > 0$: net energy flows outward into the wall.
+
+\subsection{Wall reflection condition}
+
+The wall absorbs a fraction $(1 - \alphaW)$ of the incident flux and reflects
+(re-emits) a fraction $\alphaW$:
+\begin{equation}
+    J^-(R) = \alphaW\,J^+(R)
+    \label{eq:wall_reflection}
+\end{equation}
+
+\subsection{Combining the conditions}
+
+Substituting Eqs.~\eqref{eq:J_plus}--\eqref{eq:J_minus} into
+\eqref{eq:wall_reflection}:
+\begin{equation}
+    \frac{c}{4}\,U(R) - \frac{1}{2}\,F_{\mathrm{net}}(R)
+    \;=\; \alphaW\left[\frac{c}{4}\,U(R) + \frac{1}{2}\,F_{\mathrm{net}}(R)\right]
+    \label{eq:combined_BC}
+\end{equation}
+
+Rearranging:
+\begin{equation}
+    \frac{c}{4}\,U(R)\,(1 - \alphaW)
+    \;=\; \frac{1}{2}\,F_{\mathrm{net}}(R)\,(1 + \alphaW)
+\end{equation}
+
+\begin{equation}
+    \boxed{U(R) = \frac{2(1 + \alphaW)}{c\,(1 - \alphaW)}\;F_{\mathrm{net}}(R)}
+    \label{eq:robin_energy}
+\end{equation}
+
+Substituting $F_{\mathrm{net}} = -\frac{c}{3\kappa_R}\frac{\partial U}{\partial r}\big|_R$:
+\begin{equation}
+    U(R) = -\frac{2(1 + \alphaW)}{3\kappa_R\,(1 - \alphaW)}\;\pder{U}{r}\bigg|_{r=R}
+    \label{eq:robin_U}
+\end{equation}
+
+This is a \textbf{Robin (mixed) boundary condition}. Defining the
+\emph{extrapolation length}:
+\begin{equation}
+    \boxed{\lext = \frac{2(1 + \alphaW)}{3\kappa_R\,(1 - \alphaW)}}
+    \label{eq:ell_ext}
+\end{equation}
+the boundary condition becomes:
+\begin{equation}
+    \Phi(R) = -\lext\;\Phi'(R)
+    \label{eq:robin_phi}
+\end{equation}
+
+
+\section{Modified Eigenvalue Equation}
+
+\subsection{Substituting the Bessel solution}
+
+With $\Phi(r) = J_0(\kappa_0 r)$ and $\Phi'(r) = -\kappa_0 J_1(\kappa_0 r)$,
+the Robin BC \eqref{eq:robin_phi} becomes:
+\begin{equation}
+    J_0(\kappa_0 R) = \lext\,\kappa_0\,J_1(\kappa_0 R)
+\end{equation}
+
+Substituting $\lext$ from \eqref{eq:ell_ext}:
+\begin{equation}
+    \boxed{J_0(\kappa_0 R) = \frac{2(1 + \alphaW)}{3\kappa_R\,(1 - \alphaW)}
+    \;\kappa_0\;J_1(\kappa_0 R)}
+    \label{eq:eigenvalue_full}
+\end{equation}
+
+Defining the dimensionless variable $x = \kappa_0 R$:
+\begin{equation}
+    J_0(x) = \frac{2(1 + \alphaW)}{3\kappa_R R\,(1 - \alphaW)}\;x\;J_1(x)
+    \label{eq:eigenvalue_x}
+\end{equation}
+
+\subsection{Connection to the existing eigenvalue equation}
+
+The existing code in \texttt{eigen\_bessel\_solver.py} solves:
+\begin{equation}
+    x\,J_1(x) = \varepsilon\,J_0(x)
+    \label{eq:existing_eigen}
+\end{equation}
+with:
+\begin{equation}
+    \varepsilon = \frac{3}{4}\,(1 - \alphaW)\,\frac{\Rcm}{\lR}
+    = \frac{3}{4}\,(1 - \alphaW)\,\kappa_R\,\Rcm
+    \label{eq:existing_epsilon}
+\end{equation}
+
+Rewriting \eqref{eq:eigenvalue_x}:
+\begin{equation}
+    x\,J_1(x) = \frac{3\kappa_R R\,(1 - \alphaW)}{2(1 + \alphaW)}\;J_0(x)
+\end{equation}
+
+So the eigenvalue equation is equivalent to \eqref{eq:existing_eigen} with
+$\varepsilon$ \emph{redefined} as:
+\begin{equation}
+    \boxed{\varepsilon_{\mathrm{new}} = \frac{3\kappa_R R\,(1 - \alphaW)}{2(1 + \alphaW)}
+    = \frac{3}{2}\,\frac{1 - \alphaW}{1 + \alphaW}\,\frac{R}{\lR}}
+    \label{eq:epsilon_new}
+\end{equation}
+
+\textbf{Comparison with the current formula:}
+\begin{align}
+    \varepsilon_{\mathrm{current}} &= \frac{3}{4}\,(1 - \alphaW)\,\frac{R}{\lR}
+    \label{eq:eps_current} \\[6pt]
+    \varepsilon_{\mathrm{new}} &= \frac{3}{2}\,\frac{1 - \alphaW}{1 + \alphaW}\,\frac{R}{\lR}
+    \label{eq:eps_new}
+\end{align}
+
+For high albedo ($\alphaW \to 1$), both $\varepsilon \to 0$, giving $\kappa_0 \to 0$
+and a flat radial profile (no lateral losses). For $\alphaW = 0$ (perfect absorber):
+\begin{equation}
+    \varepsilon_{\mathrm{current}}\big|_{\alphaW=0} = \frac{3}{4}\,\frac{R}{\lR}
+    \qquad\text{vs.}\qquad
+    \varepsilon_{\mathrm{new}}\big|_{\alphaW=0} = \frac{3}{2}\,\frac{R}{\lR}
+\end{equation}
+The new formula gives $2\times$ larger $\varepsilon$ for $\alphaW = 0$, which is the
+correct Marshak extrapolation length $\lext = 2/(3\kappa_R)$.
+
+
+\section{Limiting Behaviour}
+
+\begin{itemize}
+    \item \textbf{Perfect reflector ($\alphaW = 1$):} $\lext \to \infty$, so
+    $\varepsilon \to 0$. The eigenvalue $\kappa_0 \to 0$, giving $\Phi(r) = J_0(0) = 1$
+    everywhere---a flat radial profile. The wall reflects all incident radiation,
+    so there is no radial loss. \checkmark
+
+    \item \textbf{Perfect absorber ($\alphaW = 0$):} $\lext = 2/(3\kappa_R)$,
+    recovering the standard Marshak extrapolation length for a vacuum boundary.
+
+    \item \textbf{Optically thick foam ($\kappa_R R \gg 1$):} $\varepsilon \gg 1$
+    and $\kappa_0 R \to j_{0,1} \approx 2.4048$ (the first zero of $J_0$), recovering
+    the Dirichlet condition $\Phi(R) = 0$.
+
+    \item \textbf{Optically thin foam ($\kappa_R R \ll 1$):} $\varepsilon \ll 1$
+    and $\kappa_0 R \ll 1$, giving an approximately flat profile with a small
+    correction $\Phi(r) \approx 1 - \kappa_0^2 r^2/4$.
+\end{itemize}
+
+
+\section{Self-Consistent Interface Temperature}
+
+\subsection{The key idea}
+
+Once the eigenvalue $\kappa_0$ is determined from \eqref{eq:eigenvalue_full},
+the interface temperature follows directly from the radial profile:
+\begin{equation}
+    \boxed{T_{\mathrm{int}}^4 = T_{\mathrm{axis}}^4 \cdot J_0(\kappa_0 R)}
+    \label{eq:T_interface}
+\end{equation}
+where $T_{\mathrm{axis}} = T_{\mathrm{axis}}(z,t)$ is the on-axis temperature from
+the 1D Marshak march.
+
+\subsection{Self-consistent albedo from the radial flux}
+
+The net outward radiation flux at the interface is:
+\begin{align}
+    F_{\mathrm{net}}(R) &= -\frac{c}{3\kappa_R}\;\pder{(aT^4)}{r}\bigg|_{r=R}
+    \nonumber \\
+    &= \frac{c\,a}{3\kappa_R}\;\kappa_0\;T_{\mathrm{axis}}^4\;J_1(\kappa_0 R)
+    \label{eq:F_at_R}
+\end{align}
+
+The power absorbed by the wall per unit axial length at position $z$ is:
+\begin{equation}
+    \dot{E}_w(z) = 2\pi R\,(1 - \alphaW)\;J^+(R)
+    = 2\pi R\,\left[\frac{c}{4}\,a\,T_{\mathrm{int}}^4
+    + \frac{1}{2}\,F_{\mathrm{net}}(R)\right](1 - \alphaW)
+    \label{eq:Ew_from_flux}
+\end{equation}
+
+\textbf{Alternatively}, one can compute the absorbed flux purely from the
+foam-side quantities, without needing the wall loss parameterization:
+\begin{equation}
+    \Ew = (1 - \alphaW)\;J^+(R) = J^+(R) - J^-(R) = F_{\mathrm{net}}(R)
+    \label{eq:Ew_equals_Fnet}
+\end{equation}
+\textbf{This is a key result}: the net radial flux at the interface equals the
+wall energy absorption rate per unit area. Since we can compute $F_{\mathrm{net}}(R)$
+from the known Bessel profile, we can bypass the wall loss parameterization
+$E_w(T_0, t)$ entirely for the albedo calculation.
+
+\subsection{Self-consistency loop}
+
+The procedure is:
+\begin{enumerate}
+    \item \textbf{Start} with an initial guess for $\alphaW$ (e.g., from the
+    previous timestep, or from the wall loss parameterization).
+
+    \item \textbf{Compute} $\varepsilon_{\mathrm{new}}$ from
+    Eq.~\eqref{eq:epsilon_new} using the current $\alphaW$, $\kappa_R$, and $R$.
+
+    \item \textbf{Solve} the eigenvalue equation \eqref{eq:existing_eigen}
+    for $\kappa_0$ (already implemented in \texttt{eigen\_bessel\_solver.py}).
+
+    \item \textbf{Extract} the interface temperature from
+    Eq.~\eqref{eq:T_interface}: $T_{\mathrm{int}} = T_{\mathrm{axis}}\,[J_0(\kappa_0 R)]^{1/4}$.
+
+    \item \textbf{Compute} the wall energy loss $\Ew$ using the wall loss
+    parameterization evaluated at $T_{\mathrm{int}}$:
+    \begin{equation}
+        \Ew(z,t) = \frac{dE_w}{dt}\bigg|_{T_0 = T_{\mathrm{int}},\; t_{\mathrm{exp}}}
+    \end{equation}
+    (e.g., $E_w^{\mathrm{Au}} = 0.59\,T_0^{3.35}\,t_{\mathrm{ns}}^{0.59}$
+    differentiated with respect to $t$).
+
+    \item \textbf{Update} the albedo using the Rosen formula:
+    \begin{equation}
+        \alphaW^{\mathrm{new}} = 1 - \frac{\Ew}{\sSB\,T_{\mathrm{int}}^4}
+        \label{eq:albedo_update}
+    \end{equation}
+
+    \item \textbf{Iterate} steps 2--6 until $|\alphaW^{\mathrm{new}} - \alphaW^{\mathrm{old}}| < \delta$
+    (typically 2--3 iterations suffice).
+\end{enumerate}
+
+
+\section{Physical Interpretation}
+
+\subsection{Why this is better}
+
+The current approach has a conceptual issue: the albedo $\alphaW$ is computed
+from the 1D surface temperature $\Ts$ (the Marshak march solution), but this
+temperature corresponds to the \emph{on-axis} value at $r = 0$. The actual
+temperature at the foam--wall interface is lower due to the radial profile:
+\begin{equation}
+    T_{\mathrm{int}} = T_{\mathrm{axis}}\cdot[J_0(\kappa_0 R)]^{1/4} < T_{\mathrm{axis}}
+\end{equation}
+
+Since the wall loss scales as a high power of temperature
+($\Ew \propto T^{3.35}$ for gold), using $T_{\mathrm{axis}}$ instead of
+$T_{\mathrm{int}}$ \textbf{overestimates} the wall energy loss, which in turn
+\textbf{underestimates} the albedo.
+
+The self-consistent approach corrects this by:
+\begin{enumerate}
+    \item Using the physically correct interface temperature.
+    \item Coupling the albedo and radial profile consistently through the
+    Robin BC.
+    \item Naturally recovering the correct limiting behaviours (perfect
+    reflector/absorber, optically thick/thin).
+\end{enumerate}
+
+\subsection{Geometric picture: extrapolated endpoint}
+
+The Robin BC \eqref{eq:robin_phi} is equivalent to saying that the
+eigenfunction $\Phi(r) = J_0(\kappa_0 r)$ extrapolates to zero not at $r = R$
+but at an \emph{effective radius}:
+\begin{equation}
+    R_{\mathrm{eff}} = R + \lext
+    = R + \frac{2(1 + \alphaW)}{3\kappa_R(1 - \alphaW)}
+\end{equation}
+
+\begin{itemize}
+    \item For $\alphaW = 0$: $R_{\mathrm{eff}} = R + \frac{2}{3\kappa_R}$
+    (standard diffusion extrapolation length).
+    \item For $\alphaW \to 1$: $R_{\mathrm{eff}} \to \infty$
+    (flat profile, no effective boundary).
+\end{itemize}
+
+This is the cylindrical analogue of the classical ``extrapolated endpoint''
+in planar slab diffusion theory.
+
+
+\section{Summary of Key Equations}
+
+\begin{enumerate}
+    \item \textbf{Radial profile:} $T^4(r,z,t) = T_{\mathrm{axis}}^4(z,t)\cdot J_0(\kappa_0 r)$
+
+    \item \textbf{Eigenvalue equation (unchanged form):}
+    \begin{equation*}
+        x\,J_1(x) = \varepsilon\,J_0(x), \qquad x = \kappa_0 R
+    \end{equation*}
+
+    \item \textbf{Modified $\varepsilon$ from the radial Marshak BC:}
+    \begin{equation*}
+        \varepsilon = \frac{3}{2}\,\frac{1 - \alphaW}{1 + \alphaW}\,\frac{R}{\lR}
+    \end{equation*}
+
+    \item \textbf{Interface temperature:}
+    \begin{equation*}
+        T_{\mathrm{int}} = T_{\mathrm{axis}}\cdot\left[J_0(\kappa_0 R)\right]^{1/4}
+    \end{equation*}
+
+    \item \textbf{Self-consistent albedo (Rosen formula):}
+    \begin{equation*}
+        \alphaW = 1 - \frac{\Ew(T_{\mathrm{int}},\,t_{\mathrm{exp}})}
+        {\sSB\,T_{\mathrm{int}}^4}
+    \end{equation*}
+\end{enumerate}
+
+\end{document}

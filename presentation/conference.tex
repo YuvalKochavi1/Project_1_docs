@@ -320,6 +320,38 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}{Comparison to many experiments}
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+            \centering
+                \includegraphics[width=0.78\textwidth]{figures_1.5model/C8H7Cl.png}
+
+            {\scriptsize \textit{Moore at el. JQSRT, (2015)}}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+                \includegraphics[width=0.78\textwidth]{figures_1.5model/Ta2O5.png}
+
+            {\scriptsize \textit{Back at el. POP, (2000)}}
+        \end{column}
+    \end{columns}
+    \vspace{0.1cm}
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+            \centering
+                \includegraphics[width=0.78\textwidth]{figures_1.5model/SiO2_low_energy.png}
+
+            {\scriptsize \textit{Back at el. PRL, (2000)}}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+                \includegraphics[width=0.78\textwidth]{figures_1.5model/Ji-Yan.png}
+
+            {\scriptsize \textit{Ji-Yan at el. CPB, (2010)}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \section{Full 2D model}
 \subsection{Modeling the front curvature}
 \begin{frame}
@@ -378,7 +410,7 @@
         \begin{column}{0.55\textwidth}
             Until now, wall albedo was treated as a constant parameter. We update it dynamically in time:
             \begin{equation*}
-                \alpha(t) = \frac{F_{\text{out, wall}}}{F_{\text{in,wall}}} = \frac{\sigma_{SB}T_{s,interface}^4 - \frac{dE_{\text{wall}}}{dt}}{\sigma_{SB}T_{s,interface}^4}
+                \alpha(t) = \frac{F_{\text{out, wall}}}{F_{\text{in,wall}}} = \frac{\sigma_{SB}T_{s,interface}^4 - \frac{dE_{\text{wall}}}{dt}/2}{\sigma_{SB}T_{s,interface}^4+\frac{dE_{\text{wall}}}{dt}/2}
             \end{equation*}
             This provides a much more physical description of the energy reflection.
             
@@ -432,40 +464,35 @@
 \begin{frame}{Gold coating - SiO2}
     \begin{figure}
         \centering
-        % \includegraphics[width=0.8\textwidth]{figures_intreduction/gold_coating_sio2.png}
-        \vspace{5cm} % Large placeholder for the image
+            \includegraphics[width=0.8\textwidth]{2D_model/front_surface_gold.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}{100 times transparenter Gold coating - SiO2}
     \begin{figure}
         \centering
-        % \includegraphics[width=0.8\textwidth]{figures_intreduction/100_times_transparenter_gold_coating_sio2.png}
-        \vspace{5cm} % Large placeholder for the image
+        \includegraphics[width=0.8\textwidth]{2D_model/front_surface_gold100.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}{Copper - SiO2}
     \begin{figure}
         \centering
-        % \includegraphics[width=0.8\textwidth]{figures_intreduction/copper_sio2.png}
-        \vspace{5cm} % Large placeholder for the image
+        \includegraphics[width=0.8\textwidth]{2D_model/front_surface_copper.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}{Be - SiO2}
     \begin{figure}
         \centering
-        % \includegraphics[width=0.8\textwidth]{figures_intreduction/be_sio2.png}
-        \vspace{5cm} % Large placeholder for the image
+        \includegraphics[width=0.8\textwidth]{2D_model/front_surface_be.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}{Vacuum - SiO2}
     \begin{figure}
         \centering
-        % \includegraphics[width=0.8\textwidth]{figures_intreduction/vacuum_sio2.png}
-        \vspace{5cm} % Large placeholder for the image
+        \includegraphics[width=0.8\textwidth]{2D_model/front_surface_vacuum.png}
     \end{figure}
 \end{frame}
 
@@ -487,39 +514,61 @@
         T(z,r,t) \approx T_S(t) \left[ 1 - \frac{z}{z_F(r,t)} \right]^{\frac{1}{4+\alpha-\beta}}
     \end{equation*}
 
-    \vspace{0.5cm}
-    \begin{figure}
-        \centering
-        % \includegraphics[width=0.8\textwidth]{figures_intreduction/your_image.png}
-        \vspace{4cm} % Large placeholder for the image
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Comparing to experiments}
+    \vspace{0.3cm}
     \begin{columns}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.3\textwidth}
             \centering
-            % \includegraphics[width=0.9\textwidth]{image1.png}
-            \vspace{2.5cm} % Placeholder for image 1
+            \includegraphics[width=\textwidth]{2D_model/2D_front_spatial.png} \\
+            \vspace{0.1cm}
         \end{column}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.12\textwidth}
             \centering
-            % \includegraphics[width=0.9\textwidth]{image2.png}
-            \vspace{2.5cm} % Placeholder for image 2
+            \Huge $\Rightarrow$
+        \end{column}
+        \begin{column}{0.35\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{2D_model/temperature_heatmap_2D(gold wall loss).png} \\
+            \vspace{0.1cm}
         \end{column}
     \end{columns}
-    
-    \vspace{0.5cm}
+\end{frame}
+
+\begin{frame}{Flux Curvature Comparison - Back SiO2 PRL}
     \begin{columns}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.37\textwidth}
             \centering
-            % \includegraphics[width=0.9\textwidth]{image3.png}
-            \vspace{2.5cm} % Placeholder for image 3
+            \includegraphics[width=\textwidth]{2D_model/prl_T4.png} \\
+            \vspace{0.2cm}
+            \includegraphics[width=0.9\textwidth]{2D_model/prl.png}
+            {\scriptsize \textit{Back at el. POP, (2000)}}
         \end{column}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.1\textwidth}
             \centering
-            % \includegraphics[width=0.9\textwidth]{image4.png}
-            \vspace{2.5cm} % Placeholder for image 4
+            \Huge $\Rightarrow$
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{2D_model/back_prl_curve.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Flux Curvature Comparison - Back Ta2O5 POP}
+    \begin{columns}
+        \begin{column}{0.37\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{2D_model/T4_spatial_heatmap_2.0ns.png} \\
+            \vspace{0.2cm}
+            \includegraphics[width=0.9\textwidth]{2D_model/Ta2O5_intensity.png}
+            {\scriptsize \textit{Back at el. POP, (2000)}}
+        \end{column}
+        \begin{column}{0.1\textwidth}
+            \centering
+            \Huge $\Rightarrow$
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{2D_model/flux_curvature_post_breakout_0.5ns.png}
         \end{column}
     \end{columns}
 \end{frame}

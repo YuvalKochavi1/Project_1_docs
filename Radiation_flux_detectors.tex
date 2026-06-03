@@ -100,6 +100,7 @@ The computation is implemented in a separate, modular Python script \texttt{radi
     \item \texttt{plot\_flux\_curvature()}: Multi-panel figure (rows = detector depths, columns = time snapshots) showing the normalised radial flux profile $\Phi(r)/\Phi_{\max}$ vs.\ radial position $r$. Also exports per-snapshot CSV files.
     \item \texttt{compute\_and\_plot\_flux\_curvature()}: End-to-end convenience function that runs the Marshak solver, computes the 2D flux curvature, prints a summary table, plots, and exports.
     \item \texttt{plot\_flux\_curvature\_post\_breakout()}: Plots the radial flux curvature at a fixed delay (e.g., $0.5\text{ ns}$) after the breakout time for multiple detector depths ($z = 0.25, 0.5, 0.75, 1.0\text{ mm}$ for $\text{Ta}_2\text{O}_5$) on a single graph, using global normalization to showcase physical attenuation. Features full symmetric coordinates, foam-wall interface markers, and comparison to experimental datasets.
+    \item \texttt{compute\_and\_plot\_T4\_heatmap()}: Computes and plots a 2D space-time heatmap of $T^4(r, t)$ at a fixed detector depth (default $1.0\text{ mm}$), showing the symmetric radial progression of the radiation wave over time.
 \end{itemize}
 
 \subsection{Standalone Execution}
@@ -111,7 +112,7 @@ This automatically detects the active material in \texttt{parameters.py}, runs t
 \begin{enumerate}
     \item \textbf{Console Output:} A clean summary table of arrival times, peak fluxes, and peak temperatures (1D), followed by a flux curvature summary table (2D).
     \item \textbf{CSV Files:} 1D flux results written to \texttt{Data\_new/\{Experiment\}/\{Material\}/1.5 model/radiation\_flux/}, and 2D radial flux curvature profiles written to \texttt{Data\_new/\{Experiment\}/\{Material\}/1.5 model/flux\_curvature/}.
-    \item \textbf{Visual Plots:} A 3-panel PNG for the 1D flux (raw, normalised, temperature), and a multi-panel PNG for the 2D radial flux curvature, both saved under \texttt{Figures\_new/\{Experiment\}/\{Material\}/1.5 model/}.
+    \item \textbf{Visual Plots:} A 3-panel PNG for the 1D flux (raw, normalised, temperature), a multi-panel PNG for the 2D radial flux curvature, and a 2D space-time heatmap of $T^4$ at $1.0\text{ mm}$, all saved under \texttt{Figures\_new/\{Experiment\}/\{Material\}/1.5 model/}.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
