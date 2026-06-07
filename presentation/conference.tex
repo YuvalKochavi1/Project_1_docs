@@ -230,7 +230,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Slowing the Front: Marshak Boundary Condition}
+\begin{frame}{Marshak Boundary Condition: $T_D \neq T_s$}
     Applying the Marshak boundary condition slows the propagation front significantly:
     
     \vspace{0.2cm}
@@ -264,7 +264,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Effect of Wall Losses}
+\begin{frame}{Energy Wall Loss}
     Including wall loss reduces the front velocity:
     
     \vspace{0.2cm}
@@ -283,7 +283,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Effect of Wall Ablation}
+\begin{frame}{Wall Ablation}
     Inward wall ablation compressively densifies the foam, which significantly slows down propagation:
     
     \vspace{0.2cm}
@@ -310,7 +310,7 @@
     where $n$ controls the "tightness" of the transition.
 \end{frame}
 
-\begin{frame}{Effective Mean Free Path Results}
+\begin{frame}{Effective Mean Free Path}
     Including the effective mean free path correction matches the simulation to the experimental data at early times:
     
     \vspace{0.2cm}
@@ -365,7 +365,7 @@
     \vfill
 \end{frame}
 
-\begin{frame}{Hurricane \& Hammer: understanding the front curvature}
+\begin{frame}{Understanding the front curvature}
     Hurricane \& Hammer (2006) solved the laplace equation (assumed constant opacity and neglected $e$):
     \begin{equation*}
         \underbrace{\frac{\partial e}{\partial t}}_{\to 0} = \frac{4}{3} \nabla \cdot \left( \frac{1}{ \rho \kappa} \nabla (T^4) \right)
@@ -529,6 +529,70 @@
             \centering
             \includegraphics[width=\textwidth]{2D_model/temperature_heatmap_2D(gold wall loss).png} \\
             \vspace{0.1cm}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temperature Distribution — Moore ($\mathrm{C}_8\mathrm{H}_7\mathrm{Cl}$)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 3.72$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: Diffusion simulation taken from \textit{Moore at el. JQSRT, (2015)}.
+                    \item \textbf{Right}: Our full 2D analytical model.
+                \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.9\textheight]{2D_model/moore_simulation.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temp. Distribution — Back SiO2 ($1.0$ ns)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 1.0$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: Implicit Monte Carlo (IMC) simulation of \textit{Back et al. POP, (2000)} experiment.
+                    \item \textbf{Right}: Our full 2D analytical model with $\lambda_{\text{eff}} = 1.5$ correction.
+                \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.55\textheight]{2D_model/back_1ns.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temp. Distribution — Back SiO2 ($2.0$ ns)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 2.0$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: Implicit Monte Carlo (IMC) simulation of \textit{Back et al. POP, (2000)} experiment.
+                    \item \textbf{Right}: Our full 2D analytical model with $\lambda_{\text{eff}} = 1.5$ correction.
+                \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.5\textheight]{2D_model/back_2ns.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temp. Distribution — Back SiO2 ($2.5$ ns)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 2.5$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: Implicit Monte Carlo (IMC) simulation of \textit{Back et al. POP, (2000)} experiment.
+                    \item \textbf{Right}: Our full 2D analytical model with $\lambda_{\text{eff}} = 1.5$ correction.
+                \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.53\textheight]{2D_model/back_2.5ns.png}
         \end{column}
     \end{columns}
 \end{frame}
