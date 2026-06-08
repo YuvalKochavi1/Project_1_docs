@@ -6,5 +6,5 @@
 \beamer@sectionintoc {4}{Full 2D model}{24}{0}{4}
 \beamer@subsectionintoc {4}{1}{Modeling the front curvature}{24}{0}{4}
 \beamer@subsectionintoc {4}{2}{Comparing to 2D supersonic diffusion simulation}{30}{0}{4}
-\beamer@subsectionintoc {4}{3}{A full 2D Temperature distribution}{36}{0}{4}
-\beamer@sectionintoc {5}{Conclusion}{44}{0}{5}
+\beamer@subsectionintoc {4}{3}{A full 2D Temperature distribution}{37}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{48}{0}{5}

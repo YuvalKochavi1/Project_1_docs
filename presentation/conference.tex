@@ -384,7 +384,7 @@
 \begin{frame}{Cylinder Coordinates}
     \begin{columns}
         \begin{column}{0.58\textwidth}
-            The model was re-developed in cylindrical coordinates (French group) to match cylindrical geometries:
+            The model was re-developed in cylindrical coordinates (\textit{Courtois at el. POP, (2022)}) to match cylindrical geometries:
             \begin{equation*}
                 x_F(r,t) = \frac{1}{\kappa_0} \cosh^{-1}\left(1 + \frac{D\kappa_0^2 t}{2}\right) J_0(\kappa_0 r) + \text{HOT}
             \end{equation*}
@@ -415,7 +415,7 @@
             This provides a much more physical description of the energy reflection.
             
             \vspace{0.2cm}
-            where the curvature goes as $J_0\left(\frac{\sqrt{2\varepsilon(t)}}{R}\right)$, and $\varepsilon(t)$ scales with $(1 - \alpha(t))$.
+            where the curvature goes as $J_0\left(\frac{\sqrt{2\varepsilon(t)}}{R}r\right)$, and $\varepsilon(t)$ scales with $(1 - \alpha(t))$.
         \end{column}
         \hfill
         \begin{column}{0.42\textwidth}
@@ -496,6 +496,16 @@
     \end{figure}
 \end{frame}
 
+
+\begin{frame}{Gold vs. Copper Coating Comparison}
+    French experiment \textit{Courtois et al. POP, (2024)} which tests the arrival time of the front as a function of $r$ for both gold and copper coats:
+    \vfill
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{2D_model/combined_curvature_comparison.png}
+    \end{figure}
+\end{frame}
+
 \subsection{A full 2D Temperature distribution}
 \begin{frame}
     \vfill
@@ -539,8 +549,12 @@
                 Side-by-side comparison of the 2D temperature distribution at $t = 3.72$ ns:
                 \begin{itemize}
                     \item \textbf{Left}: Diffusion simulation taken from \textit{Moore at el. JQSRT, (2015)}.
-                    \item \textbf{Right}: Our full 2D analytical model.
+                    \item \textbf{Right}: Our full 2D model.
                 \end{itemize}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{2D_model/front_comparison_3.72ns.png}
+                \end{figure}
         \end{column}
         \begin{column}{0.6\textwidth}
             \centering
@@ -555,7 +569,7 @@
                 Side-by-side comparison of the 2D temperature distribution at $t = 1.0$ ns:
                 \begin{itemize}
                     \item \textbf{Left}: Implicit Monte Carlo (IMC) simulation of \textit{Back et al. POP, (2000)} experiment.
-                    \item \textbf{Right}: Our full 2D analytical model with $\lambda_{\text{eff}} = 1.5$ correction.
+                    \item \textbf{Right}: Our full 2D model with $\lambda_{\text{eff}} = 1.5$ correction.
                 \end{itemize}
         \end{column}
         \begin{column}{0.6\textwidth}
@@ -571,7 +585,7 @@
                 Side-by-side comparison of the 2D temperature distribution at $t = 2.0$ ns:
                 \begin{itemize}
                     \item \textbf{Left}: Implicit Monte Carlo (IMC) simulation of \textit{Back et al. POP, (2000)} experiment.
-                    \item \textbf{Right}: Our full 2D analytical model with $\lambda_{\text{eff}} = 1.5$ correction.
+                    \item \textbf{Right}: Our full 2D model with $\lambda_{\text{eff}} = 1.5$ correction.
                 \end{itemize}
         \end{column}
         \begin{column}{0.6\textwidth}
@@ -587,12 +601,72 @@
                 Side-by-side comparison of the 2D temperature distribution at $t = 2.5$ ns:
                 \begin{itemize}
                     \item \textbf{Left}: Implicit Monte Carlo (IMC) simulation of \textit{Back et al. POP, (2000)} experiment.
-                    \item \textbf{Right}: Our full 2D analytical model with $\lambda_{\text{eff}} = 1.5$ correction.
+                    \item \textbf{Right}: Our full 2D model with $\lambda_{\text{eff}} = 1.5$ correction.
                 \end{itemize}
         \end{column}
         \begin{column}{0.6\textwidth}
             \centering
             \includegraphics[height=0.53\textheight]{2D_model/back_2.5ns.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temp. Distribution — Ji-Yan ($0.5$ ns)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 0.5$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: 2D supersonic diffusion simulation of \textit{Ji-Yan et al. CPB, (2010)} experiment.
+                    \item \textbf{Right}: Our full 2D model.
+                \end{itemize}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.05\textwidth]{2D_model/Ji-Yan_0.5ns_front.png}
+                \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.49\textheight]{2D_model/Ji-Yan_0.5ns.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temp. Distribution — Ji-Yan ($1.0$ ns)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 1.0$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: 2D supersonic diffusion simulation of \textit{Ji-Yan et al. CPB, (2010)} experiment.
+                    \item \textbf{Right}: Our full 2D model.
+                \end{itemize}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.05\textwidth]{2D_model/Ji-Yan_1ns_front.png}
+                \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.55\textheight]{2D_model/Ji-Yan_1ns.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{2D Temp. Distribution — Ji-Yan ($1.3$ ns)}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+                Side-by-side comparison of the 2D temperature distribution at $t = 1.3$ ns:
+                \begin{itemize}
+                    \item \textbf{Left}: 2D supersonic diffusion simulation of \textit{Ji-Yan et al. CPB, (2010)} experiment.
+                    \item \textbf{Right}: Our full 2D model.
+                \end{itemize}
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=1.05\textwidth]{2D_model/Ji-Yan_1.3ns_front.png}
+                \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[height=0.55\textheight]{2D_model/Ji-Yan_1.3ns.png}
         \end{column}
     \end{columns}
 \end{frame}
@@ -641,14 +715,27 @@
 \section{Conclusion}
 \begin{frame}{Conclusion}
     \begin{itemize}
-        \item Summary of key findings
-        \item Future work
+        \item \textbf{Successful 2D Modeling}:
+        \begin{itemize}
+            \item We have successfully modeled 2D supersonic Marshak waves.
+            \item Our unified model captures front curvature and temperature distribution.
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{Deep Physical Insight}:
+        \begin{itemize}
+            \item We can now understand the underlying physics of radiation transport and energy exchange in a very good, intuitive way.
+        \end{itemize}
     \end{itemize}
-    \vspace{1cm}
+\end{frame}
+
+% put the thank you in a differnet slide.
+\begin{frame}
     \begin{center}
-        \Large \textbf{Thank You!} \\
-        \vspace{0.5cm}
-        \normalsize Questions?
+        \Huge \textbf{Thank You!}
+    \end{center}
+    \vfill
+    \begin{center}
+        \Large \textbf{Questions?}
     \end{center}
 \end{frame}
 
