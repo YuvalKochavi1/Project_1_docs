@@ -10,8 +10,8 @@
 
 % Title page details: 
 \title[Modeling 2D Marshak Waves]{Modeling 2D Marshak Waves}
-\subtitle{Optional Subtitle}
-\author[Yuval Kochavi]{Yuval Kochavi}
+\subtitle{Understanding the physics of x-ray radiation driven supersonic nonlinear heat waves}
+\author[Kochavi et al.]{Yuval Kochavi, Tal Ramot, Tal Balakirski, Shay I. Heizler}
 \institute[HUJI]{The Hebrew University of Jerusalem}
 \date{June 17, 2026}
 % \logo{\includegraphics[height=1cm]{logo-image.png}} % Optional logo
@@ -23,19 +23,14 @@
     \titlepage
 \end{frame}
 
-% Outline slide
-\begin{frame}{Outline}
-    \tableofcontents
-\end{frame}
-
 % --- Section 1 ---
 \section{Describing the Physical system}
 
 \begin{frame}{Photon Transport and Energy Exchange}
-    Photon transport (Boltzmann equation):
+    Scattering-free Boltzmann equation for photons (RTE):
     \begin{multline}
-        \frac{1}{c} \frac{\partial I}{\partial t} + \hat{\Omega} \cdot \nabla I + (\sigma_a(T_m) + \sigma_s(T_m))I = \sigma_a(T_m)B(T_m) \\
-        + \frac{\sigma_s(T_m)}{4\pi} \int_{4\pi} I \, d\hat{\Omega} + S(\hat{\Omega}, \vec{r}, t)
+        \frac{1}{c}\frac{\partial I(\hat{\Omega},\vec{r},t)}{\partial t}+\hat{\Omega}\cdot \vec{\nabla}I(\hat{\Omega},\vec{r},t)=
+        \sigma'_{a}\left(B(T_m(\vec{r},t))-I(\hat{\Omega},\vec{r},t)\right)
     \end{multline}
     
     \vspace{0.5cm}
@@ -66,6 +61,8 @@
     \begin{figure}
         \centering
         \includegraphics[width=0.45\textwidth]{figures_intreduction/supersonic.png}
+
+        {\scriptsize \textit{Shussman at el. POP, (2015)}}
     \end{figure}
     
     \vspace{0.2cm}
@@ -74,8 +71,8 @@
         \begin{equation*}
             e = fT^\beta \rho^{-\mu}, \qquad \frac{1}{\kappa} = gT^\alpha \rho^{-\lambda}
         \end{equation*}
-        \item The diffusion coefficient $D$ is not linear.
-        \item Because of this, the entire system becomes highly non-linear and hard to solve analytically.
+        \item The diffusion coefficient $D=\frac{c}{3\rho \kappa}$ is not linear.
+        \item The entire system becomes highly non-linear and hard to solve analytically.
         \item \textbf{Our Motivation:} To build a robust model and fundamentally understand the dynamics of this system.
     \end{itemize}
 \end{frame}
@@ -171,7 +168,7 @@
         \underbrace{\frac{\partial E}{\partial t}}_{\to 0} + \frac{\partial e}{\partial t} = \frac{\partial}{\partial x} \left( \frac{c}{ 3 \rho \kappa} \frac{\partial (aT^4)}{\partial x} \right)
     \end{equation*}
 
-    With specific energy and opacity models:
+    With specific energy and opacity power laws:
     \begin{equation*}
         e = fT^\beta \rho^{-\mu}, \qquad \frac{1}{\kappa} = gT^\alpha \rho^{-\lambda}
     \end{equation*}
@@ -296,7 +293,7 @@
 \begin{frame}{Effective Mean Free Path}
     When $\lambda_R \ge 2R$, wall collisions control the transport instead of diffusion.
 
-    Can be modeled as:
+    Can be modeled as (\textit{Courtois at el. POP, (2024)}):
     \begin{equation*}
         \frac{1}{\lambda_{\mathrm{eff}}} = \frac{1}{\lambda_R} + \frac{1}{2R}
     \end{equation*}
@@ -412,7 +409,6 @@
             \begin{equation*}
                 \alpha(t) = \frac{F_{\text{out, wall}}}{F_{\text{in,wall}}} = \frac{\sigma_{SB}T_{s,interface}^4 - \frac{dE_{\text{wall}}}{dt}/2}{\sigma_{SB}T_{s,interface}^4+\frac{dE_{\text{wall}}}{dt}/2}
             \end{equation*}
-            This provides a much more physical description of the energy reflection.
             
             \vspace{0.2cm}
             where the curvature goes as $J_0\left(\frac{\sqrt{2\varepsilon(t)}}{R}r\right)$, and $\varepsilon(t)$ scales with $(1 - \alpha(t))$.
@@ -678,7 +674,7 @@
             \includegraphics[width=\textwidth]{2D_model/prl_T4.png} \\
             \vspace{0.2cm}
             \includegraphics[width=0.9\textwidth]{2D_model/prl.png}
-            {\scriptsize \textit{Back at el. POP, (2000)}}
+            {\scriptsize \textit{Back at el. PRL, (2000)}}
         \end{column}
         \begin{column}{0.1\textwidth}
             \centering

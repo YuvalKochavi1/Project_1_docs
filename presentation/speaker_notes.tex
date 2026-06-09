@@ -1,0 +1,605 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+
+% Styling
+\definecolor{slideblue}{RGB}{0, 70, 130}
+\definecolor{notegray}{RGB}{245, 245, 245}
+
+\titleformat{\section}{\Large\bfseries\color{slideblue}}{}{0em}{}[\vspace{-0.5em}\rule{\textwidth}{0.8pt}]
+\titleformat{\subsection}{\large\bfseries\color{slideblue!70}}{}{0em}{}
+
+\newtcolorbox{slidebox}{
+    colback=notegray,
+    colframe=slideblue,
+    fonttitle=\bfseries\color{white},
+    coltitle=white,
+    colbacktitle=slideblue,
+    boxrule=0.5pt,
+    arc=3pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{Speaker Notes --- Modeling 2D Marshak Waves}}
+\fancyhead[R]{\textit{June 17, 2026}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\textbf{Speaker Notes}\\[0.3cm]
+\Large Modeling 2D Marshak Waves\\[0.2cm]
+\normalsize Understanding the physics of x-ray radiation driven supersonic nonlinear heat waves}
+\author{Yuval Kochavi, Tal Ramot, Tal Balakirski, Shay I.\ Heizler\\
+The Hebrew University of Jerusalem}
+\date{June 17, 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+
+%=============================================================================
+\section{Title Slide}
+%=============================================================================
+
+\begin{slidebox}
+\textbf{Slide title:} Modeling 2D Marshak Waves
+\end{slidebox}
+
+Good morning/afternoon everyone. My name is Yuval Kochavi, and I'm from the Hebrew University of Jerusalem. Today I'll be presenting our work on modeling two-dimensional Marshak waves --- that is, understanding the physics of x-ray radiation driven supersonic nonlinear heat waves.
+
+This is joint work with Tal Ramot, Tal Balakirski, and Shay Heizler.
+
+%=============================================================================
+\section{Describing the Physical System}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Photon Transport and Energy Exchange}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Photon Transport and Energy Exchange
+\end{slidebox}
+
+Let me start by laying out the fundamental equations governing our system.
+
+The first equation you see here is the scattering-free Boltzmann equation for photons, also known as the Radiative Transfer Equation, or RTE. It describes how the specific intensity $I$ of the radiation field evolves in space and time. The left-hand side captures the time evolution and the streaming of photons in direction $\hat{\Omega}$. The right-hand side is the absorption and emission term: the material absorbs radiation at a rate proportional to $\sigma'_a$ and re-emits thermally according to the Planck function $B$ at the local material temperature $T_m$.
+
+The second equation describes the energy exchange between the radiation field and the material. The material's internal energy, characterized by the heat capacity $C_v$, changes at a rate determined by the imbalance between the radiation energy density --- the integral of the intensity over all solid angles --- and the Planck emission $aT_m^4$. When these are equal, the system is in equilibrium. When they are not, energy flows from the hotter component to the cooler one.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Gray Coupled Equations and LTE}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Gray Coupled Equations and LTE
+\end{slidebox}
+
+From the RTE, after taking angular moments and applying the diffusion approximation, we arrive at the so-called ``gray'' coupled equations. The first equation governs the radiation energy density $E$, which evolves through diffusion and through coupling to the material via the opacity $\sigma$. The second equation governs the material internal energy $e$, which exchanges energy with the radiation field.
+
+Now, a key simplification: if we assume complete thermodynamic equilibrium, or CTE, between the radiation and the material --- meaning $T_R = T_m$ --- we can combine these into a single nonlinear diffusion equation. This is the equation you see in the middle.
+
+Furthermore, in the regime we are interested in, the material energy density is much larger than the radiation energy density --- this holds up to temperatures of about 3~keV. Under this assumption, the radiation energy storage term drops out, and we get the simplified diffusion equation at the bottom. This is the starting point for our modeling.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Motivation}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Motivation
+\end{slidebox}
+
+So why is this problem interesting and challenging?
+
+The figure you see here, from Shussman et al.\ 2015, shows a supersonic heat wave propagating through a low-density foam. The wave front moves faster than the sound speed in the material, which means there is no hydrodynamic response ahead of the front --- the material is heated purely by radiation transport.
+
+The material properties --- the specific energy $e$ and the opacity $\kappa$ --- are described by power-law models with multiple parameters: $f$, $\beta$, $\mu$ for the energy and $g$, $\alpha$, $\lambda$ for the opacity. Because of this, the diffusion coefficient $D = c/(3\rho\kappa)$ is strongly nonlinear in temperature.
+
+This nonlinearity makes the entire system extremely difficult to solve analytically. And that is precisely our motivation: we want to build a robust, semi-analytic model that allows us to fundamentally understand the dynamics of this system and compare directly with experiments.
+
+%=============================================================================
+\section{Marshak Waves Experiments}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Marshak Waves Experiments (Setup)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Marshak Waves Experiments
+\end{slidebox}
+
+Let me now describe the experimental setup. The experiments use a Hohlraum --- a high-Z cavity illuminated by powerful laser beams --- as an x-ray source. The laser energy is converted to thermal x-rays inside the Hohlraum, which then drive a supersonic heat wave into a low-density foam sample attached to the Hohlraum wall.
+
+On the left you can see the drive temperature profile as a function of time. On the right you see a schematic of the experimental geometry: the Hohlraum generates a radiation field that enters the foam tube, and the heat wave propagates along the tube axis.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Marshak Waves Experiments (Measurements)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Marshak Waves Experiments (Measurements)
+\end{slidebox}
+
+The experiments measure two key observables.
+
+On the left side you see three different diagnostic methods. These allow experimentalists to track the heat front position as a function of time, and also to measure the spatial profile of the emerging radiation.
+
+On the right side are the resulting measurements: the radiation flux emerging from the rear of the foam --- which tells us the heat front's breakout time --- and the spatial curvature of the emerging flux, which reveals the two-dimensional structure of the heat wave inside the tube.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Experiments Tested}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Experiments tested
+\end{slidebox}
+
+Here is a summary table of all the experiments we compare our model against. They span a wide range of foam materials --- from lead-doped hydrocarbons to silica, tantala, and polystyrene-based foams. The densities range from about 10 to 160 milligrams per cubic centimeter, and the drive temperatures range from 100 to over 300 electron volts. This diversity is important: a good model must work across all of these conditions, not just one.
+
+%=============================================================================
+\section{1.5D Model}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- 1.5D Model}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} 1.5D model (section divider)
+\end{slidebox}
+
+Let me now move on to what we call our 1.5D model. The idea is to start from the one-dimensional Henyey--Raizer analytic solution and systematically incorporate two-dimensional effects as corrections, hence the name ``1.5D.''
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: HR Model --- Governing Equations}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} HR Model - Governing Equations
+\end{slidebox}
+
+We begin with the Henyey--Raizer model. The starting point is the ``black'' diffusion equation. By neglecting the time derivative of the radiation energy density --- this is the term marked with the arrow going to zero --- we get a purely material-energy-driven diffusion equation.
+
+The specific energy and opacity are described by power laws, as I showed earlier, with material-dependent parameters $f$, $\mu$, $g$, $\lambda$, $\alpha$, and $\beta$.
+
+Henyey and Raizer solved this nonlinear diffusion equation using perturbation theory and obtained a semi-analytic solution for the heat front position. Let me show you their result.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: HR Model --- Heat Front Solution}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} HR Model - Heat Front Solution
+\end{slidebox}
+
+The key result from the Henyey--Raizer model is this formula for the heat front position $x_F$ as a function of time. The front position squared is given by an integral expression involving the surface temperature history through the function $H(t) = T_s^{4+\alpha}$.
+
+The constant $C$ encapsulates all the material properties: the opacity coefficient $g$, the energy coefficient $f$, and the density $\rho$ with its appropriate power-law exponents. The parameter $\varepsilon = \beta/(4+\alpha)$ is a key dimensionless number that characterizes the nonlinearity.
+
+Notice that $T_s$ here is the surface temperature at $x = 0$, which in the original HR model is simply taken to be equal to the drive temperature $T_D$.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: HR 1D Model Limitations}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} HR 1D Model Limitations
+\end{slidebox}
+
+However, when we compare the HR model directly to the experimental data of Back et al., we find that it overestimates the heat front position by roughly a factor of 2! The model predicts a front that propagates much too fast.
+
+This is a very significant discrepancy, and it tells us that the simple 1D model is missing important physics. So the question is: what effects are we neglecting?
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- 1D Effects}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} 1.5D model --- 1D effects (section divider)
+\end{slidebox}
+
+Let me first address the one-dimensional corrections that need to be incorporated before we move to two-dimensional effects.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Marshak Boundary Condition (Theory)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Marshak Boundary Condition: $T_D \neq T_s$
+\end{slidebox}
+
+The first and most important 1D correction is the boundary condition. In the original HR model, the surface temperature $T_s$ is assumed to equal the drive temperature $T_D$. But this is not physical.
+
+In reality, the radiation field at the foam surface must satisfy an energy balance: the incoming radiation from the Hohlraum at temperature $T_D$ must equal the re-emitted radiation from the surface at temperature $T_s$, plus the net flux $F(0,t)$ entering the foam. This is the Marshak boundary condition.
+
+Because some of the incoming energy is carried away into the foam, the surface temperature $T_s$ is always \emph{lower} than the drive temperature $T_D$. This means the HR model, which uses $T_D$ directly, overestimates the effective driving temperature and therefore overestimates the front speed.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Marshak Boundary Condition (Result)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Marshak Boundary Condition: $T_D \neq T_s$ (result plot)
+\end{slidebox}
+
+And indeed, when we apply the Marshak boundary condition, you can see that the propagation front slows down significantly. This is a substantial correction --- the front position is reduced considerably compared to the naive HR prediction.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- 2D Effects}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} 1.5D model --- 2D effects (section divider)
+\end{slidebox}
+
+Now let's move to the two-dimensional effects. These arise because the heat wave propagates inside a cylindrical tube, and the tube walls interact with the radiation field.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Energy Wall Loss (Theory)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Energy Wall Loss
+\end{slidebox}
+
+The first 2D effect is energy loss to the tube walls. As the radiation-driven heat wave propagates through the foam, photons that hit the tube walls are partially absorbed. This energy is deposited into the wall material and is effectively lost from the heat wave.
+
+We model this wall energy absorption for different wall materials --- gold, copper, beryllium, and vacuum. For example, for gold walls, the energy absorbed per unit area follows the power-law expression shown here, which depends on the local temperature and the time elapsed since the front arrived at that position.
+
+This is a genuinely two-dimensional effect because it depends on the tube radius --- a narrower tube has more wall area per unit volume and therefore loses more energy.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Energy Wall Loss (Result)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Energy Wall Loss (result plot)
+\end{slidebox}
+
+Including the wall loss further reduces the front velocity, as you can see in this plot. Each successive correction brings the model closer to the experimental data.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Wall Ablation (Theory)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Wall Ablation
+\end{slidebox}
+
+The next 2D effect is wall ablation. When the wall material is a high-Z element like gold, it absorbs significant radiation energy and begins to ablate inward into the foam channel.
+
+This has two consequences. First, the tube radius effectively shrinks over time as wall material expands inward. This means the inlet cross-section and the tube cross-section both decrease, reducing the amount of radiation that can enter and propagate.
+
+Second, the ablated wall material compresses and densifies the adjacent foam. Since the heat wave speed depends strongly on density --- denser material is harder to heat --- this densification significantly slows down the propagation.
+
+Both effects need to be incorporated to accurately capture the dynamic tube geometry.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Wall Ablation (Result)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Wall Ablation (result plot)
+\end{slidebox}
+
+When we include the inward wall ablation and the resulting foam densification, the front slows down even further. As you can see, this is a very significant effect, particularly for gold-walled tubes.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Effective Mean Free Path (Theory)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Effective Mean Free Path
+\end{slidebox}
+
+The final 2D correction addresses a fundamental transport issue. The standard diffusion model assumes that the photon mean free path $\lambda_R$ is much smaller than the tube diameter. But in some experiments, particularly at early times when the foam is relatively transparent, $\lambda_R$ can become comparable to or even larger than the tube diameter $2R$.
+
+When this happens, photons are not scattering off the foam --- they are scattering off the walls. The effective mean free path is no longer controlled by the bulk material opacity but by the tube geometry.
+
+Following Courtois et al.\ 2024, we model this using a harmonic-mean formula: one over $\lambda_\mathrm{eff}$ equals one over $\lambda_R$ plus one over $2R$. This naturally transitions between the bulk-diffusion regime (when $\lambda_R \ll 2R$) and the wall-collision regime (when $\lambda_R \gg 2R$).
+
+For a smoother transition, we use a generalized power mean with an exponent $n$ that controls the tightness of the crossover.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Effective Mean Free Path (Result)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Effective Mean Free Path (result plot)
+\end{slidebox}
+
+With this effective mean free path correction included, the model now matches the experimental data very well, particularly at early times where the naive diffusion model was previously failing.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Comparison to Many Experiments}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Comparison to many experiments
+\end{slidebox}
+
+And here is the payoff: our 1.5D model, incorporating all four corrections --- the Marshak boundary condition, wall energy loss, wall ablation, and the effective mean free path --- successfully reproduces the heat front position across four different experiments.
+
+In the top left we have the Moore experiment with chlorinated polystyrene foam; top right is the Back experiment with tantala foam; bottom left is the Back experiment with silica foam at lower energy; and bottom right is the Ji-Yan experiment with polystyrene. In all cases, the model captures the front dynamics accurately.
+
+%=============================================================================
+\section{Full 2D Model}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- Modeling the Front Curvature}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Full 2D model --- Modeling the front curvature (section divider)
+\end{slidebox}
+
+Now I'd like to move beyond the 1.5D model and present our full two-dimensional model, which captures not just the longitudinal front position but also the radial curvature of the heat front.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Understanding the Front Curvature}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Understanding the front curvature
+\end{slidebox}
+
+The first 2D analytic treatment of the front curvature was done by Hurricane and Hammer in 2006. They made two strong simplifications: they assumed constant opacity and neglected the material energy storage entirely. This reduces the problem to Laplace's equation.
+
+In Cartesian coordinates --- suitable for a planar slab geometry --- they obtained the 2D front shape as a product of a time-dependent longitudinal part, involving an inverse hyperbolic cosine, and a transverse cosine mode. The parameter $\varepsilon$ controls the curvature and depends on the product of density, opacity, and slab width, weighted by the wall albedo.
+
+The figure shows their result: the front is curved, advancing faster at the center than at the edges near the walls.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Cylinder Coordinates}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Cylinder Coordinates
+\end{slidebox}
+
+Since the actual experiments use cylindrical tubes, the model was re-derived in cylindrical coordinates by Courtois et al.\ in 2022. The key mathematical change is elegant: the cosine mode in the transverse direction is replaced by a Bessel function $J_0(\kappa r)$. This is the natural eigenfunction of the Laplacian in cylindrical geometry.
+
+The figure on the right shows the comparison between the Cartesian and cylindrical solutions --- qualitatively similar, but quantitatively different due to the geometry.
+
+For small $\varepsilon$, the transverse wavenumber $\kappa_0$ is approximately $\sqrt{2\varepsilon}/R$, where $R$ is the tube radius and $\varepsilon$ again depends on the opacity, density, radius, and the wall albedo $a$.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Dynamic Albedo}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Applying on our model: Dynamic Albedo
+\end{slidebox}
+
+Now, in both the Hurricane--Hammer and the Courtois models, the wall albedo was treated as a constant parameter. But physically, the albedo changes in time: as the wall heats up, it absorbs less energy relative to what it re-emits.
+
+We compute the albedo dynamically as the ratio of outgoing to incoming flux at the wall interface. The incoming flux is the radiation hitting the wall from the foam; the outgoing flux is the re-emitted radiation minus the rate of energy absorption by the wall. This gives us a time-dependent albedo $\alpha(t)$.
+
+On the right you can see how the albedo evolves --- it starts low at early times when the wall is cold and absorbing heavily, and increases as the wall heats up and approaches thermal equilibrium with the radiation field.
+
+The curvature then goes as $J_0$ with a time-dependent argument $\varepsilon(t)$ that scales with $1 - \alpha(t)$.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Problem --- Longitudinal Front is Way Off}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Problem: the longitudinal front is way off!
+\end{slidebox}
+
+However, there is a problem. The Hurricane--Hammer type models, including the Courtois cylindrical version, use a very simplified physics for the longitudinal front position. Because they neglect material energy and assume constant opacity, the longitudinal part of their solution does not match the real experiments at all.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Solution --- Using 1.5D for Longitudinal Position}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Luckily, we have a direct longitudinal position
+\end{slidebox}
+
+But here is the key insight of our full 2D model: we already have a very accurate longitudinal front position from our 1.5D model! So we simply combine them.
+
+The full 2D front shape is given by the product of our 1.5D front position $x_\mathrm{1.5D}(t)$ and the Bessel function $J_0(\kappa_0(t)\, r)$ with the dynamic albedo. This separable ansatz gives us the best of both worlds: accurate longitudinal physics from the 1.5D model, and the correct radial curvature from the Bessel mode.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- Comparing to 2D Simulation}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Full 2D model --- Comparing to 2D supersonic Diffusion Simulation (section divider)
+\end{slidebox}
+
+Let me now show you how this full 2D model compares against 2D supersonic diffusion simulations for different wall materials.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Gold Coating --- SiO2}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Gold coating - SiO2
+\end{slidebox}
+
+First, gold-coated tubes with silica foam. You can see the 2D front surface from both the simulation and our model. The agreement is excellent --- our model captures both the overall propagation speed and the curvature of the front.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: 100x Transparenter Gold Coating --- SiO2}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} 100 times transparenter Gold coating - SiO2
+\end{slidebox}
+
+To test the robustness of our model, we also ran a case where the gold opacity is artificially reduced by a factor of 100, making the wall much more transparent. Even in this extreme case, the model continues to reproduce the simulation results well. This confirms that the dynamic albedo formulation correctly handles the transition between highly absorbing and highly reflecting walls.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Copper --- SiO2}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Copper - SiO2
+\end{slidebox}
+
+Next, copper walls with silica foam. Copper has a lower atomic number than gold, so it absorbs less radiation and has a higher albedo. Again, our model matches the simulation well, capturing the somewhat weaker curvature compared to gold.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Be --- SiO2}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Be - SiO2
+\end{slidebox}
+
+Beryllium is a low-Z material, so the walls are nearly transparent. The curvature is minimal because very little energy is lost to the walls. Our model correctly reproduces this nearly flat front.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Vacuum --- SiO2}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Vacuum - SiO2
+\end{slidebox}
+
+Finally, the vacuum case --- where there are no walls at all and energy simply escapes freely from the sides of the foam. This represents the maximum possible curvature. Our model handles this limiting case as well, showing strong curvature with the center advancing much farther than the edges.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Gold vs.\ Copper Coating Comparison}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Gold vs.\ Copper Coating Comparison
+\end{slidebox}
+
+This slide shows a direct comparison with the French experiment by Courtois et al.\ 2024, which measured the arrival time of the heat front as a function of the radial position $r$ for both gold and copper coatings.
+
+This is a critical experimental test of the curvature model: gold walls cause more curvature because they absorb more energy, while copper walls allow a more uniform front. Our model reproduces both curves, capturing the material-dependent curvature quantitatively.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- Full 2D Temperature Distribution}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Full 2D model --- A full 2D Temperature distribution (section divider)
+\end{slidebox}
+
+Beyond just the front position, we can also construct the full two-dimensional temperature distribution inside the tube.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Full 2D Temperature Distribution (Method)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} A full 2D Temperature distribution
+\end{slidebox}
+
+To do this, we use the Henyey temperature profile. This self-similar profile gives the temperature as a function of the distance behind the front. The temperature drops from its surface value $T_S$ to zero at the front position, following a power law with an exponent that depends on the material parameters $\alpha$ and $\beta$.
+
+By combining this longitudinal profile with our 2D front shape $z_F(r,t)$, we get the full temperature field $T(z, r, t)$ at any point inside the tube.
+
+On the left you see the 2D front surface, and on the right the resulting temperature heatmap. The curved front and the radial temperature gradient are clearly visible.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: 2D Temp.\ Distribution --- Moore}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} 2D Temperature Distribution --- Moore ($\mathrm{C}_8\mathrm{H}_7\mathrm{Cl}$)
+\end{slidebox}
+
+Here we compare our 2D temperature map against a full 2D diffusion simulation from the Moore et al.\ 2015 paper, for chlorinated polystyrene foam at $t = 3.72$~ns.
+
+On the left is the simulation from the published paper, and on the right is our semi-analytic model. The front shapes agree well, and the temperature contours behind the front are very consistent. You can also see the front position comparison in the small plot, which shows excellent agreement.
+
+%-----------------------------------------------------------------------------
+\subsection{Slides: 2D Temp.\ Distribution --- Back SiO2 (1.0, 2.0, 2.5 ns)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide titles:} 2D Temp.\ Distribution --- Back SiO2 at 1.0, 2.0, and 2.5~ns
+\end{slidebox}
+
+The next three slides show a time sequence for the Back et al.\ silica foam experiment, compared against Implicit Monte Carlo simulations at three different times: 1.0, 2.0, and 2.5~nanoseconds.
+
+For this comparison, we include the effective mean free path correction with a factor of 1.5. The agreement is very good at all three time snapshots --- the front position, the curvature, and the temperature gradient behind the front are all well captured by our model. You can see the wave growing in time, and the curvature increasing as the front advances deeper into the foam.
+
+%-----------------------------------------------------------------------------
+\subsection{Slides: 2D Temp.\ Distribution --- Ji-Yan (0.5, 1.0, 1.3 ns)}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide titles:} 2D Temp.\ Distribution --- Ji-Yan at 0.5, 1.0, and 1.3~ns
+\end{slidebox}
+
+Similarly, for the Ji-Yan polystyrene experiment, we show the 2D temperature distributions at 0.5, 1.0, and 1.3~nanoseconds, compared against their 2D supersonic diffusion simulations.
+
+Again, the front position and curvature from our model match the full simulation results very well. The small lower panel in each slide also shows the front position comparison directly, confirming the quantitative agreement.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Flux Curvature Comparison --- Back SiO2 PRL}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Flux Curvature Comparison - Back SiO2 PRL
+\end{slidebox}
+
+Now let me show you a comparison that goes beyond just the front position and tests the \emph{observable} radiation field.
+
+The Back et al.\ PRL 2000 experiment measured the spatial profile of the radiation flux emerging from the rear surface of the foam. The left panels show the $T^4$ spatial heatmap from our model and the experimental image from Back et al. On the right, we plot the emerging flux as a function of radial position from both the experiment and our model.
+
+This is a very demanding test because it probes not just the front curvature but also the temperature distribution behind the front. The agreement gives us confidence that our 2D model captures the essential physics correctly.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Flux Curvature Comparison --- Back Ta2O5 POP}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Flux Curvature Comparison - Back Ta2O5 POP
+\end{slidebox}
+
+And here is the same comparison for the tantala foam experiment from Back et al.\ POP 2000. Again, on the left we show the $T^4$ spatial distribution and the experimental intensity image. On the right is the flux curvature comparison after front breakout.
+
+The model captures the shape and magnitude of the emerging radiation profile, demonstrating that our approach works across different foam materials.
+
+%=============================================================================
+\section{Conclusion}
+%=============================================================================
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Conclusion}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Conclusion
+\end{slidebox}
+
+Let me summarize our main results.
+
+First, we have successfully built a full 2D model for supersonic Marshak waves. Starting from the Henyey--Raizer 1D solution, we systematically incorporated the Marshak boundary condition, wall energy loss, wall ablation with foam densification, and the effective mean free path correction. We then extended the model to two dimensions by combining our accurate 1.5D longitudinal solution with the Bessel-function curvature mode, using a dynamically computed wall albedo.
+
+Our unified model captures both the front curvature and the full 2D temperature distribution, and it successfully reproduces experimental data and full 2D simulations across multiple experiments with different foam materials and wall coatings.
+
+Second, and perhaps more importantly, this model gives us deep physical insight into radiation transport in confined geometries. We can now understand, in an intuitive and quantitative way, how each physical effect --- boundary conditions, wall losses, ablation, and transport corrections --- contributes to the overall dynamics. This understanding is valuable not only for interpreting existing experiments but also for designing future ones.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Thank You}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Thank You! --- Questions?
+\end{slidebox}
+
+Thank you very much for your attention. I'm happy to take any questions.
+
+\end{document}
