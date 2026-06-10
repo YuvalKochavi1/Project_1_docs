@@ -39,7 +39,7 @@
 % ----------------------------------------------------------------------------
 \begin{abstract}
 We present a semi-analytic two-dimensional model for supersonic Marshak waves propagating through low-density foams confined in cylindrical tubes.
-Starting from the one-dimensional Henyey--Raizer diffusion solution, we systematically incorporate the Marshak boundary condition, energy loss to tube walls, inward wall ablation with foam densification, and an effective mean free path correction for the wall-collision transport regime.
+Starting from the one-dimensional Hammer--Rosen (HR) diffusion solution, we systematically incorporate the Marshak boundary condition, energy loss to tube walls, inward wall ablation with foam densification, and an effective mean free path correction for the wall-collision transport regime.
 The resulting ``1.5D'' model accurately reproduces the longitudinal heat front position across seven independent experiments spanning diverse foam materials, densities, and drive temperatures.
 We then extend the model to two dimensions by coupling the 1.5D longitudinal solution with a Bessel-function radial mode derived from the cylindrical diffusion eigenvalue problem, using a dynamically computed wall albedo.
 The full 2D model captures the front curvature, the complete temperature distribution, and the spatial profile of the emerging radiation flux.
@@ -57,8 +57,8 @@ Supersonic radiation-driven heat waves, known as Marshak waves~\cite{Marshak1958
 In a typical experiment, a hohlraum converts laser energy into thermal x-rays that drive a supersonic heat front into a low-density foam sample~\cite{Back2000PRL, Back2000POP, Moore2015}.
 Because the wave speed exceeds the sound speed, the material ahead of the front remains unperturbed, and the problem reduces to nonlinear radiation diffusion.
 
-Despite decades of study, quantitative modeling of these experiments has relied heavily on expensive numerical simulations---Implicit Monte Carlo (IMC) and deterministic transport codes---while analytic models remained limited to one dimension~\cite{Henyey1955, Hammer2003, Shussman2015}.
-The one-dimensional (1D) Henyey--Raizer (HR) model~\cite{Henyey1955} provides a useful baseline but overestimates the front position by a factor of $\sim 2$ when compared to experiments~\cite{Back2000POP}, because it neglects boundary condition corrections and all two-dimensional effects arising from the cylindrical tube geometry.
+Despite decades of study, quantitative modeling of these experiments has relied heavily on expensive numerical simulations---Implicit Monte Carlo (IMC) and deterministic transport codes---while analytic models remained limited to one dimension~\cite{Hammer2003, Shussman2015, Henyey1955}.
+The one-dimensional (1D) Hammer--Rosen (HR) model~\cite{Hammer2003} provides a useful baseline but overestimates the front position by a factor of $\sim 2$ when compared to experiments~\cite{Back2000POP}, because it neglects boundary condition corrections and all two-dimensional effects arising from the cylindrical tube geometry.
 
 In this Letter, we develop a semi-analytic model that bridges the gap between 1D theory and full numerical simulation.
 We first construct a ``1.5D'' model by augmenting the HR solution with four physically motivated corrections, then extend it to a full 2D model that captures the radial curvature of the heat front.
@@ -101,9 +101,9 @@ The diffusion coefficient $D = c/(3\rho\kappa)$ is strongly nonlinear in tempera
 % ============================================================================
 \section{The 1.5D Model}
 
-\subsection{Baseline: Henyey--Raizer solution}
+\subsection{Baseline: Hammer--Rosen solution}
 
-Henyey and Raizer~\cite{Henyey1955} solved Eq.~(\ref{eq:diffusion}) in one dimension using perturbation theory.
+Hammer and Rosen~\cite{Hammer2003} solved Eq.~(\ref{eq:diffusion}) in one dimension using perturbation theory.
 The heat front position is given by
 \begin{equation}\label{eq:HR}
     x_F^2(t) = \frac{2+\varepsilon}{1-\varepsilon}\,C\,H^{-\varepsilon}(t)\int_0^t H(t')\,dt',

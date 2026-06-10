@@ -65,32 +65,20 @@ This is joint work with Tal Ramot, Tal Balakirski, and Shay Heizler.
 %=============================================================================
 
 %-----------------------------------------------------------------------------
-\subsection{Slide: Photon Transport and Energy Exchange}
+\subsection{Slide: Radiative Heat Waves in HEDP}
 %-----------------------------------------------------------------------------
 
 \begin{slidebox}
-\textbf{Slide title:} Photon Transport and Energy Exchange
+\textbf{Slide title:} Radiative Heat Waves in HEDP
 \end{slidebox}
 
-Let me start by laying out the fundamental equations governing our system.
+To begin, radiative heat waves are a highly common and important phenomenon in High Energy Density Physics, or HEDP. We see them primarily in two main areas: inertial confinement fusion and astrophysics.
 
-The first equation you see here is the scattering-free Boltzmann equation for photons, also known as the Radiative Transfer Equation, or RTE. It describes how the specific intensity $I$ of the radiation field evolves in space and time. The left-hand side captures the time evolution and the streaming of photons in direction $\hat{\Omega}$. The right-hand side is the absorption and emission term: the material absorbs radiation at a rate proportional to $\sigma'_a$ and re-emits thermally according to the Planck function $B$ at the local material temperature $T_m$.
+On the left side of the slide, we have Inertial Confinement Fusion, or ICF, such as the experiments conducted at the National Ignition Facility, or NIF. In these setups, radiation driven in a Hohlraum heats a low-density foam, causing supersonic heat waves to propagate through the material before any significant hydrodynamic motion can take place.
 
-The second equation describes the energy exchange between the radiation field and the material. The material's internal energy, characterized by the heat capacity $C_v$, changes at a rate determined by the imbalance between the radiation energy density --- the integral of the intensity over all solid angles --- and the Planck emission $aT_m^4$. When these are equal, the system is in equilibrium. When they are not, energy flows from the hotter component to the cooler one.
+On the right side, we see astrophysics. Radiative heat waves and transport are crucial for understanding energy transport in stars, and they govern the dynamics of radiation-dominated stellar structures and supersonic shocks in space.
 
-%-----------------------------------------------------------------------------
-\subsection{Slide: Gray Coupled Equations and LTE}
-%-----------------------------------------------------------------------------
-
-\begin{slidebox}
-\textbf{Slide title:} Gray Coupled Equations and LTE
-\end{slidebox}
-
-From the RTE, after taking angular moments and applying the diffusion approximation, we arrive at the so-called ``gray'' coupled equations. The first equation governs the radiation energy density $E$, which evolves through diffusion and through coupling to the material via the opacity $\sigma$. The second equation governs the material internal energy $e$, which exchanges energy with the radiation field.
-
-Now, a key simplification: if we assume complete thermodynamic equilibrium, or CTE, between the radiation and the material --- meaning $T_R = T_m$ --- we can combine these into a single nonlinear diffusion equation. This is the equation you see in the middle.
-
-Furthermore, in the regime we are interested in, the material energy density is much larger than the radiation energy density --- this holds up to temperatures of about 3~keV. Under this assumption, the radiation energy storage term drops out, and we get the simplified diffusion equation at the bottom. This is the starting point for our modeling.
+This wide range of applications highlights why it is so important to have a solid physical understanding of these waves, which leads us to our specific research motivation.
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: Motivation}
@@ -108,12 +96,38 @@ The material properties --- the specific energy $e$ and the opacity $\kappa$ ---
 
 This nonlinearity makes the entire system extremely difficult to solve analytically. And that is precisely our motivation: we want to build a robust, semi-analytic model that allows us to fundamentally understand the dynamics of this system and compare directly with experiments.
 
+%-----------------------------------------------------------------------------
+\subsection{Slide: Photon Transport and Energy Exchange}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Photon Transport and Energy Exchange
+\end{slidebox}
+
+To address this challenge, let's lay out the fundamental equations governing our physical system.
+
+The first equation you see here is the scattering-free gray Boltzmann equation for photons, also known as the Radiative Transfer Equation, or RTE. It describes how the specific intensity $I$ of the radiation field evolves in space and time. The left-hand side captures the time evolution and the streaming of photons in direction $\hat{\Omega}$. The right-hand side is the absorption and emission term: the material absorbs radiation at a rate proportional to $\sigma'_a$ and re-emits thermally according to the Planck function $B$ at the local material temperature $T_m$.
+
+The second equation describes the energy exchange between the radiation field and the material. The material's internal energy, characterized by the heat capacity $C_v$, changes at a rate determined by the imbalance between the radiation energy density --- the integral of the intensity over all solid angles --- and the Planck emission $aT_m^4$. When these are equal, the system is in equilibrium. When they are not, energy flows from the hotter component to the cooler one.
+
+%-----------------------------------------------------------------------------
+\subsection{Slide: Gray Coupled Equations and LTE}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Gray Coupled Equations and LTE
+\end{slidebox}
+
+From the RTE, after taking angular moments and applying the diffusion approximation, we arrive at the so-called ``gray'' coupled equations. The first relation governs the radiation energy density $E$, which evolves through diffusion and through coupling to the material via the opacity $\sigma$. The second relation governs the material internal energy $e$, which exchanges energy with the radiation field.
+
+Now, a key simplification: if we assume complete thermodynamic equilibrium, or CTE, between the radiation field and the material --- meaning $T_R = T_m$ --- we can combine these two relations into a single nonlinear equation. This is the final equation shown at the bottom of the slide, which describes the combined transport and heating.
+
 %=============================================================================
-\section{Marshak Waves Experiments}
+\section{Marshak Waves Experimental Setup}
 %=============================================================================
 
 %-----------------------------------------------------------------------------
-\subsection{Slide: Marshak Waves Experiments (Setup)}
+\subsection{Slide: Marshak Waves Experiments}
 %-----------------------------------------------------------------------------
 
 \begin{slidebox}
@@ -122,21 +136,21 @@ This nonlinearity makes the entire system extremely difficult to solve analytica
 
 Let me now describe the experimental setup. The experiments use a Hohlraum --- a high-Z cavity illuminated by powerful laser beams --- as an x-ray source. The laser energy is converted to thermal x-rays inside the Hohlraum, which then drive a supersonic heat wave into a low-density foam sample attached to the Hohlraum wall.
 
-On the left you can see the drive temperature profile as a function of time. On the right you see a schematic of the experimental geometry: the Hohlraum generates a radiation field that enters the foam tube, and the heat wave propagates along the tube axis.
+On the left you can see the drive temperature profile as a function of time, based on Back et al. POP 2000. On the right you see a schematic of the experimental geometry from Cohen et al. PRR 2018: the Hohlraum generates a radiation field that enters the foam tube, and the heat wave propagates along the tube axis.
 
 %-----------------------------------------------------------------------------
-\subsection{Slide: Marshak Waves Experiments (Measurements)}
+\subsection{Slide: Marshak Waves Experimental Setup}
 %-----------------------------------------------------------------------------
 
 \begin{slidebox}
-\textbf{Slide title:} Marshak Waves Experiments (Measurements)
+\textbf{Slide title:} Marshak Waves Experimental Setup
 \end{slidebox}
 
-The experiments measure two key observables.
+There are several ways to track the heat wave propagation in experiments, which we summarize on this slide.
 
-On the left side you see three different diagnostic methods. These allow experimentalists to track the heat front position as a function of time, and also to measure the spatial profile of the emerging radiation.
+On the left side, we show three different diagnostic methods used to track the heat front position and the emerging radiation, with data from Back et al. POP 2000, Rosen et al. ASS 2006, and Cohen et al. PRR 2018.
 
-On the right side are the resulting measurements: the radiation flux emerging from the rear of the foam --- which tells us the heat front's breakout time --- and the spatial curvature of the emerging flux, which reveals the two-dimensional structure of the heat wave inside the tube.
+On the right side, we show the resulting measurements: the radiation flux emerging from the rear of the foam, which gives us the breakout time, and the spatial curvature of the emerging flux, which reveals the two-dimensional structure of the heat wave. Both of these plots are also from the work of Back et al. POP 2000.
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: Experiments Tested}
@@ -160,7 +174,7 @@ Here is a summary table of all the experiments we compare our model against. The
 \textbf{Slide title:} 1.5D model (section divider)
 \end{slidebox}
 
-Let me now move on to what we call our 1.5D model. The idea is to start from the one-dimensional Henyey--Raizer analytic solution and systematically incorporate two-dimensional effects as corrections, hence the name ``1.5D.''
+Let me now move on to what we call our 1.5D model. The idea is to start from the one-dimensional Hammer--Rosen analytic solution and systematically incorporate two-dimensional effects as corrections, hence the name ``1.5D.''
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: HR Model --- Governing Equations}
@@ -170,11 +184,11 @@ Let me now move on to what we call our 1.5D model. The idea is to start from the
 \textbf{Slide title:} HR Model - Governing Equations
 \end{slidebox}
 
-We begin with the Henyey--Raizer model. The starting point is the ``black'' diffusion equation. By neglecting the time derivative of the radiation energy density --- this is the term marked with the arrow going to zero --- we get a purely material-energy-driven diffusion equation.
+Here we discuss the governing equations of the Hammer--Rosen model. Hammer and Rosen solved the diffusion equation by using power-law descriptions for the material properties: specifically, specific energy $e$ and opacity $\kappa$ as power laws of temperature and density, governed by parameters $f$, $\mu$, $g$, $\lambda$, $\alpha$, and $\beta$.
 
-The specific energy and opacity are described by power laws, as I showed earlier, with material-dependent parameters $f$, $\mu$, $g$, $\lambda$, $\alpha$, and $\beta$.
+By assuming that the material energy density dominates over the radiation energy density --- which is a valid assumption up to temperatures of around 3~keV --- the radiation energy storage term can be neglected. This simplifies the governing relation to the nonlinear diffusion equation shown in the middle of the slide.
 
-Henyey and Raizer solved this nonlinear diffusion equation using perturbation theory and obtained a semi-analytic solution for the heat front position. Let me show you their result.
+Using perturbation theory, Hammer and Rosen solved this simplified equation to derive key physical quantities, as detailed in Rosen et al., Physics of Plasmas, 2003.
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: HR Model --- Heat Front Solution}
@@ -184,7 +198,7 @@ Henyey and Raizer solved this nonlinear diffusion equation using perturbation th
 \textbf{Slide title:} HR Model - Heat Front Solution
 \end{slidebox}
 
-The key result from the Henyey--Raizer model is this formula for the heat front position $x_F$ as a function of time. The front position squared is given by an integral expression involving the surface temperature history through the function $H(t) = T_s^{4+\alpha}$.
+The key result from the Hammer--Rosen model is this formula for the heat front position $x_F$ as a function of time. The front position squared is given by an integral expression involving the surface temperature history through the function $H(t) = T_s^{4+\alpha}$.
 
 The constant $C$ encapsulates all the material properties: the opacity coefficient $g$, the energy coefficient $f$, and the density $\rho$ with its appropriate power-law exponents. The parameter $\varepsilon = \beta/(4+\alpha)$ is a key dimensionless number that characterizes the nonlinearity.
 
@@ -200,7 +214,7 @@ Notice that $T_s$ here is the surface temperature at $x = 0$, which in the origi
 
 However, when we compare the HR model directly to the experimental data of Back et al., we find that it overestimates the heat front position by roughly a factor of 2! The model predicts a front that propagates much too fast.
 
-This is a very significant discrepancy, and it tells us that the simple 1D model is missing important physics. So the question is: what effects are we neglecting?
+This is a very significant discrepancy, and it tells us that the naive 1D model is missing important physics. So the question is: what effects are we neglecting?
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: Section Title --- 1D Effects}
@@ -220,11 +234,11 @@ Let me first address the one-dimensional corrections that need to be incorporate
 \textbf{Slide title:} Marshak Boundary Condition: $T_D \neq T_s$
 \end{slidebox}
 
-The first and most important 1D correction is the boundary condition. In the original HR model, the surface temperature $T_s$ is assumed to equal the drive temperature $T_D$. But this is not physical.
+The first and most important 1D correction is the boundary condition. In the original HR model, the surface temperature $T_s$ was assumed to equal the drive temperature $T_D$. But this is not physical.
 
-In reality, the radiation field at the foam surface must satisfy an energy balance: the incoming radiation from the Hohlraum at temperature $T_D$ must equal the re-emitted radiation from the surface at temperature $T_s$, plus the net flux $F(0,t)$ entering the foam. This is the Marshak boundary condition.
+In reality, the Marshak boundary condition states that the drive temperature is related to the angular integral of the specific intensity at the boundary. This is expressed in terms of the radiation energy density $E(0,t)$ and the net flux $F(0,t)$ entering the foam, as shown in the first equation.
 
-Because some of the incoming energy is carried away into the foam, the surface temperature $T_s$ is always \emph{lower} than the drive temperature $T_D$. This means the HR model, which uses $T_D$ directly, overestimates the effective driving temperature and therefore overestimates the front speed.
+This leads to the relation where the drive temperature flux equals the surface emission flux plus half the entering flux. Therefore, because energy is being carried away into the foam, the surface temperature $T_s$ is always \textbf{lower} than the drive temperature $T_D$. Using $T_D$ directly in the HR model overestimates the drive, leading to an artificially fast front.
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: Marshak Boundary Condition (Result)}
@@ -311,6 +325,8 @@ When this happens, photons are not scattering off the foam --- they are scatteri
 Following Courtois et al.\ 2024, we model this using a harmonic-mean formula: one over $\lambda_\mathrm{eff}$ equals one over $\lambda_R$ plus one over $2R$. This naturally transitions between the bulk-diffusion regime (when $\lambda_R \ll 2R$) and the wall-collision regime (when $\lambda_R \gg 2R$).
 
 For a smoother transition, we use a generalized power mean with an exponent $n$ that controls the tightness of the crossover.
+
+As shown in the figures at the bottom of the slide, we see the transition of the effective mean free path. On the left, we compare the effective mean free path $\lambda_{\mathrm{eff}}$ profiles over time for different power values ($n=1$, $n=2$, and $n=5$), showing how they approach the Rosseland limit at early times and are bounded by the geometric limit $2R$ at later times. On the right, we show the transition curve from the model.
 
 %-----------------------------------------------------------------------------
 \subsection{Slide: Effective Mean Free Path (Result)}
@@ -475,18 +491,6 @@ Beryllium is a low-Z material, so the walls are nearly transparent. The curvatur
 Finally, the vacuum case --- where there are no walls at all and energy simply escapes freely from the sides of the foam. This represents the maximum possible curvature. Our model handles this limiting case as well, showing strong curvature with the center advancing much farther than the edges.
 
 %-----------------------------------------------------------------------------
-\subsection{Slide: Gold vs.\ Copper Coating Comparison}
-%-----------------------------------------------------------------------------
-
-\begin{slidebox}
-\textbf{Slide title:} Gold vs.\ Copper Coating Comparison
-\end{slidebox}
-
-This slide shows a direct comparison with the French experiment by Courtois et al.\ 2024, which measured the arrival time of the heat front as a function of the radial position $r$ for both gold and copper coatings.
-
-This is a critical experimental test of the curvature model: gold walls cause more curvature because they absorb more energy, while copper walls allow a more uniform front. Our model reproduces both curves, capturing the material-dependent curvature quantitatively.
-
-%-----------------------------------------------------------------------------
 \subsection{Slide: Section Title --- Full 2D Temperature Distribution}
 %-----------------------------------------------------------------------------
 
@@ -547,6 +551,16 @@ Similarly, for the Ji-Yan polystyrene experiment, we show the 2D temperature dis
 Again, the front position and curvature from our model match the full simulation results very well. The small lower panel in each slide also shows the front position comparison directly, confirming the quantitative agreement.
 
 %-----------------------------------------------------------------------------
+\subsection{Slide: Section Title --- Comparison with Experimental Data}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Full 2D model --- Comparison with Experimental Data (section divider)
+\end{slidebox}
+
+Now we will look at the comparison of our model directly with experimental data for both radiation breakout flux shapes and arrival time distributions.
+
+%-----------------------------------------------------------------------------
 \subsection{Slide: Flux Curvature Comparison --- Back SiO2 PRL}
 %-----------------------------------------------------------------------------
 
@@ -572,6 +586,18 @@ And here is the same comparison for the tantala foam experiment from Back et al.
 
 The model captures the shape and magnitude of the emerging radiation profile, demonstrating that our approach works across different foam materials.
 
+%-----------------------------------------------------------------------------
+\subsection{Slide: Gold vs.\ Copper Coating Comparison}
+%-----------------------------------------------------------------------------
+
+\begin{slidebox}
+\textbf{Slide title:} Gold vs.\ Copper Coating Comparison
+\end{slidebox}
+
+This slide shows a direct comparison with the French experiment by Courtois et al.\ 2024, which measured the arrival time of the heat front as a function of the radial position $r$ for both gold and copper coatings.
+
+This is a critical experimental test of the curvature model: gold walls cause more curvature because they absorb more energy, while copper walls allow a more uniform front. Our model reproduces both curves, capturing the material-dependent curvature quantitatively.
+
 %=============================================================================
 \section{Conclusion}
 %=============================================================================
@@ -586,7 +612,7 @@ The model captures the shape and magnitude of the emerging radiation profile, de
 
 Let me summarize our main results.
 
-First, we have successfully built a full 2D model for supersonic Marshak waves. Starting from the Henyey--Raizer 1D solution, we systematically incorporated the Marshak boundary condition, wall energy loss, wall ablation with foam densification, and the effective mean free path correction. We then extended the model to two dimensions by combining our accurate 1.5D longitudinal solution with the Bessel-function curvature mode, using a dynamically computed wall albedo.
+First, we have successfully built a full 2D model for supersonic Marshak waves. Starting from the Hammer--Rosen 1D solution, we systematically incorporated the Marshak boundary condition, wall energy loss, wall ablation with foam densification, and the effective mean free path correction. We then extended the model to two dimensions by combining our accurate 1.5D longitudinal solution with the Bessel-function curvature mode, using a dynamically computed wall albedo.
 
 Our unified model captures both the front curvature and the full 2D temperature distribution, and it successfully reproduces experimental data and full 2D simulations across multiple experiments with different foam materials and wall coatings.
 

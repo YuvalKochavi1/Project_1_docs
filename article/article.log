@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  9 JUN 2026 13:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  9 JUN 2026 14:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -383,27 +383,27 @@ Underfull \hbox (badness 1484) in paragraph at lines 56--59
  []
 
 [1{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-<figures/HR.png, id=120, 600.74437pt x 450.9347pt>
+<figures/HR.png, id=121, 600.74437pt x 450.9347pt>
 File: figures/HR.png Graphic file (type png)
 <use figures/HR.png>
 Package pdftex.def Info: figures/HR.png  used on input line 119.
 (pdftex.def)             Requested size: 246.0pt x 184.65047pt.
-<figures/C8H7Cl.png, id=130, 578.16pt x 433.62pt>
+<figures/C8H7Cl.png, id=131, 578.16pt x 433.62pt>
 File: figures/C8H7Cl.png Graphic file (type png)
 <use figures/C8H7Cl.png>
 Package pdftex.def Info: figures/C8H7Cl.png  used on input line 167.
 (pdftex.def)             Requested size: 120.54135pt x 90.40123pt.
-<figures/Ta2O5.png, id=131, 578.16pt x 433.62pt>
+<figures/Ta2O5.png, id=132, 578.16pt x 433.62pt>
 File: figures/Ta2O5.png Graphic file (type png)
 <use figures/Ta2O5.png>
 Package pdftex.def Info: figures/Ta2O5.png  used on input line 168.
 (pdftex.def)             Requested size: 120.54135pt x 90.40123pt.
-<figures/SiO2_low_energy.png, id=132, 578.16pt x 433.62pt>
+<figures/SiO2_low_energy.png, id=133, 578.16pt x 433.62pt>
 File: figures/SiO2_low_energy.png Graphic file (type png)
 <use figures/SiO2_low_energy.png>
 Package pdftex.def Info: figures/SiO2_low_energy.png  used on input line 170.
 (pdftex.def)             Requested size: 120.54135pt x 90.40123pt.
-<figures/Ji-Yan.png, id=133, 578.16pt x 433.62pt>
+<figures/Ji-Yan.png, id=134, 578.16pt x 433.62pt>
 File: figures/Ji-Yan.png Graphic file (type png)
 <use figures/Ji-Yan.png>
 Package pdftex.def Info: figures/Ji-Yan.png  used on input line 171.
@@ -412,12 +412,12 @@ Package pdftex.def Info: figures/Ji-Yan.png  used on input line 171.
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 191.
 
-<figures/combined_curvature_comparison.png, id=161, 643.203pt x 498.663pt>
+<figures/combined_curvature_comparison.png, id=162, 643.203pt x 498.663pt>
 File: figures/combined_curvature_comparison.png Graphic file (type png)
 <use figures/combined_curvature_comparison.png>
 Package pdftex.def Info: figures/combined_curvature_comparison.png  used on input line 225.
 (pdftex.def)             Requested size: 246.0pt x 190.71895pt.
-<figures/moore_simulation.png, id=166, 448.67625pt x 503.63156pt>
+<figures/moore_simulation.png, id=167, 448.67625pt x 503.63156pt>
 File: figures/moore_simulation.png Graphic file (type png)
 <use figures/moore_simulation.png>
 Package pdftex.def Info: figures/moore_simulation.png  used on input line 240.
@@ -426,7 +426,7 @@ Package pdftex.def Info: figures/moore_simulation.png  used on input line 240.
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix] on input line 247.
 
-<figures/back_prl_curve.png, id=195, 433.62pt x 325.215pt>
+<figures/back_prl_curve.png, id=196, 433.62pt x 325.215pt>
 File: figures/back_prl_curve.png Graphic file (type png)
 <use figures/back_prl_curve.png>
 Package pdftex.def Info: figures/back_prl_curve.png  used on input line 252.
@@ -443,7 +443,7 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `article.out' has not changed.
-(rerunfilecheck)             Checksum: 3685F6217AF4BE5AA58F7D6C5B779C62;3059.
+(rerunfilecheck)             Checksum: 4373A297536CE463AD34C674567806D4;3054.
  ) 
 Here is how much of TeX's memory you used:
  12337 strings out of 467871
@@ -454,7 +454,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,9n,79p,644b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on article.pdf (5 pages, 799901 bytes).
+Output written on article.pdf (5 pages, 799750 bytes).
 PDF statistics:
  300 PDF objects out of 1000 (max. 8388607)
  61 named destinations out of 1000 (max. 500000)
