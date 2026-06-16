@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  10 JUN 2026 15:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  16 JUN 2026 16:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -196,46 +196,61 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+Package: colortbl 2026/05/01 v1.0l Color table columns (DPC)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen195
+\ar@mcellbox=\box64
+\extrarowheight=\dimen196
+\NC@list=\toks29
+\extratabsurround=\skip52
+\backup@length=\skip53
+\ar@cellbox=\box65
+)
+\everycr=\toks30
+\minrowclearance=\skip54
+\rownum=\count317
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
 Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@picminx=\dimen195
-\pgf@picmaxx=\dimen196
-\pgf@picminy=\dimen197
-\pgf@picmaxy=\dimen198
-\pgf@pathminx=\dimen199
-\pgf@pathmaxx=\dimen256
-\pgf@pathminy=\dimen257
-\pgf@pathmaxy=\dimen258
-\pgf@xx=\dimen259
-\pgf@xy=\dimen260
-\pgf@yx=\dimen261
-\pgf@yy=\dimen262
-\pgf@zx=\dimen263
-\pgf@zy=\dimen264
+\pgf@picminx=\dimen197
+\pgf@picmaxx=\dimen198
+\pgf@picminy=\dimen199
+\pgf@picmaxy=\dimen256
+\pgf@pathminx=\dimen257
+\pgf@pathmaxx=\dimen258
+\pgf@pathminy=\dimen259
+\pgf@pathmaxy=\dimen260
+\pgf@xx=\dimen261
+\pgf@xy=\dimen262
+\pgf@yx=\dimen263
+\pgf@yy=\dimen264
+\pgf@zx=\dimen265
+\pgf@zy=\dimen266
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@path@lastx=\dimen265
-\pgf@path@lasty=\dimen266
+\pgf@path@lastx=\dimen267
+\pgf@path@lasty=\dimen268
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@shorten@end@additional=\dimen267
-\pgf@shorten@start@additional=\dimen268
+\pgf@shorten@end@additional=\dimen269
+\pgf@shorten@start@additional=\dimen270
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfpic=\box64
-\pgf@hbox=\box65
-\pgf@layerbox@main=\box66
-\pgf@picture@serial@count=\count317
+\pgfpic=\box66
+\pgf@hbox=\box67
+\pgf@layerbox@main=\box68
+\pgf@picture@serial@count=\count318
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgflinewidth=\dimen269
+\pgflinewidth=\dimen271
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@pt@x=\dimen270
-\pgf@pt@y=\dimen271
-\pgf@pt@temp=\dimen272
+\pgf@pt@x=\dimen272
+\pgf@pt@y=\dimen273
+\pgf@pt@temp=\dimen274
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
@@ -244,17 +259,17 @@ File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfarrowsep=\dimen273
+\pgfarrowsep=\dimen275
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgf@max=\dimen274
-\pgf@sys@shading@range@num=\count318
-\pgf@shadingcount=\count319
+\pgf@max=\dimen276
+\pgf@sys@shading@range@num=\count319
+\pgf@shadingcount=\count320
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-\pgfexternal@startupbox=\box67
+\pgfexternal@startupbox=\box69
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
@@ -265,8 +280,8 @@ File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ))) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\xxcolor.sty
 Package: xxcolor 2003/10/24 ver 0.1
-\XC@nummixins=\count320
-\XC@countmixins=\count321
+\XC@nummixins=\count321
+\XC@countmixins=\count322
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
@@ -299,13 +314,13 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count322
+\c@section@level=\count323
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen275
-\Hy@linkcounter=\count323
-\Hy@pagecounter=\count324
+\@linkdim=\dimen277
+\Hy@linkcounter=\count324
+\Hy@pagecounter=\count325
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -313,7 +328,7 @@ Now handling font encoding PD1 ...
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count325
+\Hy@SavedSpaceFactor=\count326
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -329,21 +344,21 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count326
+\c@Hy@tempcnt=\count327
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4801.
-\XeTeXLinkMargin=\dimen276
+\XeTeXLinkMargin=\dimen278
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count327
-\Field@Width=\dimen277
-\Fld@charsize=\dimen278
+\Fld@menulength=\count328
+\Field@Width=\dimen279
+\Fld@charsize=\dimen280
 Package hyperref Info: Hyper figures OFF on input line 6078.
 Package hyperref Info: Link nesting OFF on input line 6083.
 Package hyperref Info: Hyper index ON on input line 6086.
@@ -351,7 +366,7 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count328
+\Hy@abspage=\count329
 
 
 Package hyperref Message: Stopped early.
@@ -360,8 +375,8 @@ Package hyperref Message: Stopped early.
 Package hyperref Info: Driver (autodetected): hpdftex.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count329
-\c@bookmark@seq@number=\count330
+\Fld@listcount=\count330
+\c@bookmark@seq@number=\count331
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
@@ -372,7 +387,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks29
+\@emptytoks=\toks31
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
@@ -389,172 +404,172 @@ Package: scrlogo 2026/02/02 v3.49.2 KOMA-Script package (logo)
 ))))) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasetranslator.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator.sty
 Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
 )) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasemisc.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasetwoscreens.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseoverlay.sty
-\beamer@argscount=\count331
-\beamer@lastskipcover=\skip52
-\beamer@trivlistdepth=\count332
+\beamer@argscount=\count332
+\beamer@lastskipcover=\skip55
+\beamer@trivlistdepth=\count333
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasetitle.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasesection.sty
-\c@lecture=\count333
-\c@part=\count334
-\c@section=\count335
-\c@subsection=\count336
-\c@subsubsection=\count337
+\c@lecture=\count334
+\c@part=\count335
+\c@section=\count336
+\c@subsection=\count337
+\c@subsubsection=\count338
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseframe.sty
-\beamer@framebox=\box68
-\beamer@frametitlebox=\box69
-\beamer@zoombox=\box70
-\beamer@zoomcount=\count338
-\beamer@zoomframecount=\count339
-\beamer@frametextheight=\dimen279
-\c@subsectionslide=\count340
-\beamer@frametopskip=\skip53
-\beamer@framebottomskip=\skip54
-\beamer@frametopskipautobreak=\skip55
-\beamer@framebottomskipautobreak=\skip56
-\beamer@envbody=\toks30
-\framewidth=\dimen280
-\c@framenumber=\count341
+\beamer@framebox=\box70
+\beamer@frametitlebox=\box71
+\beamer@zoombox=\box72
+\beamer@zoomcount=\count339
+\beamer@zoomframecount=\count340
+\beamer@frametextheight=\dimen281
+\c@subsectionslide=\count341
+\beamer@frametopskip=\skip56
+\beamer@framebottomskip=\skip57
+\beamer@frametopskipautobreak=\skip58
+\beamer@framebottomskipautobreak=\skip59
+\beamer@envbody=\toks32
+\framewidth=\dimen282
+\c@framenumber=\count342
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseverbatim.sty
 \beamer@verbatimfileout=\write4
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseframesize.sty
-\beamer@splitbox=\box71
-\beamer@autobreakcount=\count342
-\beamer@autobreaklastheight=\dimen281
-\beamer@frametitletoks=\toks31
-\beamer@framesubtitletoks=\toks32
+\beamer@splitbox=\box73
+\beamer@autobreakcount=\count343
+\beamer@autobreaklastheight=\dimen283
+\beamer@frametitletoks=\toks33
+\beamer@framesubtitletoks=\toks34
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseframecomponents.sty
-\beamer@colheight=\skip57
-\beamer@footins=\box72
+\beamer@colheight=\skip60
+\beamer@footins=\box74
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasecolor.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasenotes.sty
-\beamer@frameboxcopy=\box73
+\beamer@frameboxcopy=\box75
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasetoc.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasetemplates.sty
-\beamer@sbttoks=\toks33
+\beamer@sbttoks=\toks35
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseauxtemplates.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaseboxes.sty
-\bmb@box=\box74
-\bmb@colorbox=\box75
-\bmb@boxwidth=\dimen282
-\bmb@boxheight=\dimen283
-\bmb@prevheight=\dimen284
-\bmb@temp=\dimen285
-\bmb@dima=\dimen286
-\bmb@dimb=\dimen287
-\bmb@prevheight=\dimen288
+\bmb@box=\box76
+\bmb@colorbox=\box77
+\bmb@boxwidth=\dimen284
+\bmb@boxheight=\dimen285
+\bmb@prevheight=\dimen286
+\bmb@temp=\dimen287
+\bmb@dima=\dimen288
+\bmb@dimb=\dimen289
+\bmb@prevheight=\dimen290
 )
-\beamer@blockheadheight=\dimen289
+\beamer@blockheadheight=\dimen291
 )) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbaselocalstructure.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/tools\enumerate.sty
 Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
-\@enLab=\toks34
+\@enLab=\toks36
 )
-\beamer@bibiconwidth=\skip58
-\c@figure=\count343
-\c@table=\count344
-\abovecaptionskip=\skip59
-\belowcaptionskip=\skip60
+\beamer@bibiconwidth=\skip61
+\c@figure=\count344
+\c@table=\count345
+\abovecaptionskip=\skip62
+\belowcaptionskip=\skip63
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasenavigation.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasenavigationsymbols.tex)
-\beamer@section@min@dim=\dimen290
+\beamer@section@min@dim=\dimen292
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasetheorems.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
-\@mathmargin=\skip61
+\@mathmargin=\skip64
 
 For additional information on amsmath, use the `?' option.
 (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks35
-\ex@=\dimen291
+\@emptytoks=\toks37
+\ex@=\dimen293
 )) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen292
+\pmbraise@=\dimen294
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count345
+\inf@bad=\count346
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count346
-\leftroot@=\count347
+\uproot@=\count347
+\leftroot@=\count348
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count348
-\DOTSCASE@=\count349
+\classnum@=\count349
+\DOTSCASE@=\count350
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box76
-\strutbox@=\box77
+\Mathstrutbox@=\box78
+\strutbox@=\box79
 LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen293
+\big@size=\dimen295
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count350
+\macc@depth=\count351
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count351
+\c@MaxMatrixCols=\count352
 \dotsspace@=\muskip18
-\c@parentequation=\count352
-\dspbrk@lvl=\count353
-\tag@help=\toks36
-\row@=\count354
-\column@=\count355
-\maxfields@=\count356
-\andhelp@=\toks37
-\eqnshift@=\dimen294
-\alignsep@=\dimen295
-\tagshift@=\dimen296
-\tagwidth@=\dimen297
-\totwidth@=\dimen298
-\lineht@=\dimen299
-\@envbody=\toks38
-\multlinegap=\skip62
-\multlinetaggap=\skip63
-\mathdisplay@stack=\toks39
+\c@parentequation=\count353
+\dspbrk@lvl=\count354
+\tag@help=\toks38
+\row@=\count355
+\column@=\count356
+\maxfields@=\count357
+\andhelp@=\toks39
+\eqnshift@=\dimen296
+\alignsep@=\dimen297
+\tagshift@=\dimen298
+\tagwidth@=\dimen299
+\totwidth@=\dimen300
+\lineht@=\dimen301
+\@envbody=\toks40
+\multlinegap=\skip65
+\multlinetaggap=\skip66
+\mathdisplay@stack=\toks41
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks40
-\thm@bodyfont=\toks41
-\thm@headfont=\toks42
-\thm@notefont=\toks43
-\thm@headpunct=\toks44
-\thm@preskip=\skip64
-\thm@postskip=\skip65
-\thm@headsep=\skip66
-\dth@everypar=\toks45
+\thm@style=\toks42
+\thm@bodyfont=\toks43
+\thm@headfont=\toks44
+\thm@notefont=\toks45
+\thm@headpunct=\toks46
+\thm@preskip=\skip67
+\thm@postskip=\skip68
+\thm@headsep=\skip69
+\dth@everypar=\toks47
 )
-\c@theorem=\count357
+\c@theorem=\count358
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasethemes.sty)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemedefault.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerfontthemedefault.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolorthemedefault.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerinnerthemedefault.sty
-\beamer@dima=\dimen300
-\beamer@dimb=\dimen301
+\beamer@dima=\dimen302
+\beamer@dimb=\dimen303
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerouterthemedefault.sty))) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemeMadrid.sty (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolorthemewhale.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolorthemeorchid.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerinnerthemerounded.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerouterthemeinfolines.sty)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerfontthemeserif.sty) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count358
+\l__color_backend_stack_int=\count359
 ) (conference.aux)
 \openout1 = `conference.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -592,24 +607,24 @@ LaTeX Font Info:    ... okay on input line 19.
 
 (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count359
-\scratchdimen=\dimen302
-\scratchbox=\box78
-\nofMPsegments=\count360
-\nofMParguments=\count361
-\everyMPshowfont=\toks46
-\MPscratchCnt=\count362
-\MPscratchDim=\dimen303
-\MPnumerator=\count363
-\makeMPintoPDFobject=\count364
-\everyMPtoPDFconversion=\toks47
+\scratchcounter=\count360
+\scratchdimen=\dimen304
+\scratchbox=\box80
+\nofMPsegments=\count361
+\nofMParguments=\count362
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count363
+\MPscratchDim=\dimen305
+\MPnumerator=\count364
+\makeMPintoPDFobject=\count365
+\everyMPtoPDFconversion=\toks49
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 19.
+Package hyperref Info: Link coloring OFF on input line 45.
  (conference.out) (conference.out)
 \@outlinefile=\write5
 \openout5 = `conference.out'.
@@ -626,494 +641,533 @@ Dictionary: translator-months-dictionary, Language: English
 Dictionary: translator-numbers-dictionary, Language: English 
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-) (conference.nav) [1
-
-{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-<figures_intreduction/ICF.png, id=83, 337.26pt x 252.19218pt>
-File: figures_intreduction/ICF.png Graphic file (type png)
-<use figures_intreduction/ICF.png>
-Package pdftex.def Info: figures_intreduction/ICF.png  used on input line 54.
-(pdftex.def)             Requested size: 154.03183pt x 115.18245pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 54.
+) (conference.nav)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 74.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 54.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 74.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<figures_intreduction/Astro.png, id=87, 313.9228pt x 243.91125pt>
+<town_vertical.jpg, id=58, 351.3125pt x 490.83376pt>
+File: town_vertical.jpg Graphic file (type jpg)
+<use town_vertical.jpg>
+Package pdftex.def Info: town_vertical.jpg  used on input line 74.
+(pdftex.def)             Requested size: 167.79182pt x 234.4304pt.
+
+Overfull \hbox (37.71794pt too wide) in paragraph at lines 74--74
+ [][] 
+ []
+
+[1
+
+{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./town_vertical.jpg>] (conference.toc) [2
+
+]
+<figures_intreduction/ICF.png, id=105, 337.26pt x 252.19218pt>
+File: figures_intreduction/ICF.png Graphic file (type png)
+<use figures_intreduction/ICF.png>
+Package pdftex.def Info: figures_intreduction/ICF.png  used on input line 111.
+(pdftex.def)             Requested size: 156.08475pt x 116.71786pt.
+<figures_intreduction/Astro.png, id=119, 313.9228pt x 243.91125pt>
 File: figures_intreduction/Astro.png Graphic file (type png)
 <use figures_intreduction/Astro.png>
-Package pdftex.def Info: figures_intreduction/Astro.png  used on input line 54.
-(pdftex.def)             Requested size: 154.03183pt x 119.67758pt.
- [2
-
- <./figures_intreduction/ICF.png> <./figures_intreduction/Astro.png>]
-<figures_intreduction/supersonic.png, id=97, 671.50874pt x 394.47375pt>
-File: figures_intreduction/supersonic.png Graphic file (type png)
-<use figures_intreduction/supersonic.png>
-Package pdftex.def Info: figures_intreduction/supersonic.png  used on input line 77.
-(pdftex.def)             Requested size: 143.7634pt x 84.44905pt.
+Package pdftex.def Info: figures_intreduction/Astro.png  used on input line 111.
+(pdftex.def)             Requested size: 156.08475pt x 121.27423pt.
  [3
 
- <./figures_intreduction/supersonic.png>] [4
+ <./figures_intreduction/ICF.png> <./figures_intreduction/Astro.png>] [4
 
 ] [5
 
 ]
-<figures_intreduction/T_drive.png, id=128, 412.4208pt x 233.1912pt>
-File: figures_intreduction/T_drive.png Graphic file (type png)
-<use figures_intreduction/T_drive.png>
-Package pdftex.def Info: figures_intreduction/T_drive.png  used on input line 130.
-(pdftex.def)             Requested size: 154.03183pt x 87.09421pt.
-<figures_intreduction/setup.png, id=129, 928.21782pt x 502.12593pt>
-File: figures_intreduction/setup.png Graphic file (type png)
-<use figures_intreduction/setup.png>
-Package pdftex.def Info: figures_intreduction/setup.png  used on input line 130.
-(pdftex.def)             Requested size: 154.03183pt x 83.32224pt.
+<figures_intreduction/supersonic.png, id=175, 671.50874pt x 394.47375pt>
+File: figures_intreduction/supersonic.png Graphic file (type png)
+<use figures_intreduction/supersonic.png>
+Package pdftex.def Info: figures_intreduction/supersonic.png  used on input line 167.
+(pdftex.def)             Requested size: 130.07388pt x 76.40742pt.
  [6
 
- <./figures_intreduction/T_drive.png> <./figures_intreduction/setup.png>]
-<figures_intreduction/method1.png, id=139, 165.2574pt x 152.7306pt>
-File: figures_intreduction/method1.png Graphic file (type png)
-<use figures_intreduction/method1.png>
-Package pdftex.def Info: figures_intreduction/method1.png  used on input line 175.
-(pdftex.def)             Requested size: 82.15045pt x 75.92464pt.
-<figures_intreduction/method2.png, id=140, 482.55281pt x 246.9225pt>
-File: figures_intreduction/method2.png Graphic file (type png)
-<use figures_intreduction/method2.png>
-Package pdftex.def Info: figures_intreduction/method2.png  used on input line 175.
-(pdftex.def)             Requested size: 82.15045pt x 42.03654pt.
-<figures_intreduction/method3.png, id=141, 225.0006pt x 147.9126pt>
-File: figures_intreduction/method3.png Graphic file (type png)
-<use figures_intreduction/method3.png>
-Package pdftex.def Info: figures_intreduction/method3.png  used on input line 175.
-(pdftex.def)             Requested size: 82.15045pt x 54.00456pt.
-<figures_intreduction/flux.png, id=142, 358.941pt x 196.0926pt>
-File: figures_intreduction/flux.png Graphic file (type png)
-<use figures_intreduction/flux.png>
-Package pdftex.def Info: figures_intreduction/flux.png  used on input line 175.
-(pdftex.def)             Requested size: 154.03183pt x 84.14761pt.
-<figures_intreduction/flux_curvature.png, id=143, 359.4228pt x 202.8378pt>
-File: figures_intreduction/flux_curvature.png Graphic file (type png)
-<use figures_intreduction/flux_curvature.png>
-Package pdftex.def Info: figures_intreduction/flux_curvature.png  used on input line 175.
-(pdftex.def)             Requested size: 154.03183pt x 86.92451pt.
+ <./figures_intreduction/supersonic.png>]
+Overfull \hbox (15.27953pt too wide) detected at line 194
+[] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 f^^Z[][] \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 r ^^A []
+ []
 
-Overfull \vbox (17.82535pt too high) detected at line 175
+<figures_intreduction/hurricane.png, id=197, 439.6425pt x 322.95656pt>
+File: figures_intreduction/hurricane.png Graphic file (type png)
+<use figures_intreduction/hurricane.png>
+Package pdftex.def Info: figures_intreduction/hurricane.png  used on input line 194.
+(pdftex.def)             Requested size: 177.29619pt x 130.23999pt.
+
+Overfull \hbox (12.99591pt too wide) in paragraph at lines 194--194
+ [][] 
  []
 
 [7
 
- <./figures_intreduction/method1.png> <./figures_intreduction/method2.png> <./figures_intreduction/method3.png> <./figures_intreduction/flux.png> <./figures_intreduction/flux_curvature.png>] [8
+ <./figures_intreduction/hurricane.png>]
+<figures_intreduction/T_drive.png, id=207, 412.4208pt x 233.1912pt>
+File: figures_intreduction/T_drive.png Graphic file (type png)
+<use figures_intreduction/T_drive.png>
+Package pdftex.def Info: figures_intreduction/T_drive.png  used on input line 223.
+(pdftex.def)             Requested size: 154.03183pt x 87.09421pt.
+<figures_intreduction/setup.png, id=208, 928.21782pt x 502.12593pt>
+File: figures_intreduction/setup.png Graphic file (type png)
+<use figures_intreduction/setup.png>
+Package pdftex.def Info: figures_intreduction/setup.png  used on input line 223.
+(pdftex.def)             Requested size: 154.03183pt x 83.32224pt.
+ [8
 
-] [9
+ <./figures_intreduction/T_drive.png> <./figures_intreduction/setup.png>]
+<figures_intreduction/method1.png, id=217, 165.2574pt x 152.7306pt>
+File: figures_intreduction/method1.png Graphic file (type png)
+<use figures_intreduction/method1.png>
+Package pdftex.def Info: figures_intreduction/method1.png  used on input line 268.
+(pdftex.def)             Requested size: 76.67264pt x 70.86284pt.
+<figures_intreduction/method2.png, id=218, 482.55281pt x 246.9225pt>
+File: figures_intreduction/method2.png Graphic file (type png)
+<use figures_intreduction/method2.png>
+Package pdftex.def Info: figures_intreduction/method2.png  used on input line 268.
+(pdftex.def)             Requested size: 76.67264pt x 39.23335pt.
+<figures_intreduction/method3.png, id=219, 225.0006pt x 147.9126pt>
+File: figures_intreduction/method3.png Graphic file (type png)
+<use figures_intreduction/method3.png>
+Package pdftex.def Info: figures_intreduction/method3.png  used on input line 268.
+(pdftex.def)             Requested size: 76.67264pt x 50.40245pt.
+<figures_intreduction/flux.png, id=220, 358.941pt x 196.0926pt>
+File: figures_intreduction/flux.png Graphic file (type png)
+<use figures_intreduction/flux.png>
+Package pdftex.def Info: figures_intreduction/flux.png  used on input line 268.
+(pdftex.def)             Requested size: 154.03183pt x 84.14761pt.
+<figures_intreduction/flux_curvature.png, id=221, 359.4228pt x 202.8378pt>
+File: figures_intreduction/flux_curvature.png Graphic file (type png)
+<use figures_intreduction/flux_curvature.png>
+Package pdftex.def Info: figures_intreduction/flux_curvature.png  used on input line 268.
+(pdftex.def)             Requested size: 154.03183pt x 86.92451pt.
 
-] [10
+Overfull \vbox (17.82535pt too high) detected at line 268
+ []
+
+[9
+
+ <./figures_intreduction/method1.png> <./figures_intreduction/method2.png> <./figures_intreduction/method3.png> <./figures_intreduction/flux.png> <./figures_intreduction/flux_curvature.png>] [10
 
 ] [11
 
+] [12
+
+] [13
+
 ]
-<figures_1.5model/HR.png, id=192, 600.74437pt x 450.9347pt>
+<figures_1.5model/HR.png, id=268, 803.0pt x 602.25pt>
 File: figures_1.5model/HR.png Graphic file (type png)
 <use figures_1.5model/HR.png>
-Package pdftex.def Info: figures_1.5model/HR.png  used on input line 253.
-(pdftex.def)             Requested size: 239.60567pt x 179.85463pt.
- [12
+Package pdftex.def Info: figures_1.5model/HR.png  used on input line 352.
+(pdftex.def)             Requested size: 232.75829pt x 174.5653pt.
+ [14
 
- <./figures_1.5model/HR.png>] [13
-
-] [14
+ <./figures_1.5model/HR.png (PNG copy)>] [15
 
 ]
-<figures_1.5model/marshak.png, id=218, 600.74437pt x 449.42906pt>
+<figures_1.5model/marshak.png, id=284, 803.0pt x 602.25pt>
 File: figures_1.5model/marshak.png Graphic file (type png)
 <use figures_1.5model/marshak.png>
-Package pdftex.def Info: figures_1.5model/marshak.png  used on input line 292.
-(pdftex.def)             Requested size: 239.60567pt x 179.2541pt.
- [15
+Package pdftex.def Info: figures_1.5model/marshak.png  used on input line 377.
+(pdftex.def)             Requested size: 239.60567pt x 179.70229pt.
+ [16
 
- <./figures_1.5model/marshak.png>] [16
+ <./figures_1.5model/marshak.png (PNG copy)>] [17
 
-] [17
+] [18
 
 ]
-<figures_1.5model/wall_loss.png, id=241, 602.25pt x 451.6875pt>
+<figures_1.5model/wall_loss.png, id=305, 578.16pt x 433.62pt>
 File: figures_1.5model/wall_loss.png Graphic file (type png)
 <use figures_1.5model/wall_loss.png>
-Package pdftex.def Info: figures_1.5model/wall_loss.png  used on input line 326.
-(pdftex.def)             Requested size: 239.60567pt x 179.70688pt.
- [18
+Package pdftex.def Info: figures_1.5model/wall_loss.png  used on input line 413.
+(pdftex.def)             Requested size: 239.60567pt x 179.70413pt.
+ [19
 
  <./figures_1.5model/wall_loss.png>]
-<figures_1.5model/ablation.png, id=250, 494.59781pt x 163.3603pt>
+<figures_1.5model/ablation.png, id=315, 494.59781pt x 163.3603pt>
 File: figures_1.5model/ablation.png Graphic file (type png)
 <use figures_1.5model/ablation.png>
-Package pdftex.def Info: figures_1.5model/ablation.png  used on input line 350.
+Package pdftex.def Info: figures_1.5model/ablation.png  used on input line 437.
 (pdftex.def)             Requested size: 154.03442pt x 50.87547pt.
 
-Overfull \hbox (51.3448pt too wide) in paragraph at lines 350--350
+Overfull \hbox (51.3448pt too wide) in paragraph at lines 437--437
  [] 
  []
 
-<figures_1.5model/radius_ablation.png, id=251, 803.0pt x 602.25pt>
+<figures_1.5model/radius_ablation.png, id=316, 803.0pt x 602.25pt>
 File: figures_1.5model/radius_ablation.png Graphic file (type png)
 <use figures_1.5model/radius_ablation.png>
-Package pdftex.def Info: figures_1.5model/radius_ablation.png  used on input line 350.
+Package pdftex.def Info: figures_1.5model/radius_ablation.png  used on input line 437.
 (pdftex.def)             Requested size: 198.53189pt x 148.8988pt.
 
-Overfull \vbox (4.55742pt too high) detected at line 350
+Overfull \vbox (4.55742pt too high) detected at line 437
  []
 
-[19
+[20
 
  <./figures_1.5model/ablation.png> <./figures_1.5model/radius_ablation.png (PNG copy)>]
-<figures_1.5model/denser_foam.png, id=261, 603.0028pt x 450.18187pt>
+<figures_1.5model/denser_foam.png, id=325, 578.16pt x 433.62pt>
 File: figures_1.5model/denser_foam.png Graphic file (type png)
 <use figures_1.5model/denser_foam.png>
-Package pdftex.def Info: figures_1.5model/denser_foam.png  used on input line 360.
-(pdftex.def)             Requested size: 239.60567pt x 178.88118pt.
- [20
-
- <./figures_1.5model/denser_foam.png>]
-<figures_1.5model/lam_eff0.png, id=270, 578.16pt x 433.62pt>
-File: figures_1.5model/lam_eff0.png Graphic file (type png)
-<use figures_1.5model/lam_eff0.png>
-Package pdftex.def Info: figures_1.5model/lam_eff0.png  used on input line 387.
-(pdftex.def)             Requested size: 146.32976pt x 109.74126pt.
-<figures_1.5model/lam_eff1.png, id=271, 1027.84pt x 776.9025pt>
-File: figures_1.5model/lam_eff1.png Graphic file (type png)
-<use figures_1.5model/lam_eff1.png>
-Package pdftex.def Info: figures_1.5model/lam_eff1.png  used on input line 387.
-(pdftex.def)             Requested size: 146.32976pt x 110.60306pt.
+Package pdftex.def Info: figures_1.5model/denser_foam.png  used on input line 447.
+(pdftex.def)             Requested size: 239.60567pt x 179.70413pt.
  [21
 
- <./figures_1.5model/lam_eff0.png> <./figures_1.5model/lam_eff1.png (PNG copy)>]
-<figures_1.5model/lam_eff.png, id=281, 595.47469pt x 446.41782pt>
-File: figures_1.5model/lam_eff.png Graphic file (type png)
-<use figures_1.5model/lam_eff.png>
-Package pdftex.def Info: figures_1.5model/lam_eff.png  used on input line 397.
-(pdftex.def)             Requested size: 239.60567pt x 179.62659pt.
+ <./figures_1.5model/denser_foam.png>]
+<figures_1.5model/lam_eff0.png, id=334, 578.16pt x 433.62pt>
+File: figures_1.5model/lam_eff0.png Graphic file (type png)
+<use figures_1.5model/lam_eff0.png>
+Package pdftex.def Info: figures_1.5model/lam_eff0.png  used on input line 474.
+(pdftex.def)             Requested size: 146.32976pt x 109.74126pt.
+<figures_1.5model/lam_eff1.png, id=335, 1027.84pt x 776.9025pt>
+File: figures_1.5model/lam_eff1.png Graphic file (type png)
+<use figures_1.5model/lam_eff1.png>
+Package pdftex.def Info: figures_1.5model/lam_eff1.png  used on input line 474.
+(pdftex.def)             Requested size: 146.32976pt x 110.60306pt.
  [22
 
- <./figures_1.5model/lam_eff.png>]
-<figures_1.5model/C8H7Cl.png, id=290, 578.16pt x 433.62pt>
-File: figures_1.5model/C8H7Cl.png Graphic file (type png)
-<use figures_1.5model/C8H7Cl.png>
-Package pdftex.def Info: figures_1.5model/C8H7Cl.png  used on input line 433.
-(pdftex.def)             Requested size: 128.154pt x 96.11127pt.
-<figures_1.5model/Ta2O5.png, id=291, 578.16pt x 433.62pt>
-File: figures_1.5model/Ta2O5.png Graphic file (type png)
-<use figures_1.5model/Ta2O5.png>
-Package pdftex.def Info: figures_1.5model/Ta2O5.png  used on input line 433.
-(pdftex.def)             Requested size: 128.154pt x 96.11127pt.
-<figures_1.5model/SiO2_low_energy.png, id=292, 578.16pt x 433.62pt>
-File: figures_1.5model/SiO2_low_energy.png Graphic file (type png)
-<use figures_1.5model/SiO2_low_energy.png>
-Package pdftex.def Info: figures_1.5model/SiO2_low_energy.png  used on input line 433.
-(pdftex.def)             Requested size: 128.154pt x 96.11127pt.
-<figures_1.5model/Ji-Yan.png, id=293, 578.16pt x 433.62pt>
-File: figures_1.5model/Ji-Yan.png Graphic file (type png)
-<use figures_1.5model/Ji-Yan.png>
-Package pdftex.def Info: figures_1.5model/Ji-Yan.png  used on input line 433.
-(pdftex.def)             Requested size: 128.154pt x 96.11127pt.
+ <./figures_1.5model/lam_eff0.png> <./figures_1.5model/lam_eff1.png (PNG copy)>]
+<figures_1.5model/lam_eff.png, id=345, 578.16pt x 433.62pt>
+File: figures_1.5model/lam_eff.png Graphic file (type png)
+<use figures_1.5model/lam_eff.png>
+Package pdftex.def Info: figures_1.5model/lam_eff.png  used on input line 484.
+(pdftex.def)             Requested size: 239.60567pt x 179.70413pt.
  [23
 
- <./figures_1.5model/C8H7Cl.png> <./figures_1.5model/Ta2O5.png> <./figures_1.5model/SiO2_low_energy.png> <./figures_1.5model/Ji-Yan.png>] [24
+ <./figures_1.5model/lam_eff.png>]
+<figures_1.5model/C8H7Cl.png, id=354, 803.0pt x 602.25pt>
+File: figures_1.5model/C8H7Cl.png Graphic file (type png)
+<use figures_1.5model/C8H7Cl.png>
+Package pdftex.def Info: figures_1.5model/C8H7Cl.png  used on input line 520.
+(pdftex.def)             Requested size: 128.154pt x 96.11385pt.
+<figures_1.5model/Ta2O5.png, id=355, 803.0pt x 602.25pt>
+File: figures_1.5model/Ta2O5.png Graphic file (type png)
+<use figures_1.5model/Ta2O5.png>
+Package pdftex.def Info: figures_1.5model/Ta2O5.png  used on input line 520.
+(pdftex.def)             Requested size: 128.154pt x 96.11385pt.
+<figures_1.5model/SiO2_low_energy.png, id=356, 803.0pt x 602.25pt>
+File: figures_1.5model/SiO2_low_energy.png Graphic file (type png)
+<use figures_1.5model/SiO2_low_energy.png>
+Package pdftex.def Info: figures_1.5model/SiO2_low_energy.png  used on input line 520.
+(pdftex.def)             Requested size: 128.154pt x 96.11385pt.
+<figures_1.5model/Ji-Yan.png, id=357, 803.0pt x 602.25pt>
+File: figures_1.5model/Ji-Yan.png Graphic file (type png)
+<use figures_1.5model/Ji-Yan.png>
+Package pdftex.def Info: figures_1.5model/Ji-Yan.png  used on input line 520.
+(pdftex.def)             Requested size: 128.154pt x 96.11385pt.
+ [24
+
+ <./figures_1.5model/C8H7Cl.png (PNG copy)> <./figures_1.5model/Ta2O5.png (PNG copy)> <./figures_1.5model/SiO2_low_energy.png (PNG copy)> <./figures_1.5model/Ji-Yan.png (PNG copy)>]
+<figures_1.5model/flux_back_prl.png, id=365, 475.7775pt x 389.65575pt>
+File: figures_1.5model/flux_back_prl.png Graphic file (type png)
+<use figures_1.5model/flux_back_prl.png>
+Package pdftex.def Info: figures_1.5model/flux_back_prl.png  used on input line 544.
+(pdftex.def)             Requested size: 164.30028pt x 134.56218pt.
+ [25
+
+ <./figures_1.5model/flux_back_prl.png>] [26
+
+] [27
 
 ]
-<figures_intreduction/hurricane.png, id=312, 439.6425pt x 322.95656pt>
 File: figures_intreduction/hurricane.png Graphic file (type png)
 <use figures_intreduction/hurricane.png>
-Package pdftex.def Info: figures_intreduction/hurricane.png  used on input line 462.
+Package pdftex.def Info: figures_intreduction/hurricane.png  used on input line 585.
 (pdftex.def)             Requested size: 141.8356pt x 104.1904pt.
 
-Overfull \vbox (14.65192pt too high) detected at line 462
+Overfull \vbox (14.65192pt too high) detected at line 585
  []
 
-[25
+[28
 
- <./figures_intreduction/hurricane.png>]
-Overfull \hbox (10.93pt too wide) detected at line 486
+]
+Overfull \hbox (10.93pt too wide) detected at line 609
 \OML/cmm/m/it/10.95 x[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 r; t\OT1/cmr/m/n/10.95 ) = [] [][] [] \OML/cmm/m/it/10.95 J[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 ^^T[]r\OT1/cmr/m/n/10.95 ) + \OML/cmm/m/it/10.95 HOT
  []
 
-<2D_model/cylinder_vs_cartezian.png, id=322, 210.5466pt x 412.4208pt>
+<2D_model/cylinder_vs_cartezian.png, id=394, 210.5466pt x 412.4208pt>
 File: 2D_model/cylinder_vs_cartezian.png Graphic file (type png)
 <use 2D_model/cylinder_vs_cartezian.png>
-Package pdftex.def Info: 2D_model/cylinder_vs_cartezian.png  used on input line 486.
+Package pdftex.def Info: 2D_model/cylinder_vs_cartezian.png  used on input line 609.
 (pdftex.def)             Requested size: 83.86343pt x 164.27316pt.
-[26
+[29
 
  <./2D_model/cylinder_vs_cartezian.png>]
-<2D_model/albedo.png, id=331, 570.933pt x 426.393pt>
+<2D_model/albedo.png, id=403, 1189.44376pt x 888.31876pt>
 File: 2D_model/albedo.png Graphic file (type png)
 <use 2D_model/albedo.png>
-Package pdftex.def Info: 2D_model/albedo.png  used on input line 506.
-(pdftex.def)             Requested size: 143.7634pt x 107.36572pt.
- [27
+Package pdftex.def Info: 2D_model/albedo.png  used on input line 629.
+(pdftex.def)             Requested size: 164.30028pt x 122.69655pt.
+ [30
 
- <./2D_model/albedo.png>] [28
+ <./2D_model/albedo.png (PNG copy)>]
 
-] [29
+LaTeX Font Warning: Command \LARGE invalid in math mode on input line 636.
 
-] [30
+[31
+
+] [32
 
 ]
-<2D_model/front_surface_gold.png, id=362, 503.8825pt x 378.6145pt>
+<2D_model/front_surface_gold.png, id=425, 503.8825pt x 378.6145pt>
 File: 2D_model/front_surface_gold.png Graphic file (type png)
 <use 2D_model/front_surface_gold.png>
-Package pdftex.def Info: 2D_model/front_surface_gold.png  used on input line 549.
+Package pdftex.def Info: 2D_model/front_surface_gold.png  used on input line 660.
 (pdftex.def)             Requested size: 273.83728pt x 205.7602pt.
- [31
-
- <./2D_model/front_surface_gold.png>]
-<2D_model/front_surface_gold100.png, id=372, 503.8825pt x 378.6145pt>
-File: 2D_model/front_surface_gold100.png Graphic file (type png)
-<use 2D_model/front_surface_gold100.png>
-Package pdftex.def Info: 2D_model/front_surface_gold100.png  used on input line 556.
-(pdftex.def)             Requested size: 273.83728pt x 205.7602pt.
- [32
-
- <./2D_model/front_surface_gold100.png>]
-<2D_model/front_surface_copper.png, id=381, 886.31125pt x 671.50874pt>
-File: 2D_model/front_surface_copper.png Graphic file (type png)
-<use 2D_model/front_surface_copper.png>
-Package pdftex.def Info: 2D_model/front_surface_copper.png  used on input line 563.
-(pdftex.def)             Requested size: 273.83728pt x 207.4688pt.
  [33
 
- <./2D_model/front_surface_copper.png (PNG copy)>]
-<2D_model/front_surface_be.png, id=389, 503.8825pt x 378.6145pt>
-File: 2D_model/front_surface_be.png Graphic file (type png)
-<use 2D_model/front_surface_be.png>
-Package pdftex.def Info: 2D_model/front_surface_be.png  used on input line 570.
+ <./2D_model/front_surface_gold.png>]
+<2D_model/front_surface_gold100.png, id=434, 503.8825pt x 378.6145pt>
+File: 2D_model/front_surface_gold100.png Graphic file (type png)
+<use 2D_model/front_surface_gold100.png>
+Package pdftex.def Info: 2D_model/front_surface_gold100.png  used on input line 667.
 (pdftex.def)             Requested size: 273.83728pt x 205.7602pt.
  [34
 
- <./2D_model/front_surface_be.png>]
-<2D_model/front_surface_vacuum.png, id=398, 503.8825pt x 378.6145pt>
-File: 2D_model/front_surface_vacuum.png Graphic file (type png)
-<use 2D_model/front_surface_vacuum.png>
-Package pdftex.def Info: 2D_model/front_surface_vacuum.png  used on input line 577.
-(pdftex.def)             Requested size: 273.83728pt x 205.7602pt.
+ <./2D_model/front_surface_gold100.png>]
+<2D_model/front_surface_copper.png, id=443, 886.31125pt x 671.50874pt>
+File: 2D_model/front_surface_copper.png Graphic file (type png)
+<use 2D_model/front_surface_copper.png>
+Package pdftex.def Info: 2D_model/front_surface_copper.png  used on input line 674.
+(pdftex.def)             Requested size: 273.83728pt x 207.4688pt.
  [35
 
- <./2D_model/front_surface_vacuum.png>] [36
+ <./2D_model/front_surface_copper.png (PNG copy)>]
+<2D_model/front_surface_be.png, id=451, 503.8825pt x 378.6145pt>
+File: 2D_model/front_surface_be.png Graphic file (type png)
+<use 2D_model/front_surface_be.png>
+Package pdftex.def Info: 2D_model/front_surface_be.png  used on input line 681.
+(pdftex.def)             Requested size: 273.83728pt x 205.7602pt.
+ [36
+
+ <./2D_model/front_surface_be.png>]
+<2D_model/front_surface_vacuum.png, id=460, 503.8825pt x 378.6145pt>
+File: 2D_model/front_surface_vacuum.png Graphic file (type png)
+<use 2D_model/front_surface_vacuum.png>
+Package pdftex.def Info: 2D_model/front_surface_vacuum.png  used on input line 688.
+(pdftex.def)             Requested size: 273.83728pt x 205.7602pt.
+ [37
+
+ <./2D_model/front_surface_vacuum.png>] [38
 
 ]
-<2D_model/2D_front_spatial.png, id=414, 256.7994pt x 408.0846pt>
+<2D_model/2D_front_spatial.png, id=475, 256.7994pt x 408.0846pt>
 File: 2D_model/2D_front_spatial.png Graphic file (type png)
 <use 2D_model/2D_front_spatial.png>
-Package pdftex.def Info: 2D_model/2D_front_spatial.png  used on input line 615.
+Package pdftex.def Info: 2D_model/2D_front_spatial.png  used on input line 727.
 (pdftex.def)             Requested size: 102.68962pt x 163.18112pt.
-<2D_model/temperature_heatmap_2D(gold wall loss).png, id=415, 304.4976pt x 421.0932pt>
+<2D_model/temperature_heatmap_2D(gold wall loss).png, id=476, 304.4976pt x 421.0932pt>
 File: 2D_model/temperature_heatmap_2D(gold wall loss).png Graphic file (type png)
 <use 2D_model/temperature_heatmap_2D(gold wall loss).png>
-Package pdftex.def Info: 2D_model/temperature_heatmap_2D(gold wall loss).png  used on input line 615.
+Package pdftex.def Info: 2D_model/temperature_heatmap_2D(gold wall loss).png  used on input line 727.
 (pdftex.def)             Requested size: 119.80544pt x 165.67781pt.
 
-Overfull \vbox (4.96864pt too high) detected at line 615
- []
-
-[37
-
- <./2D_model/2D_front_spatial.png> <./2D_model/temperature_heatmap_2D(gold wall loss).png>]
-<2D_model/front_comparison_3.72ns.png, id=428, 281.853pt x 218.61674pt>
-File: 2D_model/front_comparison_3.72ns.png Graphic file (type png)
-<use 2D_model/front_comparison_3.72ns.png>
-Package pdftex.def Info: 2D_model/front_comparison_3.72ns.png  used on input line 635.
-(pdftex.def)             Requested size: 109.53323pt x 84.95662pt.
-<2D_model/moore_simulation.png, id=429, 448.67625pt x 503.63156pt>
-File: 2D_model/moore_simulation.png Graphic file (type png)
-<use 2D_model/moore_simulation.png>
-Package pdftex.def Info: 2D_model/moore_simulation.png  used on input line 635.
-(pdftex.def)             Requested size: 208.85138pt x 234.4304pt.
-
-Overfull \hbox (3.47212pt too wide) in paragraph at lines 635--635
- [][] 
- []
-
-
-Overfull \vbox (5.35982pt too high) detected at line 635
- []
-
-[38
-
- <./2D_model/front_comparison_3.72ns.png> <./2D_model/moore_simulation.png>]
-<2D_model/back_1ns.png, id=439, 559.33969pt x 385.44pt>
-File: 2D_model/back_1ns.png Graphic file (type png)
-<use 2D_model/back_1ns.png>
-Package pdftex.def Info: 2D_model/back_1ns.png  used on input line 651.
-(pdftex.def)             Requested size: 207.89981pt x 143.26479pt.
-
-Overfull \hbox (2.52055pt too wide) in paragraph at lines 651--651
- [][] 
+Overfull \vbox (4.96864pt too high) detected at line 727
  []
 
 [39
 
- <./2D_model/back_1ns.png>]
-<2D_model/back_2ns.png, id=448, 582.67688pt x 365.11406pt>
-File: 2D_model/back_2ns.png Graphic file (type png)
-<use 2D_model/back_2ns.png>
-Package pdftex.def Info: 2D_model/back_2ns.png  used on input line 667.
-(pdftex.def)             Requested size: 207.84308pt x 130.23999pt.
+ <./2D_model/2D_front_spatial.png> <./2D_model/temperature_heatmap_2D(gold wall loss).png>]
+<2D_model/front_comparison_3.72ns.png, id=486, 281.853pt x 218.61674pt>
+File: 2D_model/front_comparison_3.72ns.png Graphic file (type png)
+<use 2D_model/front_comparison_3.72ns.png>
+Package pdftex.def Info: 2D_model/front_comparison_3.72ns.png  used on input line 747.
+(pdftex.def)             Requested size: 109.53323pt x 84.95662pt.
+<2D_model/moore_simulation.png, id=487, 448.67625pt x 503.63156pt>
+File: 2D_model/moore_simulation.png Graphic file (type png)
+<use 2D_model/moore_simulation.png>
+Package pdftex.def Info: 2D_model/moore_simulation.png  used on input line 747.
+(pdftex.def)             Requested size: 208.85138pt x 234.4304pt.
 
-Overfull \hbox (2.46382pt too wide) in paragraph at lines 667--667
+Overfull \hbox (3.47212pt too wide) in paragraph at lines 747--747
  [][] 
+ []
+
+
+Overfull \vbox (5.35982pt too high) detected at line 747
  []
 
 [40
 
- <./2D_model/back_2ns.png>]
-<2D_model/back_2.5ns.png, id=457, 597.73312pt x 389.20406pt>
-File: 2D_model/back_2.5ns.png Graphic file (type png)
-<use 2D_model/back_2.5ns.png>
-Package pdftex.def Info: 2D_model/back_2.5ns.png  used on input line 683.
-(pdftex.def)             Requested size: 212.028pt x 138.05408pt.
+ <./2D_model/front_comparison_3.72ns.png> <./2D_model/moore_simulation.png>]
+<2D_model/back_1ns.png, id=497, 559.33969pt x 385.44pt>
+File: 2D_model/back_1ns.png Graphic file (type png)
+<use 2D_model/back_1ns.png>
+Package pdftex.def Info: 2D_model/back_1ns.png  used on input line 763.
+(pdftex.def)             Requested size: 207.89981pt x 143.26479pt.
 
-Overfull \hbox (6.64874pt too wide) in paragraph at lines 683--683
+Overfull \hbox (2.52055pt too wide) in paragraph at lines 763--763
  [][] 
  []
 
 [41
 
- <./2D_model/back_2.5ns.png>]
-<2D_model/Ji-Yan_0.5ns_front.png, id=466, 293.4965pt x 170.6375pt>
-File: 2D_model/Ji-Yan_0.5ns_front.png Graphic file (type png)
-<use 2D_model/Ji-Yan_0.5ns_front.png>
-Package pdftex.def Info: 2D_model/Ji-Yan_0.5ns_front.png  used on input line 703.
-(pdftex.def)             Requested size: 143.76224pt x 83.58446pt.
+ <./2D_model/back_1ns.png>]
+<2D_model/back_2ns.png, id=506, 582.67688pt x 365.11406pt>
+File: 2D_model/back_2ns.png Graphic file (type png)
+<use 2D_model/back_2ns.png>
+Package pdftex.def Info: 2D_model/back_2ns.png  used on input line 779.
+(pdftex.def)             Requested size: 207.84308pt x 130.23999pt.
 
-Overfull \hbox (6.8462pt too wide) in paragraph at lines 703--703
- [] 
- []
-
-<2D_model/Ji-Yan_0.5ns.png, id=467, 568.37344pt x 362.10281pt>
-File: 2D_model/Ji-Yan_0.5ns.png Graphic file (type png)
-<use 2D_model/Ji-Yan_0.5ns.png>
-Package pdftex.def Info: 2D_model/Ji-Yan_0.5ns.png  used on input line 703.
-(pdftex.def)             Requested size: 200.33865pt x 127.63663pt.
-
-Overfull \vbox (3.51808pt too high) detected at line 703
+Overfull \hbox (2.46382pt too wide) in paragraph at lines 779--779
+ [][] 
  []
 
 [42
 
- <./2D_model/Ji-Yan_0.5ns_front.png> <./2D_model/Ji-Yan_0.5ns.png>]
-<2D_model/Ji-Yan_1ns_front.png, id=477, 293.4965pt x 170.6375pt>
-File: 2D_model/Ji-Yan_1ns_front.png Graphic file (type png)
-<use 2D_model/Ji-Yan_1ns_front.png>
-Package pdftex.def Info: 2D_model/Ji-Yan_1ns_front.png  used on input line 723.
-(pdftex.def)             Requested size: 143.76224pt x 83.58446pt.
+ <./2D_model/back_2ns.png>]
+<2D_model/back_2.5ns.png, id=515, 597.73312pt x 389.20406pt>
+File: 2D_model/back_2.5ns.png Graphic file (type png)
+<use 2D_model/back_2.5ns.png>
+Package pdftex.def Info: 2D_model/back_2.5ns.png  used on input line 795.
+(pdftex.def)             Requested size: 212.028pt x 138.05408pt.
 
-Overfull \hbox (6.8462pt too wide) in paragraph at lines 723--723
- [] 
- []
-
-<2D_model/Ji-Yan_1ns.png, id=478, 550.30594pt x 393.72093pt>
-File: 2D_model/Ji-Yan_1ns.png Graphic file (type png)
-<use 2D_model/Ji-Yan_1ns.png>
-Package pdftex.def Info: 2D_model/Ji-Yan_1ns.png  used on input line 723.
-(pdftex.def)             Requested size: 200.23442pt x 143.26479pt.
-
-Overfull \vbox (3.51808pt too high) detected at line 723
+Overfull \hbox (6.64874pt too wide) in paragraph at lines 795--795
+ [][] 
  []
 
 [43
 
- <./2D_model/Ji-Yan_1ns_front.png> <./2D_model/Ji-Yan_1ns.png>]
-<2D_model/Ji-Yan_1.3ns_front.png, id=489, 293.4965pt x 170.6375pt>
-File: 2D_model/Ji-Yan_1.3ns_front.png Graphic file (type png)
-<use 2D_model/Ji-Yan_1.3ns_front.png>
-Package pdftex.def Info: 2D_model/Ji-Yan_1.3ns_front.png  used on input line 743.
+ <./2D_model/back_2.5ns.png>]
+<2D_model/Ji-Yan_0.5ns_front.png, id=525, 293.4965pt x 170.6375pt>
+File: 2D_model/Ji-Yan_0.5ns_front.png Graphic file (type png)
+<use 2D_model/Ji-Yan_0.5ns_front.png>
+Package pdftex.def Info: 2D_model/Ji-Yan_0.5ns_front.png  used on input line 815.
 (pdftex.def)             Requested size: 143.76224pt x 83.58446pt.
 
-Overfull \hbox (6.8462pt too wide) in paragraph at lines 743--743
+Overfull \hbox (6.8462pt too wide) in paragraph at lines 815--815
  [] 
  []
 
-<2D_model/Ji-Yan_1.3ns.png, id=490, 512.66531pt x 328.22626pt>
-File: 2D_model/Ji-Yan_1.3ns.png Graphic file (type png)
-<use 2D_model/Ji-Yan_1.3ns.png>
-Package pdftex.def Info: 2D_model/Ji-Yan_1.3ns.png  used on input line 743.
-(pdftex.def)             Requested size: 223.7664pt x 143.26479pt.
+<2D_model/Ji-Yan_0.5ns.png, id=526, 568.37344pt x 362.10281pt>
+File: 2D_model/Ji-Yan_0.5ns.png Graphic file (type png)
+<use 2D_model/Ji-Yan_0.5ns.png>
+Package pdftex.def Info: 2D_model/Ji-Yan_0.5ns.png  used on input line 815.
+(pdftex.def)             Requested size: 200.33865pt x 127.63663pt.
 
-Overfull \hbox (18.38715pt too wide) in paragraph at lines 743--743
- [][] 
- []
-
-
-Overfull \vbox (3.51808pt too high) detected at line 743
+Overfull \vbox (3.51808pt too high) detected at line 815
  []
 
 [44
 
- <./2D_model/Ji-Yan_1.3ns_front.png> <./2D_model/Ji-Yan_1.3ns.png>] [45
+ <./2D_model/Ji-Yan_0.5ns_front.png> <./2D_model/Ji-Yan_0.5ns.png>]
+<2D_model/Ji-Yan_1ns_front.png, id=536, 293.4965pt x 170.6375pt>
+File: 2D_model/Ji-Yan_1ns_front.png Graphic file (type png)
+<use 2D_model/Ji-Yan_1ns_front.png>
+Package pdftex.def Info: 2D_model/Ji-Yan_1ns_front.png  used on input line 835.
+(pdftex.def)             Requested size: 143.76224pt x 83.58446pt.
 
-]
-<2D_model/prl_T4.png, id=507, 428.70564pt x 269.13348pt>
-File: 2D_model/prl_T4.png Graphic file (type png)
-<use 2D_model/prl_T4.png>
-Package pdftex.def Info: 2D_model/prl_T4.png  used on input line 776.
-(pdftex.def)             Requested size: 126.64758pt x 79.50456pt.
-<2D_model/prl.png, id=508, 637.63219pt x 426.84468pt>
-File: 2D_model/prl.png Graphic file (type png)
-<use 2D_model/prl.png>
-Package pdftex.def Info: 2D_model/prl.png  used on input line 776.
-(pdftex.def)             Requested size: 113.98204pt x 76.30116pt.
-<2D_model/back_prl_curve.png, id=509, 433.62pt x 325.215pt>
-File: 2D_model/back_prl_curve.png Graphic file (type png)
-<use 2D_model/back_prl_curve.png>
-Package pdftex.def Info: 2D_model/back_prl_curve.png  used on input line 776.
-(pdftex.def)             Requested size: 205.37926pt x 154.03708pt.
+Overfull \hbox (6.8462pt too wide) in paragraph at lines 835--835
+ [] 
+ []
 
-Overfull \hbox (2.0631pt too wide) detected at line 776
-[][][] $[]$[][][][][][][][] $[]$[][][][][][][][] $[]$[][][][][][] 
+<2D_model/Ji-Yan_1ns.png, id=537, 550.30594pt x 393.72093pt>
+File: 2D_model/Ji-Yan_1ns.png Graphic file (type png)
+<use 2D_model/Ji-Yan_1ns.png>
+Package pdftex.def Info: 2D_model/Ji-Yan_1ns.png  used on input line 835.
+(pdftex.def)             Requested size: 200.23442pt x 143.26479pt.
+
+Overfull \vbox (3.51808pt too high) detected at line 835
+ []
+
+[45
+
+ <./2D_model/Ji-Yan_1ns_front.png> <./2D_model/Ji-Yan_1ns.png>]
+<2D_model/Ji-Yan_1.3ns_front.png, id=547, 293.4965pt x 170.6375pt>
+File: 2D_model/Ji-Yan_1.3ns_front.png Graphic file (type png)
+<use 2D_model/Ji-Yan_1.3ns_front.png>
+Package pdftex.def Info: 2D_model/Ji-Yan_1.3ns_front.png  used on input line 855.
+(pdftex.def)             Requested size: 143.76224pt x 83.58446pt.
+
+Overfull \hbox (6.8462pt too wide) in paragraph at lines 855--855
+ [] 
+ []
+
+<2D_model/Ji-Yan_1.3ns.png, id=548, 512.66531pt x 328.22626pt>
+File: 2D_model/Ji-Yan_1.3ns.png Graphic file (type png)
+<use 2D_model/Ji-Yan_1.3ns.png>
+Package pdftex.def Info: 2D_model/Ji-Yan_1.3ns.png  used on input line 855.
+(pdftex.def)             Requested size: 223.7664pt x 143.26479pt.
+
+Overfull \hbox (18.38715pt too wide) in paragraph at lines 855--855
+ [][] 
+ []
+
+
+Overfull \vbox (3.51808pt too high) detected at line 855
  []
 
 [46
 
- <./2D_model/prl_T4.png> <./2D_model/prl.png> <./2D_model/back_prl_curve.png>]
-<2D_model/T4_spatial_heatmap_2.0ns.png, id=520, 422.34589pt x 418.00967pt>
-File: 2D_model/T4_spatial_heatmap_2.0ns.png Graphic file (type png)
-<use 2D_model/T4_spatial_heatmap_2.0ns.png>
-Package pdftex.def Info: 2D_model/T4_spatial_heatmap_2.0ns.png  used on input line 796.
-(pdftex.def)             Requested size: 126.64758pt x 125.34647pt.
-<2D_model/Ta2O5_intensity.png, id=521, 721.19438pt x 423.08063pt>
-File: 2D_model/Ta2O5_intensity.png Graphic file (type png)
-<use 2D_model/Ta2O5_intensity.png>
-Package pdftex.def Info: 2D_model/Ta2O5_intensity.png  used on input line 796.
-(pdftex.def)             Requested size: 113.98204pt x 66.8615pt.
-<2D_model/flux_curvature_post_breakout_0.5ns.png, id=522, 578.16pt x 433.62pt>
-File: 2D_model/flux_curvature_post_breakout_0.5ns.png Graphic file (type png)
-<use 2D_model/flux_curvature_post_breakout_0.5ns.png>
-Package pdftex.def Info: 2D_model/flux_curvature_post_breakout_0.5ns.png  used on input line 796.
-(pdftex.def)             Requested size: 205.37926pt x 154.0321pt.
+ <./2D_model/Ji-Yan_1.3ns_front.png> <./2D_model/Ji-Yan_1.3ns.png>] [47
 
-Overfull \hbox (2.0631pt too wide) detected at line 796
+]
+<2D_model/prl_T4.png, id=563, 428.70564pt x 269.13348pt>
+File: 2D_model/prl_T4.png Graphic file (type png)
+<use 2D_model/prl_T4.png>
+Package pdftex.def Info: 2D_model/prl_T4.png  used on input line 890.
+(pdftex.def)             Requested size: 126.64758pt x 79.50456pt.
+<2D_model/prl.png, id=564, 637.63219pt x 426.84468pt>
+File: 2D_model/prl.png Graphic file (type png)
+<use 2D_model/prl.png>
+Package pdftex.def Info: 2D_model/prl.png  used on input line 890.
+(pdftex.def)             Requested size: 113.98204pt x 76.30116pt.
+<2D_model/back_prl_curve.png, id=565, 433.62pt x 325.215pt>
+File: 2D_model/back_prl_curve.png Graphic file (type png)
+<use 2D_model/back_prl_curve.png>
+Package pdftex.def Info: 2D_model/back_prl_curve.png  used on input line 890.
+(pdftex.def)             Requested size: 205.37926pt x 154.03708pt.
+
+Overfull \hbox (2.0631pt too wide) detected at line 890
 [][][] $[]$[][][][][][][][] $[]$[][][][][][][][] $[]$[][][][][][] 
- []
-
-[47
-
- <./2D_model/T4_spatial_heatmap_2.0ns.png> <./2D_model/Ta2O5_intensity.png> <./2D_model/flux_curvature_post_breakout_0.5ns.png>]
-<2D_model/combined_curvature_comparison.png, id=533, 643.203pt x 498.663pt>
-File: 2D_model/combined_curvature_comparison.png Graphic file (type png)
-<use 2D_model/combined_curvature_comparison.png>
-Package pdftex.def Info: 2D_model/combined_curvature_comparison.png  used on input line 805.
-(pdftex.def)             Requested size: 256.72147pt x 199.02795pt.
-
-Overfull \vbox (7.28654pt too high) detected at line 805
  []
 
 [48
 
- <./2D_model/combined_curvature_comparison.png>] [49
+ <./2D_model/prl_T4.png> <./2D_model/prl.png> <./2D_model/back_prl_curve.png>]
+<2D_model/T4_spatial_heatmap_2.0ns.png, id=576, 422.34589pt x 418.00967pt>
+File: 2D_model/T4_spatial_heatmap_2.0ns.png Graphic file (type png)
+<use 2D_model/T4_spatial_heatmap_2.0ns.png>
+Package pdftex.def Info: 2D_model/T4_spatial_heatmap_2.0ns.png  used on input line 910.
+(pdftex.def)             Requested size: 126.64758pt x 125.34647pt.
+<2D_model/Ta2O5_intensity.png, id=577, 721.19438pt x 423.08063pt>
+File: 2D_model/Ta2O5_intensity.png Graphic file (type png)
+<use 2D_model/Ta2O5_intensity.png>
+Package pdftex.def Info: 2D_model/Ta2O5_intensity.png  used on input line 910.
+(pdftex.def)             Requested size: 113.98204pt x 66.8615pt.
+<2D_model/flux_curvature_post_breakout_0.5ns.png, id=578, 578.16pt x 433.62pt>
+File: 2D_model/flux_curvature_post_breakout_0.5ns.png Graphic file (type png)
+<use 2D_model/flux_curvature_post_breakout_0.5ns.png>
+Package pdftex.def Info: 2D_model/flux_curvature_post_breakout_0.5ns.png  used on input line 910.
+(pdftex.def)             Requested size: 205.37926pt x 154.0321pt.
 
-] [50
+Overfull \hbox (2.0631pt too wide) detected at line 910
+[][][] $[]$[][][][][][][][] $[]$[][][][][][][][] $[]$[][][][][][] 
+ []
+
+[49
+
+ <./2D_model/T4_spatial_heatmap_2.0ns.png> <./2D_model/Ta2O5_intensity.png> <./2D_model/flux_curvature_post_breakout_0.5ns.png>]
+<2D_model/combined_curvature_comparison.png, id=590, 643.203pt x 498.663pt>
+File: 2D_model/combined_curvature_comparison.png Graphic file (type png)
+<use 2D_model/combined_curvature_comparison.png>
+Package pdftex.def Info: 2D_model/combined_curvature_comparison.png  used on input line 919.
+(pdftex.def)             Requested size: 256.72147pt x 199.02795pt.
+
+Overfull \vbox (7.28654pt too high) detected at line 919
+ []
+
+[50
+
+ <./2D_model/combined_curvature_comparison.png>] [51
+
+] [52
 
 ]
 \tf@nav=\write6
@@ -1131,20 +1185,20 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `conference.out' has not changed.
-(rerunfilecheck)             Checksum: 0DD6B443DA664B0102E286C50183457A;1928.
+(rerunfilecheck)             Checksum: A4F4066472D5793ACBCD492BACFE014E;1928.
  ) 
 Here is how much of TeX's memory you used:
- 22476 strings out of 467871
- 446020 string characters out of 5417408
- 804188 words of memory out of 5000000
- 50777 multiletter control sequences out of 15000+600000
- 652239 words of font info for 130 fonts, out of 8000000 for 9000
+ 22732 strings out of 467871
+ 451978 string characters out of 5417408
+ 812456 words of memory out of 5000000
+ 51021 multiletter control sequences out of 15000+600000
+ 652546 words of font info for 131 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,18n,123p,447b,782s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on conference.pdf (50 pages, 5555388 bytes).
+ 128i,18n,123p,447b,861s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on conference.pdf (52 pages, 5888997 bytes).
 PDF statistics:
- 687 PDF objects out of 1000 (max. 8388607)
- 112 named destinations out of 1000 (max. 500000)
- 434 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 745 PDF objects out of 1000 (max. 8388607)
+ 116 named destinations out of 1000 (max. 500000)
+ 564 words of extra memory for PDF output out of 10000 (max. 10000000)
 
