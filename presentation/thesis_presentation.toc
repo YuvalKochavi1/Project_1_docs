@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{Marshak Waves Experimental Setup}{4}{0}{1}
+\beamer@sectionintoc {2}{Describing the System}{7}{0}{2}
+\beamer@sectionintoc {3}{1.5D Model}{13}{0}{3}
+\beamer@subsectionintoc {3}{1}{1D Effects}{17}{0}{3}
+\beamer@subsectionintoc {3}{2}{2D Effects}{19}{0}{3}
+\beamer@sectionintoc {4}{Full 2D Model}{30}{0}{4}
+\beamer@subsectionintoc {4}{1}{Modeling the Front Curvature}{31}{0}{4}
+\beamer@subsectionintoc {4}{2}{Comparing to 2D Supersonic Diffusion Simulation}{37}{0}{4}
+\beamer@subsectionintoc {4}{3}{Full 2D Temperature Distribution}{43}{0}{4}
+\beamer@subsectionintoc {4}{4}{Comparison with Experimental Data}{52}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{56}{0}{5}

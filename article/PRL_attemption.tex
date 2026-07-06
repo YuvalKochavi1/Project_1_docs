@@ -1,0 +1,159 @@
+% ============================================================================
+%  PRL Article: Modeling Two-Dimensional Supersonic Marshak Waves
+%  Uses revtex4-2 (APS journal style)
+% ============================================================================
+\documentclass[prl, twocolumn, superscriptaddress, amsmath, amssymb, reprint]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\graphicspath{{figures/}}
+
+\begin{document}
+
+% ----------------------------------------------------------------------------
+%  Title
+% ----------------------------------------------------------------------------
+\title{Semi-Analytic Two-Dimensional Model for Supersonic Marshak Waves in Cylindrical Geometry}
+
+\author{Yuval Kochavi}
+\affiliation{Racah Institute of Physics, The Hebrew University of Jerusalem, Jerusalem 91904, Israel}
+
+\author{Tal Ramot}
+\affiliation{Racah Institute of Physics, The Hebrew University of Jerusalem, Jerusalem 91904, Israel}
+
+\author{Tal Balakirski}
+\affiliation{Racah Institute of Physics, The Hebrew University of Jerusalem, Jerusalem 91904, Israel}
+
+\author{Shay I.~Heizler}
+\affiliation{Racah Institute of Physics, The Hebrew University of Jerusalem, Jerusalem 91904, Israel}
+
+\date{\today}
+
+% ----------------------------------------------------------------------------
+%  Abstract
+% ----------------------------------------------------------------------------
+\begin{abstract}
+\textcolor{red}{\textbf{TODO (Abstract draft)}}
+\end{abstract}
+
+\maketitle
+
+% ============================================================================
+%  I. INTRODUCTION
+% ============================================================================
+\section{Introduction}
+
+The experimental setup used for supersonic x-ray transport measurements is shown in Fig.~\ref{fig:setup}~\cite{Moore2012NIF}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\columnwidth]{figures/setup.jpg}
+	\caption{Experimental setup adapted from Moore \textit{et al.}~\cite{Moore2012NIF}.}
+	\label{fig:setup}
+\end{figure}
+
+% ============================================================================
+%  II. GOVERNING EQUATIONS
+% ============================================================================
+\section{Governing Equations}
+
+
+% ============================================================================
+%  III. Modeling the heat wave
+% ============================================================================
+\section{Modeling the Heat Wave}
+In this work, we develop a semi-analytic model for supersonic Marshak-wave propagation in cylindrical geometry that extends the Hammer--Rosen one-dimensional framework~\cite{Hammer2003} to experimentally relevant finite-tube configurations. The model includes four principal physical mechanisms that control front propagation: (1) the correct incoming radiative flux at the foam boundary (Marshak boundary condition), (2) energy loss to wall heating, (3) wall ablation and the associated modification of the effective propagation channel, all presented in Refs.~\cite{Cohen2020Key,Cohen2018}, and (4) finite-diameter transport effects represented through an effective mean free path (Ref.~\cite{Courtois2024}). The first mechanism is primarily longitudinal (1D), whereas the remaining mechanisms are wall-coupled and therefore intrinsically multidimensional. This separation motivates our staged construction: a corrected 1D longitudinal model followed by a full 2D description of front curvature and observables, consistent with the bent-wave formulations in Refs.~\cite{Hurricane2006,Courtois2022}.
+
+Hammer and Rosen~\cite{Hammer2003} solved Eq.~(\ref{eq:diffusion}) in one dimension using perturbation theory.
+The heat front position is given by
+\begin{equation}\label{eq:HR}
+    x_F^2(t) = \frac{2+\varepsilon}{1-\varepsilon}\,C\,H^{-\varepsilon}(t)\int_0^t H(t')\,dt',
+\end{equation}
+where $H(t) = T_s^{4+\alpha}(t)$, $\varepsilon = \beta/(4+\alpha)$, and
+\begin{equation}\label{eq:C_coeff}
+    C = \frac{16\,g\,\sigma_{\mathrm{SB}}}{3f(4+\alpha)}\,\rho^{2-\mu-\lambda}.
+\end{equation}
+Here $T_s$ is the surface temperature at $x = 0$, which HR set equal to the hohlraum drive temperature $T_D$.
+
+% ============================================================================
+%  V. CONCLUSION
+% ============================================================================
+\section{Conclusion}
+
+
+
+% ============================================================================
+%  REFERENCES
+% ============================================================================
+\begin{thebibliography}{99}
+
+\bibitem{Hammer2003}
+J.~H.~Hammer and M.~D.~Rosen,
+\textit{A consistent approach to solving the radiation diffusion equation},
+Phys.\ Plasmas \textbf{10}, 1829 (2003).
+
+\bibitem{Shussman2015}
+T.~Shussman and S.~I.~Heizler,
+\textit{Full self-similar solutions of the subsonic radiative heat equations},
+Phys.\ Plasmas \textbf{22}, 082109 (2015).
+
+\bibitem{Pomraning1979}
+G.~C.~Pomraning,
+\textit{The Equations of Radiation Hydrodynamics}
+(Pergamon, Oxford, 1973).
+
+\bibitem{Back2000PRL}
+C.~A.~Back, J.~D.~Bauer, J.~H.~Hammer \textit{et al.},
+\textit{Diffusive, supersonic x-ray transport in radiatively heated foam cylinders},
+Phys.\ Rev.\ Lett.\ \textbf{84}, 274 (2000).
+
+\bibitem{Back2000POP}
+C.~A.~Back, J.~D.~Bauer, O.~L.~Landen \textit{et al.},
+\textit{Detailed measurements of a diffusive supersonic wave in a radiatively heated foam},
+Phys.\ Plasmas \textbf{7}, 2126 (2000).
+
+\bibitem{Moore2015}
+A.~S.~Moore, T.~M.~Guymer, J.~Morton \textit{et al.},
+\textit{Characterization of supersonic radiation diffusion waves},
+J.\ Quant.\ Spectrosc.\ Radiat.\ Transfer \textbf{159}, 100 (2015).
+
+\bibitem{Moore2012NIF}
+A.~S.~Moore, J.~L.~Kline, P.~A.~Keiter, J.~Morton, T.~M.~Guymer,
+G.~Magelssen, B.~Devolder, K.~A.~Mussack, R.~Peterson, J.~M.~Taccetti,
+N.~Lanier, M.~Stevenson, J.~Workman, K.~A.~Obrey, D.~Schmidt,
+C.~Hamilton, D.~Capelli, J.~Williams, B.~Randolph, F.~Fierro,
+J.~Martinez, B.~Patterson, N.~Bazin, and S.~Goodinga,
+\textit{NIF presentation} (2012).
+
+\bibitem{Cohen2018}
+A.~P.~Cohen and S.~I.~Heizler,
+J.\ Comput.\ Theor.\ Transp.\ \textbf{47}, 378 (2018).
+
+\bibitem{Cohen2020Key}
+A.~P.~Cohen, G.~Malamud, and S.~I.~Heizler,
+\textit{Key to understanding supersonic radiative Marshak waves using simple models and advanced simulations},
+Phys.\ Rev.\ Research \textbf{2}, 023007 (2020).
+
+\bibitem{Hurricane2006}
+O.~A.~Hurricane and J.~H.~Hammer,
+\textit{Bent Marshak waves},
+Phys.\ Plasmas \textbf{13}, 113303 (2006).
+
+\bibitem{Courtois2022}
+C.~Courtois, R.~Gr\"oger, P.~Loiseau \textit{et al.},
+\textit{Models for the propagation of radiation heat fronts in cylindrical tubes},
+Phys.\ Plasmas \textbf{29}, 022704 (2022).
+
+\bibitem{Courtois2024}
+C.~Courtois, R.~Gr\"oger, P.~Loiseau \textit{et al.},
+\textit{Experimental measurements of supersonic radiation heat wave curvature in cylindrical tubes},
+Phys.\ Plasmas \textbf{31}, 012707 (2024).
+
+\end{thebibliography}
+
+\end{document}

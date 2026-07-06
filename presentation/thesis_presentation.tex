@@ -38,7 +38,7 @@
 
 % Title page details: 
 \title[Modeling 2D Marshak Waves]{Modeling 2D Marshak Waves}
-\subtitle{Understanding the physics of x-ray radiation driven supersonic nonlinear heat waves}
+\subtitle{Understanding the physics of X-ray radiation-driven supersonic nonlinear heat waves}
 \author[Kochavi et al.]{\textbf{Yuval Kochavi}, Tal Ramot, Tal Balakirski, Shay I. Heizler}
 \date{June 17, 2026}
 
@@ -48,29 +48,20 @@
 {
 \setbeamercolor{background canvas}{bg=darkblue}
 \begin{frame}[plain]
-    \begin{columns}[c]
-        \begin{column}{0.58\textwidth}
-            \raggedright
-            \vspace{0.2cm}
-            {\Huge\bfseries\color{white} Modeling 2D \\ Marshak Waves}
-            
-            \vspace{0.4cm}
-            {\small\color{white} Understanding the physics of x-ray radiation driven supersonic nonlinear heat waves}
-            
-            \vspace{0.8cm}
-            {\large \textbf{\color{white}Yuval Kochavi}, \color{lightgray}Tal Ramot, \\ \color{lightgray}Tal Balakirski, \color{lightgray}Shay I. Heizler}
-            
-            % \vspace{0.3cm}
-            % {\small Racah Institute of Physics, \\ The Hebrew University of Jerusalem, Israel}
-            
-            \vspace{1.2cm}
-            {\large\textbf{\color{white}ICTT29 | Aix-en-Provence | June 17, 2026}}
-        \end{column}
-        \begin{column}{0.38\textwidth}
-            \centering
-            \includegraphics[height=0.9\textheight]{town_vertical.jpg}
-        \end{column}
-    \end{columns}
+    \centering
+    {\Huge\bfseries\color{white} Modeling 2D \\ Marshak Waves}
+    
+    \vspace{0.4cm}
+    {\small\color{white} Understanding the physics of X-ray radiation-driven supersonic nonlinear heat waves}
+    
+    \vspace{0.8cm}
+    {\large \textbf{\color{white}Yuval Kochavi}}
+    
+    % \vspace{0.3cm}
+    % {\small Racah Institute of Physics, \\ The Hebrew University of Jerusalem, Israel}
+    
+    \vspace{1.2cm}
+    {\large\textbf{\color{white}Thesis presentation}}
 \end{frame}
 }
 
@@ -79,125 +70,19 @@
     \tableofcontents
 \end{frame}
 
+\begin{frame}{About Me}
+    \begin{itemize}
+        \item 19 years old, from Petah Tikva.
+        \item Studied Physics and Engineering at Bar-Ilan University during high school.
+        \item Started research in semester C, after taking courses in Physics, Mathematics, and Computer Science in previous semesters.
+    \end{itemize}
+\end{frame}
+
 % --- Section 1 ---
-\section{Describing the Physical system}
-
-\begin{frame}{Motivation}
-    Radiative heat waves are highly common in High Energy Density Physics:
-    \vspace{0.3cm}
-    \begin{columns}
-        \begin{column}{0.48\textwidth}
-            \begin{block}{\centering Inertial Confinement Fusion}
-                \centering
-                \vspace{0.1cm}
-                \includegraphics[width=0.95\textwidth]{figures_intreduction/ICF.png}
-                \begin{itemize}
-                    \item Driven by radiation in Hohlraums (e.g., at NIF).
-                \end{itemize}
-            \end{block}
-        \end{column}
-        \hfill
-        \begin{column}{0.48\textwidth}
-            \begin{block}{\centering Astrophysics}
-                \centering
-                \vspace{0.1cm}
-                \includegraphics[width=0.95\textwidth]{figures_intreduction/Astro.png}
-                \begin{itemize}
-                    \item Crucial for energy transport in stars.
-                \end{itemize}
-            \end{block}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame}{The Governing Equations}
-    Scattering-free gray Boltzmann equation for photons (RTE):
-    \begin{multline}
-        \frac{1}{c}\frac{\partial I(\hat{\Omega},\vec{r},t)}{\partial t}+\hat{\Omega}\cdot \vec{\nabla}I(\hat{\Omega},\vec{r},t)=
-        \sigma'_{a}(T_m)\left(B(T_m(\vec{r},t))-I(\hat{\Omega},\vec{r},t)\right)
-    \end{multline}
-    
-    \vspace{0.5cm}
-    Energy exchange between radiation and matter:
-    \begin{equation}
-        \frac{C_v(T_m)}{c} \frac{\partial T_m}{\partial t} = \sigma_a'(T_m) \left( \frac{1}{c} \int_{4\pi} I \, d\hat{\Omega} - aT_m^4 \right)
-    \end{equation}
-\end{frame}
-
-\begin{frame}{Gray Coupled Equations and LTE}
-    Integrating the previous two equations, and using the diffusion approximation, we get the following coupled equations,
-    \begin{align*}
-        \frac{\partial E}{\partial t} - \nabla \cdot \left(\frac{c}{3\sigma} \nabla E\right) &= c\sigma(aT_m^4 - E), \quad \quad \quad E = \mathrm{a} T_R^4 \\
-        \rho \frac{\partial e}{\partial t} &= c\sigma(E - aT_m^4)
-    \end{align*}
-
-    Finally, assuming thermodynamic equilibrium (TE) between the radiation field and the material ($T \equiv T_R = T_m$):
-    \begin{equation}
-        \frac{\partial T^4}{\partial t} + \rho \frac{\partial e}{\partial t} = \nabla \cdot \left(\frac{c}{3\sigma} \nabla (aT^4)\right)
-    \end{equation}
-
-\end{frame}
-
-\begin{frame}{The Problem}
-    \begin{columns}
-        \begin{column}{0.58\textwidth}
-            \begin{itemize}
-                \item Power-law approximation for specific energy and opacity:
-                \begin{equation*}
-                    e = fT^\beta \rho^{-\mu}, \qquad \frac{1}{\sigma} = \frac{1}{\rho \kappa} = gT^\alpha \rho^{-\lambda - 1}
-                \end{equation*}
-            \end{itemize}
-            
-            \vspace{-0.2cm}
-            \begin{alertblock}{The Core Challenge}
-                The diffusion coefficient $D=\frac{c}{3\rho \kappa}$ and the material internal energy $e$ are highly non-linear. The system becomes very difficult to solve analytically.
-            \end{alertblock}
-            
-        \end{column}
-        \hfill
-        \begin{column}{0.38\textwidth}
-
-            \centering
-            \includegraphics[width=\textwidth]{figures_intreduction/supersonic.png}
-            
-            \vspace{0.2cm}
-            {\scriptsize \textit{Shussman et al. POP, (2015)}}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-\begin{frame} {The Goal}
-    \begin{block}{\textbf{Goal}}
-       \textbf{ Build a 2D semi-analytical model to understand supersonic heat wave propagation and temperature distribution.}
-    \end{block}
-
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-
-            \vspace{0.2cm}
-            Meaning, Understanding the following equation:
-
-            \begin{equation*}
-                \frac{\partial T^4}{\partial t} + f \rho^{-\mu+1}\frac{\partial T^{\beta}}{\partial t} = \nabla \cdot \left(D(T)\nabla (aT^4)\right)
-            \end{equation*}
-
-            using cylindrical coordinates and the relevant boundary conditions.
-                    
-        \end{column}
-        \hfill
-        \begin{column}{0.48\textwidth}
-
-            \centering
-            \includegraphics[height=0.5\textheight]{figures_intreduction/hurricane.png}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% --- Section 2 ---
 \section{Marshak Waves Experimental Setup}
 
 \begin{frame}{Marshak Waves Experiments}
-    Using a Hohlraum as an x-ray generator, a supersonic heatwave propagates in the low-density foam.
+    Using a Hohlraum as an X-ray generator, a supersonic heat wave propagates in the low-density foam.
     
     \vspace{0.5cm}
     \begin{columns}
@@ -219,7 +104,7 @@
 
     \vspace{0.3cm}
 
-    Laser $\Rightarrow$ hohlraum $\Rightarrow$ x-ray radiation $\Rightarrow$ supersonic heat wave propagates in the low-density foam 
+    Laser $\Rightarrow$ Hohlraum $\Rightarrow$ X-ray radiation $\Rightarrow$ supersonic heat wave propagating in the low-density foam.
 \end{frame}
 
 \begin{frame}{Marshak Waves Experimental Setup}
@@ -267,10 +152,11 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Experiments tested}
+\begin{frame}{Experiments Tested}
     \begin{table}
         \centering
-        \renewcommand{\arraystretch}{1.2}
+        \small
+        \renewcommand{\arraystretch}{1.1}
         \rowcolors{2}{primary!5}{white}
         \begin{tabular}{llcc}
             \hline \hline
@@ -289,8 +175,119 @@
     \end{table}
 \end{frame}
 
+\section{Describing the System}
+
+\begin{frame}{The Governing Equations}
+    Scattering-free gray Boltzmann equation for photons (RTE):
+    \begin{multline}
+        \frac{1}{c}\frac{\partial I(\hat{\Omega},\vec{r},t)}{\partial t}+\hat{\Omega}\cdot \vec{\nabla}I(\hat{\Omega},\vec{r},t)=
+        \sigma'_{a}(T_m)\left(B(T_m(\vec{r},t))-I(\hat{\Omega},\vec{r},t)\right)
+    \end{multline}
+    
+    \vspace{0.5cm}
+    Energy exchange between radiation and matter:
+    \begin{equation}
+        \frac{C_v(T_m)}{c} \frac{\partial T_m}{\partial t} = \sigma_a'(T_m) \left( \frac{1}{c} \int_{4\pi} I \, d\hat{\Omega} - aT_m^4 \right)
+    \end{equation}
+\end{frame}
+
+\begin{frame}{From RTE to Moment Equations}
+    We can define the energy density and flux:
+    \begin{equation*}
+        E(\vec{r},t) = \frac{1}{c}\int_{4\pi} I(\hat{\Omega}, \vec{r}, t) \, d\hat{\Omega}, \qquad \vec{F}(\vec{r},t) = \int_{4\pi} I(\hat{\Omega}, \vec{r}, t)\hat{\Omega} \, d\hat{\Omega}
+    \end{equation*}
+
+    Now the Boltzmann equation takes the following form:
+    \begin{gather*}
+        \frac{\partial E(\vec{r},t)}{\partial t} + \nabla \cdot \vec{F}(\vec{r},t) = \sigma_a'(T_m)\left(\int_{4\pi} \frac{B(\vec{r},t)}{c} \, d\hat{\Omega} - E(\vec{r},t)\right) \\[8pt]
+        \frac{1}{c}\frac{\partial \vec{F}(\vec{r},t)}{\partial t} + \frac{c}{3} \nabla E(\vec{r},t) + \sigma_a'(T_m)\vec{F}(\vec{r},t) = 0
+    \end{gather*}
+\end{frame}
+
+\begin{frame}{The Diffusion Approximation}
+    Assuming the change of the flux in time is small ($\frac{1}{c}\frac{\partial \vec{F}}{\partial t} \approx 0$):
+    \begin{equation*}
+        \vec{F}(\vec{r},t) = -\frac{c}{3\sigma_a'(T_m)} \nabla E(\vec{r},t)
+    \end{equation*}
+
+    \vspace{0.3cm}
+    This turns Boltzmann into the diffusion equation:
+    \begin{equation*}
+        \frac{\partial E(\vec{r},t)}{\partial t} - \nabla \cdot \left[\overbrace{\frac{c}{3\sigma_t(T_m)}}^{D(T_m)} \nabla E(\vec{r},t)\right] = c\sigma_a'(T_m)\left(\overbrace{\int_{4\pi} \frac{B(\vec{r},t)}{c} \, d\hat{\Omega}}^{U_R(\vec{r},t)} - E(\vec{r},t)\right)
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Gray Coupled Equations and LTE}
+    From the diffusion equation, setting $\int_{4\pi} \frac{B}{c}\,d\hat{\Omega} = aT_m^4$, the coupled gray radiation-matter system reads,
+    \begin{align*}
+        \frac{\partial E}{\partial t} - \nabla \cdot \left(\frac{c}{3\sigma} \nabla E\right) &= c\sigma(aT_m^4 - E), \quad \quad \quad E = \mathrm{a} T_R^4 \\
+        \rho \frac{\partial e}{\partial t} &= c\sigma(E - aT_m^4)
+    \end{align*}
+
+    Finally, assuming thermodynamic equilibrium (TE) between the radiation field and the material ($T \equiv T_R = T_m$):
+    \begin{equation}
+        \frac{\partial T^4}{\partial t} + \rho \frac{\partial e}{\partial t} = \nabla \cdot \left(\frac{c}{3\sigma} \nabla (aT^4)\right)
+    \end{equation}
+
+\end{frame}
+
+\begin{frame}{The Problem}
+    \begin{columns}
+        \begin{column}{0.58\textwidth}
+            \begin{itemize}
+                \item Power-law approximation for specific energy and opacity:
+                \begin{equation*}
+                    e = fT^\beta \rho^{-\mu}, \qquad \frac{1}{\sigma} = \frac{1}{\rho \kappa} = gT^\alpha \rho^{-\lambda - 1}
+                \end{equation*}
+            \end{itemize}
+            
+            \vspace{-0.2cm}
+            \begin{alertblock}{The Core Challenge}
+                The diffusion coefficient $D=\frac{c}{3\rho \kappa}$ and the material internal energy $e$ are highly nonlinear. The system becomes very difficult to solve analytically.
+            \end{alertblock}
+            
+        \end{column}
+        \hfill
+        \begin{column}{0.38\textwidth}
+
+            \centering
+            \includegraphics[width=\textwidth]{figures_intreduction/supersonic.png}
+            
+            \vspace{0.2cm}
+            {\scriptsize \textit{Shussman et al. POP, (2015)}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{The Goal}
+    \begin{block}{Goal}
+       Build a 2D semi-analytical model to understand supersonic heat wave propagation and temperature distribution.
+    \end{block}
+
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+
+            \vspace{0.2cm}
+            Specifically, analyzing the following equation:
+
+            \begin{equation*}
+                \frac{\partial T^4}{\partial t} + f \rho^{-\mu+1}\frac{\partial T^{\beta}}{\partial t} = \nabla \cdot \left(D(T)\nabla (aT^4)\right)
+            \end{equation*}
+
+            using cylindrical coordinates and the relevant boundary conditions.
+                    
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+
+            \centering
+            \includegraphics[height=0.5\textheight]{figures_intreduction/hurricane.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 % --- Section 3 ---
-\section{1.5D model}
+\section{1.5D Model}
 
 {
 \setbeamercolor{background canvas}{bg=darkblue}
@@ -308,9 +305,9 @@
     \begin{equation*}
         e = fT^\beta \rho^{-\mu}, \qquad \frac{1}{\kappa} = gT^\alpha \rho^{-\lambda}
     \end{equation*}
-    where $f, \mu, g, \lambda, \alpha, \beta$ are material-dependent parameters:
+    where $f, \mu, g, \lambda, \alpha, \beta$ are material-dependent parameters.
 
-    Assuming $\rho f T^\beta \rho^{-\mu + 1} \gg aT^4$ (true until around 3keV), HR solved:
+    Assuming $\rho f T^\beta \rho^{-\mu + 1} \gg aT^4$ (true up to $\sim$3~keV), HR solved:
     \begin{align*}
         f \rho^{-\mu + 1}\frac{\partial T^{\beta}}{\partial t} = \frac{\partial}{\partial x} \cdot \left(\frac{c g T^\alpha \rho^{-\lambda - 1}}{3} \frac{\partial}{\partial x} (aT^4)\right)
     \end{align*}
@@ -348,10 +345,10 @@
         \includegraphics[width=0.68\textwidth]{figures_1.5model/HR.png}
     \end{figure}
 
-    \textbf{Conclusion}: assuming $T_s = T_D$ overestimates the wave speed.
+    \textbf{Conclusion}: Assuming $T_s = T_D$ overestimates the wave speed.
 \end{frame}
 
-\subsection{1D effects}
+\subsection{1D Effects}
 \begin{frame}{Marshak Boundary Condition: $T_D \neq T_s$}
     The Marshak boundary condition states that
     \begin{equation*}
@@ -359,7 +356,7 @@
     \end{equation*}
     where $F(0,t)$ is the net flux entering the foam. 
     
-    Leading to,
+    This leads to:
     \begin{equation*}
         \sigma_{SB} T_D^4(t) = \sigma_{SB} T_s^4(t) + \frac{F(0,t)}{2}
     \end{equation*}
@@ -376,7 +373,7 @@
     \end{figure}
 \end{frame}
 
-\subsection{2D effects}
+\subsection{2D Effects}
 {
 \setbeamercolor{background canvas}{bg=darkblue}
 \begin{frame}[plain]
@@ -390,19 +387,48 @@
 \end{frame}
 }
 
-\begin{frame}{Energy Wall Loss}
+\begin{frame}{Energy Wall Loss - Gold}
+    The heat wave in the foam loses energy to the gold walls, which slows it down:
     \begin{itemize}
-        \item Energy is lost from the foam into the tube walls.
-        \item Can be modeled for different wall materials: \textbf{Gold}, \textbf{Copper}, \textbf{Beryllium}, and \textbf{Vacuum} (without external coating material).
-        \item From Ramot's fits, we can take the subsonic energy of gold:
+        \item Subsonic energy loss of gold per unit area:
         \begin{equation*}
             E_{\mathrm{gold}}(t) = 0.59\, T_s^{3.35}\, [t - t_0(x)]^{0.59} \quad [\mathrm{hJ/mm^2}]
         \end{equation*}
         where $t_0(x)$ is the front arrival time at position $x$.
+        \item Energy loss from a tube segment of length $dx$:
+        \begin{equation*}
+            dE_W = E_{\mathrm{gold}}(t - t_0(x)) \cdot 2\pi R \, dx
+        \end{equation*}
+        \item Total accumulated energy loss in the wall up to time $t$:
+        \begin{equation*}
+            E_W(t) = 2\pi R \int_0^{x_F(t)} \int_{t_0(x)}^t \dot{E}_{\mathrm{gold}}(t') \, dt' \, dx
+        \end{equation*}
+    \end{itemize}
+    
+    \begin{alertblock}{2D Effect Integration}
+        This energy is subtracted from the foam's energy at each iteration, thereby introducing a two-dimensional effect.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Modeling Other Wall Materials}
+    The same 2D wall loss framework can be applied to other wall materials by using their respective energy loss fits:
+    \begin{itemize}
+        \item \textbf{Copper (Cu) - Mid-Z (subsonic fit): }
+        \begin{equation*}
+            E_{\mathrm{copper}}(t) = 1.58\, T_s^{3.40}\, [t - t_0(x)]^{0.61} \quad [\mathrm{hJ/mm^2}]
+        \end{equation*}
+        \item \textbf{Beryllium (Be) - Low-Z (supersonic fit):}
+        \begin{equation*}
+            E_{\mathrm{be}}(t) = 1.27\, T_s^{4.99}\, [t - t_0(x)]^{0.50} \quad [\mathrm{hJ/mm^2}]
+        \end{equation*}
+        \item \textbf{Vacuum (no external material):}
+        \begin{equation*}
+            dE_{\mathrm{vacuum}} = \sigma_{\mathrm{SB}} T_s^4 \, dt \quad (\text{No re-emission from walls})
+        \end{equation*}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Energy Wall Loss}
+\begin{frame}{Effect of Wall Loss}
     Including wall loss reduces the front velocity:
     
     \vspace{0.2cm}
@@ -412,32 +438,59 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Wall Ablation}
-    \begin{itemize}
-        \item High-Z wall material (e.g. Gold) absorbs energy and ablates inward into the foam.
-        \item \textbf{Changing Foam Radius}: The inlet and tube radius shrink, reducing the heat wave cross-section.
-        \item \textbf{Changing Foam Density}: The ablated wall material compresses and densifies the adjacent foam:
-    \end{itemize}
-    
+\begin{frame}{Wall Ablation - Changing Foam Radius}
+    Gold wall material absorbs energy and ablates inward:
     \begin{columns}
-        \begin{column}{0.3\textwidth}
-            \begin{equation*}
-                \rho(t) = \rho_0\frac{V_0}{V(t)}
-            \end{equation*}
-            \vspace{0.5cm}
-            \centering
-            \includegraphics[width=1.5\textwidth]{figures_1.5model/ablation.png}
+        \begin{column}{0.54\textwidth}
+            \begin{itemize}
+                \item Inward wall velocity:
+                \begin{equation*}
+                    u_{\mathrm{abl}} = -510.1\,\tilde{u}\,T_s^{0.716}\,[t - t_0(x)]^{0.036}
+                \end{equation*}
+                \item Shrunk cylinder radius:
+                \begin{equation*}
+                    R(t,x) = R_0 - u_{\mathrm{abl}}(x,t)(t - t_0(x))
+                \end{equation*}
+                \item Reduced inlet energy:
+                \begin{equation*}
+                    E_{\mathrm{in}}(t) = 2\pi\sigma_{\mathrm{SB}} \int_0^t R^2(t',0) \left[ T_D^4(t') - T_s^4(t') \right] dt'
+                \end{equation*}
+            \end{itemize}
         \end{column}
         \hfill
-        \begin{column}{0.58\textwidth}
+        \begin{column}{0.42\textwidth}
             \centering
             \includegraphics[width=\textwidth]{figures_1.5model/radius_ablation.png}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Wall Ablation}
-    Inward wall ablation compressively densifies the foam, which significantly slows down propagation:
+\begin{frame}{Wall Ablation - Changing Foam Density}
+    The ablated wall material compresses and densifies the adjacent foam:
+    \begin{columns}
+        \begin{column}{0.54\textwidth}
+            \begin{itemize}
+                \item Mass conservation:
+                \begin{equation*}
+                    \rho_{\mathrm{eff}}(t) = \rho_0 \frac{V_0}{V(t)}
+                \end{equation*}
+                \item Effective density:
+                \begin{equation*}
+                    \rho_{\mathrm{eff}}(t) = \frac{\rho_0 V_0}{\int_0^{x_F(t)} \pi R^2(t,x) \, dx}
+                \end{equation*}
+            \end{itemize}
+        \end{column}
+        \hfill
+        \begin{column}{0.42\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures_1.5model/ablation.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{Effect of Wall Ablation}
+    Inward wall ablation compressively densifies the foam, slowing down propagation significantly:
     
     \vspace{0.2cm}
     \begin{figure}
@@ -449,9 +502,9 @@
 \begin{frame}{Effective Mean Free Path}
     When $\lambda_R \ge 2R$, wall collisions control the transport instead of diffusion.
 
-    Can be modeled as (\textit{Courtois et al. POP, (2024)}):
+    This can be modeled as (\textit{Courtois et al. POP, (2024)}):
     \begin{equation*}
-        \frac{1}{\lambda_{\mathrm{eff}}} = \frac{1}{\lambda_R} + \frac{1}{2R}, \quad \quad \text{$\lambda_R$ is the Ross Mean Free Path}
+        \frac{1}{\lambda_{\mathrm{eff}}} = \frac{1}{\lambda_R} + \frac{1}{2R}, \quad \quad \text{$\lambda_R$ is the Rosseland mean free path}
     \end{equation*}
     
     A smoother transition is defined using the generalized power mean:
@@ -473,7 +526,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Effective Mean Free Path}
+\begin{frame}{Effect of the Mean Free Path Correction}
     Including the effective mean free path correction matches the model to the experimental data:
     
     \vspace{0.2cm}
@@ -483,7 +536,7 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Comparison to many experiments}
+\begin{frame}{Comparison with Various Experiments}
     \begin{columns}
         \begin{column}{0.48\textwidth}
             \centering
@@ -519,7 +572,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Flux out of the model}
+\begin{frame}{Flux Predicted by the Model}
     \begin{columns}
         \begin{column}{0.5\textwidth}
             Using the Henyey-like profile:
@@ -543,7 +596,7 @@
     \end{columns}
 \end{frame}
 
-\section{Full 2D model}
+\section{Full 2D Model}
 {
 \setbeamercolor{background canvas}{bg=darkblue}
 \begin{frame}[plain]
@@ -554,7 +607,7 @@
     \vfill
 \end{frame}
 }
-\subsection{Modeling the front curvature}
+\subsection{Modeling the Front Curvature}
 {
 \setbeamercolor{background canvas}{bg=darkblue}
 \begin{frame}[plain]
@@ -568,8 +621,35 @@
 \end{frame}
 }
 
-\begin{frame}{Understanding the front curvature}
-    Hurricane \& Hammer (2006) solved the Laplace equation (assumed constant opacity and neglected $e$):
+\begin{frame}{Wall Boundary Condition}
+    Non-ideal walls introduce energy loss: only a fraction $\alpha$ of incoming flux $F_{\text{in}}$ is re-emitted ($F_{\text{out}} = \alpha F_{\text{in}}$).
+    \begin{columns}
+        \begin{column}{0.52\textwidth}
+            \begin{itemize}
+                \item Net wall flux loss:
+                \begin{equation*}
+                    F_{\text{wall}} = (1-\alpha)F_{\text{in}} = (1-\alpha)\sigma_{\mathrm{SB}}T^4
+                \end{equation*}
+                \item Equating to diffusion flux (Fick's law):
+                \begin{equation*}
+                    F_{\text{wall}} = -\frac{4}{3}\frac{\sigma_{\mathrm{SB}}}{\rho\kappa}\frac{\partial T^4}{\partial n}
+                \end{equation*}
+                \item Resulting boundary condition:
+                \begin{equation*}
+                    \left.\frac{\partial T^4}{\partial n}\right|_{\text{wall}} = \frac{3}{4}\rho\kappa(\alpha-1)T^4\Big|_{\text{wall}}
+                \end{equation*}
+            \end{itemize}
+        \end{column}
+        \hfill
+        \begin{column}{0.45\textwidth}
+            \centering
+            \includegraphics[height=0.5\textheight]{figures_intreduction/hurricane.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Understanding the Front Curvature}
+    Hurricane \& Hammer (2006) solved the Laplace equation (assuming constant opacity and neglecting $e$):
     \begin{equation*}
         \underbrace{\frac{\partial e}{\partial t}}_{\to 0} = \frac{4}{3} \nabla \cdot \left( \frac{1}{ \rho \kappa} \nabla (T^4) \right)
     \end{equation*}
@@ -577,14 +657,9 @@
     \begin{equation*}
         x_F(y,t) = \frac{L}{\varepsilon} \cosh^{-1}\left(1 + \frac{D\varepsilon t}{L^2}\right) \cos\left(\frac{\sqrt{\varepsilon}}{L}y\right) + \text{HOT}
     \end{equation*}
-
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.4\textheight]{figures_intreduction/hurricane.png}
-    \end{figure}
 \end{frame}
 
-\begin{frame}{Cylinder Coordinates}
+\begin{frame}{Cylindrical Coordinates}
     \begin{columns}
         \begin{column}{0.65\textwidth}
             The model was re-developed in \textcolor{red}{\textbf{cylindrical coordinates}} (\textit{Courtois et al. POP, (2022)}):
@@ -608,36 +683,41 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Applying on our model: Dynamic Albedo}
+\begin{frame}{Applying to Our Model: Dynamic Albedo}
+    In previous works, the wall albedo was treated as a constant fitting parameter. We update it dynamically over time:
+    \begin{equation*}
+        \alpha(t) = \frac{F_{\text{out, wall}}}{F_{\text{in,wall}}} = \frac{\sigma_{\mathrm{SB}}T_{s,\mathrm{interface}}^4 - \frac{dE_{\text{wall}}}{dt}/2}{\sigma_{\mathrm{SB}}T_{s,\mathrm{interface}}^4+\frac{dE_{\text{wall}}}{dt}/2}
+    \end{equation*}
+    
+    \vspace{0.4cm}
     \begin{columns}
-        \begin{column}{0.5\textwidth}
-            In previous works, the wall albedo was treated as a constant fitted parameter. We update it dynamically in time:
-            \begin{align*}
-                \alpha(t) &= \frac{F_{\text{out, wall}}}{F_{\text{in,wall}}} \\
-                &= \frac{\sigma_{\mathrm{SB}}T_{s,\mathrm{interface}}^4 - \frac{dE_{\text{wall}}}{dt}/2}{\sigma_{\mathrm{SB}}T_{s,\mathrm{interface}}^4+\frac{dE_{\text{wall}}}{dt}/2}
-            \end{align*}
-            
-            \vspace{0.2cm}
-            where the curvature goes as $J_0\left(\frac{\sqrt{2\varepsilon(t)}}{R}r\right)$, and $\varepsilon(t)$ scales with $(1 - \alpha(t))$.
+        \begin{column}{0.55\textwidth}
+            where the front curvature depends on the radial eigenvalue $\kappa_0$:
+            \begin{equation*}
+                \kappa_0(t) \approx \frac{\sqrt{2\varepsilon(t)}}{R}, \quad \varepsilon(t) = \frac{3}{4}\rho\kappa R (1-\alpha(t))
+            \end{equation*}
+            which dynamically scales with the time-dependent wall loss $(1 - \alpha(t))$.
         \end{column}
         \hfill
-        \begin{column}{0.48\textwidth}
+        \begin{column}{0.42\textwidth}
             \centering
             \includegraphics[width=\textwidth]{2D_model/albedo.png}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{The 2D wave front}
-    \begin{equation*} \LARGE
+\begin{frame}{The 2D Wave Front}
+    {\LARGE
+    \begin{equation*}
         \boldsymbol{x_F(r,t) = x_{\text{1.5D}}(t) \cdot J_0\left(\kappa_0 (t) r\right)}
     \end{equation*}
+    }
 
 \end{frame}
 
 
 
-\subsection{Comparing to 2D supersonic diffusion simulation}
+\subsection{Comparing to 2D Supersonic Diffusion Simulation}
 {
 \setbeamercolor{background canvas}{bg=darkblue}
 \begin{frame}[plain]
@@ -645,49 +725,49 @@
     \begin{center}
         {\color{accentblue}\LARGE Full 2D Model} \\
         \vspace{0.4cm}
-        {\huge\bfseries\color{white} Comparing to 2D Diffusion Simulation without hydrodynamics}
+        {\huge\bfseries\color{white} Comparing to 2D Diffusion Simulation Without Hydrodynamics}
     \end{center}
     \vfill
 \end{frame}
 }
 
 
-\begin{frame}{Gold coating - SiO2}
+\begin{frame}{Gold Coating — \(\mathrm{SiO}_2\)}
     \begin{figure}
         \centering
             \includegraphics[width=0.8\textwidth]{2D_model/front_surface_gold.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}{100 times optically thinner Gold coating - SiO2}
+\begin{frame}{100$\times$ Optically Thinner Gold Coating — \(\mathrm{SiO}_2\)}
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth]{2D_model/front_surface_gold100.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Copper - SiO2}
+\begin{frame}{Copper Coating — \(\mathrm{SiO}_2\)}
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth]{2D_model/front_surface_copper.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Be - SiO2}
+\begin{frame}{Beryllium (Be) Coating — \(\mathrm{SiO}_2\)}
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth]{2D_model/front_surface_be.png}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Vacuum - SiO2}
+\begin{frame}{Vacuum Boundary — \(\mathrm{SiO}_2\)}
     \begin{figure}
         \centering
         \includegraphics[width=0.8\textwidth]{2D_model/front_surface_vacuum.png}
     \end{figure}
 \end{frame}
 
-\subsection{A full 2D Temperature distribution}
+\subsection{Full 2D Temperature Distribution}
 {
 \setbeamercolor{background canvas}{bg=darkblue}
 \begin{frame}[plain]
@@ -701,8 +781,8 @@
 \end{frame}
 }
 
-\begin{frame}{A full 2D Temperature distribution}
-    One can use the 2D Henyey-like profile:
+\begin{frame}{Full 2D Temperature Distribution}
+    The 2D Henyey-like temperature profile is given by:
     \begin{equation*}
         T(z,r,t) \approx T_S(t) \left[ 1 - \frac{z}{z_F(r,t)} \right]^{\frac{1}{4+\alpha-\beta}}
     \end{equation*}
@@ -746,7 +826,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{2D Temp. Distribution — Back SiO2 ($1.0$ ns)}
+\begin{frame}{2D Temperature Distribution — Back \textit{et al.} \(\mathrm{SiO}_2\) ($1.0$ ns)}
     \begin{columns}
         \begin{column}{0.4\textwidth}
                 Side-by-side comparison of the 2D temperature distribution at $t = 1.0$ ns:
@@ -762,7 +842,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{2D Temp. Distribution — Back SiO2 ($2.0$ ns)}
+\begin{frame}{2D Temperature Distribution — Back \textit{et al.} \(\mathrm{SiO}_2\) ($2.0$ ns)}
     \begin{columns}
         \begin{column}{0.4\textwidth}
                 Side-by-side comparison of the 2D temperature distribution at $t = 2.0$ ns:
@@ -778,7 +858,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{2D Temp. Distribution — Back SiO2 ($2.5$ ns)}
+\begin{frame}{2D Temperature Distribution — Back \textit{et al.} \(\mathrm{SiO}_2\) ($2.5$ ns)}
     \begin{columns}
         \begin{column}{0.4\textwidth}
                 Side-by-side comparison of the 2D temperature distribution at $t = 2.5$ ns:
@@ -794,7 +874,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{2D Temp. Distribution — Ji-Yan ($0.5$ ns)}
+\begin{frame}{2D Temperature Distribution — Ji-Yan ($0.5$ ns)}
     \begin{columns}
         \begin{column}{0.4\textwidth}
                 Side-by-side comparison of the 2D temperature distribution at $t = 0.5$ ns:
@@ -814,7 +894,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{2D Temp. Distribution — Ji-Yan ($1.0$ ns)}
+\begin{frame}{2D Temperature Distribution — Ji-Yan ($1.0$ ns)}
     \begin{columns}
         \begin{column}{0.4\textwidth}
                 Side-by-side comparison of the 2D temperature distribution at $t = 1.0$ ns:
@@ -834,7 +914,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{2D Temp. Distribution — Ji-Yan ($1.3$ ns)}
+\begin{frame}{2D Temperature Distribution — Ji-Yan ($1.3$ ns)}
     \begin{columns}
         \begin{column}{0.4\textwidth}
                 Side-by-side comparison of the 2D temperature distribution at $t = 1.3$ ns:
@@ -869,7 +949,7 @@
 \end{frame}
 }
 
-\begin{frame}{Flux Curvature Comparison - Back SiO2 PRL}
+\begin{frame}{Flux Curvature Comparison — Back \textit{et al.} \(\mathrm{SiO}_2\) (PRL)}
     \begin{columns}
         \begin{column}{0.37\textwidth}
             \centering
@@ -889,7 +969,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Flux Curvature Comparison - Back Ta2O5 POP}
+\begin{frame}{Flux Curvature Comparison — Back \textit{et al.} \(\mathrm{Ta}_2\mathrm{O}_5\) (POP)}
     \begin{columns}
         \begin{column}{0.37\textwidth}
             \centering
@@ -910,7 +990,7 @@
 \end{frame}
 
 \begin{frame}{Gold vs. Copper Coating Comparison}
-    French experiment \textit{Courtois et al. POP, (2024)} which tests the arrival time of the front as a function of $r$ for both gold and copper coats:
+    Comparison with the French experiment by \textit{Courtois et al. POP, (2024)}, measuring the front arrival time as a function of $r$ for both gold and copper coatings:
     \vfill
     \begin{figure}
         \centering
@@ -930,7 +1010,7 @@
         \vspace{0.3cm}
         \item \textbf{Deep Physical Insight}:
         \begin{itemize}
-            \item We can now understand the underlying physics of radiation transport and energy exchange in a very good, intuitive way.
+            \item We can now understand the underlying physics of radiation transport and energy exchange in an intuitive and clear manner.
         \end{itemize}
     \end{itemize}
 \end{frame}
