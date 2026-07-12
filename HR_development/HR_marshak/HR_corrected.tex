@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\setlist{nosep}
+
+\title{A Compact Bath-Temperature Extension of the LTE Hammer--Rosen Marshak-Wave Model}
+\author{Menahem Krief}
+\date{\today}
+
+\newcommand{\Tb}{T_b}
+\newcommand{\Ts}{T_s}
+\newcommand{\xf}{x_F}
+\newcommand{\eps}{\epsilon}
+\newcommand{\dif}{\,d}
+\newcommand{\Jfour}{J_4}
+\newcommand{\Jn}{J_n}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The original LTE Hammer--Rosen (HR) theory assumes that the surface temperature
+$\Ts(t)$ is given.  Here we summarize a compact bath-temperature version in
+which the input is the incident bath temperature $\Tb(t)$ and the surface
+temperature is estimated from a Marshak boundary condition.  The model keeps
+the original HR front and profile structure, avoids differentiating the noisy
+bath history, and requires only fluence integrals plus one scalar algebraic
+solve at each time.
+\end{abstract}
+
+\section{LTE diffusion equation and material model}
+
+The LTE material model is
+\begin{equation}
+ e=fT^\beta\rho^{-\mu},
+ \qquad
+ \frac{1}{\kappa_R}=gT^\alpha\rho^{-\lambda},
+ \label{eq:material}
+\end{equation}
+where $e$ is the specific material energy, $\kappa_R$ is the Rosseland opacity,
+$\rho$ is constant, and $f,\beta,\mu,g,\alpha,\lambda$ are material constants.
+The LTE diffusion equation can be written as
+\begin{equation}
+ \boxed{
+ \frac{\partial T^\beta}{\partial t}
+ =C\frac{\partial^2 T^n}{\partial x^2}}
+ \label{eq:lte_diffusion}
+\end{equation}
+with
+\begin{equation}
+ \boxed{n=4+\alpha,\qquad \eps=\frac{\beta}{n}}
+ \label{eq:n_eps}
+\end{equation}
+and
+\begin{equation}
+ \boxed{
+ C=\frac{16g\sigma}{3nf}\rho^{-2+\mu-\lambda}.}
+ \label{eq:C}
+\end{equation}
+Here $\sigma$ is the Stefan--Boltzmann constant in the unit system used for the
+HR coefficients.
+
+\section{Original surface-temperature HR formulas}
+
+For a prescribed surface temperature $\Ts(t)$, define
+\begin{equation}
+ H(t)=\Ts^n(t).
+\end{equation}
+The first-order HR front formula is
+\begin{equation}
+ \boxed{
+ \xf^2(t)=K_\eps C\,H^{-\eps}(t)\int_0^t H(t')\dif t'}
+ \label{eq:surface_hr_front_H}
+\end{equation}
+where
+\begin{equation}
+ \boxed{K_\eps=\frac{2+\eps}{1-\eps}.}
+ \label{eq:Keps}
+\end{equation}
+Equivalently, since $H^{-\eps}=\Ts^{-\beta}$,
+\begin{equation}
+ \boxed{
+ \xf^2(t)=K_\eps C\,\Ts^{-\beta}(t)
+ \int_0^t \Ts^n(t')\dif t'.}
+ \label{eq:surface_hr_front_T}
+\end{equation}
+The HR material energy per unit area is
+\begin{equation}
+ \boxed{
+ E(t)=f\rho^{1-\mu}(1-\eps)\xf(t)H^\eps(t).}
+ \label{eq:HR_energy}
+\end{equation}
+Combining \eqref{eq:surface_hr_front_H} and \eqref{eq:HR_energy} gives
+\begin{equation}
+ \boxed{
+ E^2(t)=Z_1H^\eps(t)\int_0^tH(t')\dif t'}
+ \label{eq:E_squared}
+\end{equation}
+with
+\begin{equation}
+ \boxed{
+ Z_1=f^2\rho^{2(1-\mu)}(2+\eps)(1-\eps)C.}
+ \label{eq:Z1}
+\end{equation}
+
+\section{Bath boundary condition}
+
+The bath-driven problem prescribes $\Tb(t)$ rather than $\Ts(t)$.  We use the
+Marshak boundary condition in the convention
+\begin{equation}
+ \boxed{
+ F(t)=2\sigma\left[\Tb^4(t)-\Ts^4(t)\right].}
+ \label{eq:marshak}
+\end{equation}
+Energy conservation gives
+\begin{equation}
+ E(t)=\int_0^tF(t')\dif t'.
+ \label{eq:energy_from_flux}
+\end{equation}
+The exact Cohen--Heizler boundary-temperature method solves
+\eqref{eq:E_squared}--\eqref{eq:energy_from_flux} by time marching.  The compact
+model below replaces that marching calculation by a fluence approximation.
+
+\section{Fluence-ratio approximation}
+
+Define the instantaneous surface-to-bath ratio
+\begin{equation}
+ \boxed{
+ u(t)=\left[\frac{\Ts(t)}{\Tb(t)}\right]^4,}
+ \label{eq:u_def}
+\end{equation}
+so that
+\begin{equation}
+ \boxed{
+ \Ts(t)=\Tb(t)u^{1/4}(t).}
+ \label{eq:Ts_from_u}
+\end{equation}
+The approximation is that this ratio is slowly varying over the accumulated
+fluence history:
+\begin{equation}
+ \boxed{
+ \frac{\Ts(t')}{\Tb(t')}\approx \frac{\Ts(t)}{\Tb(t)},
+ \qquad 0<t'<t.}
+ \label{eq:fluence_approx}
+\end{equation}
+Therefore
+\begin{equation}
+ \int_0^t\Ts^4(t')\dif t'\approx u(t)\int_0^t\Tb^4(t')\dif t',
+\end{equation}
+and
+\begin{equation}
+ \int_0^t\Ts^n(t')\dif t'\approx u^{n/4}(t)\int_0^t\Tb^n(t')\dif t'.
+\end{equation}
+
+Define the two bath fluences
+\begin{equation}
+ \boxed{
+ \Jfour(t)=\int_0^t\Tb^4(t')\dif t',
+ \qquad
+ \Jn(t)=\int_0^t\Tb^n(t')\dif t'.}
+ \label{eq:fluences}
+\end{equation}
+Using \eqref{eq:marshak}, \eqref{eq:energy_from_flux}, and the fluence
+approximation gives
+\begin{equation}
+ E(t)\approx 2\sigma\Jfour(t)\left[1-u(t)\right].
+ \label{eq:E_fluence}
+\end{equation}
+Using \eqref{eq:E_squared} gives
+\begin{equation}
+ E^2(t)\approx Z_1\,u^{(n+\beta)/4}(t)\,\Tb^\beta(t)\,\Jn(t),
+ \label{eq:E_HR_fluence}
+\end{equation}
+where $n\eps=\beta$ has been used.
+Equating \eqref{eq:E_fluence} and \eqref{eq:E_HR_fluence} yields the scalar
+algebraic equation for $u(t)$:
+\begin{equation}
+ \boxed{
+ 1-u(t)
+ =
+ \left[
+ \frac{Z_1\Tb^\beta(t)\Jn(t)}{\left[2\sigma\Jfour(t)\right]^2}
+ \right]^{1/2}
+ u^{(n+\beta)/8}(t).}
+ \label{eq:u_equation}
+\end{equation}
+This equation is the only extra operation relative to the original surface-HR
+formula.
+
+\section{Bath-driven front formula}
+
+Once $u(t)$ is known, the bath-driven front is
+\begin{equation}
+ \boxed{
+ \xf^2(t)=K_\eps C\,
+ u^{(n-\beta)/4}(t)\,\Tb^{-\beta}(t)\,\Jn(t).}
+ \label{eq:bath_front}
+\end{equation}
+Equivalently,
+\begin{equation}
+ \boxed{
+ \xf(t)=\left[K_\eps C\,
+ u^{(n-\beta)/4}(t)\,\Tb^{-\beta}(t)\,\Jn(t)\right]^{1/2}.}
+ \label{eq:bath_front_sqrt}
+\end{equation}
+If $u\to 1$, then $\Ts\to\Tb$ and \eqref{eq:bath_front} reduces to the naive
+surface-HR formula with $\Ts=\Tb$.
+
+\section{Temperature profile}
+
+After computing $u(t)$ and $\xf(t)$, set
+\begin{equation}
+ \boxed{\Ts(t)=\Tb(t)u^{1/4}(t),\qquad H(t)=\Ts^n(t).}
+\end{equation}
+Define
+\begin{equation}
+ y=\frac{x}{\xf(t)}.
+\end{equation}
+The first-order HR profile is
+\begin{equation}
+ \boxed{
+ T(x,t)=\Ts(t)
+ \left[(1-y)\left(1+\frac{\eps}{2}(1-A)y\right)\right]^{1/[n(1-\eps)]}}
+ \label{eq:profile}
+\end{equation}
+for $0\le y\le 1$, and $T=0$ for $y>1$.  The profile parameter is
+\begin{equation}
+ \boxed{
+ A(t)=\frac{\xf^2(t)}{C H^{1-\eps}(t)}\frac{\dot H(t)}{H(t)}.}
+ \label{eq:A}
+\end{equation}
+For a leading-order profile, use
+\begin{equation}
+ \boxed{
+ T(x,t)\approx \Ts(t)\left(1-\frac{x}{\xf(t)}\right)^{1/n}.}
+ \label{eq:leading_profile}
+\end{equation}
+
+\section{Numerical algorithm}
+
+Given tabulated $\Tb(t)$:
+\begin{enumerate}
+ \item Interpolate $\Tb(t)$ on a convenient grid.  For noisy data, linear interpolation is usually safest.
+ \item Compute $\Jfour(t_i)$ and $\Jn(t_i)$ by trapezoidal integration.
+ \item For each time $t_i$, if $T_{b,i}=0$ or either fluence is zero, set $T_{s,i}=0$ and $x_{F,i}=0$.
+ \item Otherwise solve \eqref{eq:u_equation} for $u_i\in(0,1)$.  Define
+ \begin{equation}
+  \Phi(u;t_i)=1-u-
+  \left[\frac{Z_1 T_{b,i}^\beta J_{n,i}}{(2\sigma J_{4,i})^2}\right]^{1/2}
+  u^{(n+\beta)/8}.
+ \end{equation}
+ Since $\Phi(0;t_i)>0$, $\Phi(1;t_i)<0$, and $\partial\Phi/\partial u<0$,
+ there is a unique physical root.  Bisection or Brent on $(0,1)$ is robust.
+ \item Compute $T_{s,i}=T_{b,i} u_i^{1/4}$.
+ \item Compute $x_{F,i}$ from \eqref{eq:bath_front_sqrt}.
+ \item For profiles, compute $H_i=T_{s,i}^n$, estimate $\dot H_i$ by finite differences, compute $A_i$ from \eqref{eq:A}, and use \eqref{eq:profile}.
+\end{enumerate}
+
+\section{Self-contained summary}
+
+The bath-driven LTE HR model solves the diffusion equation
+\begin{equation}
+ \frac{\partial T^\beta}{\partial t}=C\frac{\partial^2T^n}{\partial x^2},
+ \qquad
+ n=4+\alpha,
+ \qquad
+ \eps=\frac{\beta}{n},
+\end{equation}
+with the material model
+\begin{equation}
+ e=fT^\beta\rho^{-\mu},
+ \qquad
+ \frac{1}{\kappa_R}=gT^\alpha\rho^{-\lambda},
+\end{equation}
+and the bath boundary condition
+\begin{equation}
+ F=2\sigma(\Tb^4-\Ts^4).
+\end{equation}
+Given $\Tb(t)$, compute
+\begin{equation}
+ \Jfour=\int_0^t\Tb^4(t')\dif t',
+ \qquad
+ \Jn=\int_0^t\Tb^n(t')\dif t'.
+\end{equation}
+Then solve
+\begin{equation}
+ 1-u=\left[\frac{Z_1\Tb^\beta\Jn}{(2\sigma\Jfour)^2}\right]^{1/2}
+ u^{(n+\beta)/8},
+ \qquad
+ Z_1=f^2\rho^{2(1-\mu)}(2+\eps)(1-\eps)C.
+\end{equation}
+The surface temperature is
+\begin{equation}
+ \Ts=\Tb u^{1/4},
+\end{equation}
+and the front is
+\begin{equation}
+ \boxed{
+ \xf^2=\frac{2+\eps}{1-\eps}C\,
+ u^{(n-\beta)/4}\Tb^{-\beta}\int_0^t\Tb^n(t')\dif t'.}
+\end{equation}
+The profile is
+\begin{equation}
+ \boxed{
+ T(x,t)=\Ts(t)
+ \left[(1-y)\left(1+\frac{\eps}{2}(1-A)y\right)\right]^{1/[n(1-\eps)]},
+ \quad y=\frac{x}{\xf(t)},}
+\end{equation}
+with
+\begin{equation}
+ A=\frac{\xf^2}{C\Ts^{n(1-\eps)}}\frac{d}{dt}\ln \Ts^n.
+\end{equation}
+
+The HR spatial approximation has the same formal order as the original
+Hammer--Rosen theory: the retained front and profile are first order in
+$\eps$, with neglected HR spatial terms of order $O(\eps^2)$.  The additional
+bath approximation is the fluence-ratio assumption
+\begin{equation}
+ \Ts(t')/\Tb(t')\approx \Ts(t)/\Tb(t)
+ \quad (0<t'<t).
+\end{equation}
+Thus the model is most accurate when the surface-to-bath ratio varies smoothly
+over the accumulated fluence history.  It is not the exact Cohen--Heizler
+boundary evolution, but it is stable, compact, and avoids differentiating the
+bath drive.
+
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  6 JUL 2026 13:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  12 JUL 2026 18:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -378,41 +378,64 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<figures/setup.jpg, id=33, 579.3645pt x 266.79675pt>
-File: figures/setup.jpg Graphic file (type jpg)
-<use figures/setup.jpg>
-Package pdftex.def Info: figures/setup.jpg  used on input line 55.
-(pdftex.def)             Requested size: 246.0pt x 113.2833pt.
+<figures/T_drive.png, id=33, 412.4208pt x 233.1912pt>
+File: figures/T_drive.png Graphic file (type png)
+<use figures/T_drive.png>
+Package pdftex.def Info: figures/T_drive.png  used on input line 57.
+(pdftex.def)             Requested size: 123.0pt x 69.54514pt.
+<figures/setup.png, id=34, 579.3645pt x 266.79675pt>
+File: figures/setup.png Graphic file (type png)
+<use figures/setup.png>
+Package pdftex.def Info: figures/setup.png  used on input line 63.
+(pdftex.def)             Requested size: 123.0pt x 56.6396pt.
+ [1{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./figures/T_drive.png> <./figures/setup.png>]
+<figures/SiO2_low_energy.png, id=91, 803.0pt x 602.25pt>
+File: figures/SiO2_low_energy.png Graphic file (type png)
+<use figures/SiO2_low_energy.png>
+Package pdftex.def Info: figures/SiO2_low_energy.png  used on input line 120.
+(pdftex.def)             Requested size: 221.3985pt x 166.04657pt.
 
 
-LaTeX Warning: Reference `eq:diffusion' on page 1 undefined on input line 72.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[1{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./figures/setup.jpg>]
+[2 <./figures/SiO2_low_energy.png (PNG copy)>]
+<figures/front_surface_gold100.png, id=105, 503.8825pt x 378.6145pt>
+File: figures/front_surface_gold100.png Graphic file (type png)
+<use figures/front_surface_gold100.png>
+Package pdftex.def Info: figures/front_surface_gold100.png  used on input line 142.
+(pdftex.def)             Requested size: 221.3985pt x 166.35402pt.
+<figures/prl_T4.png, id=113, 428.70564pt x 269.13348pt>
+File: figures/prl_T4.png Graphic file (type png)
+<use figures/prl_T4.png>
+Package pdftex.def Info: figures/prl_T4.png  used on input line 159.
+(pdftex.def)             Requested size: 265.20218pt x 166.49553pt.
+<figures/back_prl_curve.png, id=114, 433.62pt x 325.215pt>
+File: figures/back_prl_curve.png Graphic file (type png)
+<use figures/back_prl_curve.png>
+Package pdftex.def Info: figures/back_prl_curve.png  used on input line 165.
+(pdftex.def)             Requested size: 214.19907pt x 160.65192pt.
+
 No file PRL_attemption.bbl.
-[2] (PRL_attemption.aux)
+[3 <./figures/front_surface_gold100.png>] [4 <./figures/prl_T4.png> <./figures/back_prl_curve.png>] (PRL_attemption.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `PRL_attemption.out' has not changed.
 (rerunfilecheck)             Checksum: 48BA6F52937147A608DE803C630C430D;1252.
  ) 
 Here is how much of TeX's memory you used:
- 12200 strings out of 467871
- 182477 string characters out of 5417408
- 633926 words of memory out of 5000000
- 40914 multiletter control sequences out of 15000+600000
- 638075 words of font info for 78 fonts, out of 8000000 for 9000
+ 12258 strings out of 467871
+ 183974 string characters out of 5417408
+ 638802 words of memory out of 5000000
+ 40963 multiletter control sequences out of 15000+600000
+ 638421 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,1197b,629s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on PRL_attemption.pdf (2 pages, 251355 bytes).
+ 75i,8n,79p,933b,523s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on PRL_attemption.pdf (4 pages, 771728 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 214 PDF objects out of 1000 (max. 8388607)
+ 32 named destinations out of 1000 (max. 500000)
+ 87 words of extra memory for PDF output out of 10000 (max. 10000000)
 

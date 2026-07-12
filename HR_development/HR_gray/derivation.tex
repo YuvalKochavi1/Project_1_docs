@@ -1,0 +1,996 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{Extension of the Hammer--Rosen Model to a Gray Two-Temperature System}
+\author{Yuval Kochavi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Extension of the Hammer--Rosen Model to a Gray Two-Temperature System}
+
+Hammer and Rosen considered the supersonic Marshak-wave problem under the
+assumption of complete thermodynamic equilibrium, namely
+\[
+T_R = T_m \equiv T .
+\]
+In that case the radiation energy density is written as
+\[
+E = aT^4 ,
+\]
+and the material energy equation reduces to a single nonlinear diffusion
+equation for the material temperature. In their notation, the material internal
+energy and opacity are assumed to obey power laws of the form
+\[
+e = fT^\beta \rho^{-\mu},
+\qquad
+\frac{1}{\kappa} = gT^\alpha \rho^{-\lambda}.
+\]
+This leads to a nonlinear diffusion equation of the form
+\[
+\frac{\partial T^\beta}{\partial t}
+=
+C \frac{\partial^2 T^{4+\alpha}}{\partial x^2},
+\]
+where
+\[
+C =
+\frac{16\sigma g}{3f(4+\alpha)}
+\rho^{\mu-\lambda-2}.
+\]
+Hammer and Rosen then solve this equation perturbatively using the small
+parameter
+\[
+\epsilon = \frac{\beta}{4+\alpha}.
+\]
+Their main result for the heat-front position is
+\[
+x_F^2(t)
+=
+\frac{2+\epsilon}{1-\epsilon}
+C H^{-\epsilon}(t)
+\int_0^t H(t')\,dt',
+\]
+where
+\[
+H(t) = T_s^{4+\alpha}(t).
+\]
+The absorbed energy per unit area is, to first order in \(\epsilon\),
+\[
+\mathcal{E}(t)
+=
+f\rho^{1-\mu}
+\frac{x_F(t)H^\epsilon(t)}{1-\epsilon}.
+\]
+These are the one-temperature CTE results of Hammer and Rosen. :contentReference[oaicite:0]{index=0}
+
+\section{Gray Two-Temperature Equations}
+
+A more general description is obtained by allowing the radiation and material
+temperatures to differ:
+\[
+T_R \neq T_m .
+\]
+The gray radiation-diffusion equations are
+\begin{align}
+\frac{\partial E}{\partial t}
+-
+\nabla \cdot
+\left(
+\frac{c}{3\sigma}
+\nabla E
+\right)
+&=
+c\sigma \left(aT_m^4 - E\right),
+\\
+\rho\frac{\partial e}{\partial t}
+&=
+c\sigma \left(E-aT_m^4\right),
+\end{align}
+where
+\[
+E = aT_R^4,
+\qquad
+\sigma = \kappa \rho .
+\]
+
+Using the same power-law assumptions as Hammer and Rosen,
+\[
+e = fT_m^\beta \rho^{-\mu},
+\qquad
+\frac{1}{\kappa} = gT_m^\alpha \rho^{-\lambda},
+\]
+we have
+\[
+\kappa = \frac{1}{g}T_m^{-\alpha}\rho^\lambda,
+\]
+and therefore
+\[
+\sigma = \kappa\rho
+=
+\frac{1}{g}T_m^{-\alpha}\rho^{1+\lambda}.
+\]
+Thus
+\[
+\frac{c}{3\sigma}
+=
+\frac{cg}{3}\rho^{-1-\lambda}T_m^\alpha .
+\]
+
+Defining
+\[
+D_0 = \frac{cg}{3}\rho^{-1-\lambda},
+\qquad
+S_0 = \frac{c}{g}\rho^{1+\lambda},
+\qquad
+A_m = f\rho^{1-\mu},
+\]
+the two-temperature gray equations become
+\begin{align}
+\frac{\partial E}{\partial t}
+-
+\nabla \cdot
+\left(
+D_0T_m^\alpha \nabla E
+\right)
+&=
+S_0T_m^{-\alpha}
+\left(aT_m^4-E\right),
+\\
+A_m\frac{\partial T_m^\beta}{\partial t}
+&=
+S_0T_m^{-\alpha}
+\left(E-aT_m^4\right).
+\end{align}
+
+\section{Energy Conservation}
+
+Adding the radiation and material equations cancels the emission-absorption
+coupling term. Therefore,
+\[
+\frac{\partial}{\partial t}
+\left(
+E + A_mT_m^\beta
+\right)
+=
+\nabla \cdot
+\left(
+D_0T_m^\alpha \nabla E
+\right).
+\]
+
+In one spatial dimension this becomes
+\[
+\frac{\partial}{\partial t}
+\left(
+E + A_mT_m^\beta
+\right)
+=
+\frac{\partial}{\partial x}
+\left(
+D_0T_m^\alpha
+\frac{\partial E}{\partial x}
+\right).
+\]
+
+The total areal energy inside the heated region is therefore
+\[
+\mathcal{E}(t)
+=
+\int_0^{x_F(t)}
+\left[
+E(x,t) + A_mT_m^\beta(x,t)
+\right]dx .
+\]
+
+The incoming flux at the surface is
+\[
+F_{\rm in}(t)
+=
+-
+\left.
+D_0T_m^\alpha
+\frac{\partial E}{\partial x}
+\right|_{x=0}.
+\]
+
+Hence the exact energy-conservation relation is
+\[
+\boxed{
+\frac{d\mathcal{E}}{dt}
+=
+F_{\rm in}(t)
+}
+\]
+or explicitly,
+\[
+\boxed{
+\frac{d}{dt}
+\int_0^{x_F(t)}
+\left[
+E(x,t) + A_mT_m^\beta(x,t)
+\right]dx
+=
+-
+\left.
+D_0T_m^\alpha
+\frac{\partial E}{\partial x}
+\right|_{x=0}.
+}
+\]
+
+\section{Recovery of the Hammer--Rosen Limit}
+
+The Hammer--Rosen equation is recovered when the coupling between radiation
+and matter is sufficiently strong, so that
+\[
+E \simeq aT_m^4 .
+\]
+Equivalently,
+\[
+T_R \simeq T_m \equiv T .
+\]
+
+In this case, the total energy equation becomes
+\[
+\frac{\partial}{\partial t}
+\left(
+aT^4 + A_mT^\beta
+\right)
+=
+\frac{\partial}{\partial x}
+\left(
+D_0T^\alpha
+\frac{\partial aT^4}{\partial x}
+\right).
+\]
+
+If the material energy dominates the radiation energy,
+\[
+A_mT^\beta \gg aT^4,
+\]
+then
+\[
+A_m\frac{\partial T^\beta}{\partial t}
+=
+\frac{\partial}{\partial x}
+\left(
+D_0T^\alpha
+\frac{\partial aT^4}{\partial x}
+\right).
+\]
+
+Since
+\[
+T^\alpha\frac{\partial T^4}{\partial x}
+=
+\frac{4}{4+\alpha}
+\frac{\partial T^{4+\alpha}}{\partial x},
+\]
+we obtain
+\[
+A_m\frac{\partial T^\beta}{\partial t}
+=
+\frac{4aD_0}{4+\alpha}
+\frac{\partial^2 T^{4+\alpha}}{\partial x^2}.
+\]
+
+Therefore,
+\[
+\frac{\partial T^\beta}{\partial t}
+=
+C
+\frac{\partial^2 T^{4+\alpha}}{\partial x^2},
+\]
+with
+\[
+\boxed{
+C =
+\frac{4aD_0}{(4+\alpha)A_m}
+=
+\frac{4acg}{3(4+\alpha)f}
+\rho^{\mu-\lambda-2}.
+}
+\]
+
+This has exactly the same mathematical structure as the Hammer--Rosen
+diffusion equation.
+
+\section{Generalized CTE Form Including Radiation Energy}
+
+If we still assume
+\[
+T_R = T_m = T,
+\]
+but do not neglect the radiation energy \(aT^4\), then the conserved energy is
+\[
+U(T) = A_mT^\beta + aT^4 .
+\]
+
+The diffusion variable is
+\[
+\Phi(T)
+=
+\int_0^T
+D_0T'^\alpha
+\frac{d(aT'^4)}{dT'}\,dT' .
+\]
+
+Since
+\[
+\frac{d(aT'^4)}{dT'} = 4aT'^3,
+\]
+we get
+\[
+\Phi(T)
+=
+4aD_0\int_0^T T'^{\alpha+3}\,dT',
+\]
+and therefore
+\[
+\boxed{
+\Phi(T)
+=
+\frac{4aD_0}{4+\alpha}T^{4+\alpha}.
+}
+\]
+
+Let
+\[
+\Phi_s(t)=\Phi(T_s(t)).
+\]
+Following the Hammer--Rosen arbitrary-material-property formulation, the heat
+front may be written as
+\[
+\boxed{
+x_F^2(t)
+\simeq
+\frac{2}{L_s(t)}
+\int_0^t \Phi_s(t')\,dt',
+}
+\]
+where
+\[
+\boxed{
+L_s(t)
+=
+\frac{2}{\Phi_s(t)}
+\int_0^{\Phi_s(t)}
+U(\Phi)
+\left(
+1-\frac{\Phi}{\Phi_s(t)}
+\right)d\Phi .
+}
+\]
+
+The corresponding total areal energy is
+\[
+\boxed{
+\mathcal{E}(t)
+\simeq
+x_F(t)
+\frac{1}{\Phi_s(t)}
+\int_0^{\Phi_s(t)}
+U(\Phi)\,d\Phi .
+}
+\]
+
+For the power-law form
+\[
+U(T)=A_mT^\beta+aT^4,
+\]
+define
+\[
+\epsilon_m = \frac{\beta}{4+\alpha},
+\qquad
+\epsilon_r = \frac{4}{4+\alpha}.
+\]
+Then
+\[
+\boxed{
+L_s
+=
+2\left[
+\frac{A_mT_s^\beta}
+{(1+\epsilon_m)(2+\epsilon_m)}
++
+\frac{aT_s^4}
+{(1+\epsilon_r)(2+\epsilon_r)}
+\right].
+}
+\]
+
+Similarly,
+\[
+\boxed{
+\mathcal{E}(t)
+\simeq
+x_F(t)
+\left[
+\frac{A_mT_s^\beta}{1+\epsilon_m}
++
+\frac{aT_s^4}{1+\epsilon_r}
+\right].
+}
+\]
+
+\section{True Two-Temperature Case}
+
+For the full gray system, where
+\[
+T_R \neq T_m,
+\]
+one can still derive an exact energy-conservation equation, but the problem is
+not closed by energy conservation alone.
+
+Introduce the normalized variables
+\[
+y=\frac{x}{x_F(t)},
+\qquad
+E(x,t)=aT_s^4(t)R(y,t),
+\qquad
+T_m(x,t)=T_s(t)M(y,t).
+\]
+
+Then the total energy is
+\[
+\mathcal{E}(t)
+=
+x_F(t)
+\left[
+aT_s^4(t)I_R(t)
++
+A_mT_s^\beta(t)I_M(t)
+\right],
+\]
+where
+\[
+I_R(t)=\int_0^1 R(y,t)\,dy,
+\qquad
+I_M(t)=\int_0^1 M^\beta(y,t)\,dy .
+\]
+
+The incoming radiation flux is
+\[
+F_{\rm in}(t)
+=
+\frac{D_0aT_s^{4+\alpha}(t)}{x_F(t)}
+A_R(t),
+\]
+where
+\[
+A_R(t)
+=
+-
+\left.
+M^\alpha(y,t)
+\frac{\partial R}{\partial y}
+\right|_{y=0}.
+\]
+
+Therefore, the exact moving-front energy equation is
+\[
+\boxed{
+\frac{d}{dt}
+\left\{
+x_F(t)
+\left[
+aT_s^4(t)I_R(t)
++
+A_mT_s^\beta(t)I_M(t)
+\right]
+\right\}
+=
+\frac{D_0aT_s^{4+\alpha}(t)}{x_F(t)}
+A_R(t).
+}
+\]
+
+This equation is exact, but it is not closed because the quantities
+\[
+I_R(t), \qquad I_M(t), \qquad A_R(t)
+\]
+depend on the unknown two-temperature profiles \(R(y,t)\) and \(M(y,t)\).
+
+Thus, in the true two-temperature case, a closed analytic expression for
+\(x_F(t)\) analogous to the Hammer--Rosen result generally requires solving a
+new coupled eigenvalue or self-similar problem. Only in the near-equilibrium
+limit,
+\[
+T_R \simeq T_m,
+\]
+does the system reduce to a Hammer--Rosen-type single-temperature diffusion
+problem.
+
+\section{Henyey-Type Two-Temperature Ansatz}
+
+We now ask whether the two-temperature gray system can be reduced by assuming
+Henyey-like spatial profiles for the radiation and material fields. The gray
+equations are
+\begin{align}
+\frac{\partial E}{\partial t}
+-
+\frac{\partial}{\partial x}
+\left(
+D_0T_m^\alpha
+\frac{\partial E}{\partial x}
+\right)
+&=
+S_0T_m^{-\alpha}
+\left(aT_m^4-E\right),
+\\
+A_m\frac{\partial T_m^\beta}{\partial t}
+&=
+S_0T_m^{-\alpha}
+\left(E-aT_m^4\right),
+\end{align}
+where
+\[
+D_0=\frac{cg}{3}\rho^{-1-\lambda},
+\qquad
+S_0=\frac{c}{g}\rho^{1+\lambda},
+\qquad
+A_m=f\rho^{1-\mu}.
+\]
+
+We introduce the moving-front coordinate
+\[
+y=\frac{x}{x_F(t)},
+\qquad 0\leq y\leq 1.
+\]
+
+We allow the radiation and material temperatures to differ:
+\[
+T_R(x,t)=T_{R,s}(t)\,\mathcal{R}(y),
+\qquad
+T_m(x,t)=T_s(t)M(y),
+\]
+and define
+\[
+E(x,t)=E_s(t)R(y),
+\qquad
+R(y)\equiv \mathcal{R}^4(y),
+\]
+where
+\[
+E_s(t)=aT_{R,s}^4(t).
+\]
+
+A Henyey-like profile may be written as
+\[
+R(y)=(1-y)(1+\chi_R y),
+\]
+and, for the material energy profile,
+\[
+M^\beta(y)=(1-y)(1+\chi_M y).
+\]
+
+The constants \(\chi_R\) and \(\chi_M\) describe the curvature of the radiation
+and material profiles. The Hammer--Rosen first-order Henyey profile has the
+same structure:
+\[
+U(y)\sim (1-y)(1+\chi y).
+\]
+
+The boundary conditions are
+\[
+R(0)=1,
+\qquad
+M(0)=1,
+\qquad
+R(1)=0,
+\qquad
+M(1)=0.
+\]
+
+\section{Profile Integrals}
+
+Define the radiation and material energy-shape integrals
+\[
+I_R=\int_0^1 R(y)\,dy,
+\qquad
+I_M=\int_0^1 M^\beta(y)\,dy.
+\]
+
+For the Henyey-like profiles above,
+\[
+I_R=\int_0^1 (1-y)(1+\chi_R y)\,dy
+=
+\frac{1}{2}+\frac{\chi_R}{6},
+\]
+and similarly
+\[
+I_M=
+\frac{1}{2}+\frac{\chi_M}{6}.
+\]
+
+The surface-gradient coefficient is
+\[
+A_R=
+-\left.
+M^\alpha(y)\frac{dR}{dy}
+\right|_{y=0}.
+\]
+
+Since \(M(0)=1\),
+\[
+A_R=-R'(0).
+\]
+
+For
+\[
+R(y)=(1-y)(1+\chi_Ry),
+\]
+we have
+\[
+R'(y)=\chi_R-1-2\chi_R y,
+\]
+and therefore
+\[
+R'(0)=\chi_R-1.
+\]
+
+Hence
+\[
+\boxed{
+A_R=1-\chi_R.
+}
+\]
+
+The incoming radiative flux is therefore
+\[
+F_{\rm in}
+=
+-
+\left.
+D_0T_m^\alpha
+\frac{\partial E}{\partial x}
+\right|_{x=0}
+=
+\frac{D_0T_s^\alpha E_s}{x_F}A_R.
+\]
+
+\section{Total Energy and Heat-Front Equation}
+
+The total areal energy inside the heated region is
+\[
+\mathcal{E}(t)
+=
+\int_0^{x_F(t)}
+\left[
+E(x,t)+A_mT_m^\beta(x,t)
+\right]dx.
+\]
+
+Using the assumed profiles,
+\[
+\mathcal{E}(t)
+=
+x_F(t)
+\left[
+E_s(t)I_R
++
+A_mT_s^\beta(t)I_M
+\right].
+\]
+
+Define
+\[
+B(t)=E_s(t)I_R+A_mT_s^\beta(t)I_M.
+\]
+
+Then
+\[
+\mathcal{E}(t)=x_F(t)B(t).
+\]
+
+Energy conservation gives
+\[
+\frac{d}{dt}\left[x_F(t)B(t)\right]
+=
+\frac{D_0T_s^\alpha(t)E_s(t)}{x_F(t)}A_R.
+\]
+
+Define
+\[
+K(t)=D_0A_R T_s^\alpha(t)E_s(t).
+\]
+
+Then the moving-front equation becomes
+\[
+\boxed{
+\frac{d}{dt}\left[x_F(t)B(t)\right]
+=
+\frac{K(t)}{x_F(t)}.
+}
+\]
+
+Multiplying by \(x_F\), we get
+\[
+B x_F\dot{x}_F+x_F^2\dot{B}=K.
+\]
+
+Since
+\[
+x_F\dot{x}_F=\frac{1}{2}\frac{d x_F^2}{dt},
+\]
+we obtain
+\[
+\frac{B}{2}\frac{d x_F^2}{dt}
++
+\dot{B}x_F^2
+=
+K.
+\]
+
+Let
+\[
+X(t)=x_F^2(t).
+\]
+
+Then
+\[
+\frac{B}{2}\dot{X}+\dot{B}X=K.
+\]
+
+Dividing by \(B/2\),
+\[
+\dot{X}
++
+2\frac{\dot{B}}{B}X
+=
+\frac{2K}{B}.
+\]
+
+The integrating factor is
+\[
+\exp\left(
+\int 2\frac{\dot{B}}{B}\,dt
+\right)
+=
+B^2.
+\]
+
+Therefore,
+\[
+\frac{d}{dt}
+\left[
+B^2(t)X(t)
+\right]
+=
+2K(t)B(t).
+\]
+
+Since \(X=x_F^2\), the heat-front position is
+\[
+\boxed{
+x_F^2(t)
+=
+\frac{2}{B^2(t)}
+\int_0^t K(t')B(t')\,dt'.
+}
+\]
+
+That is,
+\[
+\boxed{
+x_F^2(t)
+=
+\frac{2}{\left[
+E_s(t)I_R+A_mT_s^\beta(t)I_M
+\right]^2}
+\int_0^t
+D_0A_R T_s^\alpha(t')E_s(t')
+\left[
+E_s(t')I_R+A_mT_s^\beta(t')I_M
+\right]
+dt'.
+}
+\]
+
+This is the two-temperature Henyey-profile analogue of the Hammer--Rosen
+front-position formula.
+
+\section{Total Energy}
+
+Since
+\[
+\mathcal{E}(t)=x_F(t)B(t),
+\]
+we immediately obtain
+\[
+\boxed{
+\mathcal{E}^2(t)
+=
+2
+\int_0^t
+K(t')B(t')\,dt'.
+}
+\]
+
+Explicitly,
+\[
+\boxed{
+\mathcal{E}^2(t)
+=
+2
+\int_0^t
+D_0A_R T_s^\alpha(t')E_s(t')
+\left[
+E_s(t')I_R+A_mT_s^\beta(t')I_M
+\right]
+dt'.
+}
+\]
+
+Therefore,
+\[
+\boxed{
+\mathcal{E}(t)
+=
+\left\{
+2
+\int_0^t
+D_0A_R T_s^\alpha(t')E_s(t')
+\left[
+E_s(t')I_R+A_mT_s^\beta(t')I_M
+\right]
+dt'
+\right\}^{1/2}.
+}
+\]
+
+\section{Closure for the Radiation--Material Temperature Difference}
+
+The previous result gives a front equation, but the two-temperature problem is
+not fully closed unless \(E_s(t)\) and \(T_s(t)\) are known. To close the model,
+one can integrate the material energy equation over the heated region.
+
+The material energy is
+\[
+\mathcal{E}_m(t)
+=
+x_F(t)A_mT_s^\beta(t)I_M.
+\]
+
+The volume-integrated matter-radiation exchange is
+\[
+Q_{\rm abs}(t)
+=
+\int_0^{x_F}
+S_0T_m^{-\alpha}
+\left(
+E-aT_m^4
+\right)dx.
+\]
+
+Using the profile ansatz,
+\[
+Q_{\rm abs}(t)
+=
+x_F S_0T_s^{-\alpha}
+\left[
+E_s J_R
+-
+aT_s^4 J_M
+\right],
+\]
+where
+\[
+J_R=
+\int_0^1 M^{-\alpha}(y)R(y)\,dy,
+\]
+and
+\[
+J_M=
+\int_0^1 M^{4-\alpha}(y)\,dy.
+\]
+
+Therefore the material-energy equation becomes
+\[
+\boxed{
+\frac{d}{dt}
+\left[
+x_F A_mT_s^\beta I_M
+\right]
+=
+x_F S_0T_s^{-\alpha}
+\left[
+E_s J_R
+-
+aT_s^4 J_M
+\right].
+}
+\]
+
+Similarly, the radiation-energy equation is
+\[
+\boxed{
+\frac{d}{dt}
+\left[
+x_F E_s I_R
+\right]
+=
+\frac{D_0A_RT_s^\alpha E_s}{x_F}
+-
+x_F S_0T_s^{-\alpha}
+\left[
+E_s J_R
+-
+aT_s^4 J_M
+\right].
+}
+\]
+
+Together with
+\[
+\boxed{
+x_F^2(t)
+=
+\frac{2}{B^2(t)}
+\int_0^t K(t')B(t')\,dt',
+}
+\]
+these equations form a closed reduced two-temperature model, provided the
+shape parameters \(\chi_R\) and \(\chi_M\) are prescribed or fitted.
+
+\section{Equilibrium Limit}
+
+In the complete thermodynamic equilibrium limit,
+\[
+T_R=T_m=T_s,
+\]
+so
+\[
+E_s=aT_s^4.
+\]
+
+If, in addition, the radiation and material profiles have the same shape, then
+\[
+R(y)\approx M^4(y).
+\]
+
+The total energy coefficient becomes
+\[
+B(t)
+=
+aT_s^4 I_R
++
+A_mT_s^\beta I_M.
+\]
+
+If material energy dominates radiation energy,
+\[
+A_mT_s^\beta I_M \gg aT_s^4 I_R,
+\]
+then
+\[
+B(t)\approx A_mT_s^\beta I_M.
+\]
+
+Also,
+\[
+K(t)=D_0A_RaT_s^{4+\alpha}.
+\]
+
+Therefore,
+\[
+x_F^2(t)
+\approx
+\frac{2D_0A_Ra}{A_m I_M}
+T_s^{-2\beta}(t)
+\int_0^t
+T_s^{4+\alpha+\beta}(t')\,dt'.
+\]
+
+This has the same diffusion-wave character as the Hammer--Rosen result, but
+with constants determined by the chosen Henyey-like profile.
+\end{document}

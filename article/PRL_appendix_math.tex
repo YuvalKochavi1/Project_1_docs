@@ -1,0 +1,123 @@
+% ============================================================================
+% Appendix for PRL_attemption.tex
+% Full mathematical details omitted from the 5-page PRL main text.
+% ============================================================================
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,bm,geometry}
+\geometry{margin=1in}
+
+\title{Appendix: Mathematical Details for the 2D Supersonic Marshak-Wave Model}
+\author{Yuval Kochavi et al.}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Purpose}
+This appendix collects the full mathematical expressions and intermediate derivation steps that are only cited in the PRL main text due to the five-page limit.
+
+\section{1D Hammer--Rosen Backbone}
+Using power-law opacity and material energy,
+\begin{equation}
+\frac{1}{\kappa}=gT^{\alpha}\rho^{-\lambda},
+\qquad
+ e=fT^{\beta}\rho^{-\mu},
+\end{equation}
+the front position is written as
+\begin{equation}
+x_F^2(t)=\frac{2+\varepsilon}{1-\varepsilon}\,C\,H^{-\varepsilon}(t)\int_0^t H(t')\,dt',
+\end{equation}
+with
+\begin{equation}
+H(t)=T_s^{4+\alpha}(t),
+\qquad
+\varepsilon=\frac{\beta}{4+\alpha},
+\qquad
+C=\frac{16\,g\,\sigma_{\mathrm{SB}}}{3f(4+\alpha)}\,\rho^{2-\mu-\lambda}.
+\end{equation}
+The coupled boundary-flux closure uses the Marshak boundary condition and material-energy balance:
+\begin{equation}
+\sigma_{\mathrm{SB}}T_D^4=\sigma_{\mathrm{SB}}T_s^4+\frac{1}{2}F(0,t),
+\qquad
+\dot E(t)=F(0,t).
+\end{equation}
+
+\section{2D Wall-Energy Loss}
+For a cylindrical tube of radius $R$, the cumulative wall-deposited energy is
+\begin{equation}
+E_W(t)=2\pi R\int_0^{x_F(t)}\int_0^t \mathcal H\!\left(t-t_0(x)\right)\,\dot E_{\mathrm{mat}}(t')\,dt'\,dx.
+\end{equation}
+For gold sleeves, the wall-heating fit used in the model is
+\begin{equation}
+E_{\mathrm{gold}}(t)=0.59\,T_0^{3.35}\left(t-t_0(x)\right)^{0.59}
+\quad (\mathrm{hJ/mm}^2).
+\end{equation}
+Material-specific coefficients for Be and Cu are taken in the same form from the cited wall-heating literature.
+
+\section{Wall Ablation and Reduced Input Area}
+For gold, the subsonic self-similar ablation velocity is
+\begin{equation}
+u_{\mathrm{gold}}(t)=-510.1\,\tilde u(\rho_{\mathrm{gold}})\,T_0^{0.716}\left(t-t_0(x)\right)^{0.036}
+\quad (\mathrm{km/s}).
+\end{equation}
+The local radius update is
+\begin{equation}
+R(t,x)=R_0-u_W(t)\left(t-t_0(x)\right),
+\end{equation}
+which modifies incoming energy as
+\begin{equation}
+E_{\mathrm{in}}(t)=2\pi\int_0^t R_0^2\left(1-\frac{u_W(t')t'}{R_0^2}\right)^2F(0,t')\,dt'.
+\end{equation}
+Ablation-driven compression updates the mean density through
+\begin{equation}
+\rho(t)=\rho_0\frac{V_0}{V(t)},
+\qquad
+V(t)=\int_0^{x_F(t)}\pi R^2(t,x)\,dx,
+\end{equation}
+and therefore makes $C$ time dependent:
+\begin{equation}
+C(t)=\frac{16\,g\,\sigma_{\mathrm{SB}}}{(4+\alpha)\,3f\,t}\int_0^t\rho^{\mu+\lambda-2}(t')\,dt'.
+\end{equation}
+
+\section{Finite-Diameter Correction}
+When $\lambda_R$ approaches or exceeds $2R$, we use
+\begin{equation}
+\lambda_{\mathrm{eff}}=\left[(2R)^{-n}+\lambda_R^{-n}\right]^{-1/n},
+\end{equation}
+so the diffusion coefficient becomes $D=c\lambda_{\mathrm{eff}}/3$.
+
+\section{Cylindrical Bent-Front Reconstruction}
+The leading cylindrical bent-wave representation is
+\begin{equation}
+x_F(r,t)=\frac{1}{\kappa_0}\cosh^{-1}\!\left(1+\frac{D\kappa_0^2t}{2}\right)J_0(\kappa_0 r)+\text{H.O.T.},
+\end{equation}
+with $\kappa_0$ obtained from the wall-loss eigenvalue problem (or the high-albedo approximation where applicable).
+
+\section{Time-Dependent Albedo Closure}
+Albedo is evaluated from the wall energy balance:
+\begin{equation}
+\alpha(t)=\frac{\sigma_{\mathrm{SB}}T_{s,\mathrm{int}}^4-\frac{1}{2}\frac{dE_{\mathrm{wall}}}{dt}}
+{\sigma_{\mathrm{SB}}T_{s,\mathrm{int}}^4+\frac{1}{2}\frac{dE_{\mathrm{wall}}}{dt}}.
+\end{equation}
+Then
+\begin{equation}
+\varepsilon(t)=\frac{3}{4}\rho\kappa R\,[1-\alpha(t)],
+\end{equation}
+which sets the curvature strength through $\kappa_0(t)$.
+
+\section{2D Temperature and Observable Flux}
+Given $z_F(r,t)$, we reconstruct
+\begin{equation}
+T(r,z,t)=T_s(t)\left(1-\frac{z}{z_F(r,t)}\right)^{\frac{1}{4+\alpha-\beta}},
+\end{equation}
+and compute
+\begin{equation}
+\Phi(r,z_{\mathrm{det}},t)=\sigma_{\mathrm{SB}}T^4(r,z_{\mathrm{det}},t)
+\end{equation}
+for comparison with diagnostic emission profiles.
+
+\section*{Source Mapping}
+The wall-loss, wall-heating, and ablation formulas above are taken from Refs. Cohen et al. (2018, 2020). The bent-wave framework is from Hurricane and Hammer (2006), with cylindrical modeling details and modern comparisons from Courtois et al. (2022, 2024). The 1D HR backbone follows Hammer and Rosen (2003) and Rosen (2009).
+
+\end{document}

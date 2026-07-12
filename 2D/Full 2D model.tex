@@ -149,6 +149,16 @@ T_s(t_i) = H(t_i)^{1/(4+\alpha)}
 x_F(t_i) = \sqrt{\frac{2+\epsilon}{1-\epsilon} \cdot C(\rho) \cdot H(t_i)^{-\epsilon} \cdot I(t_i)}
 \end{equation}
 
+\textbf{Step 7: Compute axial temperature profile (First-Order HR Profile)}
+For $0 \le y \le 1$, where $y = x / x_F(t_i)$, the first-order Hammer--Rosen spatial temperature profile is given by:
+\begin{equation}
+T(x, t_i) = T_s(t_i) \left[ (1 - y) \left( 1 + \frac{\epsilon}{2} (1 - A_i) y \right) \right]^{1/[n(1-\epsilon)]}
+\end{equation}
+with $T(x, t_i) = 0$ for $y > 1$, where $n = 4 + \alpha$ and the profile parameter $A_i \equiv A(t_i)$ is evaluated using the finite difference estimate of $\dot{H}(t_i)$:
+\begin{equation}
+A_i = \frac{x_F^2(t_i)}{C(\rho) \cdot H(t_i)^{1-\epsilon}} \frac{\dot{H}(t_i)}{H(t_i)}, \qquad \dot{H}(t_i) \approx \frac{H(t_i) - H(t_{i-1})}{\Delta t}.
+\end{equation}
+
 \section{Wall Energy Loss and Albedo}
 
 \subsection{Energy Balance at Wall}

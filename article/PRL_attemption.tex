@@ -48,37 +48,128 @@
 % ============================================================================
 \section{Introduction}
 
-The experimental setup used for supersonic x-ray transport measurements is shown in Fig.~\ref{fig:setup}~\cite{Moore2012NIF}.
+The experimental setup used for supersonic x-ray transport measurements is shown in Fig.~\ref{fig:setup_tdrive}(b)~\cite{Moore2012NIF}.
 
 \begin{figure}[h!]
-	\centering
-	\includegraphics[width=\columnwidth]{figures/setup.jpg}
-	\caption{Experimental setup adapted from Moore \textit{et al.}~\cite{Moore2012NIF}.}
-	\label{fig:setup}
+    \centering
+    \begin{minipage}{0.5\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/T_drive.png}
+        \vspace{-0.5em}
+        \centerline{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/setup.png}
+        \vspace{-0.5em}
+        \centerline{(b)}
+    \end{minipage}
+    \caption{(a) Drive-temperature history used as the boundary condition in the model. (b) Experimental setup adapted from Moore \textit{et al.}~\cite{Moore2012NIF}.}
+    \label{fig:setup_tdrive}
 \end{figure}
+
+The drive-temperature profile used in the model is shown in Fig.~\ref{fig:setup_tdrive}(a).
 
 % ============================================================================
 %  II. GOVERNING EQUATIONS
 % ============================================================================
 \section{Governing Equations}
 
+In the supersonic diffusion limit, assuming local thermodynamic equilibrium ($T_R=T_m\equiv T$), the radiation--material system reduces to a single nonlinear diffusion equation:
+\begin{equation}\label{eq:diffusion}
+\rho\frac{\partial e}{\partial t}
+= \nabla\!\cdot\!\left(\frac{c}{3\kappa \rho}\nabla\left(aT^4\right)\right),
+\end{equation}
+where $a$ is the radiation constant, $c$ is the speed of light, and $\sigma = \kappa \rho$ is the Rosseland opacity.
+
 
 % ============================================================================
 %  III. Modeling the heat wave
 % ============================================================================
 \section{Modeling the Heat Wave}
-In this work, we develop a semi-analytic model for supersonic Marshak-wave propagation in cylindrical geometry that extends the Hammer--Rosen one-dimensional framework~\cite{Hammer2003} to experimentally relevant finite-tube configurations. The model includes four principal physical mechanisms that control front propagation: (1) the correct incoming radiative flux at the foam boundary (Marshak boundary condition), (2) energy loss to wall heating, (3) wall ablation and the associated modification of the effective propagation channel, all presented in Refs.~\cite{Cohen2020Key,Cohen2018}, and (4) finite-diameter transport effects represented through an effective mean free path (Ref.~\cite{Courtois2024}). The first mechanism is primarily longitudinal (1D), whereas the remaining mechanisms are wall-coupled and therefore intrinsically multidimensional. This separation motivates our staged construction: a corrected 1D longitudinal model followed by a full 2D description of front curvature and observables, consistent with the bent-wave formulations in Refs.~\cite{Hurricane2006,Courtois2022}.
+In this work, we develop a semi-analytic model for supersonic Marshak-wave propagation in cylindrical geometry that extends the Hammer--Rosen one-dimensional framework~\cite{Hammer2003} to experimentally relevant finite-tube configurations. The model includes four mechanisms that control front propagation: (1) the incoming radiative flux at the foam boundary, (2) energy loss to wall heating, (3) wall ablation and the associated modification of the effective propagation channel~\cite{Cohen2020Key,Cohen2018}, and (4) finite-diameter transport effects represented through an effective mean free path~\cite{Courtois2024}. We build the model in two stages: first a corrected 1D longitudinal evolution, then a 2D curvature and emission reconstruction consistent with bent-wave formulations~\cite{Hurricane2006,Courtois2022}.
 
-Hammer and Rosen~\cite{Hammer2003} solved Eq.~(\ref{eq:diffusion}) in one dimension using perturbation theory.
-The heat front position is given by
+We begin with the 1D Hammer--Rosen solution~\cite{Hammer2003,Rosen2009}, which assumes power laws for opacity and material energy,
+$\frac{1}{\kappa}=gT^{\alpha}\rho^{-\lambda}$ and $e=fT^{\beta}\rho^{-\mu}$. Using perturbation theory, the heat-front position is
 \begin{equation}\label{eq:HR}
     x_F^2(t) = \frac{2+\varepsilon}{1-\varepsilon}\,C\,H^{-\varepsilon}(t)\int_0^t H(t')\,dt',
 \end{equation}
 where $H(t) = T_s^{4+\alpha}(t)$, $\varepsilon = \beta/(4+\alpha)$, and
-\begin{equation}\label{eq:C_coeff}
-    C = \frac{16\,g\,\sigma_{\mathrm{SB}}}{3f(4+\alpha)}\,\rho^{2-\mu-\lambda}.
+	$C = \frac{16\,g\,\sigma_{\mathrm{SB}}}{3f(4+\alpha)}\,\rho^{2-\mu-\lambda}$.
+In this problem, it is useful to distinguish three temperatures: the drive temperature $T_D(t)$, the foam surface temperature $T_s(t)$, and the observed re-emission temperature $T_{\mathrm{obs}}(t)$. A naive assumption, $T_s(t)=T_D(t)$, gives an incorrect heat-front evolution and systematically overestimates the front velocity. For example, in our main $\mathrm{SiO}_2$ low-energy experiment~\cite{Back2000PRL}, the uncorrected HR prediction is high by about a factor of 1.5 (Fig.~\ref{fig:sio2_low_energy}).
+
+To estimate the surface temperature $T_s(t)$, we use the Marshak boundary condition in the diffusion regime,
+$\sigma_{\mathrm{SB}}T_D^4(t)=\sigma_{\mathrm{SB}}T_s^4(t)+\frac{1}{2}F(0,t)$,
+which shows that $T_s(t)$ is set by the boundary flux $F(0,t)$. The HR framework also provides the stored material energy,
+$E(t)=f\rho^{1-\mu}x_F(t)H^{\varepsilon}(t)(1-\varepsilon)$, with $\dot{E}(t)=F(0,t)$ at the boundary. Solving these relations together with Eq.~(\ref{eq:HR}) yields a physics-based $T_s(t)$ and reduces reliance on ad hoc temperature-reduction factors.
+
+We now extend the model to 2D effects. A primary source of front retardation in cylindrical-tube experiments is radiative energy loss into the surrounding walls. As the heat wave propagates along the axis, each axial slice of foam is exposed to radiation from its local front-arrival time $t_0(x)$. The wall at that position then absorbs energy for the remaining duration $t-t_0(x)$. {\color{red}We evaluate the cumulative wall-deposited energy using the cylindrical wall-loss integral form and material-dependent self-similar wall-heating laws reported in Refs.~\cite{Cohen2020Key,Cohen2018}. For gold walls we use the corresponding subsonic scaling from those same references.}
+Wall losses reduce the energy retained by the foam and therefore slow the front (Fig.~\ref{fig:sio2_low_energy}). {\color{red}Analogous expressions, with different coefficients, apply to other coating materials such as beryllium or copper.}
+
+Beyond direct energy removal, the heated wall ablates inward, reducing the effective tube radius over time. This ablation effect is relevant only for high-$Z$ and mid-$Z$ sleeve materials, which are subsonic in the relevant temperatures --- in our experiments, gold and copper --- whereas for low-$Z$ beryllium or vacuum sleeves, the ablation is negligible, and the effect is omitted. {\color{red}The ablation-velocity law, including its density-dependent prefactor, is taken from the self-similar subsonic treatment of Ref.~\cite{Cohen2020Key}. The tube radius is then updated in time, and the incoming energy is evaluated through the corresponding reduced-area integral following Refs.~\cite{Cohen2020Key,Cohen2018}.}
+In addition, the ablated material compresses the foam, raising the mean density $\rho(t) = \rho_0 V_0 / V(t)$ where $V(t) =  \int_0^{x_F(t)}\pi R^2(t,x)\,dx$. This retards the front further, making the HR coefficient time dependent through a density-history integral~\cite{Cohen2020Key,Cohen2018}. Together, wall-energy loss and ablation-driven compression are the dominant 2D corrections that bring the model into quantitative agreement with experiment (Fig.~\ref{fig:sio2_low_energy}).
+
+{\color{red}To keep the main manuscript within the five-page PRL format, we do not reproduce the full intermediate algebra in the body text. The complete mathematical development (including the explicit wall-loss integral, gold wall-heating scaling, ablation law, and reduced-area energy-input expression) is collected in a separate appendix file: \textit{PRL\_appendix\_math.tex}.}
+
+A further correction arises when the Rosseland mean free path $\lambda_R = 1/(\rho\kappa)$ becomes comparable to or larger than the tube diameter $2R$. In that regime photon transport is no longer governed by bulk scattering alone but is increasingly limited by wall collisions, reducing the effective diffusivity below the bulk value. Following Ref.~\cite{Courtois2024}, we account for this by replacing $\lambda_R$ with
+ $\lambda_{\mathrm{eff}} = \left[\left(2R\right)^{-n} + \lambda_R^{-n}\right]^{-1/n}$,
+where $n$ controls the sharpness of the transition. In the bulk-diffusion limit ($\lambda_R \ll 2R$), $\lambda_{\mathrm{eff}} \to \lambda_R$; in the wall-collision limit ($\lambda_R \gg 2R$), $\lambda_{\mathrm{eff}} \to 2R$. This correction is most significant in optically thin, low-density foams where $\lambda_R$ is large: the tube diameter becomes the transport bottleneck, yielding an effective diffusivity below the bulk Rosseland value. The diffusion coefficient in Eq.~(\ref{eq:diffusion}) is therefore replaced by $D=c\lambda_{\mathrm{eff}}/3$, which further retards the front.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{figures/SiO2_low_energy.png}
+	\caption{Front-position comparison for the $\mathrm{SiO}_2$ low-energy case, illustrating the effect of the corrected 1D and 2D terms.}
+	\label{fig:sio2_low_energy}
+\end{figure}
+
+The 1D front position $x_F(t)$ captures only longitudinal propagation; in reality, the front is curved, primarily due to sleeve losses. This intrinsically 2D curvature delays arrival at the diagnostic plane and directly affects the model because wall losses are governed by the boundary heat front at $r=R$.
+
+Hurricane and Hammer~\cite{Hurricane2006} showed that, in the idealized limit of constant opacity, negligible material-energy storage, and a steep heat front, the hot region behind the front is governed by a Laplace problem. In that formulation, the lossy wall enters through a Robin boundary condition set by the wall albedo: only a fraction $\alpha$ of the incident radiative flux is returned to the foam, while $1-\alpha$ is absorbed by the surrounding wall. This partial return cools the tube edge relative to the axis, and the resulting transverse eigenmodes bend the front. For a planar channel these modes are cosines, while in an axisymmetric cylindrical tube the regular radial modes are zeroth-order Bessel modes $J_0$ due to symmetry at $r=0$. The cylindrical analogue therefore has the leading-order form~\cite{Courtois2022}
+\begin{equation}\label{eq:HH_cyl}
+    x_F(r,t) = \frac{1}{\kappa_0}\cosh^{-1}\!\left(1 + \frac{D\kappa_0^2 t}{2}\right)J_0(\kappa_0 r) + \text{H.O.T.}
 \end{equation}
-Here $T_s$ is the surface temperature at $x = 0$, which HR set equal to the hohlraum drive temperature $T_D$.
+The transverse wavenumber is fixed by the wall-loss boundary condition. In the weak-loss, high-albedo limit, $\kappa_0 \approx \sqrt{2\varepsilon}/R$ with $\varepsilon = \tfrac{3}{4}\rho\kappa R(1-\alpha)$ and $\alpha$ the wall albedo. This approximation is accurate for small $\varepsilon$, i.e., high albedo. However, in relevant lower-albedo cases (e.g., copper with $\alpha\sim0.5$ and beryllium with $\alpha\sim0.3$), the small-$\varepsilon$ expansion is no longer sufficiently accurate. In those cases we compute $\kappa_0$ from a numerical solution of the transverse eigenvalue problem with the full wall-loss boundary condition~\cite{Hurricane2006}. Thus $J_0(\kappa_0 r)$ describes the curvature, while the coefficient multiplying it describes the longitudinal advance of the front.
+
+We use this separation only for the transverse shape. Because the longitudinal factor in Eq.~(\ref{eq:HH_cyl}) relies on overly simplified assumptions, we replace it with the corrected HR-based 1D centerline evolution while retaining the lowest cylindrical eigenmode for the radial dependence.
+
+The remaining quantity needed to set the curvature is the wall albedo. Rather than treating it as a constant fitting parameter, as done in previous works~\cite{Hurricane2006,Courtois2022}, we compute a time-dependent albedo from the wall energy balance. If $T_{s,\mathrm{int}}$ is the foam--wall interface temperature and $dE_{\mathrm{wall}}/dt$ is the wall absorption rate per unit area, the incoming and outgoing Marshak fluxes differ by the absorbed power. We therefore write $\alpha(t)=\frac{F_{\mathrm{out}}}{F_{\mathrm{in}}}=\frac{\sigma_{\mathrm{SB}}T_{s,\mathrm{int}}^4-\frac{1}{2}\frac{dE_{\mathrm{wall}}}{dt}}{\sigma_{\mathrm{SB}}T_{s,\mathrm{int}}^4+\frac{1}{2}\frac{dE_{\mathrm{wall}}}{dt}}$,
+which gives $\varepsilon(t)=\tfrac{3}{4}\rho\kappa R[1-\alpha(t)]$ and hence a time-dependent curvature. Larger wall absorption lowers $\alpha(t)$, increases $\kappa_0(t)$, and produces a more strongly bowed front; in the high-albedo limit $\alpha\rightarrow 1$, $\kappa_0\rightarrow 0$, and the solution smoothly approaches the one-dimensional front.
+
+Using the separation-of-variables ansatz $x_F(r,t) = x_F(t)J_0(\kappa_0 r)$, we compare the results with a 2D diffusion simulation without hydrodynamics:
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{figures/front_surface_gold100.png}
+	\caption{2D front comparison for the low-energy $\mathrm{SiO}_2$ case~\cite{Back2000PRL} with different coatings: Au, Cu, Be, and vacuum. The model agrees well with simulation, and the wall-material effect is clearly visible.}
+	\label{fig:simulation_comparison}
+\end{figure}
+
+
+Once the curved front is known, we reconstruct the two-dimensional temperature field by combining the corrected longitudinal temperature profile with the radial eigenmode structure. The front shape determines which axial positions have been heated at each radius, while the local temperature behind the front follows the same Henyey-like profile used in the one-dimensional solution~\cite{Hammer2003,Rosen2009},
+\begin{equation}\label{eq:henyey_profile}
+T(r,z,t) = T_s(t)\left[1-\dfrac{z}{z_F(r,t)}\right]^{\frac{1}{4+\alpha-\beta}}
+\end{equation}
+where $z_F(r,t)$ is the curved heat-front position and $T_s(t)$ is the surface temperature obtained from the corrected 1D Marshak calculation. This gives a map of $T^4(r,z,t)$, shown in Fig.~\ref{fig:temperature_flux_curvature}(a), from which the observable re-emission pattern is computed directly. At a diagnostic plane $z=z_{\mathrm{det}}$, the model flux curvature is $\Phi(r,z_{\mathrm{det}},t)=\sigma_{\mathrm{SB}}T^4(r,z_{\mathrm{det}},t)$,
+and the resulting radial profile is normalized to its peak before comparison with the measured emission profile. The same wall-loss eigenmode that bends the heat front therefore also produces the depressed edge emission seen in Fig.~\ref{fig:temperature_flux_curvature}(b).
+
+\begin{figure*}[t]
+    \centering
+    \begin{minipage}{0.52\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/prl_T4.png}
+        \vspace{-0.8em}
+        \centerline{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.42\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/back_prl_curve.png}
+        \vspace{-0.8em}
+        \centerline{(b)}
+    \end{minipage}
+    \caption{Temperature reconstruction and flux curvature. (a) Example two-dimensional $T^4(r,z)$ profile obtained by combining the corrected longitudinal heat-wave solution with the cylindrical bent-front eigenmode. (b) Normalized radial flux profile at the diagnostic plane, computed as $\Phi=\sigma_{\mathrm{SB}}T^4$ and compared with the Back \textit{et al.} emission data.}
+    \label{fig:temperature_flux_curvature}
+\end{figure*}
+
 
 % ============================================================================
 %  V. CONCLUSION
@@ -96,6 +187,12 @@ Here $T_s$ is the surface temperature at $x = 0$, which HR set equal to the hohl
 J.~H.~Hammer and M.~D.~Rosen,
 \textit{A consistent approach to solving the radiation diffusion equation},
 Phys.\ Plasmas \textbf{10}, 1829 (2003).
+
+\bibitem{Rosen2009}
+M.~D.~Rosen,
+\textit{Lectures in the Scottish Universities Summer School in Physics, 2005, on High Energy Laser Matter Interactions},
+in \textit{High Energy Laser Matter Interactions}, edited by D.~A.~Jaroszynski, R.~Bingham, and R.~A.~Cairns
+(CRC Press, Boca Raton, 2009), p.~325.
 
 \bibitem{Shussman2015}
 T.~Shussman and S.~I.~Heizler,
