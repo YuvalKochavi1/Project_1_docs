@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  12 JUL 2026 18:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  13 JUL 2026 17:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -314,128 +314,186 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
+\MT@toks=\toks26
+\MT@tempbox=\box70
+\MT@count=\count315
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1084.
+LaTeX Info: Redefining \leftprotrusion on input line 1085.
+\MT@prot@toks=\toks27
+LaTeX Info: Redefining \rightprotrusion on input line 1104.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen163
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count316
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdftex.def
+File: microtype-pdftex.def 2026/03/01 v3.2d Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 944.
+LaTeX Info: Redefining \lslig on input line 944.
+\MT@outer@space=\skip57
 )
-Class revtex4-2 Info: Unrecognized LaTeX tabular. Please update this document class! (Proceeding with fingers crossed.) on input line 16.
-Class revtex4-2 Info: cite was not loaded (OK!) on input line 16.
-Class revtex4-2 Info: mcite was not loaded (OK!) on input line 16.
-Class revtex4-2 Info: multicol was not loaded (OK!) on input line 16.
+Package microtype Info: Loading configuration file microtype.cfg.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+)
+Class revtex4-2 Info: Unrecognized LaTeX tabular. Please update this document class! (Proceeding with fingers crossed.) on input line 17.
+Class revtex4-2 Info: cite was not loaded (OK!) on input line 17.
+Class revtex4-2 Info: mcite was not loaded (OK!) on input line 17.
+Class revtex4-2 Info: multicol was not loaded (OK!) on input line 17.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count315
+\l__color_backend_stack_int=\count317
 ) (PRL_attemption.aux)
 \openout1 = `PRL_attemption.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count316
-\scratchdimen=\dimen163
-\scratchbox=\box70
-\nofMPsegments=\count317
-\nofMParguments=\count318
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count319
-\MPscratchDim=\dimen164
-\MPnumerator=\count320
-\makeMPintoPDFobject=\count321
-\everyMPtoPDFconversion=\toks27
+\scratchcounter=\count318
+\scratchdimen=\dimen164
+\scratchbox=\box71
+\nofMPsegments=\count319
+\nofMParguments=\count320
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count321
+\MPscratchDim=\dimen165
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
+\everyMPtoPDFconversion=\toks29
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 16.
+Package hyperref Info: Link coloring OFF on input line 17.
  (PRL_attemption.out) (PRL_attemption.out)
 \@outlinefile=\write4
 \openout4 = `PRL_attemption.out'.
 
-Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 16.
+LaTeX Info: Redefining \microtypecontext on input line 17.
+Package microtype Info: Applying patch `item' on input line 17.
+Package microtype Info: Applying patch `toc' on input line 17.
+Package microtype Info: Applying patch `eqnum' on input line 17.
+Package microtype Info: Applying patch `footnote' on input line 17.
+Package microtype Info: Applying patch `verbatim' on input line 17.
+LaTeX Info: Redefining \microtypesetup on input line 17.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+Package microtype Info: Patching command `\showhyphens'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
+Class revtex4-2 Info: Taking \maketitle back from hyperref on input line 17.
 \openout3 = `PRL_attemptionNotes.bib'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-<figures/T_drive.png, id=33, 412.4208pt x 233.1912pt>
-File: figures/T_drive.png Graphic file (type png)
-<use figures/T_drive.png>
-Package pdftex.def Info: figures/T_drive.png  used on input line 57.
-(pdftex.def)             Requested size: 123.0pt x 69.54514pt.
-<figures/setup.png, id=34, 579.3645pt x 266.79675pt>
+<figures/setup.png, id=37, 579.3645pt x 266.79675pt>
 File: figures/setup.png Graphic file (type png)
 <use figures/setup.png>
-Package pdftex.def Info: figures/setup.png  used on input line 63.
+Package pdftex.def Info: figures/setup.png  used on input line 68.
 (pdftex.def)             Requested size: 123.0pt x 56.6396pt.
- [1{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./figures/T_drive.png> <./figures/setup.png>]
-<figures/SiO2_low_energy.png, id=91, 803.0pt x 602.25pt>
-File: figures/SiO2_low_energy.png Graphic file (type png)
-<use figures/SiO2_low_energy.png>
-Package pdftex.def Info: figures/SiO2_low_energy.png  used on input line 120.
-(pdftex.def)             Requested size: 221.3985pt x 166.04657pt.
+<figures/T_drive.png, id=38, 412.4208pt x 233.1912pt>
+File: figures/T_drive.png Graphic file (type png)
+<use figures/T_drive.png>
+Package pdftex.def Info: figures/T_drive.png  used on input line 74.
+(pdftex.def)             Requested size: 123.0pt x 69.54514pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[2 <./figures/SiO2_low_energy.png (PNG copy)>]
-<figures/front_surface_gold100.png, id=105, 503.8825pt x 378.6145pt>
+[1{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./figures/setup.png> <./figures/T_drive.png>]
+<figures/SiO2_low_energy.png, id=106, 578.16pt x 433.62pt>
+File: figures/SiO2_low_energy.png Graphic file (type png)
+<use figures/SiO2_low_energy.png>
+Package pdftex.def Info: figures/SiO2_low_energy.png  used on input line 129.
+(pdftex.def)             Requested size: 246.0pt x 184.49448pt.
+ [2 <./figures/SiO2_low_energy.png>]
+<figures/front_surface_gold100.png, id=121, 503.8825pt x 378.6145pt>
 File: figures/front_surface_gold100.png Graphic file (type png)
 <use figures/front_surface_gold100.png>
-Package pdftex.def Info: figures/front_surface_gold100.png  used on input line 142.
+Package pdftex.def Info: figures/front_surface_gold100.png  used on input line 150.
 (pdftex.def)             Requested size: 221.3985pt x 166.35402pt.
-<figures/prl_T4.png, id=113, 428.70564pt x 269.13348pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/prl_T4.png, id=130, 715.18391pt x 416.56429pt>
 File: figures/prl_T4.png Graphic file (type png)
 <use figures/prl_T4.png>
-Package pdftex.def Info: figures/prl_T4.png  used on input line 159.
-(pdftex.def)             Requested size: 265.20218pt x 166.49553pt.
-<figures/back_prl_curve.png, id=114, 433.62pt x 325.215pt>
+Package pdftex.def Info: figures/prl_T4.png  used on input line 169.
+(pdftex.def)             Requested size: 193.80249pt x 112.88065pt.
+<figures/back_prl_curve.png, id=131, 470.9595pt x 361.35pt>
 File: figures/back_prl_curve.png Graphic file (type png)
 <use figures/back_prl_curve.png>
-Package pdftex.def Info: figures/back_prl_curve.png  used on input line 165.
-(pdftex.def)             Requested size: 214.19907pt x 160.65192pt.
-
+Package pdftex.def Info: figures/back_prl_curve.png  used on input line 175.
+(pdftex.def)             Requested size: 142.79938pt x 109.56372pt.
+<figures/back_pop_ta2o5_curve.png, id=132, 578.16pt x 433.62pt>
+File: figures/back_pop_ta2o5_curve.png Graphic file (type png)
+<use figures/back_pop_ta2o5_curve.png>
+Package pdftex.def Info: figures/back_pop_ta2o5_curve.png  used on input line 181.
+(pdftex.def)             Requested size: 153.00156pt x 114.74995pt.
+[3 <./figures/front_surface_gold100.png>]
 No file PRL_attemption.bbl.
-[3 <./figures/front_surface_gold100.png>] [4 <./figures/prl_T4.png> <./figures/back_prl_curve.png>] (PRL_attemption.aux)
+[4 <./figures/prl_T4.png> <./figures/back_prl_curve.png> <./figures/back_pop_ta2o5_curve.png>] (PRL_attemption.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `PRL_attemption.out' has not changed.
-(rerunfilecheck)             Checksum: 48BA6F52937147A608DE803C630C430D;1252.
+(rerunfilecheck)             Checksum: B8FF39DFF160D97A57953668D6AA4D33;1138.
  ) 
 Here is how much of TeX's memory you used:
- 12258 strings out of 467871
- 183974 string characters out of 5417408
- 638802 words of memory out of 5000000
- 40963 multiletter control sequences out of 15000+600000
- 638421 words of font info for 79 fonts, out of 8000000 for 9000
+ 14433 strings out of 467871
+ 220309 string characters out of 5417408
+ 707807 words of memory out of 5000000
+ 42927 multiletter control sequences out of 15000+600000
+ 644324 words of font info for 173 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,933b,523s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on PRL_attemption.pdf (4 pages, 771728 bytes).
+ 75i,8n,79p,1068b,532s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on PRL_attemption.pdf (4 pages, 1248899 bytes).
 PDF statistics:
- 214 PDF objects out of 1000 (max. 8388607)
- 32 named destinations out of 1000 (max. 500000)
- 87 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 242 PDF objects out of 1000 (max. 8388607)
+ 37 named destinations out of 1000 (max. 500000)
+ 28756 words of extra memory for PDF output out of 29859 (max. 10000000)
 

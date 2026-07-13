@@ -7,117 +7,184 @@
 \usepackage{amsmath,amssymb,bm,geometry}
 \geometry{margin=1in}
 
-\title{Appendix: Mathematical Details for the 2D Supersonic Marshak-Wave Model}
+\title{Appendix: Detailed Derivations for the 2D Supersonic Marshak-Wave Model}
 \author{Yuval Kochavi et al.}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-\section*{Purpose}
-This appendix collects the full mathematical expressions and intermediate derivation steps that are only cited in the PRL main text due to the five-page limit.
+\section*{Scope}
+This appendix provides the detailed steps that are only summarized in the PRL manuscript: (i) the numerical closure of the 1D Hammer--Rosen model with a Marshak boundary, (ii) the radial eigenvalue problem in cylindrical geometry and its link to albedo, and (iii) the explicit wall-loss and wall-ablation accounting used in the 2D correction.
 
-\section{1D Hammer--Rosen Backbone}
-Using power-law opacity and material energy,
+\section{1D Core Equations and Marshak Closure}
+We use the standard power-law material model
 \begin{equation}
-\frac{1}{\kappa}=gT^{\alpha}\rho^{-\lambda},
+\kappa^{-1}=gT^{\alpha}\rho^{-\lambda},
 \qquad
- e=fT^{\beta}\rho^{-\mu},
+e=fT^{\beta}\rho^{-\mu},
 \end{equation}
-the front position is written as
+and define
 \begin{equation}
-x_F^2(t)=\frac{2+\varepsilon}{1-\varepsilon}\,C\,H^{-\varepsilon}(t)\int_0^t H(t')\,dt',
+H(t)\equiv T_s^{4+\alpha}(t),
+\qquad
+\varepsilon\equiv\frac{\beta}{4+\alpha},
+\qquad
+C\equiv\frac{16g\sigma_{\mathrm{SB}}}{3f(4+\alpha)}\rho^{2-\mu-\lambda}.
 \end{equation}
-with
+The Hammer--Rosen front relation is
 \begin{equation}
-H(t)=T_s^{4+\alpha}(t),
-\qquad
-\varepsilon=\frac{\beta}{4+\alpha},
-\qquad
-C=\frac{16\,g\,\sigma_{\mathrm{SB}}}{3f(4+\alpha)}\,\rho^{2-\mu-\lambda}.
+x_F^2(t)=\frac{2+\varepsilon}{1-\varepsilon}C\,H^{-\varepsilon}(t)\int_0^t H(t')\,dt'.
+\label{eq:xF_HR_appendix}
 \end{equation}
-The coupled boundary-flux closure uses the Marshak boundary condition and material-energy balance:
+The material energy per unit cross-sectional area is
 \begin{equation}
-\sigma_{\mathrm{SB}}T_D^4=\sigma_{\mathrm{SB}}T_s^4+\frac{1}{2}F(0,t),
-\qquad
+E(t)=f\rho^{1-\mu}(1-\varepsilon)x_F(t)H^{\varepsilon}(t),
+\label{eq:E_HR_appendix}
+\end{equation}
+with boundary flux condition
+\begin{equation}
 \dot E(t)=F(0,t).
+\label{eq:dEdt_flux_appendix}
 \end{equation}
+At the entrance boundary, the Marshak condition is
+\begin{equation}
+\sigma_{\mathrm{SB}}T_D^4(t)=\sigma_{\mathrm{SB}}T_s^4(t)+\frac{1}{2}F(0,t).
+\label{eq:marshak_bc_appendix}
+\end{equation}
+Equations \eqref{eq:xF_HR_appendix}--\eqref{eq:marshak_bc_appendix} close the 1D problem.
 
-\section{2D Wall-Energy Loss}
-For a cylindrical tube of radius $R$, the cumulative wall-deposited energy is
+\subsection{Implicit time-marching form for $T_s(t)$}
+Following the Appendix-A construction used in the long manuscript, combine Eqs.~\eqref{eq:xF_HR_appendix} and \eqref{eq:E_HR_appendix} to get
 \begin{equation}
-E_W(t)=2\pi R\int_0^{x_F(t)}\int_0^t \mathcal H\!\left(t-t_0(x)\right)\,\dot E_{\mathrm{mat}}(t')\,dt'\,dx.
-\end{equation}
-For gold sleeves, the wall-heating fit used in the model is
-\begin{equation}
-E_{\mathrm{gold}}(t)=0.59\,T_0^{3.35}\left(t-t_0(x)\right)^{0.59}
-\quad (\mathrm{hJ/mm}^2).
-\end{equation}
-Material-specific coefficients for Be and Cu are taken in the same form from the cited wall-heating literature.
-
-\section{Wall Ablation and Reduced Input Area}
-For gold, the subsonic self-similar ablation velocity is
-\begin{equation}
-u_{\mathrm{gold}}(t)=-510.1\,\tilde u(\rho_{\mathrm{gold}})\,T_0^{0.716}\left(t-t_0(x)\right)^{0.036}
-\quad (\mathrm{km/s}).
-\end{equation}
-The local radius update is
-\begin{equation}
-R(t,x)=R_0-u_W(t)\left(t-t_0(x)\right),
-\end{equation}
-which modifies incoming energy as
-\begin{equation}
-E_{\mathrm{in}}(t)=2\pi\int_0^t R_0^2\left(1-\frac{u_W(t')t'}{R_0^2}\right)^2F(0,t')\,dt'.
-\end{equation}
-Ablation-driven compression updates the mean density through
-\begin{equation}
-\rho(t)=\rho_0\frac{V_0}{V(t)},
+E^2(t)=Z_1\,H^{\varepsilon}(t)\int_0^t H(t')\,dt',
 \qquad
-V(t)=\int_0^{x_F(t)}\pi R^2(t,x)\,dx,
+Z_1\equiv f^2\rho^{2(1-\mu)}(2+\varepsilon)(1-\varepsilon)C.
+\label{eq:E2_identity_appendix}
 \end{equation}
-and therefore makes $C$ time dependent:
+At time step $t_n=t_{n-1}+\Delta t$, define $H_n\equiv H(t_n)$ and
 \begin{equation}
-C(t)=\frac{16\,g\,\sigma_{\mathrm{SB}}}{(4+\alpha)\,3f\,t}\int_0^t\rho^{\mu+\lambda-2}(t')\,dt'.
+I_{n-1}\equiv\int_0^{t_{n-1}}H(t')\,dt'.
 \end{equation}
+Using a trapezoid approximation for the last interval,
+\begin{equation}
+\int_{t_{n-1}}^{t_n}H(t')\,dt'\approx\frac{H_{n-1}+H_n}{2}\Delta t,
+\end{equation}
+Eq.~\eqref{eq:E2_identity_appendix} becomes one nonlinear equation for $H_n$:
+\begin{equation}
+Z_1\left(I_{n-1}+\frac{H_{n-1}+H_n}{2}\Delta t\right)H_n^{\varepsilon}-E_n^2=0.
+\label{eq:implicit_Hn_appendix}
+\end{equation}
+The input energy is advanced from the Marshak flux:
+\begin{equation}
+F_n=2\sigma_{\mathrm{SB}}\left(T_{D,n}^4-T_{s,n-1}^4\right),
+\qquad
+E_n=E_{n-1}+\frac{F_n+F_{n-1}}{2}\Delta t.
+\label{eq:Fn_En_appendix}
+\end{equation}
+Then solve Eq.~\eqref{eq:implicit_Hn_appendix} for the positive root $H_n>0$, recover
+\begin{equation}
+T_{s,n}=H_n^{1/(4+\alpha)},
+\end{equation}
+and update
+\begin{equation}
+I_n=I_{n-1}+\frac{H_{n-1}+H_n}{2}\Delta t,
+\qquad
+x_{F,n}^2=\frac{2+\varepsilon}{1-\varepsilon}C\,H_n^{-\varepsilon}I_n.
+\end{equation}
+This is the practical algorithm used to compute the 1D centerline front with Marshak boundary forcing.
 
-\section{Finite-Diameter Correction}
-When $\lambda_R$ approaches or exceeds $2R$, we use
+\section{Wall-Energy Loss: Full Integral Form}
+Let $t_0(x)$ be the arrival time of the front at axial location $x$, defined by
 \begin{equation}
-\lambda_{\mathrm{eff}}=\left[(2R)^{-n}+\lambda_R^{-n}\right]^{-1/n},
+x_F\bigl(t_0(x)\bigr)=x.
 \end{equation}
-so the diffusion coefficient becomes $D=c\lambda_{\mathrm{eff}}/3$.
+After arrival, the local wall element is exposed for $\Delta t_x=t-t_0(x)$. For wall material $m$ (Au/Cu/Be), the absorbed areal energy is written in self-similar form
+\begin{equation}
+E_{w,m}(\Delta t_x;T_s)\approx A_m\,T_s^{p_m}(t_0)\,\Delta t_x^{q_m},
+\qquad \Delta t_x>0.
+\label{eq:wall_areal_generic_appendix}
+\end{equation}
+For the Au case used in the paper, one common fit is
+\begin{equation}
+E_{w,\mathrm{Au}}(\Delta t_x)\simeq0.59\,T_0^{3.35}\,\Delta t_x^{0.59}
+\quad [\mathrm{hJ/mm^2}],
+\label{eq:wall_Au_fit_appendix}
+\end{equation}
+with coefficients from the cited subsonic wall-heating model.
 
-\section{Cylindrical Bent-Front Reconstruction}
-The leading cylindrical bent-wave representation is
+The total wall-loss energy is then
 \begin{equation}
-x_F(r,t)=\frac{1}{\kappa_0}\cosh^{-1}\!\left(1+\frac{D\kappa_0^2t}{2}\right)J_0(\kappa_0 r)+\text{H.O.T.},
+E_W(t)=2\pi\int_0^{x_F(t)}R(x,t)\,E_{w,m}\!\left(t-t_0(x)\right)dx.
+\label{eq:EW_total_appendix}
 \end{equation}
-with $\kappa_0$ obtained from the wall-loss eigenvalue problem (or the high-albedo approximation where applicable).
+In differential form, this is equivalent to
+\begin{equation}
+\dot E_W(t)=2\pi\int_0^{x_F(t)}R(x,t)\,\dot E_{w,m}\!\left(t-t_0(x)\right)dx.
+\label{eq:dEWdt_total_appendix}
+\end{equation}
+Numerically, Eqs.~\eqref{eq:EW_total_appendix}--\eqref{eq:dEWdt_total_appendix} are evaluated on the same front-time grid used for $x_F(t)$, with interpolation for $t_0(x)$.
 
-\section{Time-Dependent Albedo Closure}
-Albedo is evaluated from the wall energy balance:
+\section{Wall Ablation and Density Feedback}
+For subsonic wall response (relevant for Au and Cu sleeves in our regime), the inward wall velocity is modeled as
 \begin{equation}
-\alpha(t)=\frac{\sigma_{\mathrm{SB}}T_{s,\mathrm{int}}^4-\frac{1}{2}\frac{dE_{\mathrm{wall}}}{dt}}
-{\sigma_{\mathrm{SB}}T_{s,\mathrm{int}}^4+\frac{1}{2}\frac{dE_{\mathrm{wall}}}{dt}}.
+u_w(\Delta t_x;T_s)\approx B_m\,\tilde u(\rho_w)\,T_s^{\eta_m}(t_0)\,\Delta t_x^{\xi_m}.
+\label{eq:uw_generic_appendix}
 \end{equation}
-Then
+For Au, a representative fit is
 \begin{equation}
-\varepsilon(t)=\frac{3}{4}\rho\kappa R\,[1-\alpha(t)],
+u_{w,\mathrm{Au}}\simeq510.1\,\tilde u(\rho_{\mathrm{Au}})\,T_0^{0.716}\,\Delta t_x^{0.036}
+\quad [\mathrm{km/s}].
 \end{equation}
-which sets the curvature strength through $\kappa_0(t)$.
+The effective tube radius follows
+\begin{equation}
+R(x,t)=R_0-\int_{t_0(x)}^t u_w\!\left(t'-t_0(x)\right)dt'.
+\label{eq:R_xt_appendix}
+\end{equation}
+The foam volume inside the heated region is
+\begin{equation}
+V(t)=\int_0^{x_F(t)}\pi R^2(x,t)\,dx,
+\end{equation}
+and the mean density update is
+\begin{equation}
+\rho(t)=\rho_0\frac{V_0}{V(t)}.
+\label{eq:rho_update_appendix}
+\end{equation}
+Because $C\propto\rho^{2-\mu-\lambda}$, this introduces a density-history correction in the effective front coefficient (as used in the implementation).
 
-\section{2D Temperature and Observable Flux}
-Given $z_F(r,t)$, we reconstruct
-\begin{equation}
-T(r,z,t)=T_s(t)\left(1-\frac{z}{z_F(r,t)}\right)^{\frac{1}{4+\alpha-\beta}},
-\end{equation}
-and compute
-\begin{equation}
-\Phi(r,z_{\mathrm{det}},t)=\sigma_{\mathrm{SB}}T^4(r,z_{\mathrm{det}},t)
-\end{equation}
-for comparison with diagnostic emission profiles.
+\section{Radial Eigenvalue Problem and Albedo Coupling}
 
-\section*{Source Mapping}
-The wall-loss, wall-heating, and ablation formulas above are taken from Refs. Cohen et al. (2018, 2020). The bent-wave framework is from Hurricane and Hammer (2006), with cylindrical modeling details and modern comparisons from Courtois et al. (2022, 2024). The 1D HR backbone follows Hammer and Rosen (2003) and Rosen (2009).
+
+\section{Simulation details}
+The simulation introduced in the letter is a 2D diffusion simulation without hydrodynamics, using cylindral geometry. The equations discritization is done through finite diffrencing on the following coupled equations:
+\begin{equation}
+\frac{\partial E}{\partial t}
+=
+\frac{1}{r}\frac{\partial}{\partial r}\left(rD\frac{\partial E}{\partial r}\right) + \frac{\partial}{\partial z}\left(D\frac{\partial E}{\partial z}\right)
+-
+\chi c\sigma(E - U).
+\label{eq:E_continuous_conservative}
+\end{equation}
+This is the form we use throughout the derivation below.
+
+\subsection{Material Energy Equation}
+
+The material energy density $U(r,z,t)$ evolves according to:
+\begin{equation}
+\frac{1}{\beta}\,\frac{\partial U}{\partial t}
+=
+\chi c\sigma(E - U),
+\label{eq:U_continuous}
+\end{equation}
+where $\beta = \frac{\partial U_R}{\partial U_m}$ is the ratio of radiation to material heat capacity (dimensionless coupling strength).
+
+\subsection{Decomposition of the Diffusion Operator}
+
+Define the space-dependent diffusion coefficient:
+\begin{equation}
+D(r,z,t)
+\equiv
+\frac{c}{3\sigma(T(r,z,t))}.
+\end{equation}
 
 \end{document}
