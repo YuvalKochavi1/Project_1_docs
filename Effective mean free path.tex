@@ -3,6 +3,8 @@
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
 \usepackage{bm}
 
 \title{Modeling of Supersonic Radiative Marshak Waves Using Simple Models and Advanced Simulations}
@@ -93,7 +95,7 @@ This construction enforces a physically consistent transition between diffusion-
 \section{Results}
 \begin{table}[h!]
 \centering
-\begin{tabular}{c c c c c c c c c}
+\begin{tabular}{ccccccccc}
 \hline
 $Diameter$ & L & $\frac{L}{\lambda_R}$ & $\frac{\lambda_R}{D}$ & $\rho$ & $\lambda_R\;[\mathrm{cm}]$ & $n$ & Material & Expt. \\
 \hline
@@ -101,18 +103,41 @@ $Diameter$ & L & $\frac{L}{\lambda_R}$ & $\frac{\lambda_R}{D}$ & $\rho$ & $\lamb
 0.06 & 0.04 & 0.41 & 1.633 & 0.05   & 0.098 & $>2$        & C$_6$H$_{12}$Cu$_{0.394}$ & Xu \\
 0.16 & 0.15 & 8.33 & 0.1125 & 0.04   & 0.018 & $\ge 2$     & Ta$_2$O$_5$ & Back \\
 0.16 & 0.15 & 0.83 & 1.125 & 0.05   & 0.18 & 1.5     & SiO$_2$ & Back \\
-0.30 & 0.15 & 1.36 & 0.6875 & 0.01   & 0.11 & $\ge 2$     & SiO$_2$ low energy & Back \\
-0.20 & 0.28 & 1.32 & 0.5695 & 0.1249 & 0.212 & 1           & SiO$_2$ & Moore \\
+0.30 & 0.15 & 1.36 & 0.3667 & 0.01   & 0.11 & $\ge 2$     & SiO$_2$ low energy & Back \\
+0.20 & 0.28 & 1.32 & 1.06 & 0.1249 & 0.212 & 1           & SiO$_2$ & Moore \\
 0.20 & 0.28 & 0.28 & 4.94 & 0.1139 & 0.988 & 2--2.5      & C$_8$H$_7$Cl & Moore \\
 0.08 & 0.12 & 0.31 & 4.875 & 0.0065  & 0.39  & 1           & C$_{15}$H$_{20}$O$_6$ & Keiter \\
 0.08 & 0.12 & 2.11 & 0.7125 & 0.0625 & 0.057 & 2           & C$_{15}$H$_{20}$O$_6$Au$_{0.172}$ & Keiter \\
 0.02 & 0.03 & 0.64 & 2.35 & 0.16   & 0.047 & ? ($n>3$)   & C$_8$H$_8$ & Ji-Yan \\
 0.10 & 0.12 & 0.29 & 4.1 & 0.029  & 0.41  & 1           & French gold & French3 \\
-0.20 & 0.2 & 0.23 & 4.33 & 0.0189  & 0.866  & 1           & French copper & French3 \\
+0.20 & 0.2 & 0.23 & 4.33 & 0.0189  & 0.86  & 1           & French copper & French3 \\
 \hline
 \end{tabular}
-\caption{Parameters extracted from whiteboard note}
-\label{tab:whiteboard_params}
+\caption{Parameters extracted from maximum temperature mean free path calculation.}
+\label{tab:macimu depth}
 \end{table}
 
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c c c c c c c c c}
+$Diameter$ & L & $\frac{L}{\lambda_R}$ & $\frac{\lambda_R}{D}$ & $\rho$ & $\lambda_R\;[\mathrm{cm}]$ & $n$ & Material & Expt. \\
+\hline
+0.06 & 0.04 & 0.381 & 1.75 & 0.05   & 0.105 & $\to\infty$ & C$_6$H$_{12}$ & Xu \\
+0.06 & 0.04 & 1.33 & 0.50 & 0.05   & 0.03 & $>2$        & C$_6$H$_{12}$Cu$_{0.394}$ & Xu \\
+0.16 & 0.15 & 10.0 & 0.0938 & 0.04   & 0.015 & $\ge 2$     & Ta$_2$O$_5$ & Back \\
+0.16 & 0.15 & 1.88 & 0.50 & 0.05   & 0.08 & 1.5     & SiO$_2$ & Back \\
+0.30 & 0.15 & 3.00 & 0.1667 & 0.01   & 0.05 & $\to\infty$     & SiO$_2$ low energy & Back \\
+0.20 & 0.28 & 1.32 & 1.06 & 0.1249 & {\color{red}0.212} & 1           & SiO$_2$ & Moore \\
+0.20 & 0.28 & 1.22 & 1.15 & 0.1139 & 0.23 & 2--2.5      & C$_8$H$_7$Cl & Moore \\
+0.08 & 0.12 & 1.46 & 1.025 & 0.0065  & 0.082  & 1           & C$_{15}$H$_{20}$O$_6$ & Keiter \\
+0.08 & 0.12 & 4.00 & 0.375 & 0.0625 & 0.03 & 2           & C$_{15}$H$_{20}$O$_6$Au$_{0.172}$ & Keiter \\
+0.02 & 0.03 & 2.00 & 0.75 & 0.16   & 0.015 & ? ($n>3$)   & C$_8$H$_8$ & Ji-Yan \\
+0.10 & 0.12 & 1.14 & 1.05 & 0.029  & 0.105  & 1           & French gold & French3 \\
+0.20 & 0.2 & 1.33 & 0.75 & 0.0189  & 0.15  & 1           & French copper & French3 \\
+\hline
+\end{tabular}
+\caption{Parameters extracted from optical depth calculation}
+\label{tab:optical depth}
+\end{table}
 \end{document}

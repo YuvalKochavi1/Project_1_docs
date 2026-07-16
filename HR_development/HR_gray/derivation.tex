@@ -1,996 +1,1084 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage{grffile}
-\usepackage{amsmath}
-\usepackage{bm}
-\usepackage{booktabs}
-\usepackage{hyperref}
+\documentclass[11pt]{article}
 
-\title{Extension of the Hammer--Rosen Model to a Gray Two-Temperature System}
-\author{Yuval Kochavi}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage[draft]{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[most]{tcolorbox}
+\usepackage{microtype}
+\usepackage{float}
+\usepackage{array}
+
+\numberwithin{equation}{section}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\setlist{nosep}
+
+\newtcolorbox{resultbox}{
+ colback=blue!2!white,
+ colframe=blue!45!black,
+ boxrule=0.6pt,
+ arc=2pt,
+ left=6pt,right=6pt,top=6pt,bottom=6pt
+}
+
+\newcommand{\Ts}{T_s}
+\newcommand{\Tb}{T_{\rm bath}}
+\newcommand{\Tr}{T_r}
+\newcommand{\Tm}{T_{m,0}}
+\newcommand{\xf}{x_F}
+\newcommand{\xfzero}{x_{F,0}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\arad}{a_{\rm rad}}
+\newcommand{\dif}{\,d}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\order}{\mathcal{O}}
+
+\title{A Unified Gray Hammer--Rosen Model\\for Surface- and Bath-Temperature Drives}
+\author{Menahem Krief}
 \date{\today}
 
 \begin{document}
-
 \maketitle
 
-\section{Extension of the Hammer--Rosen Model to a Gray Two-Temperature System}
+\begin{abstract}
+A compact Hammer--Rosen-type model is developed for planar gray,
+two-temperature Marshak waves.  The model allows independent Rosseland and
+absorption opacity power laws and can be driven either by a prescribed surface
+radiation temperature $\Ts(t)$ or by a prescribed bath temperature $\Tb(t)$
+through a Marshak boundary condition.  The radiation profile uses the
+first-order Hammer--Rosen curvature correction.  The material profile is the
+same radiation shape multiplied by a monotone factor $\exp[-s(t)y]$, where the
+single scalar $s(t)$ is obtained from an areal material-energy closure.  The
+surface-driven model requires two scalar physical ODEs, three running time
+quadratures, and one scalar root.  The bath-driven model adds only one scalar
+ODE for $\Ts(t)$.  No spatial mesh, diffusion matrix, PDE solve, or
+history-dependent integral equation is required.  A fully self-contained
+implementation recipe is given in the final section.
+\end{abstract}
 
-Hammer and Rosen considered the supersonic Marshak-wave problem under the
-assumption of complete thermodynamic equilibrium, namely
-\[
-T_R = T_m \equiv T .
-\]
-In that case the radiation energy density is written as
-\[
-E = aT^4 ,
-\]
-and the material energy equation reduces to a single nonlinear diffusion
-equation for the material temperature. In their notation, the material internal
-energy and opacity are assumed to obey power laws of the form
-\[
-e = fT^\beta \rho^{-\mu},
-\qquad
-\frac{1}{\kappa} = gT^\alpha \rho^{-\lambda}.
-\]
-This leads to a nonlinear diffusion equation of the form
-\[
-\frac{\partial T^\beta}{\partial t}
-=
-C \frac{\partial^2 T^{4+\alpha}}{\partial x^2},
-\]
-where
-\[
-C =
-\frac{16\sigma g}{3f(4+\alpha)}
-\rho^{\mu-\lambda-2}.
-\]
-Hammer and Rosen then solve this equation perturbatively using the small
-parameter
-\[
-\epsilon = \frac{\beta}{4+\alpha}.
-\]
-Their main result for the heat-front position is
-\[
-x_F^2(t)
-=
-\frac{2+\epsilon}{1-\epsilon}
-C H^{-\epsilon}(t)
-\int_0^t H(t')\,dt',
-\]
-where
-\[
-H(t) = T_s^{4+\alpha}(t).
-\]
-The absorbed energy per unit area is, to first order in \(\epsilon\),
-\[
-\mathcal{E}(t)
-=
-f\rho^{1-\mu}
-\frac{x_F(t)H^\epsilon(t)}{1-\epsilon}.
-\]
-These are the one-temperature CTE results of Hammer and Rosen. :contentReference[oaicite:0]{index=0}
+\tableofcontents
 
-\section{Gray Two-Temperature Equations}
+\section{Gray diffusion problem}
 
-A more general description is obtained by allowing the radiation and material
-temperatures to differ:
-\[
-T_R \neq T_m .
-\]
-The gray radiation-diffusion equations are
+Consider a planar, fixed-density material occupying $x>0$.  Hydrodynamic
+motion is neglected.  The radiation energy density and material energy density
+are
+\begin{equation}
+ E_r=\arad\Tr^4,
+ \qquad
+ U=f\rho^{1-\mu}T^\beta,
+ \qquad
+ \arad=\frac{4\sigma_{\rm SB}}{c}.
+ \label{eq:energies}
+\end{equation}
+The Rosseland and absorption opacities are independent power laws,
+\begin{equation}
+ \frac{1}{\kappa_R}=gT^\alpha\rho^{-\lambda},
+ \qquad
+ \frac{1}{\kappa_a}=g'T^{\alpha'}\rho^{-\lambda'}.
+ \label{eq:opacities}
+\end{equation}
+Thus $(\alpha,\lambda,g)$ are the Rosseland parameters and
+$(\alpha',\lambda',g')$ are the absorption parameters.
+
+The underlying gray diffusion equations are
 \begin{align}
-\frac{\partial E}{\partial t}
--
-\nabla \cdot
-\left(
-\frac{c}{3\sigma}
-\nabla E
-\right)
-&=
-c\sigma \left(aT_m^4 - E\right),
-\\
-\rho\frac{\partial e}{\partial t}
-&=
-c\sigma \left(E-aT_m^4\right),
+ \frac{\partial}{\partial t}\left(\arad\Tr^4\right)
+ &=\frac{\partial}{\partial x}
+ \left[
+ \frac{cg}{3}\rho^{-1-\lambda}T^\alpha
+ \frac{\partial}{\partial x}\left(\arad\Tr^4\right)
+ \right]
+ -\frac{\arad c}{g'}\rho^{1+\lambda'}T^{-\alpha'}
+ \left(\Tr^4-T^4\right),
+ \label{eq:gray_radiation}\\
+ \frac{\partial}{\partial t}
+ \left(f\rho^{1-\mu}T^\beta\right)
+ &=\frac{\arad c}{g'}\rho^{1+\lambda'}T^{-\alpha'}
+ \left(\Tr^4-T^4\right).
+ \label{eq:gray_material}
 \end{align}
-where
-\[
-E = aT_R^4,
-\qquad
-\sigma = \kappa \rho .
-\]
+The reduced model derived below does not solve
+\eqref{eq:gray_radiation}--\eqref{eq:gray_material} pointwise.
 
-Using the same power-law assumptions as Hammer and Rosen,
-\[
-e = fT_m^\beta \rho^{-\mu},
-\qquad
-\frac{1}{\kappa} = gT_m^\alpha \rho^{-\lambda},
-\]
-we have
-\[
-\kappa = \frac{1}{g}T_m^{-\alpha}\rho^\lambda,
-\]
-and therefore
-\[
-\sigma = \kappa\rho
-=
-\frac{1}{g}T_m^{-\alpha}\rho^{1+\lambda}.
-\]
-Thus
-\[
-\frac{c}{3\sigma}
-=
-\frac{cg}{3}\rho^{-1-\lambda}T_m^\alpha .
-\]
+Two boundary specifications are considered.
 
-Defining
-\[
-D_0 = \frac{cg}{3}\rho^{-1-\lambda},
-\qquad
-S_0 = \frac{c}{g}\rho^{1+\lambda},
-\qquad
-A_m = f\rho^{1-\mu},
-\]
-the two-temperature gray equations become
-\begin{align}
-\frac{\partial E}{\partial t}
--
-\nabla \cdot
-\left(
-D_0T_m^\alpha \nabla E
-\right)
-&=
-S_0T_m^{-\alpha}
-\left(aT_m^4-E\right),
-\\
-A_m\frac{\partial T_m^\beta}{\partial t}
-&=
-S_0T_m^{-\alpha}
-\left(E-aT_m^4\right).
-\end{align}
+\paragraph{Surface-temperature drive.}
+\begin{equation}
+ \boxed{\Tr(0,t)=\Ts(t),}
+ \label{eq:Ts_bc}
+\end{equation}
+where $\Ts(t)$ is prescribed.
 
-\section{Energy Conservation}
+\paragraph{Bath-temperature drive.}
+The surface radiation temperature is unknown and the incoming bath is imposed
+through the Marshak condition
+\begin{equation}
+ \boxed{
+ F_s(t)=\frac{\arad c}{2}
+ \left[\Tb^4(t)-\Ts^4(t)\right],
+ \qquad \Ts(t)=\Tr(0,t),}
+ \label{eq:marshak_bc}
+\end{equation}
+where $F_s>0$ denotes flux into the material.
 
-Adding the radiation and material equations cancels the emission-absorption
-coupling term. Therefore,
-\[
-\frac{\partial}{\partial t}
-\left(
-E + A_mT_m^\beta
-\right)
-=
-\nabla \cdot
-\left(
-D_0T_m^\alpha \nabla E
-\right).
-\]
+Define the two standard Hammer--Rosen parameters
+\begin{equation}
+ \boxed{
+ \eps=\frac{\beta}{4+\alpha},
+ \qquad
+ C=\frac{4\arad c g}{3(4+\alpha)f}
+ \rho^{-2+\mu-\lambda}.}
+ \label{eq:eps_C}
+\end{equation}
+The exponent of the leading front profile will always be written explicitly as
+$1/(4+\alpha-\beta)$; no separate symbol is introduced for it.
 
-In one spatial dimension this becomes
-\[
-\frac{\partial}{\partial t}
-\left(
-E + A_mT_m^\beta
-\right)
-=
-\frac{\partial}{\partial x}
-\left(
-D_0T_m^\alpha
-\frac{\partial E}{\partial x}
-\right).
-\]
+\section{Surface material temperature}
 
-The total areal energy inside the heated region is therefore
-\[
-\mathcal{E}(t)
-=
-\int_0^{x_F(t)}
-\left[
-E(x,t) + A_mT_m^\beta(x,t)
-\right]dx .
-\]
-
-The incoming flux at the surface is
-\[
-F_{\rm in}(t)
-=
--
-\left.
-D_0T_m^\alpha
-\frac{\partial E}{\partial x}
-\right|_{x=0}.
-\]
-
-Hence the exact energy-conservation relation is
-\[
-\boxed{
-\frac{d\mathcal{E}}{dt}
-=
-F_{\rm in}(t)
-}
-\]
-or explicitly,
-\[
-\boxed{
-\frac{d}{dt}
-\int_0^{x_F(t)}
-\left[
-E(x,t) + A_mT_m^\beta(x,t)
-\right]dx
-=
--
-\left.
-D_0T_m^\alpha
-\frac{\partial E}{\partial x}
-\right|_{x=0}.
-}
-\]
-
-\section{Recovery of the Hammer--Rosen Limit}
-
-The Hammer--Rosen equation is recovered when the coupling between radiation
-and matter is sufficiently strong, so that
-\[
-E \simeq aT_m^4 .
-\]
+Let
+\begin{equation}
+ \boxed{\Tm(t)=T(0,t)}
+ \label{eq:Tm_def}
+\end{equation}
+be the surface material temperature.  Evaluating the local material balance at
+$x=0$ gives
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \frac{\dif}{\dif t}
+ \left[f\rho^{1-\mu}\Tm^\beta(t)\right]
+ =\frac{\arad c}{g'}\rho^{1+\lambda'}
+ \Tm^{-\alpha'}(t)
+ \left[\Ts^4(t)-\Tm^4(t)\right].}
+ \label{eq:surface_material_ode}
+\end{equation}
+\end{resultbox}
 Equivalently,
-\[
-T_R \simeq T_m \equiv T .
-\]
+\begin{equation}
+ \boxed{
+ \dot\Tm(t)
+ =\frac{\arad c}{\beta f g'}\rho^{\mu+\lambda'}
+ \Tm^{1-\alpha'-\beta}(t)
+ \left[\Ts^4(t)-\Tm^4(t)\right].}
+ \label{eq:surface_material_ode_T}
+\end{equation}
+This equation naturally gives $\Tm<\Ts$ during heating and may give
+$\Tm>\Ts$ during cooling.
 
-In this case, the total energy equation becomes
-\[
-\frac{\partial}{\partial t}
-\left(
-aT^4 + A_mT^\beta
-\right)
-=
-\frac{\partial}{\partial x}
-\left(
-D_0T^\alpha
-\frac{\partial aT^4}{\partial x}
-\right).
-\]
+Equation \eqref{eq:surface_material_ode} is one scalar, generally stiff ODE.
+In Python it should be integrated with
+\texttt{solve\_ivp}, using \texttt{method="Radau"} or
+\texttt{method="BDF"}.  At a perfectly cold start, a code may internally
+evolve the regular power $\Tm^{\alpha'+\beta}$, but that auxiliary variable is
+only a numerical device and is not part of the analytical model.
 
-If the material energy dominates the radiation energy,
-\[
-A_mT^\beta \gg aT^4,
-\]
-then
-\[
-A_m\frac{\partial T^\beta}{\partial t}
-=
-\frac{\partial}{\partial x}
-\left(
-D_0T^\alpha
-\frac{\partial aT^4}{\partial x}
-\right).
-\]
+\section{Common-shape gray Hammer--Rosen front}
 
-Since
-\[
-T^\alpha\frac{\partial T^4}{\partial x}
-=
-\frac{4}{4+\alpha}
-\frac{\partial T^{4+\alpha}}{\partial x},
-\]
-we obtain
-\[
-A_m\frac{\partial T^\beta}{\partial t}
-=
-\frac{4aD_0}{4+\alpha}
-\frac{\partial^2 T^{4+\alpha}}{\partial x^2}.
-\]
+\subsection{Gray storage coordinate}
 
-Therefore,
-\[
-\frac{\partial T^\beta}{\partial t}
-=
-C
-\frac{\partial^2 T^{4+\alpha}}{\partial x^2},
-\]
-with
-\[
-\boxed{
-C =
-\frac{4aD_0}{(4+\alpha)A_m}
-=
-\frac{4acg}{3(4+\alpha)f}
-\rho^{\mu-\lambda-2}.
-}
-\]
+For the leading common-shape reduction, write locally
+\begin{equation}
+ \Tr(x,t)=\Ts(t)q(x,t),
+ \qquad
+ T(x,t)=\Tm(t)q(x,t),
+ \qquad 0\le q\le1.
+ \label{eq:common_shape}
+\end{equation}
+The ratio of radiation energy to material energy at the surface is
+\begin{equation}
+ \boxed{
+ R(t)=\frac{\arad\Ts^4(t)}
+ {f\rho^{1-\mu}\Tm^\beta(t)}.}
+ \label{eq:R}
+\end{equation}
+At an arbitrary profile value $q$, the corresponding ratio is
+$R(t)q^{4-\beta}$.  The gray storage coordinate entering the HR reduction is
+therefore
+\begin{equation}
+ Z(q;R)
+ =(4+\alpha-\beta)
+ \int_0^q
+ \frac{\xi^{3+\alpha-\beta}}
+ {1+R\xi^{4-\beta}}\dif\xi.
+ \label{eq:Z_gray}
+\end{equation}
+The surface value $Z(1;R)$ is the gray storage factor
+\begin{equation}
+ \boxed{
+ G(R)
+ =(4+\alpha-\beta)
+ \int_0^1
+ \frac{\xi^{3+\alpha-\beta}}
+ {1+R\xi^{4-\beta}}\dif\xi.}
+ \label{eq:G_integral}
+\end{equation}
+The denominator is the normalized total storage
+$1+R\xi^{4-\beta}$; thus $G$ reduces the effective drive whenever radiation
+energy is non-negligible.
 
-This has exactly the same mathematical structure as the Hammer--Rosen
-diffusion equation.
+The integral has the exact Gauss-hypergeometric form
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ G(R)
+ ={}_2F_1\!\left(
+ 1,
+ \frac{4+\alpha-\beta}{4-\beta};
+ 1+\frac{4+\alpha-\beta}{4-\beta};
+ -R
+ \right).}
+ \label{eq:G_hypergeometric}
+\end{equation}
+\end{resultbox}
+The identity follows from
+\begin{equation}
+ {}_2F_1(a,b;c;z)
+ =\frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}
+ \int_0^1
+ u^{b-1}(1-u)^{c-b-1}(1-zu)^{-a}\dif u,
+ \label{eq:2F1_integral}
+\end{equation}
+valid initially for $\Re c>\Re b>0$ and elsewhere by analytic continuation.
+In Python, \eqref{eq:G_hypergeometric} is evaluated directly with
+\texttt{hyp2f1}.
 
-\section{Generalized CTE Form Including Radiation Energy}
+\subsection{Base front}
 
-If we still assume
-\[
-T_R = T_m = T,
-\]
-but do not neglect the radiation energy \(aT^4\), then the conserved energy is
-\[
-U(T) = A_mT^\beta + aT^4 .
-\]
+Define temporarily the running history
+\begin{equation}
+ \calI(t)=\int_0^t
+ \Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'.
+ \label{eq:I_history}
+\end{equation}
+Applying the first-order HR front moment to the gray storage coordinate gives
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \xfzero^2(t)
+ =\frac{2+\eps}{1-\eps}
+ C\Tm^{-\beta}(t)\calI(t).}
+ \label{eq:xf0_I}
+\end{equation}
+\end{resultbox}
+Equivalently, without introducing $\calI$,
+\begin{equation}
+ \boxed{
+ \xfzero^2(t)
+ =\frac{2+\eps}{1-\eps}
+ C\Tm^{-\beta}(t)
+ \int_0^t
+ \Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'.}
+ \label{eq:xf0}
+\end{equation}
+Numerically this is one scalar running quadrature.  It is advanced together
+with the ODE states; no past time array needs to be reintegrated at every step.
 
-The diffusion variable is
-\[
-\Phi(T)
-=
-\int_0^T
-D_0T'^\alpha
-\frac{d(aT'^4)}{dT'}\,dT' .
-\]
+\section{First-order radiation profile and the two boundary drives}
 
-Since
-\[
-\frac{d(aT'^4)}{dT'} = 4aT'^3,
-\]
-we get
-\[
-\Phi(T)
-=
-4aD_0\int_0^T T'^{\alpha+3}\,dT',
-\]
-and therefore
-\[
-\boxed{
-\Phi(T)
-=
-\frac{4aD_0}{4+\alpha}T^{4+\alpha}.
-}
-\]
+The normalized first-order HR radiation profile is
+\begin{equation}
+ \boxed{
+ \Tr(x,t)=\Ts(t)
+ \left[
+ \left(1-\frac{x}{\xf(t)}\right)
+ \left(1+B(t)\frac{x}{\xf(t)}\right)
+ \right]^{1/(4+\alpha-\beta)}.}
+ \label{eq:radiation_profile}
+\end{equation}
+The coefficient $B(t)$ is the first HR curvature correction.  The profile
+requires $B(t)>-1$ so that its base remains nonnegative on the wave interval.
 
-Let
-\[
-\Phi_s(t)=\Phi(T_s(t)).
-\]
-Following the Hammer--Rosen arbitrary-material-property formulation, the heat
-front may be written as
-\[
-\boxed{
-x_F^2(t)
-\simeq
-\frac{2}{L_s(t)}
-\int_0^t \Phi_s(t')\,dt',
-}
-\]
-where
-\[
-\boxed{
-L_s(t)
-=
-\frac{2}{\Phi_s(t)}
-\int_0^{\Phi_s(t)}
-U(\Phi)
-\left(
-1-\frac{\Phi}{\Phi_s(t)}
-\right)d\Phi .
-}
-\]
+\subsection{Prescribed surface radiation temperature}
 
-The corresponding total areal energy is
-\[
-\boxed{
-\mathcal{E}(t)
-\simeq
-x_F(t)
-\frac{1}{\Phi_s(t)}
-\int_0^{\Phi_s(t)}
-U(\Phi)\,d\Phi .
-}
-\]
+For prescribed $\Ts(t)$, the HR correction is
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ B(t)=\frac{\eps}{2}\Bigg[1
+ -\frac{2+\eps}{1-\eps}
+ &\frac{\displaystyle
+ \int_0^t\Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'}
+ {\Ts^4(t)\Tm^\alpha(t)G(R(t))}
+ \\
+ &\times\frac{\dif}{\dif t}\ln\Ts^{4+\alpha}(t)
+ \Bigg].
+ \end{aligned}}
+ \label{eq:B_Ts}
+\end{equation}
+\end{resultbox}
+This is an algebraic post-processing formula once the base-front history is
+known.  For a tabulated drive, use a shape-preserving interpolant such as
+\texttt{scipy.interpolate.PchipInterpolator}; its analytical derivative can
+be obtained with \texttt{PchipInterpolator.derivative()}.  If the tabulated
+pulse contains measurement noise, regularize only this derivative, not the
+drive used in the energy quadratures.
 
-For the power-law form
-\[
-U(T)=A_mT^\beta+aT^4,
-\]
-define
-\[
-\epsilon_m = \frac{\beta}{4+\alpha},
-\qquad
-\epsilon_r = \frac{4}{4+\alpha}.
-\]
-Then
-\[
-\boxed{
-L_s
-=
-2\left[
-\frac{A_mT_s^\beta}
-{(1+\epsilon_m)(2+\epsilon_m)}
-+
-\frac{aT_s^4}
-{(1+\epsilon_r)(2+\epsilon_r)}
-\right].
-}
-\]
+\subsection{Prescribed bath temperature}
 
-Similarly,
-\[
-\boxed{
-\mathcal{E}(t)
-\simeq
-x_F(t)
-\left[
-\frac{A_mT_s^\beta}{1+\epsilon_m}
-+
-\frac{aT_s^4}{1+\epsilon_r}
-\right].
-}
-\]
+At the surface, the diffusion flux predicted by
+\eqref{eq:radiation_profile}, using the base front inside the boundary closure,
+is
+\begin{equation}
+ F_s(t)
+ =\frac{4\arad c g}{3(4+\alpha-\beta)\xfzero(t)}
+ \rho^{-1-\lambda}\Tm^\alpha(t)\Ts^4(t)[1-B(t)].
+ \label{eq:surface_flux_profile}
+\end{equation}
+Equating this to the Marshak flux \eqref{eq:marshak_bc} gives
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ B(t)=1-
+ \frac{3(4+\alpha-\beta)\xfzero(t)\rho^{1+\lambda}}
+ {8g\Tm^\alpha(t)}
+ \left[\frac{\Tb^4(t)}{\Ts^4(t)}-1\right].}
+ \label{eq:B_bath}
+\end{equation}
+\end{resultbox}
+Using $\xfzero$ rather than the final moment-corrected front keeps the boundary
+subsystem sequential; replacing it by $\xf$ would introduce a higher-order
+implicit feedback.
 
-\section{True Two-Temperature Case}
+Equating \eqref{eq:B_bath} to the HR curvature relation gives one scalar ODE
+for the unknown surface radiation temperature:
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \dot\Ts(t)
+ ={}&\frac{2\Ts^5(t)\Tm^\alpha(t)G(R(t))}
+ {\eps(4+\alpha)\,\dfrac{2+\eps}{1-\eps}
+ \displaystyle\int_0^t
+ \Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'}
+ \\
+ &\times\Bigg\{
+ \frac{3(4+\alpha-\beta)\xfzero(t)\rho^{1+\lambda}}
+ {8g\Tm^\alpha(t)}
+ \left[\frac{\Tb^4(t)}{\Ts^4(t)}-1\right]
+ -1+\frac{\eps}{2}\Bigg\}.
+ \end{aligned}}
+ \label{eq:Ts_bath_ode}
+\end{equation}
+\end{resultbox}
+The bath drive therefore adds only one physical scalar ODE.  It uses $\Tb(t)$
+but not $\dot\Tb(t)$, which is advantageous for tabulated data.  In Python,
+solve \eqref{eq:Ts_bath_ode} together with
+\eqref{eq:surface_material_ode} using \texttt{solve\_ivp} with a stiff method.
+The cold onset is formally singular because the base-front history vanishes;
+a robust implementation starts at the first positive drive time with a small
+positive thermal seed and checks insensitivity to that seed.
 
-For the full gray system, where
-\[
-T_R \neq T_m,
-\]
-one can still derive an exact energy-conservation equation, but the problem is
-not closed by energy conservation alone.
+After $\Ts(t)$ and $B(t)$ have been determined, the surface- and bath-driven
+models are identical.
 
-Introduce the normalized variables
-\[
-y=\frac{x}{x_F(t)},
-\qquad
-E(x,t)=aT_s^4(t)R(y,t),
-\qquad
-T_m(x,t)=T_s(t)M(y,t).
-\]
+\section{Monotone material-profile closure}
 
-Then the total energy is
-\[
-\mathcal{E}(t)
-=
-x_F(t)
-\left[
-aT_s^4(t)I_R(t)
-+
-A_mT_s^\beta(t)I_M(t)
-\right],
-\]
-where
-\[
-I_R(t)=\int_0^1 R(y,t)\,dy,
-\qquad
-I_M(t)=\int_0^1 M^\beta(y,t)\,dy .
-\]
+The material profile is represented by the same radiation shape multiplied by
+one monotone ratio factor,
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ T(x,t)=\Tm(t)
+ &\left[
+ \left(1-\frac{x}{\xf(t)}\right)
+ \left(1+B(t)\frac{x}{\xf(t)}\right)
+ \right]^{1/(4+\alpha-\beta)}
+ \\
+ &\times\exp\left[-s(t)\frac{x}{\xf(t)}\right].
+ \end{aligned}}
+ \label{eq:material_profile}
+\end{equation}
+\end{resultbox}
+The ratio is
+\begin{equation}
+ \frac{T(x,t)}{\Tr(x,t)}
+ =\frac{\Tm(t)}{\Ts(t)}
+ \exp\left[-s(t)\frac{x}{\xf(t)}\right].
+ \label{eq:temperature_ratio}
+\end{equation}
+Positive $s$ narrows the material profile during heating, $s=0$ gives
+proportional profiles, and negative $s$ permits retained material energy during
+cooling.  This parametrization remains positive for every real $s$ and does
+not change the leading front exponent.
 
-The incoming radiation flux is
-\[
-F_{\rm in}(t)
-=
-\frac{D_0aT_s^{4+\alpha}(t)}{x_F(t)}
-A_R(t),
-\]
-where
-\[
-A_R(t)
-=
--
-\left.
-M^\alpha(y,t)
-\frac{\partial R}{\partial y}
-\right|_{y=0}.
-\]
+\section{Profile moments and their closed forms}
 
-Therefore, the exact moving-front energy equation is
-\[
-\boxed{
-\frac{d}{dt}
-\left\{
-x_F(t)
-\left[
-aT_s^4(t)I_R(t)
-+
-A_mT_s^\beta(t)I_M(t)
-\right]
-\right\}
-=
-\frac{D_0aT_s^{4+\alpha}(t)}{x_F(t)}
-A_R(t).
-}
-\]
+Every spatial integral required by the reduced model can be generated from two
+moments,
+\begin{equation}
+ \boxed{
+ M_p(t,z)=\int_0^1
+ \left[(1-y)(1+B(t)y)\right]^{p/(4+\alpha-\beta)}
+ e^{-zy}\dif y,}
+ \label{eq:Mp}
+\end{equation}
+\begin{equation}
+ \boxed{
+ N_p(t,z)=\int_0^1
+ y\left[(1-y)(1+B(t)y)\right]^{p/(4+\alpha-\beta)}
+ e^{-zy}\dif y.}
+ \label{eq:Np}
+\end{equation}
 
-This equation is exact, but it is not closed because the quantities
-\[
-I_R(t), \qquad I_M(t), \qquad A_R(t)
-\]
-depend on the unknown two-temperature profiles \(R(y,t)\) and \(M(y,t)\).
-
-Thus, in the true two-temperature case, a closed analytic expression for
-\(x_F(t)\) analogous to the Hammer--Rosen result generally requires solving a
-new coupled eigenvalue or self-similar problem. Only in the near-equilibrium
-limit,
-\[
-T_R \simeq T_m,
-\]
-does the system reduce to a Hammer--Rosen-type single-temperature diffusion
-problem.
-
-\section{Henyey-Type Two-Temperature Ansatz}
-
-We now ask whether the two-temperature gray system can be reduced by assuming
-Henyey-like spatial profiles for the radiation and material fields. The gray
-equations are
+These integrals have exact forms in terms of Humbert's confluent
+hypergeometric function $\Phi_1$:
 \begin{align}
-\frac{\partial E}{\partial t}
--
-\frac{\partial}{\partial x}
-\left(
-D_0T_m^\alpha
-\frac{\partial E}{\partial x}
-\right)
-&=
-S_0T_m^{-\alpha}
-\left(aT_m^4-E\right),
-\\
-A_m\frac{\partial T_m^\beta}{\partial t}
-&=
-S_0T_m^{-\alpha}
-\left(E-aT_m^4\right),
+ M_p(t,z)
+ &=\frac{1}{1+\dfrac{p}{4+\alpha-\beta}}
+ \Phi_1\!\left(
+ 1,-\frac{p}{4+\alpha-\beta};
+ 2+\frac{p}{4+\alpha-\beta};
+ -B(t),-z
+ \right),
+ \label{eq:Mp_humbert}\\
+ N_p(t,z)
+ &=\frac{1}
+ {\left(1+\dfrac{p}{4+\alpha-\beta}\right)
+  \left(2+\dfrac{p}{4+\alpha-\beta}\right)}
+ \Phi_1\!\left(
+ 2,-\frac{p}{4+\alpha-\beta};
+ 3+\frac{p}{4+\alpha-\beta};
+ -B(t),-z
+ \right).
+ \label{eq:Np_humbert}
 \end{align}
-where
-\[
-D_0=\frac{cg}{3}\rho^{-1-\lambda},
-\qquad
-S_0=\frac{c}{g}\rho^{1+\lambda},
-\qquad
-A_m=f\rho^{1-\mu}.
-\]
+The original integral representation of Humbert's function is
+\begin{equation}
+ \boxed{
+ \Phi_1(A,B;C;x,z)
+ =\frac{\Gamma(C)}{\Gamma(A)\Gamma(C-A)}
+ \int_0^1
+ e^{zu}u^{A-1}(1-u)^{C-A-1}
+ (1-xu)^{-B}\dif u.}
+ \label{eq:humbert_integral}
+\end{equation}
+The conditions relevant here are $B(t)>-1$ and
+$p/(4+\alpha-\beta)>-1$.
 
-We introduce the moving-front coordinate
-\[
-y=\frac{x}{x_F(t)},
-\qquad 0\leq y\leq 1.
-\]
+SciPy provides \texttt{hyp2f1} for $G(R)$ but does not currently expose
+Humbert $\Phi_1$ directly.  Although $\Phi_1$ can be represented by nested
+series of one-variable hypergeometric functions, that is not the recommended
+production route.  The most transparent and accurate Python evaluation of
+\eqref{eq:Mp}--\eqref{eq:Np} is
+\texttt{quad}, which uses adaptive QUADPACK integration and
+returns an error estimate.  The algebraic endpoint behavior can be supplied
+through \texttt{weight="alg"}.  If performance later matters, a fixed
+Gauss--Jacobi rule can be validated against \texttt{quad}.
 
-We allow the radiation and material temperatures to differ:
-\[
-T_R(x,t)=T_{R,s}(t)\,\mathcal{R}(y),
-\qquad
-T_m(x,t)=T_s(t)M(y),
-\]
-and define
-\[
-E(x,t)=E_s(t)R(y),
-\qquad
-R(y)\equiv \mathcal{R}^4(y),
-\]
-where
-\[
-E_s(t)=aT_{R,s}^4(t).
-\]
+\section{Areal material-energy equation}
 
-A Henyey-like profile may be written as
-\[
-R(y)=(1-y)(1+\chi_R y),
-\]
-and, for the material energy profile,
-\[
-M^\beta(y)=(1-y)(1+\chi_M y).
-\]
+The material energy per unit transverse area represented by the reduced
+profile is
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \calU_m(t)
+ =\xfzero(t)f\rho^{1-\mu}\Tm^\beta(t)
+ M_\beta\!\left(t,\beta s(t)\right).}
+ \label{eq:Um_definition}
+\end{equation}
+\end{resultbox}
+The base front $\xfzero$ is used in this closure so that the material-energy
+subsystem remains sequential.
 
-The constants \(\chi_R\) and \(\chi_M\) describe the curvature of the radiation
-and material profiles. The Hammer--Rosen first-order Henyey profile has the
-same structure:
-\[
-U(y)\sim (1-y)(1+\chi y).
-\]
+Integrating the material equation \eqref{eq:gray_material} over the reduced
+profile gives
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \dot{\calU}_m(t)
+ ={}&\frac{\arad c}{g'}\rho^{1+\lambda'}\xfzero(t)
+ \Big[
+ \Ts^4(t)\Tm^{-\alpha'}(t)
+ M_{4-\alpha'}\!\left(t,-\alpha's(t)\right)
+ \\
+ &\hspace{30mm}
+ -\Tm^{4-\alpha'}(t)
+ M_{4-\alpha'}\!\left(t,(4-\alpha')s(t)\right)
+ \Big].
+ \end{aligned}}
+ \label{eq:Um_ode}
+\end{equation}
+\end{resultbox}
+At every ODE right-hand-side evaluation, $s(t)$ is determined from
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ M_\beta\!\left(t,\beta s(t)\right)
+ =\frac{\calU_m(t)}
+ {\xfzero(t)f\rho^{1-\mu}\Tm^\beta(t)}.}
+ \label{eq:s_root}
+\end{equation}
+\end{resultbox}
+The left side is strictly decreasing because
+\begin{equation}
+ \frac{\partial}{\partial s}
+ M_\beta(t,\beta s)
+ =-\beta\int_0^1
+ y\left[(1-y)(1+B(t)y)\right]^{\beta/(4+\alpha-\beta)}
+ e^{-\beta s y}\dif y<0.
+ \label{eq:s_monotone}
+\end{equation}
+Hence the root is unique.  In Python, use the bracketed solver
+\texttt{brentq}.  This is a local scalar inversion, not a
+Volterra equation; all material-energy history is compressed into the single
+ODE state $\calU_m(t)$.
 
-The boundary conditions are
-\[
-R(0)=1,
-\qquad
-M(0)=1,
-\qquad
-R(1)=0,
-\qquad
-M(1)=0.
-\]
+\section{Final front correction}
 
-\section{Profile Integrals}
+For any trial material-lag value $s$, define the first total-energy moment
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \calE_1(t,s)
+ ={}&\arad\Ts^4(t)N_4(t,0)
+ \\
+ &+f\rho^{1-\mu}\Tm^\beta(t)
+ N_\beta\!\left(t,\beta s\right).
+ \end{aligned}}
+ \label{eq:E1}
+\end{equation}
+Define also the dimensionless transport integrand
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \calD(t,s)
+ ={}&\Ts^4(t)\Tm^\alpha(t)
+ \Big\{[1-B(t)]M_\beta\!\left(t,\alpha s\right)
+ \\
+ &\hspace{29mm}
+ +2B(t)N_\beta\!\left(t,\alpha s\right)\Big\}.
+ \end{aligned}}
+ \label{eq:D_compact}
+\end{equation}
+The compact form follows from the identity
+\begin{equation}
+ \begin{aligned}
+ &\left[(1-y)(1+B y)\right]^{(\alpha+3)/(4+\alpha-\beta)}
+ \left[-\frac{\dif}{\dif y}
+ \left((1-y)(1+B y)\right)^{1/(4+\alpha-\beta)}\right]
+ \\
+ &\qquad=\frac{(1-B)+2By}{4+\alpha-\beta}
+ \left[(1-y)(1+B y)\right]^{\beta/(4+\alpha-\beta)}.
+ \end{aligned}
+ \label{eq:transport_identity}
+\end{equation}
+All dimensional constants in the physical transport moment are identical in
+the numerator and denominator below and therefore cancel.
 
-Define the radiation and material energy-shape integrals
-\[
-I_R=\int_0^1 R(y)\,dy,
-\qquad
-I_M=\int_0^1 M^\beta(y)\,dy.
-\]
+The final moment-corrected front is
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \xf^2(t)
+ =\xfzero^2(t)
+ \frac{\calE_1(t,0)}{\calE_1(t,s(t))}
+ \frac{\displaystyle\int_0^t
+ \calD\!\left(t',s(t')\right)\dif t'}
+ {\displaystyle\int_0^t
+ \calD(t',0)\dif t'}.}
+ \label{eq:xf_final}
+\end{equation}
+\end{resultbox}
+The denominator is simply the special case $s=0$ of the same integrand.
+Numerically the two time integrals are two running scalar quadratures.  Once
+$\xf(t)$ is known, the temperature profiles follow algebraically from
+\eqref{eq:radiation_profile} and \eqref{eq:material_profile}.
 
-For the Henyey-like profiles above,
-\[
-I_R=\int_0^1 (1-y)(1+\chi_R y)\,dy
-=
-\frac{1}{2}+\frac{\chi_R}{6},
-\]
-and similarly
-\[
-I_M=
-\frac{1}{2}+\frac{\chi_M}{6}.
-\]
+\section{Numerical implementation and complexity}
 
-The surface-gradient coefficient is
-\[
-A_R=
--\left.
-M^\alpha(y)\frac{dR}{dy}
-\right|_{y=0}.
-\]
+\subsection{Recommended SciPy functions}
 
-Since \(M(0)=1\),
-\[
-A_R=-R'(0).
-\]
+\begin{table}[H]
+\centering
+\caption{Recommended Python functions for the reduced model.}
+\label{tab:scipy_functions}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.25\textwidth}
+                >{\raggedright\arraybackslash}p{0.28\textwidth}
+                >{\raggedright\arraybackslash}p{0.35\textwidth}}
+\toprule
+Task & Function & Practical recommendation \\
+\midrule
+Scalar ODE system & \texttt{solve\_ivp} &
+Use \texttt{Radau} or \texttt{BDF}; request dense output if profiles are needed
+at specified times. \\
+Gray storage $G(R)$ & \texttt{hyp2f1} &
+Evaluate the exact closed form \eqref{eq:G_hypergeometric}; compare once
+against \texttt{quad} as a unit test. \\
+Profile moments $M_p,N_p$ & \texttt{quad} &
+Use tight \texttt{epsabs}/\texttt{epsrel}; optionally use
+\texttt{weight="alg"} for the endpoint factor. \\
+Scalar inversion for $s$ & \texttt{brentq} &
+Bracket the unique root and reuse the previous $s$ value to initialize the next
+bracket. \\
+Tabulated drive interpolation & \texttt{PchipInterpolator} &
+Use the shape-preserving interpolant; for a prescribed $\Ts$, obtain the
+needed derivative from \texttt{.derivative()}. \\
+\bottomrule
+\end{tabular}
+\end{table}
+The current SciPy documentation for these functions is available at
+\url{https://docs.scipy.org/doc/scipy/reference/}.
 
-For
-\[
-R(y)=(1-y)(1+\chi_Ry),
-\]
-we have
-\[
-R'(y)=\chi_R-1-2\chi_R y,
-\]
-and therefore
-\[
-R'(0)=\chi_R-1.
-\]
+\subsection{Surface-temperature drive}
 
-Hence
-\[
-\boxed{
-A_R=1-\chi_R.
-}
-\]
+For prescribed $\Ts(t)$, the evolving quantities are
+\begin{itemize}
+ \item the physical scalar ODE for $\Tm(t)$;
+ \item the physical scalar ODE for $\calU_m(t)$;
+ \item the running quadrature defining $\xfzero(t)$;
+ \item the two running quadratures in \eqref{eq:xf_final}.
+\end{itemize}
+At every ODE evaluation:
+\begin{enumerate}
+ \item interpolate $\Ts(t)$ and evaluate its derivative only for $B(t)$;
+ \item evaluate $R(t)$ and $G(R(t))$;
+ \item update the base-front quadrature and calculate $\xfzero(t)$;
+ \item calculate $B(t)$ from \eqref{eq:B_Ts};
+ \item solve the unique scalar equation \eqref{eq:s_root} for $s(t)$;
+ \item evaluate the moments and the right-hand sides for $\Tm$, $\calU_m$,
+       and the three quadratures;
+ \item calculate $\xf(t)$ and the profiles only at requested output times.
+\end{enumerate}
+Thus the surface-driven model requires
+\begin{equation}
+ \boxed{
+ 2\text{ scalar physical ODEs}
+ +3\text{ running quadratures}
+ +1\text{ scalar root}.}
+ \label{eq:complexity_Ts}
+\end{equation}
 
-The incoming radiative flux is therefore
-\[
-F_{\rm in}
-=
--
-\left.
-D_0T_m^\alpha
-\frac{\partial E}{\partial x}
-\right|_{x=0}
-=
-\frac{D_0T_s^\alpha E_s}{x_F}A_R.
-\]
+\subsection{Bath-temperature drive}
 
-\section{Total Energy and Heat-Front Equation}
+For prescribed $\Tb(t)$, add only the scalar boundary ODE
+\eqref{eq:Ts_bath_ode}.  The remaining calculation is unchanged.  No
+derivative of the bath history is needed.  The bath-driven model therefore
+requires
+\begin{equation}
+ \boxed{
+ 3\text{ scalar physical ODEs}
+ +3\text{ running quadratures}
+ +1\text{ scalar root}.}
+ \label{eq:complexity_Tbath}
+\end{equation}
+The state dimension is fixed and independent of spatial resolution.
 
-The total areal energy inside the heated region is
-\[
-\mathcal{E}(t)
-=
-\int_0^{x_F(t)}
-\left[
-E(x,t)+A_mT_m^\beta(x,t)
-\right]dx.
-\]
+By comparison, a full gray PDE calculation requires hundreds or thousands of
+spatial cells, two unknown fields per cell, temperature-dependent face
+coefficients, an implicit matrix solve at every timestep, nonlinear opacity
+updates, boundary-face treatment, timestep control, and spatial convergence
+studies.  The reduced model performs only a small fixed number of scalar
+operations per ODE evaluation.
 
-Using the assumed profiles,
-\[
-\mathcal{E}(t)
-=
-x_F(t)
-\left[
-E_s(t)I_R
-+
-A_mT_s^\beta(t)I_M
-\right].
-\]
+\section{Numerical illustration}
 
-Define
-\[
-B(t)=E_s(t)I_R+A_mT_s^\beta(t)I_M.
-\]
+The model was tested for the supplied SiO$_2$ drive using both surface and
+bath boundary specifications.  The simulations use a validated $N=1000$
+finite-volume gray diffusion solver without a flux limiter.  The bath-driven
+simulation uses the Marshak Robin boundary condition directly.
 
-Then
-\[
-\mathcal{E}(t)=x_F(t)B(t).
-\]
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.97\textwidth]{front_comparison.png}
+ \caption{Surface- and bath-driven gray/LTE front comparisons through 4 ns.
+ The unified gray-HR model uses the same interior closure for both gray drive
+ types; only the boundary subsystem differs.}
+ \label{fig:front_comparison}
+\end{figure}
 
-Energy conservation gives
-\[
-\frac{d}{dt}\left[x_F(t)B(t)\right]
-=
-\frac{D_0T_s^\alpha(t)E_s(t)}{x_F(t)}A_R.
-\]
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.91\textwidth]{surface_temperatures.png}
+ \caption{Prescribed bath temperature and the resulting surface radiation
+ temperatures.  The direct gray bath-HR boundary ODE follows the gray Robin
+ simulation closely.}
+ \label{fig:surface_temperatures}
+\end{figure}
 
-Define
-\[
-K(t)=D_0A_R T_s^\alpha(t)E_s(t).
-\]
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{profile_overview.png}
+ \caption{Gray radiation and material profiles for the surface-driven example.
+ The monotone factor $\exp[-s(t)y]$ captures the early material narrowing
+ without changing the front exponent.}
+ \label{fig:profile_overview}
+\end{figure}
 
-Then the moving-front equation becomes
-\[
-\boxed{
-\frac{d}{dt}\left[x_F(t)B(t)\right]
-=
-\frac{K(t)}{x_F(t)}.
-}
-\]
+For the bath-driven gray case, the front error decreases from approximately
+$8\%$ at $0.5$ ns to less than $1\%$ near 4 ns.  For the surface-driven gray
+case, the front remains near the one-percent level over most of the pulse.
+The larger relative errors immediately after the discontinuous turn-on occur
+inside the short onset layer where both the HR asymptotics and a numerical
+front definition are least reliable.
 
-Multiplying by \(x_F\), we get
-\[
-B x_F\dot{x}_F+x_F^2\dot{B}=K.
-\]
+\section{Accuracy and limitations}
 
-Since
-\[
-x_F\dot{x}_F=\frac{1}{2}\frac{d x_F^2}{dt},
-\]
-we obtain
-\[
-\frac{B}{2}\frac{d x_F^2}{dt}
-+
-\dot{B}x_F^2
-=
-K.
-\]
+The model combines a first-order HR radiation profile with integrated material
+energy and transport moments.  It is not a pointwise solution of the gray PDE
+and is not a proof of a uniform $\order(\eps)$ expansion for arbitrary drives.
+Its principal approximations are:
+\begin{itemize}
+ \item one HR-shaped radiation profile;
+ \item one scalar material-lag parameter $s(t)$;
+ \item use of the base front $\xfzero$ inside the surface-flux and material-energy
+       closures;
+ \item enforcement of integrated moments rather than the PDEs pointwise.
+\end{itemize}
+The model is expected to work best for sharp, single-front waves with smooth
+power-law material properties.  Strong opacity transitions, multiple fronts,
+large excursions with $B(t)\le-1$, or strongly non-HR radiation profiles
+indicate that another profile parameter or the full gray PDE may be required.
 
+\clearpage
+\section{Self-contained summary of the working model}
+\label{sec:summary}
+
+This section can be used independently as an implementation specification.
+No profile symbol is introduced; every profile and moment is written
+explicitly.
+
+\subsection*{Problem definition and input}
+
+A fixed-density material occupies $x>0$.  Radiation and material temperatures
+are $\Tr(x,t)$ and $T(x,t)$.  Use
+\begin{equation}
+ E_r=\arad\Tr^4,
+ \qquad
+ U=f\rho^{1-\mu}T^\beta,
+ \qquad
+ \boxed{\arad=\frac{4\sigma_{\rm SB}}{c}},
+ \label{eq:sum_energies}
+\end{equation}
+\begin{equation}
+ \frac{1}{\kappa_R}=gT^\alpha\rho^{-\lambda},
+ \qquad
+ \frac{1}{\kappa_a}=g'T^{\alpha'}\rho^{-\lambda'}.
+ \label{eq:sum_opacities}
+\end{equation}
+The Rosseland parameters are $(g,\alpha,\lambda)$ and the absorption parameters
+are $(g',\alpha',\lambda')$.  Define
+\begin{equation}
+ \boxed{
+ \eps=\frac{\beta}{4+\alpha},
+ \qquad
+ C=\frac{4\arad c g}{3(4+\alpha)f}
+ \rho^{-2+\mu-\lambda}.}
+ \label{eq:sum_constants}
+\end{equation}
 Let
-\[
-X(t)=x_F^2(t).
-\]
+\begin{equation}
+ \boxed{\Tm(t)=T(0,t),\qquad \Ts(t)=\Tr(0,t).}
+ \label{eq:sum_surface_temperatures}
+\end{equation}
 
-Then
-\[
-\frac{B}{2}\dot{X}+\dot{B}X=K.
-\]
+For a surface-temperature drive, $\Ts(t)$ is prescribed.  For a bath drive,
+$\Tb(t)$ is prescribed and $\Ts(t)$ is determined by the Marshak condition
+\begin{equation}
+ \boxed{
+ F_s(t)=\frac{\arad c}{2}
+ [\Tb^4(t)-\Ts^4(t)].}
+ \label{eq:sum_marshak}
+\end{equation}
 
-Dividing by \(B/2\),
-\[
-\dot{X}
-+
-2\frac{\dot{B}}{B}X
-=
-\frac{2K}{B}.
-\]
+\subsection*{Step 1: surface material temperature --- scalar ODE}
 
-The integrating factor is
-\[
-\exp\left(
-\int 2\frac{\dot{B}}{B}\,dt
-\right)
-=
-B^2.
-\]
+For either drive type, solve
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \frac{\dif}{\dif t}
+ [f\rho^{1-\mu}\Tm^\beta(t)]
+ =\frac{\arad c}{g'}\rho^{1+\lambda'}
+ \Tm^{-\alpha'}(t)[\Ts^4(t)-\Tm^4(t)].}
+ \label{eq:sum_Tm_ode}
+\end{equation}
+\end{resultbox}
+Numerically: use \texttt{solve\_ivp(method="Radau")} or
+\texttt{solve\_ivp(method="BDF")}.
 
-Therefore,
-\[
-\frac{d}{dt}
-\left[
-B^2(t)X(t)
-\right]
-=
-2K(t)B(t).
-\]
+\subsection*{Step 2: gray storage and base front --- one running quadrature}
 
-Since \(X=x_F^2\), the heat-front position is
-\[
-\boxed{
-x_F^2(t)
-=
-\frac{2}{B^2(t)}
-\int_0^t K(t')B(t')\,dt'.
-}
-\]
+Calculate
+\begin{equation}
+ \boxed{
+ R(t)=\frac{\arad\Ts^4(t)}
+ {f\rho^{1-\mu}\Tm^\beta(t)}.}
+ \label{eq:sum_R}
+\end{equation}
+The gray storage factor may be evaluated either from its original integral,
+\begin{equation}
+ \boxed{
+ G(R)=(4+\alpha-\beta)
+ \int_0^1\frac{\xi^{3+\alpha-\beta}}
+ {1+R\xi^{4-\beta}}\dif\xi,}
+ \label{eq:sum_G_integral}
+\end{equation}
+or from the exact closed form
+\begin{equation}
+ \boxed{
+ G(R)={}_2F_1\!\left(
+ 1,\frac{4+\alpha-\beta}{4-\beta};
+ 1+\frac{4+\alpha-\beta}{4-\beta};-R\right).}
+ \label{eq:sum_G_hyper}
+\end{equation}
+The defining integral of ${}_2F_1$ is
+\begin{equation}
+ {}_2F_1(a,b;c;z)
+ =\frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}
+ \int_0^1u^{b-1}(1-u)^{c-b-1}(1-zu)^{-a}\dif u.
+ \label{eq:sum_2F1_integral}
+\end{equation}
+Numerically: use \texttt{hyp2f1}.
 
-That is,
-\[
-\boxed{
-x_F^2(t)
-=
-\frac{2}{\left[
-E_s(t)I_R+A_mT_s^\beta(t)I_M
-\right]^2}
-\int_0^t
-D_0A_R T_s^\alpha(t')E_s(t')
-\left[
-E_s(t')I_R+A_mT_s^\beta(t')I_M
-\right]
-dt'.
-}
-\]
+The base front is
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \xfzero^2(t)
+ =\frac{2+\eps}{1-\eps}C\Tm^{-\beta}(t)
+ \int_0^t\Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'.}
+ \label{eq:sum_xf0}
+\end{equation}
+\end{resultbox}
+Numerically: store the time integral as one scalar quadrature state.
 
-This is the two-temperature Henyey-profile analogue of the Hammer--Rosen
-front-position formula.
+\subsection*{Step 3: radiation curvature $B(t)$}
 
-\section{Total Energy}
+For prescribed $\Ts(t)$,
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ B(t)=\frac{\eps}{2}\Bigg[1
+ -\frac{2+\eps}{1-\eps}
+ &\frac{\displaystyle\int_0^t
+ \Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'}
+ {\Ts^4(t)\Tm^\alpha(t)G(R(t))}
+ \\
+ &\times\frac{\dif}{\dif t}\ln\Ts^{4+\alpha}(t)
+ \Bigg].
+ \end{aligned}}
+ \label{eq:sum_B_Ts}
+\end{equation}
+\end{resultbox}
+Numerically: use a \texttt{PchipInterpolator} and its derivative for a
+tabulated $\Ts(t)$.
 
-Since
-\[
-\mathcal{E}(t)=x_F(t)B(t),
-\]
-we immediately obtain
-\[
-\boxed{
-\mathcal{E}^2(t)
-=
-2
-\int_0^t
-K(t')B(t')\,dt'.
-}
-\]
-
-Explicitly,
-\[
-\boxed{
-\mathcal{E}^2(t)
-=
-2
-\int_0^t
-D_0A_R T_s^\alpha(t')E_s(t')
-\left[
-E_s(t')I_R+A_mT_s^\beta(t')I_M
-\right]
-dt'.
-}
-\]
-
-Therefore,
-\[
-\boxed{
-\mathcal{E}(t)
-=
-\left\{
-2
-\int_0^t
-D_0A_R T_s^\alpha(t')E_s(t')
-\left[
-E_s(t')I_R+A_mT_s^\beta(t')I_M
-\right]
-dt'
-\right\}^{1/2}.
-}
-\]
-
-\section{Closure for the Radiation--Material Temperature Difference}
-
-The previous result gives a front equation, but the two-temperature problem is
-not fully closed unless \(E_s(t)\) and \(T_s(t)\) are known. To close the model,
-one can integrate the material energy equation over the heated region.
-
-The material energy is
-\[
-\mathcal{E}_m(t)
-=
-x_F(t)A_mT_s^\beta(t)I_M.
-\]
-
-The volume-integrated matter-radiation exchange is
-\[
-Q_{\rm abs}(t)
-=
-\int_0^{x_F}
-S_0T_m^{-\alpha}
-\left(
-E-aT_m^4
-\right)dx.
-\]
-
-Using the profile ansatz,
-\[
-Q_{\rm abs}(t)
-=
-x_F S_0T_s^{-\alpha}
-\left[
-E_s J_R
--
-aT_s^4 J_M
-\right],
-\]
-where
-\[
-J_R=
-\int_0^1 M^{-\alpha}(y)R(y)\,dy,
-\]
+For prescribed $\Tb(t)$, $\Ts(t)$ is an additional scalar ODE,
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \dot\Ts(t)
+ ={}&\frac{2\Ts^5(t)\Tm^\alpha(t)G(R(t))}
+ {\eps(4+\alpha)\,\dfrac{2+\eps}{1-\eps}
+ \displaystyle\int_0^t\Ts^4(t')\Tm^\alpha(t')G(R(t'))\dif t'}
+ \\
+ &\times\Bigg\{
+ \frac{3(4+\alpha-\beta)\xfzero(t)\rho^{1+\lambda}}
+ {8g\Tm^\alpha(t)}
+ \left[\frac{\Tb^4(t)}{\Ts^4(t)}-1\right]
+ -1+\frac{\eps}{2}\Bigg\}.
+ \end{aligned}}
+ \label{eq:sum_Ts_bath_ode}
+\end{equation}
+\end{resultbox}
 and
-\[
-J_M=
-\int_0^1 M^{4-\alpha}(y)\,dy.
-\]
+\begin{equation}
+ \boxed{
+ B(t)=1-
+ \frac{3(4+\alpha-\beta)\xfzero(t)\rho^{1+\lambda}}
+ {8g\Tm^\alpha(t)}
+ \left[\frac{\Tb^4(t)}{\Ts^4(t)}-1\right].}
+ \label{eq:sum_B_bath}
+\end{equation}
+Numerically: integrate $\Ts(t)$ with the same stiff \texttt{solve\_ivp}
+call.  No derivative of $\Tb(t)$ is required.
 
-Therefore the material-energy equation becomes
-\[
-\boxed{
-\frac{d}{dt}
-\left[
-x_F A_mT_s^\beta I_M
-\right]
-=
-x_F S_0T_s^{-\alpha}
-\left[
-E_s J_R
--
-aT_s^4 J_M
-\right].
-}
-\]
+\subsection*{Step 4: profile moments --- adaptive scalar quadratures}
 
-Similarly, the radiation-energy equation is
-\[
-\boxed{
-\frac{d}{dt}
-\left[
-x_F E_s I_R
-\right]
-=
-\frac{D_0A_RT_s^\alpha E_s}{x_F}
--
-x_F S_0T_s^{-\alpha}
-\left[
-E_s J_R
--
-aT_s^4 J_M
-\right].
-}
-\]
+For any $p$ and $z$, define
+\begin{equation}
+ \boxed{
+ M_p(t,z)=\int_0^1
+ [(1-y)(1+B(t)y)]^{p/(4+\alpha-\beta)}e^{-zy}\dif y,}
+ \label{eq:sum_M}
+\end{equation}
+\begin{equation}
+ \boxed{
+ N_p(t,z)=\int_0^1
+ y[(1-y)(1+B(t)y)]^{p/(4+\alpha-\beta)}e^{-zy}\dif y.}
+ \label{eq:sum_N}
+\end{equation}
+Their exact Humbert forms are
+\begin{align}
+ M_p(t,z)
+ &=\frac{1}{1+\dfrac{p}{4+\alpha-\beta}}
+ \Phi_1\!\left(
+ 1,-\frac{p}{4+\alpha-\beta};
+ 2+\frac{p}{4+\alpha-\beta};-B(t),-z\right),
+ \label{eq:sum_M_humbert}\\
+ N_p(t,z)
+ &=\frac{1}
+ {\left(1+\dfrac{p}{4+\alpha-\beta}\right)
+  \left(2+\dfrac{p}{4+\alpha-\beta}\right)}
+ \Phi_1\!\left(
+ 2,-\frac{p}{4+\alpha-\beta};
+ 3+\frac{p}{4+\alpha-\beta};-B(t),-z\right),
+ \label{eq:sum_N_humbert}
+\end{align}
+with
+\begin{equation}
+ \boxed{
+ \Phi_1(A,B;C;x,z)
+ =\frac{\Gamma(C)}{\Gamma(A)\Gamma(C-A)}
+ \int_0^1e^{zu}u^{A-1}(1-u)^{C-A-1}
+ (1-xu)^{-B}\dif u.}
+ \label{eq:sum_humbert_integral}
+\end{equation}
+Numerically: SciPy has no direct $\Phi_1$ function, so use
+\texttt{quad} for $M_p$ and $N_p$.  The returned error estimate
+should be checked during validation.
 
-Together with
-\[
-\boxed{
-x_F^2(t)
-=
-\frac{2}{B^2(t)}
-\int_0^t K(t')B(t')\,dt',
-}
-\]
-these equations form a closed reduced two-temperature model, provided the
-shape parameters \(\chi_R\) and \(\chi_M\) are prescribed or fitted.
+\subsection*{Step 5: material lag $s(t)$ --- one scalar ODE and one root}
 
-\section{Equilibrium Limit}
+Evolve the areal material energy
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \dot{\calU}_m(t)
+ ={}&\frac{\arad c}{g'}\rho^{1+\lambda'}\xfzero(t)
+ \Big[
+ \Ts^4(t)\Tm^{-\alpha'}(t)
+ M_{4-\alpha'}(t,-\alpha's(t))
+ \\
+ &\hspace{27mm}
+ -\Tm^{4-\alpha'}(t)
+ M_{4-\alpha'}(t,(4-\alpha')s(t))
+ \Big].
+ \end{aligned}}
+ \label{eq:sum_U_ode}
+\end{equation}
+\end{resultbox}
+At each ODE evaluation, solve
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ M_\beta(t,\beta s(t))
+ =\frac{\calU_m(t)}
+ {\xfzero(t)f\rho^{1-\mu}\Tm^\beta(t)}.}
+ \label{eq:sum_s_root}
+\end{equation}
+\end{resultbox}
+Numerically: use \texttt{brentq}; the root is unique because the
+left side decreases strictly with $s$.
 
-In the complete thermodynamic equilibrium limit,
-\[
-T_R=T_m=T_s,
-\]
-so
-\[
-E_s=aT_s^4.
-\]
+\subsection*{Step 6: final front --- two running quadratures}
 
-If, in addition, the radiation and material profiles have the same shape, then
-\[
-R(y)\approx M^4(y).
-\]
+For a trial value $s$, define
+\begin{equation}
+ \boxed{
+ \calE_1(t,s)=\arad\Ts^4(t)N_4(t,0)
+ +f\rho^{1-\mu}\Tm^\beta(t)N_\beta(t,\beta s),}
+ \label{eq:sum_E1}
+\end{equation}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ \calD(t,s)=\Ts^4(t)\Tm^\alpha(t)
+ \Big\{[1-B(t)]M_\beta(t,\alpha s)
+ +2B(t)N_\beta(t,\alpha s)\Big\}.
+ \end{aligned}}
+ \label{eq:sum_D}
+\end{equation}
+Then
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \xf^2(t)=\xfzero^2(t)
+ \frac{\calE_1(t,0)}{\calE_1(t,s(t))}
+ \frac{\displaystyle\int_0^t\calD(t',s(t'))\dif t'}
+ {\displaystyle\int_0^t\calD(t',0)\dif t'}.}
+ \label{eq:sum_xf}
+\end{equation}
+\end{resultbox}
+Numerically: advance the numerator and denominator as two scalar running
+quadratures.
 
-The total energy coefficient becomes
-\[
-B(t)
-=
-aT_s^4 I_R
-+
-A_mT_s^\beta I_M.
-\]
+\subsection*{Step 7: final profiles --- algebraic evaluation}
 
-If material energy dominates radiation energy,
-\[
-A_mT_s^\beta I_M \gg aT_s^4 I_R,
-\]
-then
-\[
-B(t)\approx A_mT_s^\beta I_M.
-\]
+For $0\le x\le\xf(t)$,
+\begin{resultbox}
+\begin{equation}
+ \boxed{
+ \Tr(x,t)=\Ts(t)
+ \left[
+ \left(1-\frac{x}{\xf(t)}\right)
+ \left(1+B(t)\frac{x}{\xf(t)}\right)
+ \right]^{1/(4+\alpha-\beta)},}
+ \label{eq:sum_Tr_profile}
+\end{equation}
+\begin{equation}
+ \boxed{
+ \begin{aligned}
+ T(x,t)=\Tm(t)
+ &\left[
+ \left(1-\frac{x}{\xf(t)}\right)
+ \left(1+B(t)\frac{x}{\xf(t)}\right)
+ \right]^{1/(4+\alpha-\beta)}
+ \\
+ &\times\exp\left[-s(t)\frac{x}{\xf(t)}\right].
+ \end{aligned}}
+ \label{eq:sum_T_profile}
+\end{equation}
+\end{resultbox}
+Set both temperatures to zero beyond the sharp front.
 
-Also,
-\[
-K(t)=D_0A_RaT_s^{4+\alpha}.
-\]
+\subsection*{Complete numerical workflow and cost}
 
-Therefore,
-\[
-x_F^2(t)
-\approx
-\frac{2D_0A_Ra}{A_m I_M}
-T_s^{-2\beta}(t)
-\int_0^t
-T_s^{4+\alpha+\beta}(t')\,dt'.
-\]
+For prescribed $\Ts(t)$:
+\begin{enumerate}
+ \item integrate the two physical scalar ODEs for $\Tm(t)$ and $\calU_m(t)$;
+ \item advance the base-front quadrature and the two final-front quadratures;
+ \item evaluate $G$ with \texttt{hyp2f1};
+ \item evaluate $M_p,N_p$ with \texttt{quad};
+ \item solve the unique $s(t)$ root with \texttt{brentq};
+ \item evaluate $\xf$, $\Tr$, and $T$ algebraically at output times.
+\end{enumerate}
+The cost is
+\begin{equation}
+ \boxed{
+ 2\text{ scalar physical ODEs}
+ +3\text{ scalar quadratures}
+ +1\text{ scalar root}.}
+ \label{eq:sum_cost_Ts}
+\end{equation}
 
-This has the same diffusion-wave character as the Hammer--Rosen result, but
-with constants determined by the chosen Henyey-like profile.
+For prescribed $\Tb(t)$, add only the scalar ODE for $\Ts(t)$; all later steps
+are identical.  The cost is
+\begin{equation}
+ \boxed{
+ 3\text{ scalar physical ODEs}
+ +3\text{ scalar quadratures}
+ +1\text{ scalar root}.}
+ \label{eq:sum_cost_Tbath}
+\end{equation}
+No spatial grid, diffusion matrix, PDE iteration, or time-dependent integral
+equation appears in either reduced model.
+
 \end{document}
