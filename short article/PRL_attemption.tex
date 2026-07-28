@@ -38,7 +38,7 @@
 % ----------------------------------------------------------------------------
 %  Abstract
 \begin{abstract}
-We present a semi-analytic model for radiation-wave propagation in finite cylindrical foam targets that combines a self-consistent radiative boundary condition and global energy balance with the leading effects of wall interaction and hydrodynamic response. The model predicts the longitudinal heat-front evolution, its transverse curvature, and the associated re-emission pattern using experiment-specific drive histories and material properties. Comparisons with representative experiments and two-dimensional diffusion simulations show that the framework captures the main trends in front propagation, breakout, curvature, and sleeve dependence. The model therefore provides a compact and physically transparent description of finite-target radiative transport in the diffusive regime.
+We present a semi-analytic model for radiation-wave propagation in finite cylindrical foam targets that combines a self-consistent radiative boundary condition and global energy balance with the leading effects of wall interaction and hydrodynamic response. The model predicts the longitudinal heat-front evolution and its transverse curvature, using experiment-specific drive histories and material properties. Comparisons with representative experiments and two-dimensional diffusion simulations show that the framework captures the main trends in front propagation, breakout, curvature, and sleeve dependence. The model therefore provides a compact and physically transparent description of finite-target radiative transport in the diffusive regime.
 \end{abstract}
 
 \maketitle
@@ -50,15 +50,13 @@ We present a semi-analytic model for radiation-wave propagation in finite cylind
 \begingroup
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{1em}
-Radiative heat waves are central to inertial-confinement fusion (ICF) and high-energy-density physics~\cite{Rosen1996}. In the indirect-drive approach, laser energy is converted into x~rays inside a high-$Z$ hohlraum that heat and implode the fusion capsule~\cite{Lindl2004}. Because radiation modifies the temperature, ionization state, and opacity of the medium, energy storage and transport are strongly coupled and nonlinear. Additional complexity arises from plasma filling and laser--plasma interactions, which can reduce the energy delivered to the hohlraum wall so that the applied laser pulse does not translate directly into the radiation drive seen by the target~\cite{Hinkel2006PRL}.
+Radiative heat waves are central to inertial-confinement fusion (ICF) and high-energy-density physics~\cite{AbuShawareb2024,AbuShawareb2022}. In indirect-drive ICF, laser energy is converted into x~rays within a high-$Z$ hohlraum, whose radiation heats and compresses the fusion capsule~\cite{Lindl2004}. A first-principles description must couple nonlinear laser propagation, opacities, equations of state, hydrodynamics and many more. Because a unified treatment remains impractical, individual physical processes must be isolated and studied independently. Here, we focus on dedicated experiments designed to probe radiation transport under controlled conditions.
 
-Motivated by this broader hohlraum-radiation context, a major experimental step was made by Afshar-rad \textit{et al.}, who reported direct measurements of the sustained propagation of a supersonic, radiation-driven heat wave in low-density foam~\cite{AfsharRad1994}. Lowering the density allowed the radiative front to remain ahead of the hydrodynamic response, while the measurements showed that re-emission from the heated foam plays an essential role in the propagation. However, these early experiments generally probed distances of order one photon mean free path and were only weakly supersonic, placing them outside the regime most naturally described by diffusion theory.
+Early experiments by Afshar-rad \textit{et al.} and Massen \textit{et al.} established low-density foams as a controlled platform in which radiation-driven fronts could outrun the hydrodynamic response~\cite{AfsharRad1994,Massen1994}. Back \textit{et al.} then reported the first detailed measurements of a diffusive, supersonic radiation wave in a finite cylindrical foam several optical depths thick~\cite{Back2000PRL}. They observed a curved front that broke out first on axis and later near the wall, directly exposing the role of energy loss to the surrounding sleeve. A companion study broadened the analysis across materials, optical depths, and target lengths~\cite{Back2000POP}, and subsequent experiments have explored diverse foams, sleeves, drives, and geometries~\cite{Jiang2005,Keiter2008,Zhang2010,Moore2015,Courtois2024}.
 
-Back \textit{et al.} extended these studies to foams several optical depths thick and reported the first detailed measurements of a diffusive, supersonic radiation wave in a finite cylindrical target~\cite{Back2000PRL,Back2000POP}. The wave broke out first on axis and later near the boundary, revealing that energy loss to the surrounding walls bends and retards the front. These experiments demonstrated that opacity, wall material, and transverse geometry jointly govern heat-wave propagation. Subsequent campaigns extended these results to a wider range of materials, energies, sleeves, and geometries~\cite{Moore2015,Courtois2024,Keiter2008,Jiang2005,Zhang2010}. 
+Theory, however, remains fragmented. The one-dimensional Hammer--Rosen diffusion solution describes on-axis propagation~\cite{Hammer2003}, and later extensions include wall-energy loss, ablation, compression, and boundary-temperature corrections to get quantitative agreement with the experimental data~\cite{Cohen2018,Cohen2020Key}. These models do not capture the measured delay between front arrival on axis and at the tube boundary. Conversely, curvature models describe front bending~\cite{Hurricane2006,Courtois2022}, but represent wall coupling by a fitted constant and do not accurately reproduce the on-axis evolution.
 
-In parallel, Hammer and Rosen developed a self-consistent one-dimensional theory for nonlinear Marshak waves under arbitrary drive histories~\cite{Hammer2003}. Subsequent studies showed that quantitative agreement with experiment requires self-consistent boundary conditions together with two-dimensional energy-balance and hydrodynamic corrections~\cite{Cohen2018,Cohen2020Key,Courtois2022,Courtois2024}.
-
-In this Letter, we synthesize these developments into a semi-analytic two-dimensional model for supersonic Marshak-wave propagation in finite cylindrical foam targets. Building on the Hammer--Rosen framework, we include a self-consistent radiative boundary condition, material-dependent thermodynamic and opacity closures, wall-coupled energy loss and hydrodynamic effects, and a finite-size transport correction that connects the diffusion and wall-collision limits. We then couple the corrected longitudinal evolution to a cylindrical eigenmode description of the transverse front~\cite{Hurricane2006,Courtois2022}, with curvature set by a time-dependent wall albedo. The resulting front geometry and re-emission profile are benchmarked against representative experiments and two-dimensional diffusion simulations.
+In this work, we present a semi analytic two-dimensional model that self-consistently connects longitudinal propagation and radial curvature in finite cylindrical foams. The framework combines a corrected Hammer--Rosen solution for the radiative boundary, wall losses, hydrodynamic effects, and finite-size transport with cylindrical eigenmodes whose transverse structure is set by a time-dependent wall albedo~\cite{Hurricane2006,Courtois2022}. By capturing both the front evolution and its geometry within one physically transparent description, the model enables systematic interpretation of experiments across different target dimensions, foam properties, and sleeve materials, and provides a practical tool for identifying the mechanisms that control radiative transport.
 
 Figure~\ref{fig:setup_tdrive} illustrates the generic experimental platform: the cylindrical foam-tube target~(a) and a representative hohlraum drive history~(b)~\cite{Back2000PRL}.
 \endgroup
@@ -77,7 +75,7 @@ Figure~\ref{fig:setup_tdrive} illustrates the generic experimental platform: the
         \vspace{-0.5em}
         \centerline{(b)}
     \end{minipage}
-    \caption{(a) Experimental platform: laser beams enter the hohlraum through the LEH, generate x rays, and drive a Marshak wave in low-density foam targets of different lengths~\cite{Moore2015}. (b) Measured hohlraum drive temperature $T_D(t)$ for the high-energy Back experiment; the dashed curve is the normalized laser pulse shape~\cite{Back2000PRL}.}
+    \caption{(a) Experimental platform: laser beams enter the hohlraum through the LEH, generate x rays, and drive a Marshak wave in low-density foam targets of different lengths~\cite{Moore2015}. (b) Measured hohlraum drive temperature $T_D(t)$ for the high-energy Back experiment~\cite{Back2000PRL}.}
     \label{fig:setup_tdrive}
 \end{figure}
 
@@ -127,7 +125,7 @@ and thus the front evolution.
 
 Beyond its agreement with the measured trajectory, Fig.~\ref{fig:sio2_low_energy} shows how the model can separate the relative influence of the physical mechanisms governing the on-axis longitudinal front position. Each curve adds one correction to the preceding model, so the change between successive curves indicates how strongly that effect modifies the front evolution in this experimental configuration. For the $\mathrm{SiO}_2$ low density Ecperimental setup~\cite{Back2000PRL}, the finite MFP correction and direct wall-energy loss produce only small changes, whereas the wall-ablation correction substantially alter the propagation trend. The particularly strong ablation effect follows from the extremely low foam density, $10\,[\mathrm{mg/\,cm^{3}}]$: the density-dependent prefactor calibration approaches unity, allowing greater inward wall motion and stronger foam compression, which increases the mean density and slows the front. This hierarchy is not universal. In other configurations, such as the $\mathrm{SiO}_2$ experiment reported by Back \textit{et al.}~\cite{Back2000POP}, direct wall loss is the dominant correction. The model therefore provides not only a prediction of the front trajectory but also a diagnostic of which mechanism limits propagation in a given target. This information can guide experimental design by identifying whether changes to the drive, foam density, tube diameter, or sleeve material are most likely to increase the front velocity.
 
-The longitudinal front position captures only axial propagation, whereas the physical front is curved, primarily by radiative losses to the sleeve. This curvature is experimentally important because the measured signal is the re-emission intensity, $\Phi\propto T^4$, which strongly amplifies transverse temperature variations~\cite{Back2000POP,Back2000PRL}. As a result, the intrinsically 2D front shape both delays breakout at the diagnostic plane and feeds back on the energy balance, since wall losses are controlled by the boundary-front evolution at $r=R$.
+While the longitudinal model captures the axial physics and identifies the dominant loss mechanisms, the physical heat front is not planar: radiative losses to the surrounding sleeve cool the tube edge relative to the axis, curving the front and delaying breakout at $r>0$. This curvature is experimentally important because the measured signal is the re-emission intensity, $\Phi\propto T^4$, which strongly amplifies transverse temperature variations~\cite{Back2000POP,Back2000PRL}. As a result, the intrinsically 2D front shape both delays breakout at the diagnostic plane and feeds back on the energy balance, since wall losses are controlled by the boundary-front evolution at $r=R$.
 
 To describe this curvature quantitatively, Hurricane and Hammer~\cite{Hurricane2006} showed that, in the idealized limit of constant opacity, negligible material-energy storage, and a steep heat front, the region behind the front is governed by a Laplace problem. In this formulation, the lossy wall enters through a Robin boundary condition set by the wall albedo (see the SM): only a fraction $\alpha$ of the incident radiative flux is returned to the foam, while $1-\alpha$ is absorbed by the surrounding wall. This partial return cools the tube edge relative to the axis, so the transverse eigenmodes bend the front. For a planar channel these modes are cosines, while in an axisymmetric cylindrical tube the regular radial modes are zeroth-order Bessel modes $J_0$ by symmetry at $r=0$. The cylindrical analogue therefore has the leading-order form~\cite{Courtois2022}
 \begin{equation}\label{eq:HH_cyl}
@@ -143,15 +141,15 @@ With this dynamic-albedo closure, we keep the separation of variables form only 
 
 \begin{figure}[t]
     \centering
-    \begin{minipage}{0.4\columnwidth}
+    \begin{minipage}{0.38\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/diff_albedo.png}
+        \includegraphics[width=\linewidth]{figures/gold_heyney2.png}
         \vspace{-0.8em}
         \centerline{(a)}
     \end{minipage}\hfill
-    \begin{minipage}{0.4\columnwidth}
+    \begin{minipage}{0.38\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/diff_albedo.png}
+        \includegraphics[width=\linewidth]{figures/heyney2.png}
         \vspace{-0.8em}
         \centerline{(b)}
     \end{minipage}
@@ -163,7 +161,7 @@ With this dynamic-albedo closure, we keep the separation of variables form only 
         \vspace{-0.8em}
         \centerline{(c)}
     \end{minipage}
-    \caption{{\color{red}(a) Model comparison with 2D diffusion simulation without hydrodynamics for the low-energy $\mathrm{SiO}_2$ case~\cite{Back2000PRL}, with Au coating, for 3 different times. (b) front curvature comparison with simulation between 4 different sleeves, Au, Cu, Be, and no sleeve (vacuum), showing the coating dependence. (c) Comparison with the French experiment of Courtois \textit{et al.}~\cite{Courtois2024}, measuring front-arrival time versus radius for Au (1.2 mm) and Cu (2 mm) coatings.}}
+    \caption{(a) Model comparison with 2D diffusion simulation without hydrodynamics for the low-energy $\mathrm{SiO}_2$ case~\cite{Back2000PRL}, with Au coating, for 3 different times. (b) front curvature comparison with simulation between 4 different sleeves, Au, Cu, Be, and no sleeve (vacuum), showing the coating dependence. (c) Comparison with the French experiment of Courtois \textit{et al.}~\cite{Courtois2024}, measuring front-arrival time versus radius for Au (1.2 mm) and Cu (2 mm) coatings.}
     \label{fig:simulation_comparison}
 \end{figure}
 
@@ -185,7 +183,7 @@ Figure~\ref{fig:temperature_flux_curvature}(c) shows an additional experimental 
         \vspace{-0.8em}
         \centerline{(a)}
     \end{minipage}\hfill
-    \begin{minipage}{0.28\textwidth}
+    \begin{minipage}{0.26\textwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/back_prl_curve.png}
         \vspace{-0.8em}
@@ -218,9 +216,13 @@ The remaining discrepancies also define the present limits of the framework. Its
 % ============================================================================
 \begin{thebibliography}{99}
 
-\bibitem{Rosen1996}
-M.~D.~Rosen,
-Phys.\ Plasmas \textbf{3}, 1803 (1996).
+\bibitem{AbuShawareb2024}
+H.~Abu-Shawareb \textit{et al.} (Indirect Drive ICF Collaboration),
+Phys.\ Rev.\ Lett.\ \textbf{132}, 065102 (2024).
+
+\bibitem{AbuShawareb2022}
+H.~Abu-Shawareb \textit{et al.} (Indirect Drive ICF Collaboration),
+Phys.\ Rev.\ Lett.\ \textbf{129}, 075001 (2022).
 
 \bibitem{Lindl2004}
 J.~D.~Lindl, P.~Amendt, R.~L.~Berger, S.~G.~Glendinning, and S.~H.~Glenzer,
@@ -236,6 +238,12 @@ T.~Afshar-rad, M.~Desselberger, M.~Dunne, J.~Edwards, J.~M.~Foster, D.~Hoarty,
 M.~W.~Jones, S.~J.~Rose, P.~A.~Rosen, R.~Taylor, and O.~Willi,
 \textit{Supersonic Propagation of an Ionization Front in Low Density Foam Targets Driven by Thermal Radiation},
 Phys.\ Rev.\ Lett.\ \textbf{73}, 74 (1994).
+
+\bibitem{Massen1994}
+J.~Massen, G.~D.~Tsakiris, K.~Eidmann, I.~B.~F\"oldes, Th.~L\"ower, R.~Sigel,
+S.~Witkowski, H.~Nishimura, T.~Endo, H.~Shiraga, M.~Takagi, Y.~Kato, and S.~Nakai,
+\textit{Supersonic radiative heat waves in low-density high-$Z$ material},
+Phys.\ Rev.\ E \textbf{50}, 5130 (1994).
 
 \bibitem{Back2000PRL}
 C.~A.~Back, J.~D.~Bauer, J.~H.~Hammer \textit{et al.},

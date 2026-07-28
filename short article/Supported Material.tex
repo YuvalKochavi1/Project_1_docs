@@ -108,11 +108,11 @@ The heated-foam volume gets smaller, and the effective mean density is updated b
 \end{equation}
 
 \subsection{MFP calculation}
-{\color{red}Because the temperature behind the heat wave drops spatially from $T_s(t)$ at the boundary to zero at the front depth $x_F(t)$ according to the self-similar profile $T(x,t)=T_s(t)(1-x/x_F)^{1/(4+\alpha-\beta)}$, the local mean free path $l_R(x,t)=g T^\alpha(x,t)\rho^{-\lambda-1}$ varies across the wave. Rather than evaluating the mean free path solely at the boundary temperature $T_s$, we determine the effective bulk Rosseland mean free path $\lambda_R(t)$ by integrating the optical depth across the heated region up to $0.9x_F(t)$ (excluding the steep wave tip):
+Because the temperature behind the heat wave drops spatially from $T_s(t)$ at the boundary to zero at the front depth $x_F(t)$ according to the self-similar profile $T(x,t)=T_s(t)(1-x/x_F)^{1/(4+\alpha-\beta)}$, the local mean free path $l_R(x,t)=g T^\alpha(x,t)\rho^{-\lambda-1}$ varies across the wave. Rather than evaluating the mean free path solely at the boundary temperature $T_s$, we determine the effective bulk Rosseland mean free path $\lambda_R(t)$ by integrating the optical depth across the heated region up to $0.9x_F(t)$ (excluding the steep wave tip):
 \begin{equation}
     \tau(t) = \int_0^{0.9 x_F(t)} \kappa_R(x,t)\rho\,dx, \quad \lambda_R(t) = \frac{0.9\,x_F(t)}{\tau(t)}.
 \end{equation}
-This spatially averaged $\lambda_R(t)$ is the mean free path used in $\lambda_{\mathrm{eff}}(t)$ and throughout the model calculations.}
+This spatially averaged $\lambda_R(t)$ is the mean free path used in $\lambda_{\mathrm{eff}}(t)$ and throughout the model calculations.
 
 
 
