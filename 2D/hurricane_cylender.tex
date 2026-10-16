@@ -1,763 +1,128 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage{grffile}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{bm}
-
-\title{Bent Marshak Waves - Cylindrical 2D Model}
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{microtype}
+\numberwithin{equation}{section}
+\title{Bent Marshak Waves: Axisymmetric Cylindrical Model\\\large Eigenvalues, Longitudinal Calibration, and Front Curvature}
 \author{Yuval Kochavi}
-\date{February 2026}
-
+\date{Updated October 2026}
 \begin{document}
-
 \maketitle
 
-\section{Physical Setup and Geometry}
+\section{Physical setup and assumptions}
+We consider an optically thick, stationary foam within a cylindrical sleeve of radius $R$. The axial direction is $z$, the radial direction is $r\in[0,R]$, and axial symmetry implies $\partial_\theta=0$. A radiation-temperature drive $T_s(t)$ is imposed at $z=0$. We take constant foam density $\rho$ and constant Rosseland opacity $\kappa$; the wall has albedo $a$. Let
+\begin{equation} U(z,r,t)=T^4(z,r,t),\qquad U_s(t)=T_s^4(t).\end{equation}
+As in the quasi-steady region of Hurricane and Hammer's \emph{Bent Marshak Waves} (2006), the temperature field is treated as harmonic behind a steep front. This is not a full time-dependent diffusion solution, and corrections to the front position should be distinguished from a self-consistent moving-boundary solution.
 
-We consider radiative heat transport in an optically thick medium inside a cylindrical tube.
-The longitudinal coordinate is denoted by $z$, and the transverse coordinate by the radial
-coordinate $r$. We assume full axisymmetry:
-\[
-\frac{\partial}{\partial \theta} = 0.
-\]
-
-The quantity of interest is
-\[
-U(z,r,t) \equiv T^4(z,r,t),
-\]
-which satisfies a diffusion--type equation under the assumptions of \textbf{constant opacity} and negligible hydrodynamic motion.
-
----
-
-\section{Governing Equation}
-
-In the steady diffusion region behind the Marshak front, the radiation energy density
-satisfies Laplace's equation. In axisymmetric cylindrical coordinates this reads:
+\section{Governing equation and cylindrical modes}
+The diffusion approximation gives
 \begin{equation}
-\frac{\partial^2 U}{\partial z^2}
-+
-\frac{1}{r}\frac{\partial}{\partial r}
-\left(
-r \frac{\partial U}{\partial r}
-\right)
-= 0.
-\label{eq::laplace}
+\rho\frac{\partial e}{\partial t}=\frac43\nabla\!\cdot\!\left[\frac{\sigma}{\rho\kappa}\nabla U\right],
 \end{equation}
+where $e$ is \emph{specific} internal energy (energy per mass) and $\sigma$ is the Stefan--Boltzmann constant in the paper's units. Assuming $\partial_t e$ is negligible away from the front, and constant $\rho,\kappa$,
+\begin{equation}\boxed{\partial_z^2 U+\frac1r\partial_r(r\partial_r U)=0.}\end{equation}
+With $U=Z(z)F(r)$, separation yields
+\begin{equation}Z''-k^2 Z=0,\qquad F''+\frac1rF'+k^2F=0.\end{equation}
+The finite radial solution is $F(r)=J_0(kr)$; $Y_0(kr)$ is singular on the axis. The full modal solution is
+\begin{equation}\boxed{U(z,r,t)=\sum_{n=0}^\infty J_0(k_n r)\left[A_n(t)e^{k_nz}+B_n(t)e^{-k_nz}\right].}\label{eq:general}\end{equation}
 
----
+\section{Wall boundary condition and eigenvalues}
+The axis is regular, $\partial_rU(0,z,t)=0$. The outward radiative loss at $r=R$ gives the Robin condition
+\begin{equation}\left.\partial_r U\right|_{R}=-hU(R,z,t),\qquad h=\frac34\rho\kappa(1-a).\end{equation}
+Introduce $\varepsilon=hR=\tfrac34\rho\kappa R(1-a)$ and $\lambda_n=k_nR$. Since $J_0'(x)=-J_1(x)$, each mode obeys
+\begin{equation}\boxed{\lambda_nJ_1(\lambda_n)=\varepsilon J_0(\lambda_n),\qquad k_n=\lambda_n/R.}\label{eq:eigen}\end{equation}
+This replaces the planar relation $\tan(k_nL)=\varepsilon/(k_nL)$. For $\varepsilon>0$, the roots $\lambda_n>0$ are ordered increasingly; $\lambda_0\to0$ as $\varepsilon\to0$.
 
-\section{Separation of Variables}
-
-We seek separable solutions of the form
-\[
-U(z,r) = Z(z) R(r).
-\]
-
-Substituting into Eq.~\eqref{eq::laplace} and dividing by $ZR$ yields
-\[
-\frac{1}{Z}\frac{d^2 Z}{dz^2}
-+
-\frac{1}{R r}\frac{d}{dr}
-\left(
-r \frac{dR}{dr}
-\right)
-= 0.
-\]
-
-Setting both terms equal to a separation constant $-\kappa^2$ gives
-\begin{align}
-\frac{d^2 Z}{dz^2} - \kappa^2 Z &= 0, \\
-\frac{1}{r}\frac{d}{dr}
-\left(
-r \frac{dR}{dr}
-\right)
-+ \kappa^2 R &= 0.
+\subsection{Small-wall-loss eigenvalue expansions}
+The Bessel series are
+\begin{align}J_0(x)&=1-\frac{x^2}{4}+\frac{x^4}{64}+O(x^6),\\
+J_1(x)&=\frac{x}{2}-\frac{x^3}{16}+\frac{x^5}{384}+O(x^7).
 \end{align}
+For the fundamental mode,
+\begin{equation}\varepsilon=\frac{\lambda_0J_1(\lambda_0)}{J_0(\lambda_0)}=\frac{\lambda_0^2}{2}+\frac{\lambda_0^4}{16}+\frac{\lambda_0^6}{96}+O(\lambda_0^8),\end{equation}
+so
+\begin{equation}\boxed{\lambda_0=\sqrt{2\varepsilon}\left(1-\frac{\varepsilon}{8}+\frac{5\varepsilon^2}{384}+O(\varepsilon^3)\right).}\end{equation}
+For $n\ge1$, let $\alpha_n=j_{1,n}$ be the $n$-th positive zero of $J_1$ and write $\lambda_n=\alpha_n+\delta_n$. Expanding \eqref{eq:eigen} around $\alpha_n$ and using $J_1'(\alpha_n)=J_0(\alpha_n)$ gives
+\begin{equation}\boxed{\lambda_n=\alpha_n+\frac{\varepsilon}{\alpha_n}-\frac{\varepsilon^2}{2\alpha_n^3}+O(\varepsilon^3),\quad n\ge1.}\end{equation}
+The first positive zeros are $\alpha_1\simeq3.831706$, $\alpha_2\simeq7.015587$, $\alpha_3\simeq10.173468$.
 
----
+\subsection{Weighted orthogonality and exact source coefficients}
+Define $\phi_n(r)=J_0(k_nr)$. The eigenfunctions are orthogonal with cylindrical weight $r$:
+\begin{equation}\int_0^R r\phi_n(r)\phi_m(r)\,dr=N_n\delta_{nm},\qquad N_n=\frac{R^2}{2}\left[J_0^2(\lambda_n)+J_1^2(\lambda_n)\right].\label{eq:norm}\end{equation}
+The simpler norm using only $J_1$ applies to Dirichlet zeros of $J_0$ and must \emph{not} be used for the present Robin eigenvalues. For a radially uniform boundary $U(0,r,t)=U_s(t)$, let $1=\sum_{n\ge0}b_n\phi_n(r)$. Then
+\begin{equation}\boxed{b_n=\frac{2J_1(\lambda_n)}{\lambda_n[J_0^2(\lambda_n)+J_1^2(\lambda_n)]}.}\label{eq:bn}\end{equation}
+For $\varepsilon\ll1$, $b_0=1+\varepsilon/4+O(\varepsilon^2)$, while $b_{n\ge1}=O(\varepsilon)$. The source cannot be represented \emph{exactly} by the fundamental mode alone for nonzero wall loss.
 
-\section{Radial Eigenfunctions}
+\section{Longitudinal conditions and quasi-steady temperature profile}
+The source condition is $U(0,r,t)=U_s(t)$. First solve an auxiliary \emph{flat-front} boundary problem with a reference plane $z=\ell(t)$ and $U(\ell,r,t)=0$. Modal separation and \eqref{eq:bn} then give
+\begin{equation}\boxed{\frac{U(z,r,t)}{U_s(t)}=\sum_{n=0}^\infty b_nJ_0(k_nr)\frac{\sinh[k_n(\ell(t)-z)]}{\sinh[k_n\ell(t)]}.}\label{eq:field}\end{equation}
+This field meets both longitudinal boundary conditions (up to the usual convergence interpretation at the source--wall corner). The leading-mode approximation is
+\begin{equation}\frac{U}{U_s}\simeq b_0J_0(k_0r)\frac{\sinh[k_0(\ell-z)]}{\sinh(k_0\ell)}.\label{eq:single}\end{equation}
+The planar-front approximation is an intermediate computational closure: it should not be mistaken for an exact solution satisfying $U(z_F(r,t),r,t)=0$ at a curved front. Terms from the front displacement enter upon Taylor-expanding $U(z_F,r,t)$ about $z=\ell$.
 
-The radial equation is Bessel's equation of order zero. Its regular solution at $r=0$ is
-\[
-R(r) = J_0(\kappa r).
-\]
+\section{Illustrative lowest-mode front evolution}
+For a steep front, the approximate axial energy balance is
+\begin{equation}\rho e\,\partial_t z_F=-\frac{4\sigma}{3\rho\kappa}\left.\partial_zU\right|_{\mathrm{front}},\label{eq:stefan}\end{equation}
+where $e$ is the specific energy required to heat initially cold foam. Projecting the lowest-mode gradient of \eqref{eq:single} onto the lowest mode, and taking the \emph{model} front $z_F^{\rm mod}(r,t)=c_0(t)J_0(k_0r)$ with the auxiliary plane $\ell=c_0$, yields
+\begin{equation}\dot c_0=\frac{D_M(t)b_0k_0}{2\sinh(k_0c_0)},\qquad D_M(t)=\frac{8\sigma U_s(t)}{3e\rho^2\kappa}.\label{eq:c0ode}\end{equation}
+This is a leading-mode approximation; it is not an exact pointwise moving-front solution. With $c_0(0)=0$, its integral is
+\begin{equation}\boxed{c_0(t)=\frac1{k_0}\operatorname{arcosh}\!\left[1+\frac{b_0k_0^2}{2}\int_0^t D_M(s)\,ds\right].}\label{eq:c0}\end{equation}
+For a constant drive, $D_M$ is constant and the integral equals $D_Mt$. At leading order $b_0\simeq1$; retaining $b_0$ gives the source-normalization correction, $b_0=1+\varepsilon/4+O(\varepsilon^2)$, not an independently established $1+\varepsilon/2$ correction. Higher-order consistency requires retaining higher radial modes and curved-front terms.
 
-The general axisymmetric solution therefore takes the form
-\begin{equation}
-U(z,r) =
-\sum_{n\ge 0}
-J_0(\kappa_n r)
-\left[
-A_n(t)e^{\kappa_n z}
-+
-B_n(t)e^{-\kappa_n z}
-\right].
-\label{eq::general_solution}
-\end{equation}
+\section{Calibration to the correct on-axis longitudinal position}
+The front may be predicted inaccurately along $z$ even if the transverse \emph{bending} is useful. To avoid confusing the correct on-axis position with the modal estimate, define
+\begin{equation}Z_F(t)=\text{correct or externally supplied on-axis front position},\qquad
+z_F^{\rm mod}(r,t)=\sum_{n=0}^\infty c_n(t)J_0(k_nr).\end{equation}
+As $J_0(0)=1$, $z_F^{\rm mod}(0,t)=\sum_nc_n(t)$. A \emph{pure longitudinal correction}, preserving the original transverse displacement relative to the axis, is
+\begin{equation}\boxed{\widetilde z_F(r,t)=Z_F(t)+\sum_{n=0}^\infty c_n(t)\left[J_0(k_nr)-1\right].}\label{eq:corrected}\end{equation}
+Indeed $\widetilde z_F(0,t)=Z_F(t)$. This is equivalent to translating the model front by $Z_F-\sum_nc_n$. It is a geometric calibration, not a new solution of \eqref{eq:stefan} or of the complete nonlinear boundary-value problem. It also does not, by itself, correct the underlying temperature field.
 
----
-
-\section{Boundary Conditions}
-
-\subsection{Axis Regularity}
-
-Regularity at the symmetry axis requires
-\[
-\left.\frac{\partial U}{\partial r}\right|_{r=0} = 0.
-\]
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.5\linewidth]{bessel_functions.png}
-    \caption{The first three Bessel functions of the first kind, $J_0$, $J_1$, and $J_2$.}
-    \label{fig:bessel_functions}
-\end{figure}
-
-For that reason, we want the r-spatial part to be at its peak at r=0, and not 0, which is only satisfied by $J_0(\kappa r)$.
-
-\subsection{Radiative Wall Losses}
-
-At the cylindrical wall $r=R$, radiative energy is lost according to a Marshak-type
-Robin boundary condition:
-\begin{equation}
-\left.
-\frac{\partial U}{\partial r}
-\right|_{r=R}
-=
-\frac{3}{4}\rho\kappa_{opacity}(a-1)\,
-U(R),
-\label{eq::robin_bc}
-\end{equation}
-where $a$ is the wall albedo.
-
-Using the Bessel function identity (Eq.~\ref{eq::bessel_diff} and Eq.~\ref{eq::bessel_prop})
-\[
-\frac{d}{dr}J_0(\kappa r) = -\kappa J_1(\kappa r),
-\]
-the boundary condition yields the eigenvalue equation
-\begin{equation}
-\boxed{
-\kappa_n R J_1(\kappa_n R) = \varepsilon J_0(\kappa_n R),
-}
-\label{eq::eigenvalue}
-\end{equation}
-definition of small parameter:
-\[
-    \varepsilon \equiv \frac{3}{4}(1-a)\tau
-\]
-where $\tau = \rho\kappa_{opacity} R$ is the optical depth.
-
-Solutions are intersections of: $\kappa R J_1(\kappa R) = \varepsilon J_0(\kappa R)$. 
-with small corrections.
-
-This equation determines the discrete spectrum $\{\kappa_n\}$.
-
-\paragraph{Small-loss limit.}
-For $\varepsilon \ll 1$, we can express the the zeroth and first bessel functions using their series representation:
-\[
-J_0(\kappa x) \approx 1 - \frac{ (\kappa x)^2}{4}, \
-J_1(\kappa x) \approx \frac{(\kappa x)}{2} - \frac{(\kappa x)^3}{16}.
-\]
-Substituting into Eq.~\eqref{eq::eigenvalue} we get:
-\[
-\kappa R \left(\frac{\kappa R}{2} - \frac{(\kappa R)^3}{16}\right) = \varepsilon \left(1 - \frac{ (\kappa R)^2}{4}\right).
-\]
-or leading order in $\kappa R$,
-\[
-\frac{(\kappa R)^2}{2} \approx \varepsilon,
-\implies \kappa_0 R \approx \sqrt{2\varepsilon}.
-\]
-
----
-
-\section{Marshak Front Representation}
-
-The Marshak front position is expanded in the same radial eigenfunctions:
-\begin{equation}
-z_F(r,t) =
-\sum_{n\ge 0}
-c_n(t)\,J_0(\kappa_n r),
-\label{eq::front_expansion}
-\end{equation}
-where $\{\kappa_n\}$ are determined by the Robin wall condition
-$\kappa R J_1(\kappa R)=\varepsilon J_0(\kappa R)$.
-
-At leading order, only the lowest mode is retained:
-\begin{equation}
-z_F(r,t) \approx c_0(t)\,J_0(\kappa_0 r).
-\label{eq::leading_front}
-\end{equation}
-
-\subsection*{Front Evolution Equation: explicit leading-mode reduction}
-
-We now derive the ODE for $c_0(t)$ from the front energy balance. Following the
-Hurricane--Hammer steep-front closure, the front speed is proportional to the
-longitudinal radiative flux at the front:
-\begin{equation}
-\rho e\,\dot{z}_F
-=
--\frac{4\sigma}{3\kappa_R \rho}
-\left.
-\frac{\partial U}{\partial z}
-\right|_{z=z_F}.
-\label{eq::front_speed}
-\end{equation}
-Here $\kappa_R$ is the (Rosseland) opacity and $\sigma$ is the Stefan--Boltzmann constant;
-$e$ is an effective energy-per-volume parameter for heating the material.
-
-\paragraph{Step 1: leading eigenmode form of $U(z,r,t)$.}
-From the separated solution (Eq.~\eqref{eq::general_solution}) we retain only the lowest
-radial eigenfunction:
-\begin{equation}
-U(z,r,t)\approx J_0(\kappa_0 r)\,\Big(A(t)e^{\kappa_0 z}+B(t)e^{-\kappa_0 z}\Big).
-\label{eq::U_leading_exp}
-\end{equation}
-
-We impose two longitudinal conditions (as in the planar derivation):
-
-\subsection{Source boundary at $z=0$}
-
-From \eqref{eq::general_solution} at $z=0$:
-\begin{equation}
-T_s^4
-=
-\sum_{n=0}^{\infty} \big(A_n+B_n\big)\,J_0(k_n r).
-\label{eq:source_expand}
-\end{equation}
-Using orthogonality of $J_0(k_n r)$ on $[0,R]$ with weight $r$, this implies that to leading order only the fundamental mode carries the constant function:
-\begin{equation}
-A_0+B_0 = T_s^4 + O(\epsilon),\qquad
-A_{n\ge 1}+B_{n\ge 1}=O(\epsilon).
-\label{eq::AnBn_source}
-\end{equation}
-(Exactly as in the planar derivation: the constant-in-$r$ boundary drives primarily the lowest mode.)
-
-\subsection{Front boundary condition: weak-curvature implementation (full derivation)}
-
-The bent Marshak front is the moving surface
-\[
-z=z_F(r,t),
-\]
-at which the temperature drops sharply. In the steep-front approximation we impose
-\[
-U\big(z_F(r,t),r,t\big)\approx 0.
-\]
-Because the wall losses are assumed weak (high albedo), the curvature of the front is small.
-We therefore expand the front position about a mean (or centerline) position $c_0(t)$:
-\begin{equation}
-z_F(r,t)=c_0(t)+\delta z_F(r,t),
-\qquad \delta z_F=O(\epsilon).
-\label{eq:zF_expand_c0}
-\end{equation}
-
-\paragraph{Taylor expansion of the front boundary condition.}
-Expand $U(z,r,t)$ about $z=c_0(t)$:
-\begin{align}
-U\big(z_F(r,t),r,t\big)
-&=
-U\big(c_0+\delta z_F,r,t\big) \nonumber\\
-&=
-U(c_0,r,t)
-+
-\delta z_F(r,t)\,\partial_z U(c_0,r,t)
-+\frac{1}{2}\delta z_F(r,t)^2\,\partial_z^2 U(c_0,r,t)
-+\cdots.
-\label{eq:taylor_front}
+\subsection{On-axis curvature and curvature radius}
+For the meridional curve $z=\widetilde z_F(r,t)$, the unsigned curvature is
+\begin{equation}\mathcal K_m(r,t)=\frac{|\partial_r^2\widetilde z_F|}{\left[1+(\partial_r\widetilde z_F)^2\right]^{3/2}}.\end{equation}
+By axisymmetry, $\partial_r\widetilde z_F(0,t)=0$. Using
+\begin{equation}J_0(k_nr)=1-\frac{k_n^2r^2}{4}+O(r^4),\end{equation}
+one obtains (assuming sufficient convergence to differentiate the modal series)
+\begin{align}\widetilde z_F(r,t)&=Z_F(t)-\frac{r^2}{4R^2}\sum_{n\ge0}c_n(t)\lambda_n^2+O(r^4),\\
+\left.\partial_r^2\widetilde z_F\right|_{r=0}&=-\frac1{2R^2}\sum_{n\ge0}c_n(t)\lambda_n^2.
 \end{align}
-Imposing $U(z_F,r,t)\approx 0$ and retaining only the leading term in the weak-curvature limit gives
-\begin{equation}
-\boxed{
-U(c_0,r,t)=0
-\qquad\text{(leading order in curvature).}
-}
-\label{eq::front_leadingBC_full}
-\end{equation}
-Higher-order corrections can be incorporated by keeping the $\delta z_F\,\partial_z U$ term; here we focus on the leading-order closure.
+Therefore the \emph{on-axis meridional curvature radius} is
+\begin{equation}\boxed{\mathcal R_c(t)=\frac{2R^2}{\left|\sum_{n=0}^\infty c_n(t)\lambda_n^2\right|}.}\label{eq:radius}\end{equation}
+At the axis, the two principal curvatures of the smooth surface of revolution agree in magnitude; away from the axis the meridional and azimuthal principal curvatures generally differ. Most importantly, \eqref{eq:radius} is \emph{independent} of $Z_F(t)$ for an additive longitudinal correction.
 
-\paragraph{modal form of the solution in the diffusion region.}
-In the quasi-steady diffusion region behind the front, $U$ satisfies Laplace's equation and admits the separated expansion
-\begin{equation}
-U(z,r,t)=\sum_{n=0}^{\infty} J_0(k_n r)\Big(A_n(t)e^{k_n z}+B_n(t)e^{-k_n z}\Big).
-\label{eq::U_series_full}
-\end{equation}
+\subsection{Fundamental mode and alternative rescaling}
+Keeping only $n=0$ in \eqref{eq:corrected},
+\begin{equation}\widetilde z_F(r,t)\simeq Z_F(t)+c_0(t)[J_0(k_0r)-1],\qquad
+\boxed{\mathcal R_c(t)\simeq\frac{2R^2}{|c_0(t)|\lambda_0^2}\simeq\frac{R^2}{\varepsilon|c_0(t)|}.}\label{eq:radius0}\end{equation}
+If instead one decides to rescale the \emph{entire fundamental-mode amplitude} to match $Z_F$, the different assumption is
+\begin{equation}\widetilde z_F^{\rm scale}(r,t)=Z_F(t)J_0(k_0r),\qquad
+\boxed{\mathcal R_c^{\rm scale}(t)=\frac{2R^2}{|Z_F(t)|\lambda_0^2}\simeq\frac{R^2}{\varepsilon|Z_F(t)|}.}\end{equation}
+The two formulas are \emph{not interchangeable}: translation preserves curvature; amplitude rescaling changes it. A more general amplitude adjustment $A(t)$ multiplying the bracketed sum in \eqref{eq:corrected} scales the on-axis curvature by $|A(t)|$.
 
-\paragraph{impose the leading-order front condition mode-by-mode.}
-Insert $z=c_0$ into \eqref{eq::U_series_full} and enforce \eqref{eq::front_leadingBC_full}:
-\[
-0=U(c_0,r,t)=\sum_{n=0}^{\infty} J_0(k_n r)\Big(A_n e^{k_n c_0}+B_n e^{-k_n c_0}\Big).
-\]
-Since the set $\{J_0(k_n r)\}$ forms an orthogonal basis on $0\le r\le R$ (with weight $r$), the coefficient of each mode must vanish:
-\begin{equation}
-\boxed{
-A_n(t)e^{k_n c_0(t)}+B_n(t)e^{-k_n c_0(t)}=0
-\qquad \forall n.
-}
-\label{eq:front_mode_condition}
-\end{equation}
-This immediately gives
-\begin{equation}
-B_n(t)=-A_n(t)e^{2k_n c_0(t)}.
-\label{eq:Bn_in_terms_An}
-\end{equation}
+\section{Physical interpretation and limitations}
+The cylindrical eigenfunctions and Robin eigenvalues determine the radial dependence associated with wall losses. The leading eigenvalue $k_0R\sim\sqrt{2\varepsilon}$ produces the first-order reduction of axial penetration toward the sleeve. The auxiliary solution \eqref{eq:field} and the illustrative evolution \eqref{eq:c0} approximate the nonlinear moving-front problem; higher-mode coupling and the actual curved-front boundary condition should be solved to obtain a controlled higher-order correction. The calibration \eqref{eq:corrected} is appropriate when a separate model or measurement supplies a more reliable \emph{on-axis} trajectory and one wants to retain the Bessel-predicted bending.
 
-\paragraph{rewrite the longitudinal dependence in hyperbolic-sine form.}
-Start with the generic $z$-dependence of mode $n$:
-\[
-A_n e^{k_n z}+B_n e^{-k_n z}.
-\]
-Substitute \eqref{eq:Bn_in_terms_An}:
+\section{Selected Bessel identities}
 \begin{align}
-A_n e^{k_n z}+B_n e^{-k_n z}
-&=A_n e^{k_n z}-A_n e^{2k_n c_0}e^{-k_n z}\nonumber\\
-&=A_n\left(e^{k_n z}-e^{k_n(2c_0-z)}\right)\nonumber\\
-&=A_n e^{k_n c_0}\left(e^{k_n(z-c_0)}-e^{-k_n(z-c_0)}\right)\nonumber\\
-&=2A_n e^{k_n c_0}\sinh\!\big(k_n(z-c_0)\big).
-\label{eq:AB_to_sinh_step}
+J_0'(x)&=-J_1(x), &\frac{d}{dx}[x^\nu J_\nu(x)]&=x^\nu J_{\nu-1}(x),\\
+J_\nu'(x)&=\tfrac12[J_{\nu-1}(x)-J_{\nu+1}(x)], &J_0(x)&=1-\frac{x^2}{4}+O(x^4).
 \end{align}
-It is convenient to factor out a normalization $\sinh(k_n c_0)$ so that the remaining coefficient is dimensionless and (later) directly tied to the source boundary condition. Define a new amplitude $\widetilde A_n(t)$ by
-\begin{equation}
-\widetilde A_n(t)\equiv 2A_n(t)e^{k_n c_0(t)}\,\sinh\!\big(k_n c_0(t)\big).
-\label{eq:Atilde_def}
-\end{equation}
-Then \eqref{eq:AB_to_sinh_step} becomes the compact ``sinh-form''
-\begin{equation}
-\boxed{
-A_n e^{k_n z}+B_n e^{-k_n z}
-=
-\widetilde A_n(t)\,
-\frac{\sinh\!\big(k_n(z-c_0(t))\big)}{\sinh\!\big(k_n c_0(t)\big)}.
-}
-\label{eq:AB_sinh_form_full}
-\end{equation}
-This expression automatically satisfies the front condition because at $z=c_0$ the numerator vanishes.
+The norm \eqref{eq:norm} is the appropriate Robin-boundary orthogonality formula for this problem.
 
-\paragraph{insert back into the full field expansion.}
-Substituting \eqref{eq:AB_sinh_form_full} into \eqref{eq::U_series_full} yields
-\begin{equation}
-U(z,r,t)=
-\sum_{n=0}^{\infty}
-J_0(k_n r)\,
-\widetilde A_n(t)\,
-\frac{\sinh\!\big(k_n(z-c_0(t))\big)}{\sinh\!\big(k_n c_0(t)\big)}.
-\label{eq::U_sinh_series}
-\end{equation}
+\section{Wall albedo: definition versus inference}
+The wall albedo is the fraction of incident radiative flux re-emitted or reflected back into the foam, in the effective boundary model:
+\begin{equation}a=\frac{F_{\rm returned}}{F_{\rm incident}},\qquad 0\le a\le1,\qquad
+F_{\rm net\ loss}=(1-a)F_{\rm incident}.\end{equation}
+Consequently the characteristic Robin parameter determines only the combination
+\begin{equation}1-a=\frac{4\varepsilon}{3\rho\kappa R}.\end{equation}
+Measured outgoing temperatures and an independently estimated wall heating rate are not, by themselves, sufficient to justify an algebraic ratio such as $(F_0+\dot E_w/2)/(F_0-\dot E_w/2)$ for albedo. A detector/transport energy balance defining which flux is incident and returned is required before inferring $a(t)$. If $a$ is time dependent, the eigenbasis is also time dependent and the constant-$\varepsilon$ modal derivation needs revision.
 
-\paragraph{normalize by the source temperature and define dimensionless amplitudes.}
-Let $T_s$ be the imposed source temperature (for constant drive) so that the natural scale is $T_s^4$.
-Define dimensionless coefficients
-\begin{equation}
-\alpha_n(t)\equiv -\frac{\widetilde A_n(t)}{T_s^4}.
-\label{eq::alpha_def}
-\end{equation}
-Then \eqref{eq::U_sinh_series} becomes
-\begin{equation}
-\boxed{
-\frac{U(z,r,t)}{T_s^4}
-=
--\sum_{n=0}^{\infty}\alpha_n(t)\,J_0(k_n r)\,
-\frac{\sinh\!\big(k_n(z-c_0(t))\big)}{\sinh\!\big(k_n c_0(t)\big)}.
-}
-\label{eq::U_final_form_full}
-\end{equation}
-This is exactly the cylindrical analogue of the paper's planar expression (their Eq.~(27)), with $\cos(\cdot)$ replaced by $J_0(\cdot)$ and transverse eigenvalues set by the Robin condition.
-
-\paragraph{how $\alpha_n$ are fixed by the source boundary condition.}
-At $z=0$ the boundary condition is $U(0,r,t)=T_s^4$ (constant in $r$ for a uniform drive). Plugging $z=0$ into \eqref{eq::U_final_form_full} gives
-\[
-1
-=
-\frac{U(0,r,t)}{T_s^4}
-=
--\sum_{n=0}^{\infty}\alpha_n\,J_0(k_n r)\,
-\frac{\sinh\!\big(-k_n c_0\big)}{\sinh\!\big(k_n c_0\big)}
-=
-\sum_{n=0}^{\infty}\alpha_n\,J_0(k_n r),
-\]
-since $\sinh(-x)=-\sinh(x)$. Therefore
-\begin{equation}
-\boxed{
-1=\sum_{n=0}^{\infty}\alpha_n\,J_0(k_n r)
-\qquad (0\le r\le R),
-}
-\label{eq::alpha_source_match}
-\end{equation}
-i.e.\ the constant function $1$ is expanded in the $J_0(k_n r)$ basis. This uniquely determines the $\alpha_n$ via Bessel orthogonality (with weight $r$).
-In the high-albedo limit, the lowest mode is nearly uniform, so
-\[
-\alpha_0=1,\qquad \alpha_{n\ge 1}=O(\epsilon),
-\]
-matching the weak-loss ordering used in the perturbation theory.
-Therefore, to leading order we can set $\alpha_0=1$ and $\alpha_{n\ge 1}=0$, giving the leading-mode approximation
-\begin{equation}
-\boxed{
-\frac{U(z,r,t)}{T_s^4} \approx -\alpha_0 J_0(k_0 r) \frac{\sinh(k_0(z-c_0(t)))}{\sinh(k_0 c_0(t))} = J_0(k_0 r) \frac{\sinh(k_0(c_0(t)-z))}{\sinh(k_0 c_0(t))}.
-\label{eq::U_hyperbolic}
-}
-\end{equation}
-
-\paragraph{Step 2: compute the front gradient $\partial_z U|_{z=z_F}$.}
-Differentiate \eqref{eq::U_hyperbolic} with respect to $z$:
-\begin{align*}
-\partial_z U(z,r,t)\approx
-U_s(t)\,J_0(\kappa_0 r)\;
-\frac{\partial}{\partial z}
-\left[
-\frac{\sinh(\kappa_0(c_0-z))}{\sinh(\kappa_0 c_0)}
-\right]
-=\\
--U_s(t)\,J_0(\kappa_0 r)\;
-\frac{\kappa_0\cosh(\kappa_0(c_0-z))}{\sinh(\kappa_0 c_0)}.
-\end{align*}
-Evaluating at the front $z=c_0(t)$ gives
-\begin{equation}
-\left.\partial_z U\right|_{z=c_0(t)}
-\approx
--U_s(t)\,J_0(\kappa_0 r)\;
-\frac{\kappa_0}{\sinh\!\big(\kappa_0 c_0(t)\big)}.
-\label{eq::dUdz_front}
-\end{equation}
-
-\paragraph{Step 3: project the front balance onto the lowest eigenmode.}
-Equation \eqref{eq::front_speed} is a \emph{pointwise} statement along the front.
-In the leading-mode truncation we enforce it in a weighted (Galerkin) sense by
-multiplying both sides by $J_0(\kappa_0 r)$ and integrating over the cross section
-with cylindrical weight $r\,dr$:
-\begin{equation}
-\int_0^R \rho e\,\dot z_F(r,t)\,J_0(\kappa_0 r)\,r\,dr
-=
--\frac{4\sigma}{3\kappa_R \rho}
-\int_0^R
-\left.\partial_z U\right|_{z=z_F}\,
-J_0(\kappa_0 r)\,r\,dr.
-\label{eq::galerkin}
-\end{equation}
-
-Using $z_F(r,t)\approx c_0(t)J_0(\kappa_0 r)$, the left-hand side becomes
-\[
-\int_0^R \rho e\,\dot c_0(t)\,J_0^2(\kappa_0 r)\,r\,dr
-=
-\rho e\,\dot c_0(t)\,\mathcal N_0,
-\qquad
-\mathcal N_0 \equiv \int_0^R J_0^2(\kappa_0 r)\,r\,dr.
-\]
-
-Using \eqref{eq::dUdz_front}, the right-hand side becomes
-\[
--\frac{4\sigma}{3\kappa_R \rho}
-\int_0^R
-\left(
--U_s(t)\,J_0(\kappa_0 r)\frac{\kappa_0}{\sinh(\kappa_0 c_0)}
-\right)J_0(\kappa_0 r)\,r\,dr
-=
-\frac{4\sigma}{3\kappa_R \rho}
-\frac{U_s(t)\kappa_0}{\sinh(\kappa_0 c_0)}\;\mathcal N_0.
-\]
-
-Canceling the common factor $\mathcal N_0$ yields the closed ODE
-\begin{equation}
-e\,\dot c_0(t)=
-\frac{4\sigma}{3\kappa_R \rho^2}\;
-\frac{U_s(t)\kappa_0}{\sinh\!\big(\kappa_0 c_0(t)\big)}.
-\label{eq::c0_ode_raw}
-\end{equation}
-
-\paragraph{Step 4: define an effective diffusion constant $D_M$.}
-For a constant drive $U_s(t)=U_0$ (or for slow variation treated quasi-statically),
-we define the effective constant
-\begin{equation}
-D_M \equiv
-\frac{8\sigma U_0}{3e\,\kappa_R \rho^2},
-\label{eq::D_def}
-\end{equation}
-so that \eqref{eq::c0_ode_raw} becomes
-\begin{equation}
-\dot c_0(t)=
-\frac{D_M \kappa_0}{2}\,
-\frac{1}{\sinh\!\big(\kappa_0 c_0(t)\big)}.
-\label{eq::c0_ode}
-\end{equation}
-
-\subsection*{Solution for the Isotropic Mode: integration to $\cosh^{-1}$}
-
-Multiply \eqref{eq::c0_ode} by $\kappa_0\sinh(\kappa_0 c_0)$:
-\[
-\kappa_0\sinh(\kappa_0 c_0)\,\dot c_0
-=
-\frac{D_M \kappa_0^2}{2}.
-\]
-Recognizing the left-hand side as a time derivative,
-\[
-\frac{d}{dt}\cosh(\kappa_0 c_0)
-=
-\kappa_0\sinh(\kappa_0 c_0)\,\dot c_0,
-\]
-we obtain
-\begin{equation}
-\frac{d}{dt}\cosh(\kappa_0 c_0)=\frac{D_M \kappa_0^2}{2}.
-\end{equation}
-Integrating from $t=0$ with $c_0(0)=0$ gives
-\[
-\cosh(\kappa_0 c_0(t)) = 1 + \frac{D_M \kappa_0^2 t}{2}.
-\]
-Therefore,
-\begin{equation}
-\boxed{
-c_0(t)
-=
-\frac{1}{\kappa_0}
-\cosh^{-1}
-\left(
-1 + \frac{D_M \kappa_0^2\,t}{2}
-\right).
-}
-\label{eq::c0_solution}
-\end{equation}
-
-Finally, the leading-order front shape is
-\begin{equation}
-\boxed{
-z_F(r,t)
-\approx c_0(t)\,J_0(\kappa_0 r)
-=
-\frac{1}{\kappa_0}
-\cosh^{-1}
-\left(
-1 + \frac{D_M \kappa_0^2\,t}{2}
-\right)
-J_0(\kappa_0 r).
-}
-\end{equation}
-
-One can make the derivation even better if defining $D = D_M (1+\frac{\varepsilon}{2})$ (higher order accuracy):
-\begin{equation}
-\boxed{
-z_F(r,t)
-\approx c_0(t)\,J_0(\kappa_0 r)
-=
-\frac{1}{\kappa_0}
-\cosh^{-1}
-\left(
-1 + \frac{D \kappa_0^2\,t}{2}
-\right)
-J_0(\kappa_0 r).
-}
-\end{equation}
-
-\subsection*{Time-dependent drive $U_s(t)$ (non-constant boundary temperature)}
-
-So far, the closed-form solution \eqref{eq::c0_solution} was obtained assuming a
-\emph{constant} drive $U_s(t)=U_0$ (equivalently, constant boundary temperature
-$T_s$ so that $U_s=T_s^4$). We now generalize the derivation to an \emph{arbitrary}
-time-dependent drive $U_s(t)$.
-
-\paragraph{Where $U_s(t)$ enters.}
-The only place where the drive appears in the leading-mode reduction is through the
-boundary condition at $z=0$,
-\[
-U(0,r,t)=U_s(t),
-\]
-which implies $A(t)+B(t)=U_s(t)$ (Eq.~\eqref{eq::AnBn_source}). Repeating the same algebra as
-in \eqref{eq::dUdz_front} (with $U_0\to U_s(t)$), we obtain the
-front gradient
-\begin{equation}
-\left.\partial_z U\right|_{z=c_0(t)}
-\approx
--U_s(t)\,J_0(\kappa_0 r)\;
-\frac{\kappa_0}{\sinh\!\big(\kappa_0 c_0(t)\big)}.
-\label{eq::dUdz_front_time_drive}
-\end{equation}
-Therefore, the Galerkin projection step (Eq.~\eqref{eq::galerkin}) yields the same ODE
-structure as before, but with an explicit $U_s(t)$ factor:
-\begin{equation}
-\dot c_0(t)=
-\frac{\kappa_0}{\sinh\!\big(\kappa_0 c_0(t)\big)}\;
-\frac{4\sigma}{3e\,\kappa_R\rho^2}\;U_s(t).
-\label{eq::c0_ode_time_drive_raw}
-\end{equation}
-
-\paragraph{Define a time-dependent diffusion coefficient.}
-It is convenient to define
-\begin{equation}
-D_M(t)\equiv \frac{8\sigma}{3e\,\kappa_R\rho^2}\,U_s(t),
-\label{eq::DM_time_def}
-\end{equation}
-so that Eq.~\eqref{eq::c0_ode_time_drive_raw} becomes
-\begin{equation}
-\dot c_0(t)=
-\frac{D_M(t)\,\kappa_0}{2}\,
-\frac{1}{\sinh\!\big(\kappa_0 c_0(t)\big)}.
-\label{eq::c0_ode_time_drive}
-\end{equation}
-
-\paragraph{Integration for general $U_s(t)$.}
-Multiply Eq.~\eqref{eq::c0_ode_time_drive} by $\kappa_0\sinh(\kappa_0 c_0)$ to obtain
-\[
-\frac{d}{dt}\cosh(\kappa_0 c_0(t))=\frac{\kappa_0^2}{2}\,D_M(t).
-\]
-Integrating from $0$ to $t$ with $c_0(0)=0$ gives
-\begin{equation}
-\boxed{
-\cosh\!\big(\kappa_0 c_0(t)\big)
-=
-1+\frac{\kappa_0^2}{2}\int_0^t D_M(t')\,dt'
-=
-1+\frac{4\sigma\,\kappa_0^2}{3e\,\kappa_R\rho^2}\int_0^t U_s(t')\,dt'.
-}
-\label{eq::cosh_general_drive}
-\end{equation}
-Hence,
-\begin{equation}
-\boxed{
-c_0(t)=\frac{1}{\kappa_0}\cosh^{-1}\!\left(
-1+\frac{\kappa_0^2}{2}\int_0^t D_M(t')\,dt'
-\right)
-=
-\frac{1}{\kappa_0}\cosh^{-1}\!\left(
-1+\frac{4\sigma\,\kappa_0^2}{3e\,\kappa_R\rho^2}\int_0^t U_s(t')\,dt'
-\right).
-}
-\label{eq::c0_general_drive}
-\end{equation}
-
-Finally, the leading-order cylindrical front shape becomes
-\begin{equation}
-\boxed{
-z_F(r,t)\approx c_0(t)\,J_0(\kappa_0 r)
-=
-\frac{J_0(\kappa_0 r)}{\kappa_0}\cosh^{-1}\!\left(
-1+\frac{4\sigma\,\kappa_0^2}{3e\,\kappa_R\rho^2}\int_0^t U_s(t')\,dt'
-\right).
-}
-\label{eq::zF_general_drive}
-\end{equation}
-
-\paragraph{Special case: power-law drive.}
-If $U_s(t)=U_0\left(\frac{t}{t_0}\right)^p$ for $t\ge 0$, then
-\[
-\int_0^t U_s(t')\,dt' = \frac{U_0}{p+1}\frac{t^{p+1}}{t_0^p},
-\]
-and Eq.~\eqref{eq::c0_general_drive} becomes
-\[
-c_0(t)=\frac{1}{\kappa_0}\cosh^{-1}\!\left(
-1+\frac{4\sigma\,\kappa_0^2}{3e\,\kappa_R\rho^2}\cdot
-\frac{U_0}{p+1}\frac{t^{p+1}}{t_0^p}
-\right).
-\]
-This reduces to the constant-drive expression when $p=0$.
-
-
----
-
-\section{Physical Interpretation}
-
-\begin{itemize}
-\item The transverse structure is governed by $J_0(\kappa_0 r)$ rather than $\cos(k_0 y)$.
-\item Radiative wall losses introduce curvature and retard the front.
-\item Cylindrical geometry enhances edge cooling relative to planar geometry.
-\item The leading-order dynamics are entirely controlled by the lowest eigenvalue $\kappa_0$.
-\end{itemize}
-
-The correspondence between planar and cylindrical formulations is:
-\[
-\cos(k y)
-\;\longleftrightarrow\;
-J_0(\kappa r),
-\qquad
-\tan(kL)
-\;\longleftrightarrow\;
-\frac{\kappa R J_1(\kappa R)}{J_0(\kappa R)}.
-\]
-
-All higher-order perturbation theory carries over with this substitution.
-
-\section{Usful bessel function identities}
-Series Representation:
-\begin{equation}
-J_n(x) = \sum_{m=0}^{\infty} \frac{(-1)^m}{m! \, \Gamma(m+n+1)} \left(\frac{x}{2}\right)^{2m+n}
-\end{equation}
-Proparties: 
-\begin{equation}
-2nJ_n(x) = x(J_{n-1}(x) + J_{n+1}(x))
-\end{equation}
-\begin{equation}
-J_n(-x) = (-1)^n J_n(x), \quad
-J_{-n} = (-1)^n J_n(x)
-\label{eq::bessel_prop}
-\end{equation}
-Differentiation, 
-\begin{equation}
-\frac{d}{dx} J_n(x) = \frac{1}{2}(J_{n-1}(x) - J_{n+1}(x))
-\label{eq::bessel_diff}
-\end{equation}
-\begin{equation}
-\frac{d}{dx} \left[x^n J_n(x)\right] = x^n J_{n-1}(x), \qquad \frac{d}{dx} \left[x^{-n} J_n(x)\right] = -x^{-n} J_{n+1}(x)
-\end{equation}
-Asymptotic form for large and small x:
-\begin{equation}
-J_n(x) \approx \frac{1}{n!} \left(\frac{x}{2}\right)^n, \quad x \ll 1
-\end{equation}
-\begin{equation}
-J_n(x) \approx \sqrt{\frac{2}{\pi x}} \cos\left(x - \frac{n\pi}{2} - \frac{\pi}{4}\right), \quad x \gg 1
-\end{equation}
-And lastly the orthogonality relation:
-\begin{equation}
-\int_0^R r J_n\left(\frac{\alpha_{m} r}{R}\right) J_n\left(\frac{\alpha_{k} r}{R}\right) dr = \frac{R^2}{2} \left[J_{n+1}(\alpha_{m})\right]^2 \delta_{mk}
-\end{equation}
-where $\alpha_m$ is the m'th root of $J_n(x)$.
-
-\section*{Albedo Derivation}
-
-Consider a gold cylindrical shell surrounding foam.
-
-Let
-
-\begin{align}
-F_{\text{in}} &= \sigma_{SB} T_s^4 \\
-F_{\text{out}} &= \sigma_{SB} T_{\text{obs}}^4
-\end{align}
-
-The detector measures the re-emitted flux:
-
-\begin{equation}
-\sigma_{SB} T_{\text{obs}}^4
-=
-\sigma_{SB} T_s^4
-+
-\frac{F(0,t)}{2}
-\end{equation}
-
-Thus,
-
-\begin{equation}
-\sigma_{SB} T_s^4
--
-\frac{F(0,t)}{2}
-=
-\sigma_{SB} T_{\text{obs}}^4
-\end{equation}
-
-Since
-
-\begin{equation}
-F(0,t) = \dot{E}_w
-\end{equation}
-
-we define the albedo:
-
-\begin{equation}
-a(t)
-=
-\frac{\text{reflected flux}}{\text{incident flux}}
-=
-\frac{F_{\text{in}}}{F_{\text{out}}}
-=
-\frac{
-\sigma_{SB} T_0^4 + \frac{\dot{E}_w}{2}
-}{
-\sigma_{SB} T_0^4 - \frac{\dot{E}_w}{2}
-}
-\end{equation}
-
+\begin{thebibliography}{9}
+\bibitem{HH} O.~A. Hurricane and J.~H. Hammer, ``Bent Marshak waves,'' \emph{Physics of Plasmas} \textbf{13}, 113303 (2006), \href{https://doi.org/10.1063/1.2388268}{doi:10.1063/1.2388268}.
+\bibitem{HR} J.~H. Hammer and M.~D. Rosen, \emph{Physics of Plasmas} \textbf{10}, 1829 (2003).
+\end{thebibliography}
 \end{document}

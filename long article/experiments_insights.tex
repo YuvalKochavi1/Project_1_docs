@@ -1,0 +1,167 @@
+% ============================================================================
+% Appendix for PRL_attemption.tex
+% Full mathematical details omitted from the 5-page PRL main text.
+% ============================================================================
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,bm,geometry,graphicx,float,xcolor}
+\geometry{margin=1in}
+
+\title{EXperiments and Insights}
+\author{Yuval Kochavi et al.}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{French2022}
+This section is based on a comparison with the experimental data from Courtois et al. (2022) \cite{Courtois2022}. The work contains 2 different experiments, both with a with a SiO$_2$ tube coated with gold, one with density of $17.6 [\frac{mg}{cm^3}]$ and the second with $39.4 [\frac{mg}{cm^3}]$. The gold is 1.5 mm long and the tube diameter is 1.4 mm. Now note the that 17.6 foam is stongly transparent to radiation and therefore the diffusion approximation there is less valid, especially at early times. Moreover, the MFP is comparable to the tube diameter and so, an effective MFP correction will be needed here. The 39.4 foam is more opaque and therefore the diffusion approximation is more valid. Now one more thing we need to notice is that the breakout time of the heatwave was measured according to the inflaction point of the rising front. This could be calculated throw Fig 5a and 5b of the article~\cite{Courtois2022}, where we had to calculate in the inflaction point of the radiation tempratures for different lengthes, which accored at a fraction of 0.45-0.5 of the maximum temprature. And so when taking it to the forth order of the flux we get: 
+\begin{equation}
+    x_F^{'} = (1-0.5^4)^{\frac{4 + \alpha - \beta}{4}} x_F = (1-0.0625)^{\frac{4 + \alpha - \beta}{4}} x_F
+\end{equation} 
+But this had a really small effect on the final results. Note that when comparing to the results of $x_F$ we must take the beginning of the data to start from time 0, with value 0 at $t=0$. Another thing is that $T_{\mathrm{drive}}$ starts from time $0.3456\,\mathrm{ns}$, and so one must subtract this offset from the times of $T_D$.
+Now for $n=0.6$ (MFP correction) and FT we get Fig.~\ref{fig:french22_front_position_gold17p6} for the front position of the SiO$_2$ gold-coating case (density 17.6): 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.45\textwidth]{figures_French22/front_position - gold coating (density 17.6).png}
+	\caption{French2022: front position for the SiO$_2$ gold-coating case (density 17.6).}
+	\label{fig:french22_front_position_gold17p6}
+\end{figure}
+
+Fig.~\ref{fig:french22_curvature_and_t4}a for the curvature comparison at $z=1.5\,\mathrm{mm}$ where we subtract a constant offset of $0.15 ns\,\mathrm{ns}$ from $t_{\mathrm{arr}}$ as some kind of average between 0 and 0.3456 ns, and Fig.~\ref{fig:french22_curvature_and_t4}b for the spatial $T^4$ heatmap at $t=4.5\,\mathrm{ns}$.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.48\textwidth]{figures_French22/curvature_comparison_1.5mm.png}
+	\hfill
+	\includegraphics[width=0.28\textwidth]{figures_French22/T4_spatial_heatmap_4.5ns.png}
+	\caption{French2022: comparison of model and experimental curvature at $z=1.5\,\mathrm{mm}$ (left), and spatial $T^4$ heatmap at $t=4.5\,\mathrm{ns}$ (right).}
+	\label{fig:french22_curvature_and_t4}
+\end{figure}
+
+The MFP along time graph will be (with the optical depth $\tau$) Fig.~\ref{fig:french22_mfp_with_tau}: 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.45\textwidth]{figures_French22/lambda_eff_vs_time.png}
+	\caption{effective mean free path $\lambda_{\mathrm{eff}}$ and optical depth $\tau$ as functions of time - 17.6 mg/cm$^3$.}
+	\label{fig:french22_mfp_with_tau}
+\end{figure}
+
+Now for the 39.4 mg/cm$^3$ case we get Fig.~\ref{fig:french22_front_position_gold39p4} for the front position when using $n=1$ and FT:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures_French22/front_position - gold coating (density 39.4).png}
+    \caption{French2022: front position for the SiO$_2$ gold-coating case (density 39.4).}
+    \label{fig:french22_front_position_gold39p4}
+\end{figure}
+\vspace{9em}
+The MFP along time graph will be (with the optical depth $\tau$) Fig.~\ref{fig:french22_mfp_with_tau_39p4}:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures_French22/lambda_eff_vs_time_39.4.png}
+    \caption{effective mean free path $\lambda_{\mathrm{eff}}$ and optical depth $\tau$ as functions of time - 39.4 mg/cm$^3$.}
+    \label{fig:french22_mfp_with_tau_39p4}
+\end{figure}
+
+\section{French2024}
+This section is based on a comparison with the experimental data from Courtois et al. (2024)\cite{Courtois2024}. This work contains 2 different experiments, both with a with a SiO$_2$, but one is coated with gold and the other with copper. The first experiment with a SiO$_2$ tube coated with gold, has foam density of $29 [\frac{mg}{cm^3}]$ and diameter of $1 [\mathrm{mm}]$. The second experiment with a SiO$_2$ tube coated with copper, one has foam density of $18.9 [\frac{mg}{cm^3}]$ and diameter of $2 [\mathrm{mm}]$. Each of the experiment has only one point of breakout measured, in the gold coated experiment it is 1.2 mm, and in the copper coated one we have 2.0 mm (which are the tubes lengthes). Another very intresnting data that was measured is the time arrivel of the heatwave front to the end of the tube as a function of the radial location, for both experiments. Both experiments have mfp which is comparable to the tube diameter, and so, an effective MFP correction will be needed here. The gold coated experiment needs a strong correction while the copper coated experiment needs a weaker correction, this can be seen in Fig.~\ref{fig:french24_mfp_with_tau_gold} where we plot the effective mean free path $\lambda_{\mathrm{eff}}$ and optical depth $\tau$ as functions of time for both experiments. The gold coated experiment has a very small optical depth, while the copper coated experiment has a larger optical depth. This is due to the fact that the gold coated experiment has a much smaller tube diameter than the copper coated experiment. The effective mean free path $\lambda_{\mathrm{eff}}$ is calculated using the formula:
+\begin{equation}
+    \tau(t) = \int_0^{0.9 x_F(t)} \kappa_R(x,t)\rho\,dx, \quad \lambda_R(t) = \frac{0.9\,x_F(t)}{\tau(t)}.
+\end{equation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures_French24/lambda_eff_vs_time.png}
+    \hfill
+    \includegraphics[width=0.5\textwidth]{figures_French24/lambda_eff_vs_time copper.png}
+    \caption{Effective mean free path $\lambda_{\mathrm{eff}}$ and optical depth $\tau$ as functions of time for the French2024 cases: gold-coated SiO$_2$ (left) and copper-coated SiO$_2$ (right).}
+    \label{fig:french24_mfp_with_tau_gold}
+    \label{fig:french24_mfp_with_tau_copper}
+\end{figure}
+
+Now for the on-axis propagation of the heatwave front we get Fig.~\ref{fig:french24_front_position_gold} for the gold coated experiment and Fig.~\ref{fig:french24_front_position_copper} for the copper coated experiment. The gold coated experiment is modeled with $n=1$ and FT, while the copper coated experiment is modeled with $n=2.5$ and FT.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures_French24/front_position - french_gold.png}
+    \caption{French2024: front position for the SiO$_2$ gold-coating case.}
+    \label{fig:french24_front_position_gold}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures_French24/front_position - french_copper.png}
+    \caption{French2024: front position for the SiO$_2$ copper-coating case.}
+    \label{fig:french24_front_position_copper}
+\end{figure}
+
+Now for the curvature comparison we get Fig.~\ref{fig:french24_curvature} for the curvature of both experiments. The gold coated experiment is modeled with $n=1$ and FT, while the copper coated experiment is modeled with $n=3$ and FT. Note that we used a constant offset to match the initial breakout time of the on-axis heatwave front to the end of the tube, which is $t_{\mathrm{delay}}=0.47\,\mathrm{ns}$ for the gold coated experiment and $t_{\mathrm{delay}}=0.165\,\mathrm{ns}$ for the copper coated experiment. This offset is subtracted from the experimental data arrivel time to match the model predictions.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures_French24/combined_curvature_comparison.png}
+    \caption{French2024: curvature comparison for the SiO$_2$ gold-coating and copper-coating cases}
+    \label{fig:french24_curvature}
+\end{figure}
+
+\section{Back PRL}
+Here we have SiO2 in a 3 mm diamater tubes with 10 mg/cm$^3$ density, and the tubes are coated with gold. We have 4 different tube lengthes: 0.5, 1, 1.5, 2 mm long. The breakout time of the flux is taken as the heat wave time of arrivel to the detector:
+\vspace{3em}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures_backPRL/article fluxes.png}
+    \caption{Back PRL: fluxes from article for the SiO$_2$ gold-coating case with 3 different tube lengthes.}
+    \label{fig:backprl_fluxes}
+\end{figure}
+
+Now this experiment is big geometry wise, and so the MFP is much smaller than the tube diameter, and therefore the diffusion approximation is valid, and no mfp correction is needed. We can see that in Fig \ref{fig:backprl_front} even n=1 make almost no change from case with all effects without mfp correction.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures_backPRL/front.png}
+    \hfill
+    \includegraphics[width=0.45\textwidth]{figures_backPRL/lambda_eff_vs_time.png}
+    \caption{Back PRL: front position for the SiO$_2$ gold-coating case with data points 3 different tube lengthes (left), and effective mean free path $\lambda_{\mathrm{eff}}$ as a function of time (right).}
+    \label{fig:backprl_front}
+\end{figure}
+
+Now the PRL provides us curvature data for 9.5 ns after the drive starts, with tube length of 1mm. Now when comparing with the all the effects, we get Fig.~\ref{fig:backprl_curvature} for the curvature comparison. The model is without mfp correction and FT.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures_backPRL/curvature.png}
+    \caption{Back PRL: curvature comparison for the SiO$_2$ gold-coating case with tube length of 1 mm.}
+    \label{fig:backprl_curvature}
+\end{figure}
+
+\section{Back POP}
+
+
+
+\section*{Bibliography}
+\begin{thebibliography}{99}
+
+\bibitem{Courtois2022}
+C.~Courtois, R.~Gr\"oger, P.~Loiseau \textit{et al.},
+\textit{Models for the propagation of radiation heat fronts in cylindrical tubes},
+Phys.\ Plasmas \textbf{29}, 022704 (2022).
+
+\bibitem{Courtois2024}
+C.~Courtois, R.~Gr\"oger, P.~Loiseau \textit{et al.},
+\textit{Experimental measurements of supersonic radiation heat wave curvature in cylindrical tubes},
+Phys.\ Plasmas \textbf{31}, 012707 (2024).
+
+\bibitem{Back2000PRL}
+C.~A.~Back, J.~D.~Bauer, J.~H.~Hammer \textit{et al.},
+\textit{Diffusive, supersonic x-ray transport in radiatively heated foam cylinders},
+Phys.\ Rev.\ Lett.\ \textbf{84}, 274 (2000).
+
+\bibitem{Back2000POP}
+C.~A.~Back, J.~D.~Bauer, O.~L.~Landen \textit{et al.},
+\textit{Detailed measurements of a diffusive supersonic wave in a radiatively heated foam},
+Phys.\ Plasmas \textbf{7}, 2126 (2000).
+
+\end{thebibliography}
+
+
+\end{document}
