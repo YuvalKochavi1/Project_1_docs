@@ -50,7 +50,7 @@ We present a semi-analytic model for radiation-wave propagation in finite cylind
 \begingroup
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{1em}
-Radiative heat waves are central to inertial-confinement fusion (ICF) and high-energy-density physics~\cite{AbuShawareb2024,AbuShawareb2022}. In indirect-drive ICF, laser energy is converted into x~rays within a high-$Z$ hohlraum, whose radiation heats and compresses the fusion capsule~\cite{Lindl2004}. A first-principles description must couple nonlinear laser propagation, opacities, equations of state, hydrodynamics and many more. Because a unified treatment remains impractical, individual physical processes must be isolated and studied independently. Here, we focus on dedicated experiments designed to probe radiation transport under controlled conditions.
+Radiative heat waves are central to inertial-confinement fusion (ICF) and high-energy-density physics~\cite{AbuShawareb2024,AbuShawareb2022}. In indirect-drive ICF, laser energy is converted into x~rays within a high-$Z$ hohlraum, whose radiation heats and compresses the fusion capsule~\cite{Lindl2004}. A first-principles description must couple nonlinear laser propagation, opacities, equations of state, hydrodynamics and many more phenomena. Because a unified treatment remains impractical, individual physical processes must be isolated and studied independently. Here, we focus on dedicated experiments designed to probe radiation transport under controlled conditions.
 
 Early experiments by Afshar-rad \textit{et al.} and Massen \textit{et al.} established low-density foams as a controlled platform in which radiation-driven fronts could outrun the hydrodynamic response~\cite{AfsharRad1994,Massen1994}. Back \textit{et al.} then reported the first detailed measurements of a diffusive, supersonic radiation wave in a finite cylindrical foam several optical depths thick~\cite{Back2000PRL}. They observed a curved front that broke out first on axis and later near the wall, directly exposing the role of energy loss to the surrounding sleeve. A companion study broadened the analysis across materials, optical depths, and target lengths~\cite{Back2000POP}, and subsequent experiments have explored diverse foams, sleeves, drives, and geometries~\cite{Jiang2005,Keiter2008,Zhang2010,Moore2015,Courtois2024}.
 
@@ -75,7 +75,7 @@ Figure~\ref{fig:setup_tdrive} illustrates the generic experimental platform: the
         \vspace{-0.5em}
         \centerline{(b)}
     \end{minipage}
-    \caption{(a) Experimental platform: laser beams enter the hohlraum through the LEH, generate x rays, and drive a Marshak wave in low-density foam targets of different lengths~\cite{Moore2015}. (b) Measured hohlraum drive temperature $T_D(t)$ for the high-energy Back experiment~\cite{Back2000PRL}.}
+    \caption{(a) Experimental platform: laser beams enter the hohlraum through the LEH, generate x rays, and drive a Marshak wave in low-density foam targets of different lengths. (b) Measured hohlraum drive temperature $T_D(t)$ for the high-energy Back experiment~\cite{Back2000PRL}.}
     \label{fig:setup_tdrive}
 \end{figure}
 
@@ -119,7 +119,7 @@ and thus the front evolution.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\columnwidth]{figures/SiO2_low_energy.png}
-	\caption{Front-position comparison for the $\mathrm{SiO}_2$ low-energy case, illustrating the effect of the corrected 1D and 2D terms.}
+	\caption{Front position comparison for the $\mathrm{SiO}_2$ low-energy case, illustrating the effect of the corrected 1D and 2D terms.}
 	\label{fig:sio2_low_energy}
 \end{figure}
 
@@ -127,7 +127,7 @@ Beyond its agreement with the measured trajectory, Fig.~\ref{fig:sio2_low_energy
 
 While the longitudinal model captures the axial physics and identifies the dominant loss mechanisms, the physical heat front is not planar: radiative losses to the surrounding sleeve cool the tube edge relative to the axis, curving the front and delaying breakout at $r>0$. This curvature is experimentally important because the measured signal is the re-emission intensity, $\Phi\propto T^4$, which strongly amplifies transverse temperature variations~\cite{Back2000POP,Back2000PRL}. As a result, the intrinsically 2D front shape both delays breakout at the diagnostic plane and feeds back on the energy balance, since wall losses are controlled by the boundary-front evolution at $r=R$.
 
-To describe this curvature quantitatively, Hurricane and Hammer~\cite{Hurricane2006} showed that, in the idealized limit of constant opacity, negligible material-energy storage, and a steep heat front, the region behind the front is governed by a Laplace problem. In this formulation, the lossy wall enters through a Robin boundary condition set by the wall albedo (see the SM): only a fraction $\alpha$ of the incident radiative flux is returned to the foam, while $1-\alpha$ is absorbed by the surrounding wall. This partial return cools the tube edge relative to the axis, so the transverse eigenmodes bend the front. For a planar channel these modes are cosines, while in an axisymmetric cylindrical tube the regular radial modes are zeroth-order Bessel modes $J_0$ by symmetry at $r=0$. The cylindrical analogue therefore has the leading-order form~\cite{Courtois2022}
+To describe this curvature quantitatively, Hurricane and Hammer~\cite{Hurricane2006} showed that, in the idealized limit of constant opacity, negligible material-energy storage, and a steep heat front, the region behind the front is governed by a Laplace problem. In this formulation, the lossy wall enters through a Robin boundary condition set by the wall albedo (see the SM): only a fraction $\alpha$ of the incident radiative flux is returned to the foam, while $1-\alpha$ is absorbed by the surrounding wall. This partial return cools the tube edge relative to the axis, and therefore bend the heat wave front. For a planar channel these modes are cosines, while in an axisymmetric cylindrical tube the regular radial modes are zeroth-order Bessel modes $J_0$ by symmetry at $r=0$. The cylindrical analogue therefore has the leading-order form~\cite{Courtois2022}
 \begin{equation}\label{eq:HH_cyl}
     x_F(r,t) = \frac{1}{\kappa_0}\cosh^{-1}\!\left(1 + \frac{D\kappa_0^2 t}{2}\right)J_0(\kappa_0 r) + \text{H.O.T.}
 \end{equation}
@@ -141,21 +141,19 @@ With this dynamic-albedo closure, we keep the separation of variables form only 
 
 \begin{figure}[t]
     \centering
-    \begin{minipage}{0.38\columnwidth}
+    \begin{minipage}{0.34\columnwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/gold_heyney2.png}
         \vspace{-0.8em}
         \centerline{(a)}
     \end{minipage}\hfill
-    \begin{minipage}{0.38\columnwidth}
+    \begin{minipage}{0.275\columnwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/heyney2.png}
         \vspace{-0.8em}
         \centerline{(b)}
-    \end{minipage}
-
-    \vspace{0.4em}
-    \begin{minipage}{0.4\columnwidth}
+    \end{minipage}\hfill
+    \begin{minipage}{0.34\columnwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/french_expt.png}
         \vspace{-0.8em}

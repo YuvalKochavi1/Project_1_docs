@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  29 JUL 2026 18:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  17 OCT 2026 21:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -168,7 +168,11 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count299
-) (experiments_insights.aux)
+) (experiments_insights.aux
+
+LaTeX Warning: Label `fig:backpop_front_ta2o5' multiply defined.
+
+)
 \openout1 = `experiments_insights.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -325,16 +329,16 @@ Package pdftex.def Info: figures_backPRL/article fluxes.png  used on input line 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [5 <./figures_French24/front_position - french_copper.png> <./figures_French24/combined_curvature_comparison.png>]
-<figures_backPRL/front.png, id=53, 803.0pt x 602.25pt>
+<figures_backPRL/front.png, id=53, 578.16pt x 433.62pt>
 File: figures_backPRL/front.png Graphic file (type png)
 <use figures_backPRL/front.png>
 Package pdftex.def Info: figures_backPRL/front.png  used on input line 121.
-(pdftex.def)             Requested size: 234.8775pt x 176.1551pt.
+(pdftex.def)             Requested size: 223.13649pt x 167.35112pt.
 <figures_backPRL/lambda_eff_vs_time.png, id=54, 578.16pt x 433.62pt>
 File: figures_backPRL/lambda_eff_vs_time.png Graphic file (type png)
 <use figures_backPRL/lambda_eff_vs_time.png>
 Package pdftex.def Info: figures_backPRL/lambda_eff_vs_time.png  used on input line 123.
-(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+(pdftex.def)             Requested size: 220.78543pt x 165.58452pt.
 <figures_backPRL/curvature.png, id=55, 1003.75pt x 803.0pt>
 File: figures_backPRL/curvature.png Graphic file (type png)
 <use figures_backPRL/curvature.png>
@@ -344,24 +348,141 @@ Package pdftex.def Info: figures_backPRL/curvature.png  used on input line 132.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6 <./figures_backPRL/article fluxes.png> <./figures_backPRL/front.png (PNG copy)> <./figures_backPRL/lambda_eff_vs_time.png>] [7 <./figures_backPRL/curvature.png (PNG copy)>] (experiments_insights.aux)
+[6 <./figures_backPRL/article fluxes.png> <./figures_backPRL/front.png> <./figures_backPRL/lambda_eff_vs_time.png>]
+<figures_backPOP/front.png, id=65, 578.16pt x 433.62pt>
+File: figures_backPOP/front.png Graphic file (type png)
+<use figures_backPOP/front.png>
+Package pdftex.def Info: figures_backPOP/front.png  used on input line 146.
+(pdftex.def)             Requested size: 223.13649pt x 167.35112pt.
+<figures_backPOP/lambda_eff_vs_time.png, id=66, 578.16pt x 433.62pt>
+File: figures_backPOP/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_backPOP/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_backPOP/lambda_eff_vs_time.png  used on input line 148.
+(pdftex.def)             Requested size: 220.78543pt x 165.58452pt.
+ [7 <./figures_backPRL/curvature.png (PNG copy)> <./figures_backPOP/front.png> <./figures_backPOP/lambda_eff_vs_time.png>]
+<figures_backPOP/front_surface.png, id=73, 264.187pt x 534.798pt>
+File: figures_backPOP/front_surface.png Graphic file (type png)
+<use figures_backPOP/front_surface.png>
+Package pdftex.def Info: figures_backPOP/front_surface.png  used on input line 157.
+(pdftex.def)             Requested size: 112.74377pt x 228.22865pt.
+<figures_backPOP/all_coatings_front_surface_t2.5ns.png, id=74, 214.8025pt x 534.798pt>
+File: figures_backPOP/all_coatings_front_surface_t2.5ns.png Graphic file (type png)
+<use figures_backPOP/all_coatings_front_surface_t2.5ns.png>
+Package pdftex.def Info: figures_backPOP/all_coatings_front_surface_t2.5ns.png  used on input line 159.
+(pdftex.def)             Requested size: 91.60567pt x 228.07361pt.
+ [8 <./figures_backPOP/front_surface.png> <./figures_backPOP/all_coatings_front_surface_t2.5ns.png>]
+<figures_backPOP/front2.png, id=80, 578.16pt x 433.62pt>
+File: figures_backPOP/front2.png Graphic file (type png)
+<use figures_backPOP/front2.png>
+Package pdftex.def Info: figures_backPOP/front2.png  used on input line 174.
+(pdftex.def)             Requested size: 223.13649pt x 167.35112pt.
+<figures_backPOP/lambda_eff_vs_time2.png, id=81, 578.16pt x 433.62pt>
+File: figures_backPOP/lambda_eff_vs_time2.png Graphic file (type png)
+<use figures_backPOP/lambda_eff_vs_time2.png>
+Package pdftex.def Info: figures_backPOP/lambda_eff_vs_time2.png  used on input line 176.
+(pdftex.def)             Requested size: 220.78543pt x 165.58452pt.
+ [9 <./figures_backPOP/front2.png> <./figures_backPOP/lambda_eff_vs_time2.png>]
+<figures_backPOP/flux_curvature_post_breakout_0.5ns.png, id=87, 578.16pt x 433.62pt>
+File: figures_backPOP/flux_curvature_post_breakout_0.5ns.png Graphic file (type png)
+<use figures_backPOP/flux_curvature_post_breakout_0.5ns.png>
+Package pdftex.def Info: figures_backPOP/flux_curvature_post_breakout_0.5ns.png  used on input line 187.
+(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+<figures_backPOP/flux_curvature_be_vs_gold.png, id=88, 519.25995pt x 398.9304pt>
+File: figures_backPOP/flux_curvature_be_vs_gold.png Graphic file (type png)
+<use figures_backPOP/flux_curvature_be_vs_gold.png>
+Package pdftex.def Info: figures_backPOP/flux_curvature_be_vs_gold.png  used on input line 196.
+(pdftex.def)             Requested size: 159.71498pt x 122.70537pt.
+<figures_backPOP/T4_heatmap_be_vs_gold.png, id=89, 1002.3849pt x 475.89795pt>
+File: figures_backPOP/T4_heatmap_be_vs_gold.png Graphic file (type png)
+<use figures_backPOP/T4_heatmap_be_vs_gold.png>
+Package pdftex.def Info: figures_backPOP/T4_heatmap_be_vs_gold.png  used on input line 198.
+(pdftex.def)             Requested size: 267.7638pt x 127.12172pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10 <./figures_backPOP/flux_curvature_post_breakout_0.5ns.png>]
+<figures_backPOP/flux_curvature_post_breakout_0.4ns.png, id=94, 578.16pt x 433.62pt>
+File: figures_backPOP/flux_curvature_post_breakout_0.4ns.png Graphic file (type png)
+<use figures_backPOP/flux_curvature_post_breakout_0.4ns.png>
+Package pdftex.def Info: figures_backPOP/flux_curvature_post_breakout_0.4ns.png  used on input line 211.
+(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+ [11 <./figures_backPOP/flux_curvature_be_vs_gold.png> <./figures_backPOP/T4_heatmap_be_vs_gold.png> <./figures_backPOP/flux_curvature_post_breakout_0.4ns.png>]
+<figures_JiYan/front_position - compare Ji-Yan.png, id=101, 578.16pt x 433.62pt>
+File: figures_JiYan/front_position - compare Ji-Yan.png Graphic file (type png)
+<use figures_JiYan/front_position - compare Ji-Yan.png>
+Package pdftex.def Info: figures_JiYan/front_position - compare Ji-Yan.png  used on input line 225.
+(pdftex.def)             Requested size: 192.60127pt x 144.45142pt.
+<figures_JiYan/lambda_eff_vs_time.png, id=102, 578.16pt x 433.62pt>
+File: figures_JiYan/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_JiYan/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_JiYan/lambda_eff_vs_time.png  used on input line 227.
+(pdftex.def)             Requested size: 192.60127pt x 144.45142pt.
+<figures_JiYan/Ji-Yan_0.5ns.png, id=103, 568.37344pt x 362.10281pt>
+File: figures_JiYan/Ji-Yan_0.5ns.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_0.5ns.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_0.5ns.png  used on input line 236.
+(pdftex.def)             Requested size: 197.29623pt x 125.6936pt.
+<figures_JiYan/Ji-Yan_0.5ns_front.png, id=104, 293.4965pt x 170.6375pt>
+File: figures_JiYan/Ji-Yan_0.5ns_front.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_0.5ns_front.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_0.5ns_front.png  used on input line 238.
+(pdftex.def)             Requested size: 201.99121pt x 117.44057pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures_JiYan/Ji-Yan_1ns.png, id=105, 550.30594pt x 393.72093pt>
+File: figures_JiYan/Ji-Yan_1ns.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1ns.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1ns.png  used on input line 245.
+(pdftex.def)             Requested size: 197.29623pt x 141.15668pt.
+<figures_JiYan/Ji-Yan_1ns_front.png, id=106, 293.4965pt x 170.6375pt>
+File: figures_JiYan/Ji-Yan_1ns_front.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1ns_front.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1ns_front.png  used on input line 247.
+(pdftex.def)             Requested size: 201.99121pt x 117.44057pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures_JiYan/Ji-Yan_1.3ns.png, id=107, 512.66531pt x 328.22626pt>
+File: figures_JiYan/Ji-Yan_1.3ns.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1.3ns.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1.3ns.png  used on input line 254.
+(pdftex.def)             Requested size: 197.29623pt x 126.31491pt.
+<figures_JiYan/Ji-Yan_1.3ns_front.png, id=108, 293.4965pt x 170.6375pt>
+File: figures_JiYan/Ji-Yan_1.3ns_front.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1.3ns_front.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1.3ns_front.png  used on input line 256.
+(pdftex.def)             Requested size: 201.99121pt x 117.44057pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 <./figures_JiYan/front_position - compare Ji-Yan.png> <./figures_JiYan/lambda_eff_vs_time.png>]
+Overfull \vbox (18.57845pt too high) has occurred while \output is active []
+
+ [13 <./figures_JiYan/Ji-Yan_0.5ns.png> <./figures_JiYan/Ji-Yan_0.5ns_front.png> <./figures_JiYan/Ji-Yan_1ns.png> <./figures_JiYan/Ji-Yan_1ns_front.png> <./figures_JiYan/Ji-Yan_1.3ns.png> <./figures_JiYan/Ji-Yan_1.3ns_front.png>] [14] (experiments_insights.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 3911 strings out of 467871
- 61805 string characters out of 5417408
- 472740 words of memory out of 5000000
- 32751 multiletter control sequences out of 15000+600000
- 638854 words of font info for 80 fonts, out of 8000000 for 9000
+ 4055 strings out of 467871
+ 68034 string characters out of 5417408
+ 476010 words of memory out of 5000000
+ 32894 multiletter control sequences out of 15000+600000
+ 639022 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,7n,65p,1774b,248s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on experiments_insights.pdf (7 pages, 1417126 bytes).
+ 57i,7n,65p,1774b,252s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on experiments_insights.pdf (14 pages, 2824065 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
+ 194 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 166 words of extra memory for PDF output out of 10000 (max. 10000000)
 

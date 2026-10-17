@@ -71,9 +71,9 @@ where $e$ is the specific energy required to heat initially cold foam. Projectin
 \begin{equation}\dot c_0=\frac{D_M(t)b_0k_0}{2\sinh(k_0c_0)},\qquad D_M(t)=\frac{8\sigma U_s(t)}{3e\rho^2\kappa}.\label{eq:c0ode}\end{equation}
 This is a leading-mode approximation; it is not an exact pointwise moving-front solution. With $c_0(0)=0$, its integral is
 \begin{equation}\boxed{c_0(t)=\frac1{k_0}\operatorname{arcosh}\!\left[1+\frac{b_0k_0^2}{2}\int_0^t D_M(s)\,ds\right].}\label{eq:c0}\end{equation}
-For a constant drive, $D_M$ is constant and the integral equals $D_Mt$. At leading order $b_0\simeq1$; retaining $b_0$ gives the source-normalization correction, $b_0=1+\varepsilon/4+O(\varepsilon^2)$, not an independently established $1+\varepsilon/2$ correction. Higher-order consistency requires retaining higher radial modes and curved-front terms.
+For a constant drive, $D_M$ is constant and the integral equals $D_Mt$. At leading order $b_0\simeq1$; retaining $b_0$ gives the source-normalization correction, $b_0=1+\varepsilon/4+O(\varepsilon^2)$, not an independently established $1+\varepsilon/2$ correction. Higher-order consistency requires retaining higher radial modes and curved-front terms (Section~\ref{sec:higher}).
 
-\section{Calibration to the correct on-axis longitudinal position}
+\section{Calibration to the correct on-axis longitudinal position}\label{sec:calib}
 The front may be predicted inaccurately along $z$ even if the transverse \emph{bending} is useful. To avoid confusing the correct on-axis position with the modal estimate, define
 \begin{equation}Z_F(t)=\text{correct or externally supplied on-axis front position},\qquad
 z_F^{\rm mod}(r,t)=\sum_{n=0}^\infty c_n(t)J_0(k_nr).\end{equation}
@@ -103,8 +103,161 @@ If instead one decides to rescale the \emph{entire fundamental-mode amplitude} t
 \boxed{\mathcal R_c^{\rm scale}(t)=\frac{2R^2}{|Z_F(t)|\lambda_0^2}\simeq\frac{R^2}{\varepsilon|Z_F(t)|}.}\end{equation}
 The two formulas are \emph{not interchangeable}: translation preserves curvature; amplitude rescaling changes it. A more general amplitude adjustment $A(t)$ multiplying the bracketed sum in \eqref{eq:corrected} scales the on-axis curvature by $|A(t)|$.
 
+\section{Higher-order curvature when the on-axis position is prescribed}\label{sec:higher}
+Throughout this section the on-axis trajectory $Z_F(t)$ is regarded as \emph{known} (from a 1D Marshak model, a simulation, or a measurement). Only the transverse shape remains to be determined:
+\begin{equation}
+z_F(r,t)=Z_F(t)+\eta(r,t),\qquad \eta(0,t)=0,\qquad
+\mathcal K(t)\equiv\frac1{\mathcal R_c(t)}=\bigl|\partial_r^2\eta(0,t)\bigr|.
+\end{equation}
+The aim is to obtain $\mathcal K$ beyond the single-mode result \eqref{eq:radius0} without re-predicting $Z_F$.
+
+\subsection{\texorpdfstring{Closure: $Z_F$ fixes the magnitude, the model fixes the ratio}{Closure: ZF fixes the magnitude, the model fixes the ratio}}
+For a curved front, $U=0$ along $z=z_F(r,t)$, so $\nabla U$ is normal to the front and its tangential derivative vanishes, $\partial_rU+\partial_rz_F\,\partial_zU=0$. Hence $|\nabla U|=q\sqrt{1+(\partial_rz_F)^2}$ with
+\begin{equation}q(r,t)\equiv-\left.\partial_zU\right|_{z=z_F(r,t)}.\end{equation}
+The normal front speed is $\partial_tz_F/\sqrt{1+(\partial_rz_F)^2}$, so the curved-front generalization of \eqref{eq:stefan} is
+\begin{equation}\rho e\,\partial_tz_F=\frac{4\sigma}{3\rho\kappa}\bigl[1+(\partial_rz_F)^2\bigr]q(r,t).\label{eq:stefan_curved}\end{equation}
+At $r=0$ the slope vanishes and $\partial_tz_F=\dot Z_F$. Dividing \eqref{eq:stefan_curved} by its on-axis value removes $\rho e$, $\sigma$, $\kappa$, $D_M$, the drive, and the source normalization $b_0$:
+\begin{equation}\boxed{\partial_tz_F(r,t)=\dot Z_F(t)\,\bigl[1+(\partial_rz_F)^2\bigr]\frac{q(r,t)}{q(0,t)}.}\label{eq:ratio}\end{equation}
+This is the natural way to use a prescribed $Z_F$: its \emph{rate} supplies the magnitude of the motion, and the model only supplies the \emph{radial ratio} of front speeds. Using $Z_F$ itself as the clock,
+\begin{equation}\boxed{\frac{\partial\eta}{\partial Z_F}=\bigl[1+(\partial_r\eta)^2\bigr]\frac{q(r)}{q(0)}-1,\qquad \eta\big|_{Z_F=0}=0.}\label{eq:etaZ}\end{equation}
+Two consequences follow. First, any error in the absolute axial speed of the model is irrelevant. Second, for constant $\varepsilon$ the shape depends on $Z_F/R$ and $\varepsilon$ only, not on the drive history.
+
+\paragraph{Leading order.} With the single-mode, flat-plane field \eqref{eq:single} evaluated at $\ell=Z_F$, $q(r)/q(0)=J_0(k_0r)$. Dropping the $O(\varepsilon^2)$ slope factor, \eqref{eq:etaZ} integrates to
+\begin{equation}z_F(r,t)=Z_F(t)\,J_0(k_0r),\qquad \mathcal K^{(0)}=\frac{\lambda_0^2Z_F}{2R^2}\simeq\frac{\varepsilon Z_F}{R^2}.\label{eq:K0}\end{equation}
+This is exactly the \emph{rescaled} variant of Section~\ref{sec:calib}, and it is the profile currently implemented in the code (\texttt{\_compute\_z\_front\_radial\_snapshot} in \texttt{model\_main.py}, $z_F(r)=x_F\,J_0(k_0r)$). The closure \eqref{eq:ratio} therefore selects rescaling, not translation, when $Z_F$ is trusted. Every higher-order term below is a correction to $q(r)/q(0)$ in \eqref{eq:etaZ}.
+
+\subsection{Bookkeeping: which parameter is small}
+The only small parameter is the wall-loss number $\varepsilon$; the penetration ratio $Z_F/R$ is $O(1)$ and must \emph{not} be expanded. All results take the form
+\begin{equation}\mathcal K=\frac{\varepsilon}{R}\,\mathcal F_1\!\left(\frac{Z_F}{R}\right)+\frac{\varepsilon^2}{R}\,\mathcal F_2\!\left(\frac{Z_F}{R}\right)+O(\varepsilon^3).\end{equation}
+The single-mode model gives $\mathcal F_1=Z_F/R$. Corrections 2 and 3 below show that the higher radial modes and the curved-front boundary condition both change $\mathcal F_1$ at \emph{leading} order; they are not small refinements. Only Correction 1 and the slope factor in \eqref{eq:etaZ} are genuinely $O(\varepsilon^2)$.
+
+At $O(\varepsilon)$ the Robin modes may be replaced by Neumann modes. Writing $\alpha_n=j_{1,n}$ and $\psi_n(r)=J_0(\alpha_nr/R)$, the source coefficients of Section~3 reduce to
+\begin{equation}b_n\simeq\frac{2\varepsilon}{\alpha_n^2J_0(\alpha_n)}\quad(n\ge1).\label{eq:bn_lead}\end{equation}
+The expansion of $r^2$, which vanishes at the axis, is
+\begin{equation}r^2=\sum_{n\ge1}\frac{4R^2}{\alpha_n^2J_0(\alpha_n)}\bigl[\psi_n(r)-1\bigr],\qquad\text{so}\qquad J_0(k_0r)-1=-\sum_{n\ge1}b_n\bigl[\psi_n(r)-1\bigr]+O(\varepsilon^2).\label{eq:r2}\end{equation}
+Any $\eta$ with $\eta(0)=0$ is expanded as $\eta=\sum_{n\ge1}\eta_n(\psi_n-1)$, which gives
+\begin{equation}\partial_r^2\eta(0)=-\sum_{n\ge1}\frac{\alpha_n^2}{2R^2}\eta_n.\end{equation}
+The series below are alternating and converge slowly. The constant
+\begin{equation}C_\infty\equiv\sum_{n\ge1}\frac{1}{\alpha_nJ_0(\alpha_n)}=-0.38479\ldots\label{eq:Cinf}\end{equation}
+recurs throughout. Numerically, subtract it and sum only the exponentially convergent remainders.
+
+\subsection{\texorpdfstring{Correction 1: the eigenvalue at higher order in $\varepsilon$}{Correction 1: the eigenvalue at higher order in epsilon}}
+Inverting the series of Section~3.1,
+\begin{equation}\lambda_0^2=2\varepsilon\left(1-\frac{\varepsilon}{4}+\frac{\varepsilon^2}{24}+O(\varepsilon^3)\right)\;\Rightarrow\;
+\mathcal K^{(0)}=\frac{\varepsilon Z_F}{R^2}\left(1-\frac{\varepsilon}{4}+\frac{\varepsilon^2}{24}\right).\end{equation}
+This is a pure $\varepsilon^2$ correction (about $7\%$ at $\varepsilon=0.3$). It is included automatically whenever $\lambda_0$ is the exact root of \eqref{eq:eigen}, as in \texttt{kappa\_roots}. It does \emph{not} change the $Z_F$ dependence.
+
+\subsection{Correction 2: higher radial modes on the flat auxiliary plane}
+Evaluating the full series \eqref{eq:field} at $\ell=Z_F$ gives
+\begin{equation}\frac{q(r)}{q(0)}=\frac{\sum_nw_nJ_0(k_nr)}{\sum_nw_n},\qquad w_n(Z)=\frac{b_n\lambda_n}{\sinh(\lambda_nZ/R)}.\end{equation}
+Inserting this into \eqref{eq:etaZ} gives, within this closure and for any $\varepsilon$,
+\begin{equation}\mathcal K_{\rm plane}=\frac{1}{2R^2}\int_0^{Z_F}\langle\lambda^2\rangle(Z)\,dZ,\qquad
+\langle\lambda^2\rangle=\frac{\sum_nw_n\lambda_n^2}{\sum_nw_n}.\label{eq:Kplane_exact}\end{equation}
+At $O(\varepsilon)$, use \eqref{eq:bn_lead}--\eqref{eq:r2} and $x_n\equiv\alpha_nZ_F/R$:
+\begin{equation}\boxed{\mathcal K_{\rm plane}=\frac{\varepsilon}{R^2}\left|Z_F+R\sum_{n\ge1}\frac{I(x_n)}{\alpha_nJ_0(\alpha_n)}\right|,\qquad I(x)=\int_0^x\frac{u\,du}{\sinh u}\;\xrightarrow{x\to\infty}\;\frac{\pi^2}{4}.}\label{eq:Kplane}\end{equation}
+For $Z_F\gtrsim2R$ the remainders are exponentially small, giving an \emph{effective origin shift}
+\begin{equation}\mathcal K_{\rm plane}\simeq\frac{\varepsilon}{R^2}\bigl(Z_F-Z_*\bigr),\qquad Z_*=-\frac{\pi^2R}{4}C_\infty\simeq0.949\,R.\end{equation}
+At finite $\varepsilon$, using $\int_0^\infty\sinh(az)/\sinh(bz)\,dz=(\pi/2b)\tan(\pi a/2b)$,
+\begin{equation}Z_*=-\frac{\pi R}{2b_0\lambda_0^3}\sum_{n\ge1}b_n(\lambda_n^2-\lambda_0^2)\tan\frac{\pi\lambda_0}{2\lambda_n}.\end{equation}
+This gives $Z_*/R=0.943$, $0.937$, and $0.916$ for $\varepsilon=0.05$, $0.1$, and $0.3$.
+
+Physically, near the source the wall's influence has not yet reached the axis, so the front starts flat; the higher modes represent this delay. The $O(\varepsilon)$ coefficients $b_{n\ge1}$ are small, but they are multiplied by $\lambda_n^2$ and by an integration over $Z$, so the shift is $O(R)$, not $O(\varepsilon R)$. For $Z_F\lesssim R$ this closure is dominated by the source--wall corner, where the quasi-steady model is least reliable.
+
+\subsection{Correction 3: the curved-front boundary condition}
+Both previous results evaluate $q$ on the plane $z=Z_F$, whereas $U$ must vanish on $z=Z_F+\eta(r)$. Write $U=U^{(0)}+U^{(1)}$, where $U^{(0)}$ is the plane solution \eqref{eq:field} with $\ell=Z_F$, and let $q^{(0)}=-\partial_zU^{(0)}(Z_F,r)$. Taylor-transferring the condition to the plane gives
+\begin{equation}U^{(1)}(Z_F,r)=\eta(r)\,q^{(0)}(r),\qquad U^{(1)}(0,r)=0,\qquad
+U^{(1)}=\sum_ng_nJ_0(k_nr)\frac{\sinh k_nz}{\sinh k_nZ_F},\end{equation}
+with $g_n=N_n^{-1}\int_0^Rr\,\eta\,q^{(0)}J_0(k_nr)\,dr$. Because $U^{(0)}\equiv0$ on the plane, $\partial_z^2U^{(0)}=-r^{-1}\partial_r(r\partial_rU^{(0)})=0$ there. The flux on the true front is therefore
+\begin{equation}\boxed{q(r)=q^{(0)}(r)-\sum_ng_n\,k_n\coth(k_nZ_F)\,J_0(k_nr)+O(\eta^2).}\label{eq:DtN}\end{equation}
+The second term is a Dirichlet-to-Neumann response. A part of the front that lags by $\eta_n$ in radial mode $n$ is closer to the source, so it receives an extra flux of relative size $\approx k_n|\eta_n|$ and catches up: the front is \emph{self-flattening}.
+
+This term is not optional. In the plane closure $\eta\sim\varepsilon Z_F$, so the relaxation $k_1\eta\sim\varepsilon\alpha_1Z_F/R$ is of the same order as the wall-loss forcing ($\sim\varepsilon$) as soon as $Z_F\gtrsim R/\alpha_1\approx0.26R$.
+
+\paragraph{Leading-order solution.} At $O(\varepsilon)$, $q^{(0)}\simeq U_s/Z_F$ inside $g_n$, so $g_n\simeq(U_s/Z_F)\eta_n$; the $n=0$ term only contributes at $O(\varepsilon^2)$. Expanding $q^{(0)}(r)/q^{(0)}(0)-1$ with \eqref{eq:r2} gives the forcing $\sigma_n=-b_n\,(1-x/\sinh x)|_{x=\alpha_nZ/R}$. Equation \eqref{eq:etaZ} then decouples into independent linear relaxation equations,
+\begin{equation}\frac{d\eta_n}{dZ_F}=-b_n\left(1-\frac{x_n}{\sinh x_n}\right)-\frac{\alpha_n}{R}\coth(x_n)\,\eta_n,\qquad x_n=\frac{\alpha_nZ_F}{R}.\end{equation}
+With the integrating factor $\sinh x_n$ they have the closed-form solution
+\begin{equation}\eta_n=-\frac{b_nR}{\alpha_n}\,F(x_n),\qquad F(x)=\frac{\cosh x-1-x^2/2}{\sinh x}\;\xrightarrow{x\to\infty}\;1,\qquad F(x)\simeq\frac{x^3}{24}\ (x\ll1).\end{equation}
+Hence the front shape and the on-axis curvature are
+\begin{align}
+z_F(r,t)&=Z_F(t)-2\varepsilon R\sum_{n\ge1}\frac{F(x_n)}{\alpha_n^3J_0(\alpha_n)}\Bigl[J_0\!\left(\tfrac{\alpha_nr}{R}\right)-1\Bigr],\label{eq:shape_sc}\\
+\mathcal K_{\rm sc}&=\frac{\varepsilon}{R}\left|\sum_{n\ge1}\frac{F(x_n)}{\alpha_nJ_0(\alpha_n)}\right|
+=\frac{\varepsilon}{R}\left|C_\infty+\sum_{n\ge1}\frac{F(x_n)-1}{\alpha_nJ_0(\alpha_n)}\right|.\label{eq:Ksc}
+\end{align}
+For $Z_F\gtrsim2R$ the curvature \emph{saturates}:
+\begin{equation}\boxed{\mathcal K_\infty=\frac{|C_\infty|\,\varepsilon}{R}\simeq0.385\,\frac{\varepsilon}{R},\qquad \mathcal R_{c,\infty}\simeq2.60\,\frac{R}{\varepsilon},\qquad Z_F-z_F(R)\to0.120\,\varepsilon R.}\end{equation}
+This is a balance between wall-loss forcing and lateral relaxation, independent of $Z_F$. It differs qualitatively from \eqref{eq:K0}, where $\mathcal R_c\propto1/Z_F$.
+
+The solution also satisfies the corner condition automatically. Since $J_1(\alpha_n)=0$, $\partial_r\eta(R)=0$, which is required at a regular point where $U=0$ meets a Robin wall: there $\partial_rU=-hU=0$, so the tangential condition gives $\partial_rz_F\,\partial_zU=0$. The single-mode profile \eqref{eq:K0} instead has wall slope $-Z_Fk_0J_1(\lambda_0)\simeq-\varepsilon Z_F/R$.
+
+\paragraph{Time-dependent wall loss.} Because the equations are linear and $b_n\propto\varepsilon$, a slowly varying $\varepsilon(t)$ (e.g.\ from a time-dependent albedo) is included by superposition. Let $\varepsilon(Z')$ denote its value when the axis front was at $Z'$. Then
+\begin{equation}\partial_r^2\eta(0,t)=\frac{1}{R^2}\sum_{n\ge1}\frac{1}{J_0(\alpha_n)\sinh x_n(t)}\int_0^{Z_F(t)}\varepsilon(Z')\left[\sinh\frac{\alpha_nZ'}{R}-\frac{\alpha_nZ'}{R}\right]dZ'.\end{equation}
+The kernel decays as $e^{-\alpha_n(Z_F-Z')/R}$, so the memory length is $R/\alpha_1\approx0.26R$. Using the instantaneous $\varepsilon(t)$ is therefore justified here. In the plane closure, by contrast, the leading term becomes $R^{-2}\int_0^{Z_F}\varepsilon\,dZ'$ and the full history matters.
+
+\subsection{Comparison and numerical check}
+To test the expansions, \eqref{eq:etaZ} was also solved without linearization. The field is represented as $U=U_s\sum_{n<N}J_0(k_nr)\bigl[b_n\sinh k_n(Z_F-z)+\beta_n\sinh k_nz\bigr]/\sinh k_nZ_F$, which satisfies the source and Robin conditions exactly. The $\beta_n$ are found by weighted least squares so that $U=0$ on the current curved front, and the front is advanced in $Z_F$ (RK2, $N=120$ exact Robin modes, start flat at $Z_F=0.02R$). The residual on the front stays below $10^{-3}U_s$, and the results change by about $3\%$ when $N$ is lowered to $70$. This reference includes all orders in $\varepsilon$ and $\eta$ except the slope factor, which is $O(10^{-2}\varepsilon^2)$ there.
+\begin{center}
+\begin{tabular}{@{}ccccccc@{}}
+\toprule
+& \multicolumn{3}{c}{$O(\varepsilon)$ theory: $\mathcal K R/\varepsilon$} & \multicolumn{3}{c}{full curved-front solution: $\mathcal KR/\varepsilon$}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+$Z_F/R$ & single \eqref{eq:K0} & plane \eqref{eq:Kplane} & curved \eqref{eq:Ksc} & $\varepsilon=0.05$ & $\varepsilon=0.1$ & $\varepsilon=0.3$\\
+\midrule
+0.5 & 0.50 & 0.006 & 0.012 & 0.011 & 0.011 & 0.011\\
+1   & 1.00 & 0.180 & 0.171 & 0.168 & 0.165 & 0.155\\
+2   & 2.00 & 1.056 & 0.366 & 0.358 & 0.353 & 0.331\\
+3   & 3.00 & 2.051 & 0.384 & 0.374 & 0.368 & 0.347\\
+4   & 4.00 & 3.051 & 0.385 & 0.374 & 0.368 & 0.345\\
+\bottomrule
+\end{tabular}
+\end{center}
+The plane column was also reproduced by the same numerical integration with $q$ taken on the plane, and the predicted wall lag $0.120\,\varepsilon R$ matches the numerical value. The remaining difference between the curved-front columns is the $O(\varepsilon^2)$ term $\mathcal F_2$, roughly $-(0.3$--$0.4)\varepsilon$ in relative terms. Substituting exact Robin $\lambda_n,b_n$ into \eqref{eq:Ksc} recovers only about a third of it.
+
+\subsection{Off-axis curvature}
+For \eqref{eq:shape_sc}, with $\rho_n=\alpha_nr/R$ and $J_0'=-J_1$, $J_1'(x)=J_0(x)-J_1(x)/x$,
+\begin{equation}\partial_r\eta=2\varepsilon\sum_{n\ge1}\frac{F(x_n)J_1(\rho_n)}{\alpha_n^2J_0(\alpha_n)},\qquad
+\partial_r^2\eta=\frac{2\varepsilon}{R}\sum_{n\ge1}\frac{F(x_n)\bigl[J_0(\rho_n)-J_1(\rho_n)/\rho_n\bigr]}{\alpha_nJ_0(\alpha_n)}.\end{equation}
+For the single-mode profile, $\partial_r\eta=-Z_Fk_0J_1(k_0r)$ and $\partial_r^2\eta=-Z_Fk_0^2\bigl[J_0(k_0r)-J_1(k_0r)/(k_0r)\bigr]$. The two principal curvatures of the surface of revolution are
+\begin{equation}\mathcal K_m(r)=\frac{|\partial_r^2\eta|}{[1+(\partial_r\eta)^2]^{3/2}},\qquad
+\mathcal K_\theta(r)=\frac{|\partial_r\eta|}{r\,[1+(\partial_r\eta)^2]^{1/2}},\end{equation}
+which coincide at $r=0$. The slope corrections in the denominators are $O(\varepsilon^2)$.
+
+\subsection{\texorpdfstring{Next order, $O(\varepsilon^2)$: what must be added}{Next order, O(epsilon squared): what must be added}}
+A systematic $\mathcal F_2$ requires all of the following together; keeping only some of them is not consistent:
+\begin{enumerate}
+\item exact Robin $\lambda_n$, $b_n$, $J_0(k_nr)$, and $N_n$ in place of $\alpha_n$, \eqref{eq:bn_lead}, and $\psi_n$, including the slow $n=0$ relaxation rate $k_0\coth(k_0Z_F)$;
+\item the radial variation of $q^{(0)}$ inside $g_n$, i.e.\ the product $\eta\,q^{(0)}$, not $\eta\,q^{(0)}(0)$;
+\item the second-order transfer of the front condition, $U^{(2)}(Z_F,r)=-\eta\,\partial_zU^{(1)}(Z_F,r)$ (the $\tfrac12\eta^2\partial_z^2U^{(0)}$ term vanishes);
+\item the slope factor $1+(\partial_r\eta)^2$ in \eqref{eq:etaZ};
+\item if $\varepsilon=\varepsilon(t)$, the time dependence of the eigenbasis itself.
+\end{enumerate}
+The collocation solver above contains items 1--3 automatically and is the practical route beyond $O(\varepsilon)$.
+
+\subsection{\texorpdfstring{Recipe for a given $Z_F(t)$}{Recipe for a given ZF(t)}}
+\begin{enumerate}
+\item Take $Z_F(t)$ from the trusted source and $\varepsilon(t)$ from the albedo model, $\varepsilon=\tfrac34\rho\kappa R(1-a)$.
+\item Form $x_n=\alpha_nZ_F/R$ for $n=1,\dots,N$. Because $F(x_n)-1$ and $I(x_n)-\pi^2/4$ decay like $x_ne^{-x_n}$, a few modes suffice once the constant $C_\infty$ is used for the tail.
+\item Choose the closure. Plane (Hurricane--Hammer-type): \eqref{eq:Kplane}. Self-consistent curved front: \eqref{eq:Ksc}. Then $\mathcal R_c=1/\mathcal K$, with the shape from \eqref{eq:shape_sc} if needed.
+\item For $\varepsilon\gtrsim0.2$, or to quantify $\mathcal F_2$, solve \eqref{eq:etaZ} numerically with the curved-front collocation.
+\end{enumerate}
+
+\subsection{Implementation in the code}
+The closures are implemented in \texttt{front\_curvature.py} (class \texttt{FrontShapeModel}) and selected by \texttt{Front\_curvature\_closure} in \texttt{parameters.py} (\texttt{"single"}, \texttt{"plane"}, \texttt{"curved"}). The model is advanced once per time step of the Marshak march, with $\varepsilon$ and $k_0$ frozen over each step $\Delta Z_F$. Three choices go beyond the $O(\varepsilon)$ formulas above.
+\begin{enumerate}
+\item \emph{Exact forcing projection.} The forcing $J_0(k_0r)-1=-\sum_{n\ge1}\tilde b_n[\psi_n(r)-1]$ is projected exactly onto the fixed Neumann basis:
+\begin{equation}\tilde b_n=\frac{2\lambda_0J_1(\lambda_0)}{(\alpha_n^2-\lambda_0^2)\,J_0(\alpha_n)}=\frac{2\varepsilon J_0(\lambda_0)}{(\alpha_n^2-\lambda_0^2)\,J_0(\alpha_n)}.\end{equation}
+This reduces to \eqref{eq:bn_lead} as $\varepsilon\to0$ and stays bounded for $\varepsilon\gg1$, as happens at early times when the front is still thin. With it, the curved closure gives $\mathcal KR/\varepsilon=0.379$, $0.373$, and $0.352$ at $Z_F=4R$ for $\varepsilon=0.05$, $0.1$, and $0.3$. The full curved-front solution gives $0.374$, $0.368$, and $0.345$, so most of the $O(\varepsilon^2)$ gap is removed.
+\item \emph{History in the plane closure.} For time-dependent $\varepsilon$ the leading term is $\int_0^{Z_F}[J_0(k_0(Z')r)-1]\,dZ'$, not $Z_F[J_0(k_0r)-1]$. It is accumulated through the moments $S_m=\int_0^{Z_F}(k_0R)^{2m}dZ'$ of the $J_0$ power series. The mode corrections obey $d\delta_n/dZ_F=\tilde b_n\,x_n/\sinh x_n$.
+\item \emph{Exact step integration in the curved closure.} The step uses $d(\eta_n\sinh x_n)/dZ_F=-\tilde b_n(\sinh x_n-x_n)$, written in overflow-safe form. For constant $\varepsilon$ this reproduces \eqref{eq:shape_sc} independently of the step size.
+\end{enumerate}
+In both closures the truncated series for $\partial_r^2\eta(0)$ is completed analytically with the remainder of $C_\infty$, weighted by $\lambda_0J_1(\lambda_0)$. With \texttt{Front\_shape\_feedback}, the wall position $z_F(R)$ of the selected closure replaces $Z_FJ_0(\lambda_0)$ in the albedo, heating-time, and wall-penetration models.
+
+\subsection{Physical caveat}
+The self-flattening in Correction 3 is a property of the quasi-steady harmonic model, in which conduction just behind the front relaxes lateral perturbations efficiently. A temperature-dependent opacity alone does not remove it: in the quasi-steady limit it can be absorbed into a Kirchhoff potential that is again harmonic. However, it makes the Robin condition nonlinear, with relatively stronger loss near the cold front. More importantly, the neglected heat-capacity term $\rho\,\partial_te$ is not small in a supersonic Marshak wave.
+
+Hence \eqref{eq:K0}--\eqref{eq:Kplane} (curvature keeps growing with $Z_F$) and \eqref{eq:Ksc} (curvature saturates at $\mathcal R_c\simeq2.6R/\varepsilon$) should be regarded as two limiting closures of the same leading-order physics, not as a converged prediction. The observed behaviour of $\mathcal R_c$ versus $Z_F$ at fixed $\varepsilon$ discriminates between them directly. A 2D simulation or measurement that keeps bending as $\mathcal R_c\propto1/Z_F$ indicates that lateral relaxation is weaker than the harmonic model assumes.
+
 \section{Physical interpretation and limitations}
-The cylindrical eigenfunctions and Robin eigenvalues determine the radial dependence associated with wall losses. The leading eigenvalue $k_0R\sim\sqrt{2\varepsilon}$ produces the first-order reduction of axial penetration toward the sleeve. The auxiliary solution \eqref{eq:field} and the illustrative evolution \eqref{eq:c0} approximate the nonlinear moving-front problem; higher-mode coupling and the actual curved-front boundary condition should be solved to obtain a controlled higher-order correction. The calibration \eqref{eq:corrected} is appropriate when a separate model or measurement supplies a more reliable \emph{on-axis} trajectory and one wants to retain the Bessel-predicted bending.
+The cylindrical eigenfunctions and Robin eigenvalues determine the radial dependence associated with wall losses. The leading eigenvalue $k_0R\sim\sqrt{2\varepsilon}$ produces the first-order reduction of axial penetration toward the sleeve. The auxiliary solution \eqref{eq:field} and the illustrative evolution \eqref{eq:c0} approximate the nonlinear moving-front problem; higher-mode coupling and the actual curved-front boundary condition change the curvature already at leading order in $\varepsilon$ and are treated in Section~\ref{sec:higher}. The calibration \eqref{eq:corrected} is appropriate when a separate model or measurement supplies a more reliable \emph{on-axis} trajectory and one wants to retain the Bessel-predicted bending.
 
 \section{Selected Bessel identities}
 \begin{align}
