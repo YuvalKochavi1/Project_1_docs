@@ -1,0 +1,655 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  18 OCT 2026 22:45
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./experiments_insights.tex
+(experiments_insights.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen149
+))
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen150
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count283
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count284
+\leftroot@=\count285
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count286
+\DOTSCASE@=\count287
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen151
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count288
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count289
+\dotsspace@=\muskip17
+\c@parentequation=\count290
+\dspbrk@lvl=\count291
+\tag@help=\toks18
+\row@=\count292
+\column@=\count293
+\maxfields@=\count294
+\andhelp@=\toks19
+\eqnshift@=\dimen152
+\alignsep@=\dimen153
+\tagshift@=\dimen154
+\tagwidth@=\dimen155
+\totwidth@=\dimen156
+\lineht@=\dimen157
+\@envbody=\toks20
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/tools\bm.sty
+Package: bm 2025/10/21 v1.2g Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
+Package bm Info: No bold for \U/msa/m/n, using \pmb.
+Package bm Info: No bold for \U/msb/m/n, using \pmb.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count295
+\Gm@cntv=\count296
+\c@Gm@tempcnt=\count297
+\Gm@bindingoffset=\dimen158
+\Gm@wd@mp=\dimen159
+\Gm@odd@mp=\dimen160
+\Gm@even@mp=\dimen161
+\Gm@layoutwidth=\dimen162
+\Gm@layoutheight=\dimen163
+\Gm@layouthoffset=\dimen164
+\Gm@layoutvoffset=\dimen165
+\Gm@dimlist=\toks23
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg
+))
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics
+.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.d
+ef
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen166
+\Gin@req@width=\dimen167
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count298
+\float@exts=\toks24
+\float@box=\box55
+\@float@everytoks=\toks25
+\@floatcapt=\box56
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cf
+g
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.lt
+x)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
+dftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count299
+) (experiments_insights.aux
+
+LaTeX Warning: Label `fig:backpop_front_ta2o5' multiply defined.
+
+)
+\openout1 = `experiments_insights.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
+mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count300
+\scratchdimen=\dimen168
+\scratchbox=\box57
+\nofMPsegments=\count301
+\nofMParguments=\count302
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count303
+\MPscratchDim=\dimen169
+\MPnumerator=\count304
+\makeMPintoPDFobject=\count305
+\everyMPtoPDFconversion=\toks27
+)
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
+-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys
+.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
+
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
+
+
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+<figures_French22/front_position - gold coating (density 17.6).png, id=1, 578.1
+6pt x 433.62pt>
+File: figures_French22/front_position - gold coating (density 17.6).png Graphic
+ file (type png)
+<use figures_French22/front_position - gold coating (density 17.6).png>
+Package pdftex.def Info: figures_French22/front_position - gold coating (densit
+y 17.6).png  used on input line 26.
+(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+<figures_French22/curvature_comparison_1.5mm.png, id=3, 491.436pt x 404.4711pt>
+
+File: figures_French22/curvature_comparison_1.5mm.png Graphic file (type png)
+<use figures_French22/curvature_comparison_1.5mm.png>
+Package pdftex.def Info: figures_French22/curvature_comparison_1.5mm.png  used 
+on input line 34.
+(pdftex.def)             Requested size: 225.4804pt x 185.58374pt.
+<figures_French22/T4_spatial_heatmap_4.5ns.png, id=4, 332.15292pt x 549.252pt>
+File: figures_French22/T4_spatial_heatmap_4.5ns.png Graphic file (type png)
+<use figures_French22/T4_spatial_heatmap_4.5ns.png>
+Package pdftex.def Info: figures_French22/T4_spatial_heatmap_4.5ns.png  used on
+ input line 36.
+(pdftex.def)             Requested size: 131.53082pt x 217.50111pt.
+
+[1
+
+{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./figures_
+French22/front_position - gold coating (density 17.6).png>]
+<figures_French22/lambda_eff_vs_time.png, id=21, 578.16pt x 433.62pt>
+File: figures_French22/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_French22/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_French22/lambda_eff_vs_time.png  used on input
+ line 44.
+(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+<figures_French22/front_position - gold coating (density 39.4).png, id=22, 578.
+16pt x 433.62pt>
+File: figures_French22/front_position - gold coating (density 39.4).png Graphic
+ file (type png)
+<use figures_French22/front_position - gold coating (density 39.4).png>
+Package pdftex.def Info: figures_French22/front_position - gold coating (densit
+y 39.4).png  used on input line 52.
+(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+<figures_French22/lambda_eff_vs_time_39.4.png, id=23, 578.16pt x 433.62pt>
+File: figures_French22/lambda_eff_vs_time_39.4.png Graphic file (type png)
+<use figures_French22/lambda_eff_vs_time_39.4.png>
+Package pdftex.def Info: figures_French22/lambda_eff_vs_time_39.4.png  used on 
+input line 60.
+(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2 <./figures_French22/curvature_comparison_1.5mm.png> <./figures_French22/T4_s
+patial_heatmap_4.5ns.png> <./figures_French22/lambda_eff_vs_time.png>] [3 <./fi
+gures_French22/front_position - gold coating (density 39.4).png> <./figures_Fre
+nch22/lambda_eff_vs_time_39.4.png>]
+<figures_French24/lambda_eff_vs_time.png, id=35, 578.16pt x 433.62pt>
+File: figures_French24/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_French24/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_French24/lambda_eff_vs_time.png  used on input
+ line 73.
+(pdftex.def)             Requested size: 225.4804pt x 169.10449pt.
+<figures_French24/lambda_eff_vs_time copper.png, id=36, 578.16pt x 433.62pt>
+File: figures_French24/lambda_eff_vs_time copper.png Graphic file (type png)
+<use figures_French24/lambda_eff_vs_time copper.png>
+Package pdftex.def Info: figures_French24/lambda_eff_vs_time copper.png  used o
+n input line 75.
+(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+<figures_French24/front_position - french_gold.png, id=37, 578.16pt x 433.62pt>
+
+File: figures_French24/front_position - french_gold.png Graphic file (type png)
+
+<use figures_French24/front_position - french_gold.png>
+Package pdftex.def Info: figures_French24/front_position - french_gold.png  use
+d on input line 85.
+(pdftex.def)             Requested size: 281.85587pt x 211.39055pt.
+<figures_French24/front_position - french_copper.png, id=38, 578.16pt x 433.62p
+t>
+File: figures_French24/front_position - french_copper.png Graphic file (type pn
+g)
+<use figures_French24/front_position - french_copper.png>
+Package pdftex.def Info: figures_French24/front_position - french_copper.png  u
+sed on input line 92.
+(pdftex.def)             Requested size: 281.85587pt x 211.39055pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4 <./figures_French24/lambda_eff_vs_time.png> <./figures_French24/lambda_eff_v
+s_time copper.png> <./figures_French24/front_position - french_gold.png>]
+<figures_French24/combined_curvature_comparison.png, id=46, 538.4115pt x 393.63
+06pt>
+File: figures_French24/combined_curvature_comparison.png Graphic file (type png
+)
+<use figures_French24/combined_curvature_comparison.png>
+Package pdftex.def Info: figures_French24/combined_curvature_comparison.png  us
+ed on input line 101.
+(pdftex.def)             Requested size: 234.8775pt x 171.71443pt.
+<figures_backPRL/article fluxes.png, id=47, 620.3175pt x 377.61075pt>
+File: figures_backPRL/article fluxes.png Graphic file (type png)
+<use figures_backPRL/article fluxes.png>
+Package pdftex.def Info: figures_backPRL/article fluxes.png  used on input line
+ 112.
+(pdftex.def)             Requested size: 234.8775pt x 142.975pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5 <./figures_French24/front_position - french_copper.png> <./figures_French24/
+combined_curvature_comparison.png>]
+<figures_backPRL/front.png, id=53, 578.16pt x 433.62pt>
+File: figures_backPRL/front.png Graphic file (type png)
+<use figures_backPRL/front.png>
+Package pdftex.def Info: figures_backPRL/front.png  used on input line 121.
+(pdftex.def)             Requested size: 223.13649pt x 167.35112pt.
+<figures_backPRL/lambda_eff_vs_time.png, id=54, 578.16pt x 433.62pt>
+File: figures_backPRL/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_backPRL/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_backPRL/lambda_eff_vs_time.png  used on input 
+line 123.
+(pdftex.def)             Requested size: 220.78543pt x 165.58452pt.
+<figures_backPRL/curvature.png, id=55, 1003.75pt x 803.0pt>
+File: figures_backPRL/curvature.png Graphic file (type png)
+<use figures_backPRL/curvature.png>
+Package pdftex.def Info: figures_backPRL/curvature.png  used on input line 132.
+
+(pdftex.def)             Requested size: 234.8775pt x 187.89635pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6 <./figures_backPRL/article fluxes.png> <./figures_backPRL/front.png> <./figu
+res_backPRL/lambda_eff_vs_time.png>]
+<figures_backPOP/front.png, id=65, 578.16pt x 433.62pt>
+File: figures_backPOP/front.png Graphic file (type png)
+<use figures_backPOP/front.png>
+Package pdftex.def Info: figures_backPOP/front.png  used on input line 146.
+(pdftex.def)             Requested size: 223.13649pt x 167.35112pt.
+<figures_backPOP/lambda_eff_vs_time.png, id=66, 578.16pt x 433.62pt>
+File: figures_backPOP/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_backPOP/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_backPOP/lambda_eff_vs_time.png  used on input 
+line 148.
+(pdftex.def)             Requested size: 220.78543pt x 165.58452pt.
+ [7 <./figures_backPRL/curvature.png (PNG copy)> <./figures_backPOP/front.png> 
+<./figures_backPOP/lambda_eff_vs_time.png>]
+<figures_backPOP/front_surface.png, id=73, 264.187pt x 534.798pt>
+File: figures_backPOP/front_surface.png Graphic file (type png)
+<use figures_backPOP/front_surface.png>
+Package pdftex.def Info: figures_backPOP/front_surface.png  used on input line 
+157.
+(pdftex.def)             Requested size: 112.74377pt x 228.22865pt.
+<figures_backPOP/all_coatings_front_surface_t2.5ns.png, id=74, 214.8025pt x 534
+.798pt>
+File: figures_backPOP/all_coatings_front_surface_t2.5ns.png Graphic file (type 
+png)
+<use figures_backPOP/all_coatings_front_surface_t2.5ns.png>
+Package pdftex.def Info: figures_backPOP/all_coatings_front_surface_t2.5ns.png 
+ used on input line 159.
+(pdftex.def)             Requested size: 91.60567pt x 228.07361pt.
+[8 <./figures_backPOP/front_surface.png> <./figures_backPOP/all_coatings_front_
+surface_t2.5ns.png>]
+<figures_backPOP/front2.png, id=80, 578.16pt x 433.62pt>
+File: figures_backPOP/front2.png Graphic file (type png)
+<use figures_backPOP/front2.png>
+Package pdftex.def Info: figures_backPOP/front2.png  used on input line 174.
+(pdftex.def)             Requested size: 223.13649pt x 167.35112pt.
+<figures_backPOP/lambda_eff_vs_time2.png, id=81, 578.16pt x 433.62pt>
+File: figures_backPOP/lambda_eff_vs_time2.png Graphic file (type png)
+<use figures_backPOP/lambda_eff_vs_time2.png>
+Package pdftex.def Info: figures_backPOP/lambda_eff_vs_time2.png  used on input
+ line 176.
+(pdftex.def)             Requested size: 220.78543pt x 165.58452pt.
+ [9 <./figures_backPOP/front2.png> <./figures_backPOP/lambda_eff_vs_time2.png>]
+<figures_backPOP/flux_curvature_post_breakout_0.5ns.png, id=87, 578.16pt x 433.
+62pt>
+File: figures_backPOP/flux_curvature_post_breakout_0.5ns.png Graphic file (type
+ png)
+<use figures_backPOP/flux_curvature_post_breakout_0.5ns.png>
+Package pdftex.def Info: figures_backPOP/flux_curvature_post_breakout_0.5ns.png
+  used on input line 187.
+(pdftex.def)             Requested size: 234.8775pt x 176.15768pt.
+<figures_backPOP/flux_curvature_be_vs_gold.png, id=88, 519.25995pt x 398.9304pt
+>
+File: figures_backPOP/flux_curvature_be_vs_gold.png Graphic file (type png)
+<use figures_backPOP/flux_curvature_be_vs_gold.png>
+Package pdftex.def Info: figures_backPOP/flux_curvature_be_vs_gold.png  used on
+ input line 196.
+(pdftex.def)             Requested size: 159.71498pt x 122.70537pt.
+<figures_backPOP/T4_heatmap_be_vs_gold.png, id=89, 1002.3849pt x 475.89795pt>
+File: figures_backPOP/T4_heatmap_be_vs_gold.png Graphic file (type png)
+<use figures_backPOP/T4_heatmap_be_vs_gold.png>
+Package pdftex.def Info: figures_backPOP/T4_heatmap_be_vs_gold.png  used on inp
+ut line 198.
+(pdftex.def)             Requested size: 267.7638pt x 127.12172pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10 <./figures_backPOP/flux_curvature_post_breakout_0.5ns.png>]
+<figures_backPOP/flux_curvature_post_breakout_0.4ns.png, id=94, 578.16pt x 433.
+62pt>
+File: figures_backPOP/flux_curvature_post_breakout_0.4ns.png Graphic file (type
+ png)
+<use figures_backPOP/flux_curvature_post_breakout_0.4ns.png>
+Package pdftex.def Info: figures_backPOP/flux_curvature_post_breakout_0.4ns.png
+  used on input line 211.
+(pdftex.def)             Requested size: 211.38832pt x 158.53795pt.
+ [11 <./figures_backPOP/flux_curvature_be_vs_gold.png> <./figures_backPOP/T4_he
+atmap_be_vs_gold.png> <./figures_backPOP/flux_curvature_post_breakout_0.4ns.png
+>]
+<figures_JiYan/front_position - compare Ji-Yan.png, id=101, 578.16pt x 433.62pt
+>
+File: figures_JiYan/front_position - compare Ji-Yan.png Graphic file (type png)
+
+<use figures_JiYan/front_position - compare Ji-Yan.png>
+Package pdftex.def Info: figures_JiYan/front_position - compare Ji-Yan.png  use
+d on input line 225.
+(pdftex.def)             Requested size: 192.60127pt x 144.45142pt.
+<figures_JiYan/lambda_eff_vs_time.png, id=102, 578.16pt x 433.62pt>
+File: figures_JiYan/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_JiYan/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_JiYan/lambda_eff_vs_time.png  used on input li
+ne 227.
+(pdftex.def)             Requested size: 192.60127pt x 144.45142pt.
+<figures_JiYan/Ji-Yan_0.5ns.png, id=103, 568.37344pt x 362.10281pt>
+File: figures_JiYan/Ji-Yan_0.5ns.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_0.5ns.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_0.5ns.png  used on input line 236
+.
+(pdftex.def)             Requested size: 197.29623pt x 125.6936pt.
+<figures_JiYan/Ji-Yan_0.5ns_front.png, id=104, 293.4965pt x 170.6375pt>
+File: figures_JiYan/Ji-Yan_0.5ns_front.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_0.5ns_front.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_0.5ns_front.png  used on input li
+ne 238.
+(pdftex.def)             Requested size: 201.99121pt x 117.44057pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures_JiYan/Ji-Yan_1ns.png, id=105, 550.30594pt x 393.72093pt>
+File: figures_JiYan/Ji-Yan_1ns.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1ns.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1ns.png  used on input line 245.
+(pdftex.def)             Requested size: 197.29623pt x 141.15668pt.
+<figures_JiYan/Ji-Yan_1ns_front.png, id=106, 293.4965pt x 170.6375pt>
+File: figures_JiYan/Ji-Yan_1ns_front.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1ns_front.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1ns_front.png  used on input line
+ 247.
+(pdftex.def)             Requested size: 201.99121pt x 117.44057pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures_JiYan/Ji-Yan_1.3ns.png, id=107, 512.66531pt x 328.22626pt>
+File: figures_JiYan/Ji-Yan_1.3ns.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1.3ns.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1.3ns.png  used on input line 254
+.
+(pdftex.def)             Requested size: 197.29623pt x 126.31491pt.
+<figures_JiYan/Ji-Yan_1.3ns_front.png, id=108, 293.4965pt x 170.6375pt>
+File: figures_JiYan/Ji-Yan_1.3ns_front.png Graphic file (type png)
+<use figures_JiYan/Ji-Yan_1.3ns_front.png>
+Package pdftex.def Info: figures_JiYan/Ji-Yan_1.3ns_front.png  used on input li
+ne 256.
+(pdftex.def)             Requested size: 201.99121pt x 117.44057pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 <./figures_JiYan/front_position - compare Ji-Yan.png> <./figures_JiYan/lamb
+da_eff_vs_time.png>] [13 <./figures_JiYan/Ji-Yan_0.5ns.png> <./figures_JiYan/Ji
+-Yan_0.5ns_front.png> <./figures_JiYan/Ji-Yan_1ns.png> <./figures_JiYan/Ji-Yan_
+1ns_front.png> <./figures_JiYan/Ji-Yan_1.3ns.png> <./figures_JiYan/Ji-Yan_1.3ns
+_front.png>]
+<figures_Moore/front_position - compare Moore SiO2.png, id=124, 578.16pt x 433.
+62pt>
+File: figures_Moore/front_position - compare Moore SiO2.png Graphic file (type 
+png)
+<use figures_Moore/front_position - compare Moore SiO2.png>
+Package pdftex.def Info: figures_Moore/front_position - compare Moore SiO2.png 
+ used on input line 268.
+(pdftex.def)             Requested size: 225.4804pt x 169.10449pt.
+<figures_Moore/lambda_eff_vs_time.png, id=125, 578.16pt x 433.62pt>
+File: figures_Moore/lambda_eff_vs_time.png Graphic file (type png)
+<use figures_Moore/lambda_eff_vs_time.png>
+Package pdftex.def Info: figures_Moore/lambda_eff_vs_time.png  used on input li
+ne 270.
+(pdftex.def)             Requested size: 225.4804pt x 169.10449pt.
+<figures_Moore/moore_sio2_heatmap.png, id=126, 448.67625pt x 503.63156pt>
+File: figures_Moore/moore_sio2_heatmap.png Graphic file (type png)
+<use figures_Moore/moore_sio2_heatmap.png>
+Package pdftex.def Info: figures_Moore/moore_sio2_heatmap.png  used on input li
+ne 279.
+(pdftex.def)             Requested size: 164.41711pt x 184.5502pt.
+<figures_Moore/model_vs_moore_normalized.png, id=127, 555.7563pt x 377.0085pt>
+File: figures_Moore/model_vs_moore_normalized.png Graphic file (type png)
+<use figures_Moore/model_vs_moore_normalized.png>
+Package pdftex.def Info: figures_Moore/model_vs_moore_normalized.png  used on i
+nput line 281.
+(pdftex.def)             Requested size: 281.85587pt x 191.20178pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14 <./figures_Moore/front_position - compare Moore SiO2.png> <./figures_Moore/
+lambda_eff_vs_time.png>]
+<figures_Moore/front_position - compare Moore C8H7Cl.png, id=133, 578.16pt x 43
+3.62pt>
+File: figures_Moore/front_position - compare Moore C8H7Cl.png Graphic file (typ
+e png)
+<use figures_Moore/front_position - compare Moore C8H7Cl.png>
+Package pdftex.def Info: figures_Moore/front_position - compare Moore C8H7Cl.pn
+g  used on input line 291.
+(pdftex.def)             Requested size: 225.4804pt x 169.10449pt.
+<figures_Moore/lambda_eff_vs_time_C8H7Cl.png, id=134, 578.16pt x 433.62pt>
+File: figures_Moore/lambda_eff_vs_time_C8H7Cl.png Graphic file (type png)
+<use figures_Moore/lambda_eff_vs_time_C8H7Cl.png>
+Package pdftex.def Info: figures_Moore/lambda_eff_vs_time_C8H7Cl.png  used on i
+nput line 293.
+(pdftex.def)             Requested size: 225.4804pt x 169.10449pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15 <./figures_Moore/moore_sio2_heatmap.png> <./figures_Moore/model_vs_moore_no
+rmalized.png>] [16 <./figures_Moore/front_position - compare Moore C8H7Cl.png> 
+<./figures_Moore/lambda_eff_vs_time_C8H7Cl.png>] (experiments_insights.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
+ ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4100 strings out of 467871
+ 70300 string characters out of 5417408
+ 477088 words of memory out of 5000000
+ 32940 multiletter control sequences out of 15000+600000
+ 639022 words of font info for 81 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,7n,65p,1712b,252s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP
+-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
+/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
+12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP
+-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C
+:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+tt10.pfb>
+Output written on "C:\Users\TLP-001\Documents\GitHub\Project_1_docs\long articl
+e\$build\experiments_insights.pdf" (16 pages, 3230950 bytes).
+PDF statistics:
+ 212 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 196 words of extra memory for PDF output out of 10000 (max. 10000000)
+

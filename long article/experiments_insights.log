@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  17 OCT 2026 21:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.8)  18 OCT 2026 23:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -458,31 +458,6 @@ Package pdftex.def Info: figures_JiYan/Ji-Yan_1.3ns_front.png  used on input lin
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[12 <./figures_JiYan/front_position - compare Ji-Yan.png> <./figures_JiYan/lambda_eff_vs_time.png>]
-Overfull \vbox (18.57845pt too high) has occurred while \output is active []
-
- [13 <./figures_JiYan/Ji-Yan_0.5ns.png> <./figures_JiYan/Ji-Yan_0.5ns_front.png> <./figures_JiYan/Ji-Yan_1ns.png> <./figures_JiYan/Ji-Yan_1ns_front.png> <./figures_JiYan/Ji-Yan_1.3ns.png> <./figures_JiYan/Ji-Yan_1.3ns_front.png>] [14] (experiments_insights.aux)
- ***********
-LaTeX2e <2025-11-01>
-L3 programming layer <2025-11-06>
- ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
-Here is how much of TeX's memory you used:
- 4055 strings out of 467871
- 68034 string characters out of 5417408
- 476010 words of memory out of 5000000
- 32894 multiletter control sequences out of 15000+600000
- 639022 words of font info for 81 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 57i,7n,65p,1774b,252s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on experiments_insights.pdf (14 pages, 2824065 bytes).
-PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+[12 <./figures_JiYan/front_position - compare Ji-Yan.png> <./figures_JiYan/lambda_eff_vs_time.png>] [13 <./figures_JiYan/Ji-Yan_0.5ns.png> <./figures_JiYan/Ji-Yan_0.5ns_front.png> <./figures_JiYan/Ji-Yan_1ns.png> <./figures_JiYan/Ji-Yan_1ns_front.png> <./figures_JiYan/Ji-Yan_1.3ns.png> <./figures_JiYan/Ji-Yan_1.3ns_front.png>]
+<figures_Moore/front_position - compare Moore SiO2.png, id=124, 578.16pt x 433.62pt>
+File: figures_Moore/front_posit

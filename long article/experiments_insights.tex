@@ -260,7 +260,40 @@ Since the foam has no surrounding coating, we can compare the model directly wit
 
 \section{Moore}
 \subsection{SiO$_2$}
+
+Moore \textit{et al.}~\cite{Moore2015} investigated supersonic radiation-diffusion waves in low-density SiO$_2$ aerogel and chlorine-doped polystyrene (C$_8$H$_7$Cl) foams contained within gold tubes and driven by thermal radiation. For the SiO$_2$ case, Fig.~\ref{fig:moore_sio2_front_and_mfp} shows that the uncorrected HR solution substantially overpredicts the propagation speed. Introducing the Marshak boundary condition and two-dimensional effects progressively reduces this discrepancy. The effective-mean-free-path correction brings the predicted trajectory into close agreement with the measured front positions over the plotted time interval. The accompanying mean-free-path plot illustrates how the correction limits the transport length relative to the Rosseland value as it becomes comparable to the transverse geometric scale.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures_Moore/front_position - compare Moore SiO2.png}
+    \hfill
+    \includegraphics[width=0.48\textwidth]{figures_Moore/lambda_eff_vs_time.png}
+    \caption{Moore SiO$_2$ comparison: calculated heat-front trajectories and experimental measurements~\cite{Moore2015} (left), and the Rosseland and effective mean free paths for several limiter exponents, together with the geometric scale $2R$ (right).}
+    \label{fig:moore_sio2_front_and_mfp}
+\end{figure}
+
+To assess the spatial structure in addition to the longitudinal trajectory, Fig.~\ref{fig:moore_sio2_heatmap} compares our model with a radiation-diffusion simulation including hydrodynamics. For SiO$_2$, the temperature maps (left) show very good qualitative agreement in the extent of the heated region, the interior temperature distribution, and the curved front near the tube wall, using the flat-top (FT) approximation and limiter exponent $n=1$. The right panel compares the radial front profiles, each normalized separately to its on-axis position, $x_F(r)/x_F(0)$. The negative radial coordinates of the simulation profile are reflected onto positive $r$ to overlay the two curves. Since the digitized profiles do not contain a sample exactly at $r=0$, the nearest-to-axis value is used for normalization and extended as a constant to the axis. Both profiles remain nearly flat near the axis and decrease toward the wall, showing close agreement in the relative front curvature, with small differences at intermediate radii. This normalized comparison tests the transverse shape independently of the absolute front position; it does not by itself establish agreement in the absolute propagation distance.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.32\textwidth]{figures_Moore/moore_sio2_heatmap.png}
+    \hfill
+    \includegraphics[width=0.50\textwidth]{figures_Moore/model_vs_moore_normalized.png}
+    \caption{SiO$_2$ comparison for the Moore configuration: juxtaposed temperature maps from the radiation-diffusion simulation including hydrodynamics and our model (left), and radial front profiles normalized separately to their on-axis positions (right). The simulation's negative radial coordinates are reflected onto positive $r$. The maps show very good qualitative agreement, while the normalized profiles show close agreement in the relative front curvature.}
+    \label{fig:moore_sio2_heatmap}
+\end{figure}
+
 \subsection{C$_8$H$_7$Cl}
+For the chlorine-doped polystyrene targets studied by Moore \textit{et al.}~\cite{Moore2015}, Fig.~\ref{fig:moore_c8h7cl_front_and_mfp} shows a similar progression in the predicted heat-front trajectory. Both the HR solution and the calculation with the Marshak boundary condition alone substantially overpredict the measured propagation speed. Including two-dimensional effects reduces the discrepancy, while the effective-mean-free-path correction yields very good agreement with the experimental front positions over the measured interval (FT and $n=2$). The effective mean free paths remain below this scale, with smaller limiter exponents producing a stronger reduction. Thus, accounting for the finite transverse size is important for reproducing the observed longitudinal propagation when the Rosseland transport length becomes comparable to the tube diameter.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.43\textwidth]{figures_Moore/front_position - compare Moore C8H7Cl.png}
+    \hfill
+    \includegraphics[width=0.43\textwidth]{figures_Moore/lambda_eff_vs_time_C8H7Cl.png}
+    \caption{Moore C$_8$H$_7$Cl comparison: calculated heat-front trajectories and experimental measurements~\cite{Moore2015} (left), and the Rosseland and effective mean free paths for several limiter exponents, together with the geometric scale $2R$ (right). Including the effective-mean-free-path correction brings the predicted trajectory into very good agreement with the measurements.}
+    \label{fig:moore_c8h7cl_front_and_mfp}
+\end{figure}
 
 \begin{thebibliography}{99}
 
@@ -293,6 +326,11 @@ Lawrence Livermore National Laboratory, UCRL-LR-105820-00/01 (U.S. Department of
 J.-Y.~Zhang, J.-M.~Yang, S.-E.~Jiang \textit{et al.},
 \textit{Experimental observation of ionization and shock fronts in foam targets driven by thermal radiation},
 Chin.\ Phys.\ B \textbf{19}, 025201 (2010).
+
+\bibitem{Moore2015}
+A.~S.~Moore, T.~M.~Guymer, J.~Morton \textit{et al.},
+\textit{Characterization of supersonic radiation diffusion waves},
+J.\ Quant.\ Spectrosc.\ Radiat.\ Transfer \textbf{159}, 19--28 (2015).
 
 \end{thebibliography}
 
